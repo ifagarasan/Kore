@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KoreCode.Validation;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace KoreCode.Util
     {
         public static int[] GetContiguousRandomSequence(int startValue, int count)
         {
-            Validation<int>.IsLargerThan(count, 0);
+            ComparisonValidation<int>.IsLargerThan(count, 0);
 
             List<int> items = new List<int>();
 

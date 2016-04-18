@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using KoreCode.Exceptions;
+using KoreCode.Validation;
 
 namespace KoreCode.Util
 {
@@ -47,37 +46,19 @@ namespace KoreCode.Util
 
         #endregion
 
-        #region Exchange
-
-        public static void Exchange (T[] input, int sourceIndex, int destinationIndex)
-        {
-            Validation<T>.ValidateArrayIndex(input, sourceIndex);
-            Validation<T>.ValidateArrayIndex(input, destinationIndex);
-
-            if (sourceIndex == destinationIndex)
-                return;
-
-            T temp = input[sourceIndex];
-
-            input[sourceIndex] = input[destinationIndex];
-            input[destinationIndex] = temp;
-        }
-
-        #endregion
-
         #region Copy
 
         public static void CopyArray(T[] source, T[] target)
         {
-            Validation<T>.ValidateArray(source);
-            Validation<T>.ValidateArray(target);
+            ArrayValidation<T>.ValidateArray(source);
+            ArrayValidation<T>.ValidateArray(target);
 
             CopyArray(source, 0, source.Length, target);
         }
 
         public static void CopyArray(T[] source, int sourceStartIndex, T[] target, int targetStartIndex)
         {
-            Validation<T>.ValidateArrayIndex(source, sourceStartIndex);
+            ArrayValidation<T>.ValidateArrayIndex(source, sourceStartIndex);
 
             CopyArray(source, sourceStartIndex, source.Length - sourceStartIndex, target, targetStartIndex);
         }
@@ -89,11 +70,11 @@ namespace KoreCode.Util
 
         public static void CopyArray(T[] source, int sourceStartIndex, int sourceCount, T[] target, int targetStartIndex)
         {
-            Validation<T>.ValidateArrayIndex(source, sourceStartIndex);
-            Validation<int>.IsSmallerThanOrEqualTo(sourceStartIndex + sourceCount, source.Length);
+            ArrayValidation<T>.ValidateArrayIndex(source, sourceStartIndex);
+            ComparisonValidation<int>.IsSmallerThanOrEqualTo(sourceStartIndex + sourceCount, source.Length);
 
-            Validation<T>.ValidateArrayIndex(target, targetStartIndex);
-            Validation<int>.IsSmallerThanOrEqualTo(targetStartIndex + sourceCount, target.Length);
+            ArrayValidation<T>.ValidateArrayIndex(target, targetStartIndex);
+            ComparisonValidation<int>.IsSmallerThanOrEqualTo(targetStartIndex + sourceCount, target.Length);
 
             for (int i = 0; i < sourceCount; ++i)
                 target[targetStartIndex + i] = source[sourceStartIndex + i];
@@ -105,8 +86,8 @@ namespace KoreCode.Util
 
         public static T[] Merge(T[] input1, T[] input2, Func<T, T, bool> comparisonFunc)
         {
-            Validation<T>.ValidateArray(input1);
-            Validation<T>.ValidateArray(input2);
+            ArrayValidation<T>.ValidateArray(input1);
+            ArrayValidation<T>.ValidateArray(input2);
 
             int totalLength = input1.Length + input2.Length;
             T[] result = new T[totalLength];
@@ -123,15 +104,15 @@ namespace KoreCode.Util
 
         public static T[] Merge(T[] input, int start1, int length1, int start2, int length2, Func<T, T, bool> comparisonFunc)
         {
-            Validation<int>.IsSmallerThanOrEqualTo(start1, start2);
+            ComparisonValidation<int>.IsSmallerThanOrEqualTo(start1, start2);
 
-            Validation<T>.ValidateArrayIndex(input, start1);
-            Validation<int>.IsLargerThan(length1, 0);
-            Validation<int>.IsSmallerThanOrEqualTo(start1 + length1, input.Length);
+            ArrayValidation<T>.ValidateArrayIndex(input, start1);
+            ComparisonValidation<int>.IsLargerThan(length1, 0);
+            ComparisonValidation<int>.IsSmallerThanOrEqualTo(start1 + length1, input.Length);
 
-            Validation<T>.ValidateArrayIndex(input, start2);
-            Validation<int>.IsLargerThan(length2, 0);
-            Validation<int>.IsSmallerThanOrEqualTo(start2 + length2, input.Length);
+            ArrayValidation<T>.ValidateArrayIndex(input, start2);
+            ComparisonValidation<int>.IsLargerThan(length2, 0);
+            ComparisonValidation<int>.IsSmallerThanOrEqualTo(start2 + length2, input.Length);
 
             T[] input1 = new T[length1];
             CopyArray(input, start1, length1, input1);
@@ -146,11 +127,11 @@ namespace KoreCode.Util
 
         public static T[] Merge(T[] input1, T[] input2, T[] result, int resultStartIndex, Func<T, T, bool> comparisonFunc)
         {
-            Validation<T>.ValidateArray(input1);
-            Validation<T>.ValidateArray(input2);
-            Validation<T>.ValidateArrayIndex(result, resultStartIndex);
+            ArrayValidation<T>.ValidateArray(input1);
+            ArrayValidation<T>.ValidateArray(input2);
+            ArrayValidation<T>.ValidateArrayIndex(result, resultStartIndex);
 
-            Validation<int>.IsSmallerThanOrEqualTo(resultStartIndex + input1.Length + input2.Length, result.Length);
+            ComparisonValidation<int>.IsSmallerThanOrEqualTo(resultStartIndex + input1.Length + input2.Length, result.Length);
 
             int input1Index = 0, input2Index = 0;
             int resultIndex = resultStartIndex;
@@ -182,7 +163,7 @@ namespace KoreCode.Util
 
         public static bool ArrayContains(T[] input, T value)
         {
-            Validation<T>.ValidateArray(input);
+            ArrayValidation<T>.ValidateArray(input);
 
             int leftIndex = 0, rightIndex = input.Length - 1;
 

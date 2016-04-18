@@ -49,6 +49,9 @@
     <Compile Include="Functional\Readers\MatrixReader.cs" />
     <Compile Include="Functional\Tests\FolderProcessor.cs" />
     <Compile Include="Heaps\BinaryHeap.cs" />
+    <Compile Include="Heaps\BinaryHeapMax.cs" />
+    <Compile Include="Heaps\BinaryHeapMin.cs" />
+    <Compile Include="Heaps\HeapItem.cs" />
     <Compile Include="List\Circular\CircularList.cs" />
     <Compile Include="List\LinkedList.cs" />
     <Compile Include="List\Linear\DoubleLinkedList.cs" />
@@ -83,10 +86,12 @@
     <Compile Include="Trees\Height\IHeightProcessor.cs" />
     <Compile Include="Util\ArrayOps.cs" />
     <Compile Include="Util\Comparers.cs" />
+    <Compile Include="Util\Exchange.cs" />
     <Compile Include="Util\RandomOps.cs" />
     <Compile Include="Util\IO.cs" />
     <Compile Include="Sort\Sort.cs" />
-    <Compile Include="Util\Validation.cs" />
+    <Compile Include="Validation\ArrayValidation.cs" />
+    <Compile Include="Validation\ComparisoniValidation.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

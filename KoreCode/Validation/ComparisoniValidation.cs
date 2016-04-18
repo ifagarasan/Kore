@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+
 using KoreCode.Exceptions;
+using KoreCode.Util;
 
-namespace KoreCode.Util
+namespace KoreCode.Validation
 {
-    public static class Validation<T> where T : IComparable
+    public static class ComparisonValidation<T> where T : IComparable
     {
-        #region Comparisons
-
         public static void IsSmallerThan(T input1, T input2)
         {
             if (!Comparers<T>.LessThan(input1, input2))
@@ -39,28 +36,5 @@ namespace KoreCode.Util
             if (!Comparers<T>.LargerThan(input1, input2) && !Comparers<T>.Equal(input1, input2))
                 throw new ComparisonException(input1.ToString(), input2.ToString(), "larger than or equal to");
         }
-
-        #endregion
-
-        #region SingleDimensionalArrays
-
-        public static void ValidateArray(T[] input, bool allowEmpty = true)
-        {
-            if (input == null)
-                throw new ArgumentNullException("input");
-
-            if (!allowEmpty && input.Length == 0)
-                throw new Exception("collection empty");
-        }
-
-        public static void ValidateArrayIndex(T[] input, int index)
-        {
-            ValidateArray(input);
-
-            if (index < 0 || index >= input.Length)
-                throw new IndexOutOfRangeException("invalid value '" + index.ToString() + "' for index");
-        }
-
-        #endregion
     }
 }

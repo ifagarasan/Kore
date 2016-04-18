@@ -12,7 +12,7 @@ namespace KoreCodeTests
         [TestInitialize]
         public override void SetUp()
         {
-            heap = new BinaryHeap<int>(100, HeapType.Min);
+            heap = new BinaryHeapMin<int, object>(100);
         }
 
         [TestMethod]

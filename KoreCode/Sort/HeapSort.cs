@@ -5,6 +5,7 @@ using System.Text;
 
 using KoreCode.Util;
 using KoreCode.Heaps;
+using KoreCode.Validation;
 
 namespace KoreCode.Sort
 {
@@ -12,13 +13,13 @@ namespace KoreCode.Sort
     {
         public static void Sort(T[] input, SortDirection direction = SortDirection.Ascending)
         {
-            Validation<T>.ValidateArray(input);
+            ArrayValidation<T>.ValidateArray(input);
 
             HeapType heapType = direction == SortDirection.Ascending ? HeapType.Min : HeapType.Max;
-            BinaryHeap<T> heap = new BinaryHeap<T>(input, heapType);
+            BinaryHeap<T, object> heap = new BinaryHeap<T, object>(input, heapType);
 
             for (int i = 0; i < input.Length; ++i)
-                input[i] = heap.Pop();
+                input[i] = heap.ExtractRoot().Key;
         }
     }
 }

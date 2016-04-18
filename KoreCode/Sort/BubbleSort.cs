@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using KoreCode.Util;
+using KoreCode.Validation;
 
 namespace KoreCode.Sort
 {
@@ -11,7 +12,7 @@ namespace KoreCode.Sort
     {
         public static void Sort(T[] input, SortDirection direction = SortDirection.Ascending)
         {
-            Validation<T>.ValidateArray(input);
+            ArrayValidation<T>.ValidateArray(input);
 
             Func<T, T, bool> comparisonFunc = Sort<T>.GetComparisonFunc(direction);
 
@@ -24,7 +25,7 @@ namespace KoreCode.Sort
                     if (comparisonFunc(input[i], input[i - 1]))
                     {
                         sorted = false;
-                        ArrayOps<T>.Exchange(input, i, i - 1);
+                        Exchange<T>.ArrayExchange(input, i, i - 1);
                     }                        
             }       
         }

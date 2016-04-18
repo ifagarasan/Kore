@@ -19,7 +19,7 @@ namespace KoreCodeTest.Util
         {
             int[] input = new int[] { 0, 1 };
 
-            ArrayOps<int>.Exchange(input, 0, 1);
+            Exchange<int>.ArrayExchange(input, 0, 1);
 
             Assert.AreEqual(1, input[0]);
             Assert.AreEqual(0, input[1]);
@@ -30,7 +30,7 @@ namespace KoreCodeTest.Util
         {
             int[] input = new int[] { 0, 1 };
 
-            ArrayOps<int>.Exchange(input, 1, 0);
+            Exchange<int>.ArrayExchange(input, 1, 0);
 
             Assert.AreEqual(1, input[0]);
             Assert.AreEqual(0, input[1]);
@@ -41,7 +41,7 @@ namespace KoreCodeTest.Util
         {
             int[] input = new int[] { 0, 1 };
 
-            ArrayOps<int>.Exchange(input, 0, 0);
+            Exchange<int>.ArrayExchange(input, 0, 0);
 
             Assert.AreEqual(0, input[0]);
             Assert.AreEqual(1, input[1]);

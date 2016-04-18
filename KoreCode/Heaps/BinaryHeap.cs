@@ -1,5 +1,6 @@
 ﻿using System;
 using KoreCode.Util;
+using KoreCode.Validation;
 
 namespace KoreCode.Heaps
 {
@@ -9,7 +10,7 @@ namespace KoreCode.Heaps
         Min
     };
 
-    public class BinaryHeap<T> where T : IComparable
+    public class BinaryHeap<T, R> where T : IComparable
     {
         HeapType heapType = HeapType.Max;
 
@@ -17,36 +18,24 @@ namespace KoreCode.Heaps
 
         public BinaryHeap(int capacity, HeapType heapType = HeapType.Max)
         {
-            Validation<int>.IsLargerThan(capacity, 0);
+            ComparisonValidation<int>.IsLargerThan(capacity, 0);
 
             Capacity = capacity;
-            Array = new T[capacity + 1];
-            HeapType = heapType;
+            Array = new HeapItem<T, R>[capacity+1];
+            this.heapType = heapType;
+            CompareFunc = GetComparisonFunction();
         }
 
-        public BinaryHeap(T[] input, HeapType heapType = HeapType.Max) : this(input.Length + 1, heapType)
+        public BinaryHeap(T[] input, HeapType heapType = HeapType.Max): this(input.Length + 1, heapType)
         {
             Insert(input);
         }
 
         public int Capacity { get; private set; }
         public int Count { get; private set; }
-        public T[] Array { get; private set; }
+        public HeapItem<T, R>[] Array { get; private set; }
 
         public Func<T, T, bool> CompareFunc { get; private set; }
-
-        public HeapType HeapType
-        {
-            get
-            {
-                return heapType;
-            }
-            set
-            {
-                heapType = value;
-                CompareFunc = GetComparisonFunction();
-            }
-        }
 
         public bool IsFull
         {
@@ -64,21 +53,16 @@ namespace KoreCode.Heaps
             }
         }
 
-        public T this[int index]
+        public HeapItem<T, R> this[int index]
         {
             get
             {
                 ValidateHeapIndex(index);
                 return Array[index];
             }
-            set
-            {
-                ValidateHeapIndex(index);
-                Array[index] = value;
-            }
         }
 
-        public T Root
+        public HeapItem<T, R> Root
         {
             get
             {
@@ -91,8 +75,8 @@ namespace KoreCode.Heaps
 
         private void ValidateHeapIndex(int index)
         {
-            Validation<int>.IsLargerThan(index, 0);
-            Validation<int>.IsSmallerThanOrEqualTo(index, Count);
+            ComparisonValidation<int>.IsLargerThan(index, 0);
+            ComparisonValidation<int>.IsSmallerThanOrEqualTo(index, Count);
         }
 
         public int GetParentIndex(int index)
@@ -141,7 +125,7 @@ namespace KoreCode.Heaps
 
             while (childExtremeIndex != Nil)
             {
-                if (!CompareFunc(Array[index], Array[childExtremeIndex]))
+                if (!CompareFunc(Array[index].Key, Array[childExtremeIndex].Key))
                     return false;
 
                 index = childExtremeIndex;
@@ -151,22 +135,22 @@ namespace KoreCode.Heaps
             return true;
         }
 
-        public bool Contains(T value)
+        public bool ContainsKey(T key)
         {
             for (int i = 1; i <= Count; ++i)
-                if (Array[i].CompareTo(value) == 0)
+                if (Array[i].Key.CompareTo(key) == 0)
                     return true;
 
             return false;
         }
 
-        public int Insert(T value)
+        public int Insert(T key, R data=default(R))
         {
             if (IsFull)
                 throw new Exception("collection is full");
 
             Count++;
-            Array[Count] = value;
+            Array[Count] = new HeapItem<T, R>(key, data);
             int index = Count;
 
             HeapifyUp(GetParentIndex(Count), ref index);
@@ -174,29 +158,29 @@ namespace KoreCode.Heaps
             return index;
         }
 
-        public void Insert(T[] values)
+        public void Insert(T[] keys)
         {
-            Validation<T>.ValidateArray(values);
+            ArrayValidation<T>.ValidateArray(keys);
 
-            foreach (T value in values)
+            foreach (T value in keys)
                 Insert(value);
         }
 
-        public T Remove(int index)
+        public HeapItem<T, R> Remove(int index)
         {
             ValidateHeapIndex(index);
 
-            T removedValue = Array[index];
+            HeapItem<T, R> removed = Array[index];
 
             Array[index] = Array[Count--];
 
             if (index <= Count)
                 HeapifyDown(index);
 
-            return removedValue;
+            return removed;
         }
 
-        public T Pop()
+        public HeapItem<T, R> ExtractRoot()
         {
             if (IsEmpty)
                 throw new Exception("collection is empty");
@@ -206,7 +190,7 @@ namespace KoreCode.Heaps
 
         private Func<T, T, bool> GetComparisonFunction()
         {
-            if (HeapType == HeapType.Max)
+            if (heapType == HeapType.Max)
                 return Comparers<T>.LargerThan;
 
             return Comparers<T>.LessThan;
@@ -224,7 +208,7 @@ namespace KoreCode.Heaps
             else if (rightIndex == Nil)
                 return leftIndex;
 
-            return CompareFunc(Array[leftIndex], Array[rightIndex]) ? leftIndex : rightIndex;
+            return CompareFunc(Array[leftIndex].Key, Array[rightIndex].Key) ? leftIndex : rightIndex;
         }
 
         private void HeapifyDown(int index)
@@ -233,9 +217,9 @@ namespace KoreCode.Heaps
             if (childExtremeIndex == Nil)
                 return;
 
-            if (CompareFunc(Array[childExtremeIndex], Array[index]))
+            if (CompareFunc(Array[childExtremeIndex].Key, Array[index].Key))
             {
-                ArrayOps<T>.Exchange(Array, childExtremeIndex, index);
+                Exchange<HeapItem<T, R>>.ArrayExchange(Array, childExtremeIndex, index);
                 HeapifyDown(childExtremeIndex);
             }
         }
@@ -250,9 +234,9 @@ namespace KoreCode.Heaps
 
             if (childExtremeIndex == Nil)
                 HeapifyUp(parentIndex, ref finalIndex);
-            else if (CompareFunc(Array[childExtremeIndex], Array[index]))
+            else if (CompareFunc(Array[childExtremeIndex].Key, Array[index].Key))
             {
-                ArrayOps<T>.Exchange(Array, childExtremeIndex, index);
+                Exchange<HeapItem<T, R>>.ArrayExchange(Array, childExtremeIndex, index);
                 finalIndex = index;
                 HeapifyUp(parentIndex, ref finalIndex);
             }

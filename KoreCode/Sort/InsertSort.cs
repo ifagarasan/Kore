@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using KoreCode.Util;
+using KoreCode.Validation;
 
 namespace KoreCode.Sort
 {
@@ -11,7 +7,7 @@ namespace KoreCode.Sort
     {
         public static void Sort(T[] input, SortDirection direction = SortDirection.Ascending)
         {
-            Validation<T>.ValidateArray(input);
+            ArrayValidation<T>.ValidateArray(input);
 
             Func<T, T, bool> comparisonFunc = Sort<T>.GetComparisonFunc(direction);
 
