@@ -64,13 +64,11 @@
     <Compile Include="Sort\SelectionSortFunctionality.cs" />
     <Compile Include="Sort\SortFunctionality.cs" />
     <Compile Include="Stack\StackFunctional.cs" />
+    <Compile Include="Trees\Binary\Nodes\BinaryNodeHeightFunctionality.cs" />
     <Compile Include="Trees\Binary\Nodes\RedBlackNodeFunctionality.cs" />
     <Compile Include="Trees\Binary\Nodes\BinaryNodeFunctionality.cs" />
     <Compile Include="Trees\Binary\BinaryTreeFunctionality.cs" />
     <Compile Include="Trees\Binary\BstFunctionality.cs" />
-    <Compile Include="Trees\Binary\Height\HeightProcessorFunctionality.cs" />
-    <Compile Include="Trees\Binary\Height\BlackHeightProcessorFunctionality.cs" />
-    <Compile Include="Trees\Binary\Height\BinaryHeightProcessorFunctionality.cs" />
     <Compile Include="Trees\Binary\RedBlackTreeFunctionality.cs" />
     <Compile Include="Util\ArrayOpsFunctionality.cs" />
   </ItemGroup>

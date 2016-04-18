@@ -99,6 +99,14 @@ namespace KoreCode.Trees.Binary
             }
         }
 
+        public bool IsNil
+        {
+            get
+            {
+                return Left == this && Right == this && Parent == this;
+            }
+        }
+
         public virtual Color Color
         {
             get
@@ -108,6 +116,18 @@ namespace KoreCode.Trees.Binary
             set
             {
                 throw new NotSupportedException("BinaryNode does not support Color");
+            }
+        }
+
+        //TODO: optimise
+        public virtual int Height
+        {
+            get
+            {
+                if (IsNil)
+                    return 0;
+
+                return 1 + Math.Max(Left.Height, Right.Height);
             }
         }
     }

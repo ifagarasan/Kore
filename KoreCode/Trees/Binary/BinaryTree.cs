@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using KoreCode.Exceptions;
-using KoreCode.Trees.Height;
 
 namespace KoreCode.Trees.Binary
 {
@@ -16,14 +15,12 @@ namespace KoreCode.Trees.Binary
     public abstract class BinaryTree
     {
         private IBinaryNode nil;
-        protected IHeightProcessor heightProcessor;
 
         public BinaryTree()
         {
             nil = CreateNode();
             DecorateNode(nil);
             Root = nil;
-            heightProcessor = CreateHeightProcessor();
         }
 
         public IBinaryNode Root { get; protected set; }
@@ -258,7 +255,6 @@ namespace KoreCode.Trees.Binary
                 throw new ElementNotFoundException(key.ToString());
 
             Remove(node);
-            heightProcessor.Clear();
             Count--;
         }
 
@@ -386,13 +382,11 @@ namespace KoreCode.Trees.Binary
     
             Insert(node);
             Count++;
-            heightProcessor.Clear();
 
             return node;
         }
 
         public abstract IBinaryNode CreateNode();
-        protected abstract IHeightProcessor CreateHeightProcessor();
         public abstract void Insert(IBinaryNode node);
         public abstract IBinaryNode Search(int key);
         protected abstract void Remove(IBinaryNode node);

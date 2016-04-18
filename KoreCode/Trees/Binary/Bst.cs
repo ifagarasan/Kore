@@ -1,5 +1,4 @@
 ﻿using KoreCode.Exceptions;
-using KoreCode.Trees.Height;
 
 namespace KoreCode.Trees.Binary
 {
@@ -16,11 +15,6 @@ namespace KoreCode.Trees.Binary
             DecorateNode(node);
 
             return node;
-        }
-
-        protected override IHeightProcessor CreateHeightProcessor()
-        {
-            return new BinaryHeightProcessor(Nil);
         }
 
         public override void Insert(IBinaryNode node)

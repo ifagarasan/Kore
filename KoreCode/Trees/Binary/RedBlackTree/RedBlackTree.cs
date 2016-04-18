@@ -1,7 +1,7 @@
-﻿using KoreCode.Exceptions;
-using KoreCode.Trees.Height;
-using System;
+﻿using System;
 using System.Diagnostics;
+
+using KoreCode.Exceptions;
 
 namespace KoreCode.Trees.Binary.RedBlackTree
 {
@@ -19,11 +19,6 @@ namespace KoreCode.Trees.Binary.RedBlackTree
             IBinaryNode node = new RedBlackNode();
             DecorateNode(node);
             return node;
-        }
-
-        protected override IHeightProcessor CreateHeightProcessor()
-        {
-            return new BlackHeightProcessor(Nil);
         }
 
         #region IsRedBlackTree
@@ -58,7 +53,7 @@ namespace KoreCode.Trees.Binary.RedBlackTree
             if (!node.IsLeaf)
                 throw new Exception("node with Key '" + node.Key + "' is not a leaf");
 
-            return heightProcessor.GetHeight(Root) != GetBlackHeighFromNodeUpwards(node);
+            return Root.Height != GetBlackHeighFromNodeUpwards(node);
         }
 
         private int GetBlackHeighFromNodeUpwards(IBinaryNode node)

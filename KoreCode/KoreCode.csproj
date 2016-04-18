@@ -80,10 +80,6 @@
     <Compile Include="Trees\Binary\Bst.cs" />
     <Compile Include="Trees\Binary\RedBlackTree\RedBlackTree.cs" />
     <Compile Include="Trees\Binary\RedBlackTree\RedBlackNode.cs" />
-    <Compile Include="Trees\Height\BlackHeightProcessor.cs" />
-    <Compile Include="Trees\Height\HeightProcessor.cs" />
-    <Compile Include="Trees\Height\BinaryHeightProcessor.cs" />
-    <Compile Include="Trees\Height\IHeightProcessor.cs" />
     <Compile Include="Util\ArrayOps.cs" />
     <Compile Include="Util\Comparers.cs" />
     <Compile Include="Util\Exchange.cs" />

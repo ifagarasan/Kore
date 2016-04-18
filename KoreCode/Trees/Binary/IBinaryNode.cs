@@ -27,6 +27,8 @@ namespace KoreCode.Trees.Binary
         bool IsLeftChild { get; }
         bool IsRightChild { get; }
         IBinaryNode Sibling { get; }
+        int Height { get; }
+        bool IsNil { get; }
 
         string Label { get; }
     }

@@ -266,5 +266,36 @@ namespace KoreCodeTests.Tree.Binary.Nodes
         }
 
         #endregion
+
+        #region IsNil
+
+        [TestMethod]
+        public void IsNilReturnsTrueIfLeftRightAndParentEqualThis()
+        {
+            Assert.IsTrue(Nil.IsNil);
+        }
+
+        [TestMethod]
+        public void IsNilReturnsFalseIfAnyofLeftRightAndParentDoesNotEqualThis()
+        {
+            var node = BuildNode();
+
+            Assert.IsFalse(node.IsNil);
+
+            node.Left = node;
+
+            Assert.IsFalse(node.IsNil);
+
+            node.Right = node;
+
+            Assert.IsFalse(node.IsNil);
+
+            node.Parent = node;
+
+            Assert.IsTrue(node.IsNil);
+        }
+
+        #endregion
+
     }
 }

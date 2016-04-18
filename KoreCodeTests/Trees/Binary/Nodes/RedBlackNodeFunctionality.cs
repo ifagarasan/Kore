@@ -14,5 +14,33 @@ namespace KoreCodeTests.Tree.Binary.Nodes
         {
             return new RedBlackNode();
         }
+
+        #region Height
+
+        [TestMethod]
+        public void HeightReturnsZeroForNil()
+        {
+            Assert.AreEqual(0, Nil.Height);
+        }
+
+        [TestMethod]
+        public void HeightTakesNilNodeHeightAsNil()
+        {
+            var node = BuildNode();
+            node.Color = Color.Red;
+
+            Assert.AreEqual(1, node.Height);
+        }
+
+        [TestMethod]
+        public void HeightProcessorDoesNotIncludeStartingNode()
+        {
+            var node = BuildNode();
+            node.Color = Color.Black;
+
+            Assert.AreEqual(1, node.Height);
+        }
+
+        #endregion
     }
 }
