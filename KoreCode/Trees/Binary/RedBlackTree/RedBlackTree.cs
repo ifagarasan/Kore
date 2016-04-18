@@ -16,7 +16,7 @@ namespace KoreCode.Trees.Binary.RedBlackTree
 
         public override IBinaryNode CreateNode()
         {
-            IBinaryNode node = new Node();
+            IBinaryNode node = new RedBlackNode();
             DecorateNode(node);
             return node;
         }

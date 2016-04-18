@@ -12,7 +12,7 @@ namespace KoreCodeTests.Tree.Binary.Nodes
     {
         protected override IBinaryNode CreateNode()
         {
-            return new Node();
+            return new RedBlackNode();
         }
     }
 }

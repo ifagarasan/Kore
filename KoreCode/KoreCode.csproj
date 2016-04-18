@@ -79,7 +79,7 @@
     <Compile Include="Trees\Binary\BinaryTree.cs" />
     <Compile Include="Trees\Binary\Bst.cs" />
     <Compile Include="Trees\Binary\RedBlackTree\RedBlackTree.cs" />
-    <Compile Include="Trees\Binary\RedBlackTree\Node.cs" />
+    <Compile Include="Trees\Binary\RedBlackTree\RedBlackNode.cs" />
     <Compile Include="Trees\Height\BlackHeightProcessor.cs" />
     <Compile Include="Trees\Height\HeightProcessor.cs" />
     <Compile Include="Trees\Height\BinaryHeightProcessor.cs" />
