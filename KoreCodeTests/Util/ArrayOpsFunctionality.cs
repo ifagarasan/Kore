@@ -1,8 +1,11 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using KoreCode;
-using KoreCode.Util;
 using System.Collections;
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+using KoreCode;
+using KoreCode.Exceptions;
+using KoreCode.Util;
 
 namespace KoreCodeTest.Util
 {
