@@ -1,0 +1,88 @@
+﻿using KoreCode.Exceptions;
+using KoreCode.Trees.Height;
+
+namespace KoreCode.Trees.Binary
+{
+    public class Bst : BinaryTree
+    {
+        protected override void DecorateNode(IBinaryNode node)
+        {
+            node.Parent = node.Left = node.Right = Nil;
+        }
+
+        public override IBinaryNode CreateNode()
+        {
+            IBinaryNode node = new BinaryNode();
+            DecorateNode(node);
+
+            return node;
+        }
+
+        protected override IHeightProcessor CreateHeightProcessor()
+        {
+            return new BinaryHeightProcessor(Nil);
+        }
+
+        public override void Insert(IBinaryNode node)
+        {
+            if (Root == Nil)
+            {
+                Root = node;
+                return;
+            }
+            
+            IBinaryNode current = Root;
+            IBinaryNode parent = Root;
+
+            while (current != Nil)
+            {
+                parent = current;
+                current = node.Key < current.Key ? current.Left : current.Right;
+            }
+
+            node.Parent = parent;
+
+            if (node.Key < parent.Key)
+                parent.Left = node;
+            else
+                parent.Right = node;
+        }
+
+        protected override void Remove(IBinaryNode node)
+        {
+            if (node.Left == Nil)
+                Transplant(node, node.Right);
+            else if (node.Right == Nil)
+                Transplant(node, node.Left);
+            else
+            {
+                IBinaryNode successor = Min(node.Right);
+                if (successor != node.Right)
+                {
+                    Transplant(successor, successor.Right);
+                    successor.Right = node.Right;
+                    node.Right.Parent = successor;
+                }
+
+                Transplant(node, successor);
+                node.Left.Parent = successor;
+                successor.Left = node.Left;
+            }
+        }
+
+        public override IBinaryNode Search(int key)
+        {
+            IBinaryNode node = Root;
+
+            while (node != Nil)
+            {
+                if (node.Key == key)
+                    break;
+
+                node = key < node.Key ? node.Left : node.Right;
+            }
+
+            return node;
+        }
+    }
+}
