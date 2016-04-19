@@ -74,6 +74,7 @@
     <Compile Include="Stack\Item.cs" />
     <Compile Include="Stack\IStack.cs" />
     <Compile Include="Stack\Stack.cs" />
+    <Compile Include="Trees\Binary\Avl.cs" />
     <Compile Include="Trees\Binary\IBinaryNode.cs" />
     <Compile Include="Trees\Binary\BinaryNode.cs" />
     <Compile Include="Trees\Binary\BinaryTree.cs" />
