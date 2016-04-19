@@ -58,7 +58,15 @@ namespace KoreCode.Trees.Binary
 
         public virtual bool IsBalanced()
         {
-            return Math.Abs(Root.Left.Height - Root.Right.Height) < 2;
+            return IsNodeBalanced(Root);
+        }
+
+        protected virtual bool IsNodeBalanced(IBinaryNode node)
+        {
+            if (node == null)
+                throw new ArgumentNullException("node");
+
+            return Math.Abs(node.Left.Height - node.Right.Height) < 2;
         }
 
         public bool IsBst()
