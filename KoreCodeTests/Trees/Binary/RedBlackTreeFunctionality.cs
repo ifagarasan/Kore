@@ -32,19 +32,19 @@ namespace KoreCodeTests.Tree.Binary.RedBlackTree
 
         #endregion
 
-        #region IsRedBlackTree
+        #region IsBalanced
 
         [TestMethod]
-        public void IsRedBlackTreeReturnsFalseIfRootIsRed()
+        public void IsBalancedReturnsFalseIfRootIsRed()
         {
             binaryTree.Insert(1);
             binaryTree.Root.Color = Color.Red;
 
-            Assert.AreEqual(false, binaryTree.IsRedBlackTree());
+            Assert.IsFalse(binaryTree.IsBalanced());
         }
 
         [TestMethod]
-        public void IsRedBlackTreeReturnsFalseIfARedNodeHasARedChild()
+        public void IsBalancedReturnsFalseIfARedNodeHasARedChild()
         {
             binaryTree.Insert(new int[] { 2, 1, 3, 5, 6 });
 
@@ -53,12 +53,12 @@ namespace KoreCodeTests.Tree.Binary.RedBlackTree
 
             node.Left.Color = Color.Black;
 
-            Assert.IsFalse(binaryTree.IsRedBlackTree());
+            Assert.IsFalse(binaryTree.IsBalanced());
 
             node.Left.Color = Color.Red;
             node.Right.Color = Color.Black;
 
-            Assert.IsFalse(binaryTree.IsRedBlackTree());
+            Assert.IsFalse(binaryTree.IsBalanced());
         }
 
         #endregion
@@ -151,7 +151,7 @@ namespace KoreCodeTests.Tree.Binary.RedBlackTree
         {
             base.TestTreeCorrectness();
 
-            Assert.IsTrue(binaryTree.IsRedBlackTree());
+            Assert.IsTrue(binaryTree.IsBalanced());
         }
 
         #endregion
@@ -249,7 +249,7 @@ namespace KoreCodeTests.Tree.Binary.RedBlackTree
         {
             base.TestRemoveAtIndex(keys, index);
 
-            Assert.IsTrue(binaryTree.IsRedBlackTree());
+            Assert.IsTrue(binaryTree.IsBalanced());
         }
 
         //TODO: clear the tree starting from an index - yea, baybee!
@@ -265,7 +265,7 @@ namespace KoreCodeTests.Tree.Binary.RedBlackTree
             //while (binaryTree.Root != binaryTree.Nil)
             //{
             //     binaryTree.Remove(binaryTree.Root.Key);
-            //    Assert.IsTrue(binaryTree.IsRedBlackTree());
+            //    Assert.IsTrue(binaryTree.IsBalanced());
             //}
         }
 

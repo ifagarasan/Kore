@@ -151,6 +151,16 @@ namespace KoreCodeTests.Tree.Binary
 
         #endregion
 
+        #region IsBalanced
+
+        [TestMethod]
+        public void IsBalancedReturnsTrueForEmptyTree()
+        {
+            Assert.IsTrue(binaryTree.IsBalanced());
+        }
+
+        #endregion
+
         #region Traversals
 
         [TestMethod]

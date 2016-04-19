@@ -21,9 +21,9 @@ namespace KoreCode.Trees.Binary.RedBlackTree
             return node;
         }
 
-        #region IsRedBlackTree
+        #region IsBalanced
 
-        public override bool IsRedBlackTree()
+        public override bool IsBalanced()
         {
             if (Root.Color == Color.Red)
                 return false;

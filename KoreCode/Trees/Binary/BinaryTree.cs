@@ -56,9 +56,9 @@ namespace KoreCode.Trees.Binary
             node2.Parent = node1.Parent;
         }
 
-        public virtual bool IsRedBlackTree()
+        public virtual bool IsBalanced()
         {
-            return false;
+            return Math.Abs(Root.Left.Height - Root.Right.Height) < 2;
         }
 
         public bool IsBst()
