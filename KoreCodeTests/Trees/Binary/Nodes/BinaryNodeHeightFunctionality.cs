@@ -42,7 +42,7 @@ namespace KoreCodeTests.Tree.Binary.Nodes
         }
 
         [TestMethod]
-        public void HeightReturnsOneForSingleNode()
+        public void HeightReturnsZeroForSingleNode()
         {
             var node = BuildNode();
 
@@ -50,14 +50,14 @@ namespace KoreCodeTests.Tree.Binary.Nodes
         }
 
         [TestMethod]
-        public void HeightProcessorReturnsOnePlusMaxOfSubtree()
+        public void HeightReturnsMaxNumberOfEdgesInSubtree()
         {
             var root = BuildNode();
             root.Left = BuildNode();
             root.Left.Left = BuildNode();
             root.Right = BuildNode();
 
-            Assert.AreEqual(3, root.Height);
+            Assert.AreEqual(2, root.Height);
         }
     }
 }
