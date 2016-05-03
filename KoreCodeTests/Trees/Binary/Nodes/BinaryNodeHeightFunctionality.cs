@@ -46,7 +46,7 @@ namespace KoreCodeTests.Tree.Binary.Nodes
         {
             var node = BuildNode();
 
-            Assert.AreEqual(1, node.Height);
+            Assert.AreEqual(0, node.Height);
         }
 
         [TestMethod]

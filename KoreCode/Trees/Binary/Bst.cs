@@ -1,4 +1,5 @@
-﻿using KoreCode.Exceptions;
+﻿using System;
+using KoreCode.Exceptions;
 
 namespace KoreCode.Trees.Binary
 {

@@ -124,7 +124,7 @@ namespace KoreCode.Trees.Binary
         {
             get
             {
-                if (IsNil || IsLeaf || IsRoot)
+                if (IsNil || (Left.IsNil && Right.IsNil))
                     return 0;
 
                 return 1 + Math.Max(Left.Height, Right.Height);

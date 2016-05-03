@@ -61,7 +61,7 @@ namespace KoreCode.Trees.Binary
             return IsNodeBalanced(Root);
         }
 
-        protected virtual bool IsNodeBalanced(IBinaryNode node)
+        protected bool IsNodeBalanced(IBinaryNode node)
         {
             if (node == null)
                 throw new ArgumentNullException("node");

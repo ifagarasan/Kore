@@ -43,11 +43,6 @@ namespace KoreCode.Trees.Binary.RedBlackTree
             return result;
         }
 
-        protected override bool IsNodeBalanced(IBinaryNode node)
-        {
-            throw new NotSupportedException();
-        }
-
         private bool IsRedNodeWithARedChild(IBinaryNode node)
         {
             return node.Color == Color.Red && (node.Left.Color == Color.Red || node.Right.Color == Color.Red);
