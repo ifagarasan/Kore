@@ -433,7 +433,7 @@ namespace KoreCodeTests.Tree.Binary
         }
 
         [TestMethod]
-        public void RotateLeftUpdatesNodeNewNodeRelationship()
+        public virtual void RotateLeftUpdatesNodeNewNodeRelationship()
         {
             binaryTree.Insert(new int[] { 10, 2, 1, 5, 3, 6 });
 

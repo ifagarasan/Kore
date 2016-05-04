@@ -34,6 +34,20 @@ namespace KoreCodeTests.Tree.Binary.AvlTree
             Assert.AreSame(expected.Parent, target);
         }
 
+        [TestMethod]
+        public override void RotateLeftUpdatesNodeNewNodeRelationship()
+        {
+            binaryTree.Insert(new int[] { 10, 2, 11, 1, 5, 13, 3, 6 });
+
+            IBinaryNode target = binaryTree.Search(2);
+            IBinaryNode newNode = binaryTree.Search(5);
+
+            binaryTree.RotateLeft(target);
+
+            Assert.AreSame(target.Parent, newNode);
+            Assert.AreSame(newNode.Left, target);
+        }
+
         #endregion
 
         #region Insert
