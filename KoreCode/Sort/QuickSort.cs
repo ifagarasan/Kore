@@ -32,7 +32,12 @@ namespace KoreCode.Sort
 
         private static int Partition(T[] input, int left, int right, Func<T, T, bool> comparisonFunc)
         {
-            int pivotIndex = right;
+            int pivotIndex = new Random().Next(left, right + 1);
+
+            Exchange<T>.ArrayExchange(input, pivotIndex, right);
+
+            pivotIndex = right;
+
             int wall = left - 1;
 
             for (int i = left; i < right; ++i)
