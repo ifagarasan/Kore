@@ -70,6 +70,7 @@
     <Compile Include="Sort\HeapSort.cs" />
     <Compile Include="Sort\InsertSort.cs" />
     <Compile Include="Sort\MergeSort.cs" />
+    <Compile Include="Sort\QuickSort.cs" />
     <Compile Include="Sort\SelectionSort.cs" />
     <Compile Include="Stack\Item.cs" />
     <Compile Include="Stack\IStack.cs" />
