@@ -418,7 +418,7 @@ namespace KoreCodeTests.Tree.Binary
         }
 
         [TestMethod]
-        public void RotateLeftSetsNodeRightToNewNodeLeft()
+        public virtual void RotateLeftSetsNodeRightToNewNodeLeft()
         {
             binaryTree.Insert(new int[] { 10, 2, 1, 5, 3, 6 });
 

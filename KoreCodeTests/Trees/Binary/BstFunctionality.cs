@@ -139,11 +139,11 @@ namespace KoreCodeTests.Tree.Binary
         [TestMethod]
         public virtual void RemoveNodeWithOneRightChildReplacesNodeWithChild()
         {
-            binaryTree.Insert(new int[] { 1, 2, 3 });
+            binaryTree.Insert(new int[] { 2, 1, 3, 4 });
 
-            binaryTree.Remove(2);
+            binaryTree.Remove(3);
 
-            var three = binaryTree.Search(3);
+            var three = binaryTree.Search(4);
 
             Assert.AreSame(three, binaryTree.Root.Right);
             Assert.AreSame(binaryTree.Root, three.Parent);
