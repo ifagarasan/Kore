@@ -62,6 +62,7 @@
     <Compile Include="List\Linear\SingleLinkedList.cs" />
     <Compile Include="List\Linear\SingleLinkedListItem.cs" />
     <Compile Include="Memory\ArrayObjectAllocator.cs" />
+    <Compile Include="Node\INode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queue\Deque.cs" />
     <Compile Include="Queue\Queue.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Trees\Binary\Bst.cs" />
     <Compile Include="Trees\Binary\RedBlackTree\RedBlackTree.cs" />
     <Compile Include="Trees\Binary\RedBlackTree\RedBlackNode.cs" />
+    <Compile Include="Trees\ITreeNode.cs" />
     <Compile Include="Util\ArrayOps.cs" />
     <Compile Include="Util\Comparers.cs" />
     <Compile Include="Util\Exchange.cs" />
