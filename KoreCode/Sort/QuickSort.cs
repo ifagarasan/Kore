@@ -30,13 +30,9 @@ namespace KoreCode.Sort
             }
         }
 
-        private static int Partition(T[] input, int left, int right, Func<T, T, bool> comparisonFunc)
+        public static int Partition(T[] input, int left, int right, Func<T, T, bool> comparisonFunc)
         {
-            int pivotIndex = new Random().Next(left, right + 1);
-
-            Exchange<T>.ArrayExchange(input, pivotIndex, right);
-
-            pivotIndex = right;
+            int pivotIndex = MedianOfThree(input, left, right, comparisonFunc);
 
             int wall = left - 1;
 
@@ -52,6 +48,27 @@ namespace KoreCode.Sort
             Exchange<T>.ArrayExchange(input, right, wall + 1);
 
             return wall + 1;
+        }
+
+        public static int MedianOfThree(T[] input, int left, int right, Func<T, T, bool> comparisonFunc)
+        {
+            if (comparisonFunc == null)
+                throw new ArgumentNullException("comparisonFunc");
+
+            ArrayValidation<T>.ValidateArray(input);
+            ArrayValidation<T>.ValidateArrayIndex(input, left);
+            ArrayValidation<T>.ValidateArrayIndex(input, right);
+            ComparisonValidation<int>.IsSmallerThan(left, right);
+
+            int middle = (left + right) / 2;
+
+            if (!comparisonFunc(input[left], input[middle]))
+                Exchange<T>.ArrayExchange(input, left, middle);
+
+            if (!comparisonFunc(input[middle], input[right]))
+                Exchange<T>.ArrayExchange(input, middle, right);
+
+            return middle;
         }
     }
 }
