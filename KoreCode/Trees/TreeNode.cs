@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace KoreCode.Trees
 {
-    public abstract class TreeNode<T>: ITreeNode<T>
+    public abstract class TreeNode<T>: ITreeNode<T> where T : ITreeNode<T>
     {
         public TreeNode(): this(0) { }
 
@@ -24,7 +24,7 @@ namespace KoreCode.Trees
         {
             get
             {
-                return (bool)Parent.GetType().GetProperty("IsNil").GetValue(Parent);
+                return Parent.IsNil;
             }
         }
 
@@ -40,7 +40,7 @@ namespace KoreCode.Trees
         {
             get
             {
-                return (T)Parent.GetType().GetProperty("Parent").GetValue(Parent);
+                return Parent.Parent;
             }
         }
 
