@@ -6,19 +6,14 @@ using System.Threading.Tasks;
 
 namespace KoreCode.Trees.Binary
 {
-    public class BinaryNode: IBinaryNode
+    public class BinaryNode: TreeNode<IBinaryNode>, IBinaryNode
     {
         public BinaryNode() { }
 
-        public BinaryNode(int key)
-        {
-            Key = key;
-        }
+        public BinaryNode(int key): base(key) { }
 
         public IBinaryNode Left { get; set; }
         public IBinaryNode Right { get; set; }
-        public IBinaryNode Parent { get; set; }
-        public int Key { get; set; }
 
         public IBinaryNode Uncle
         {
@@ -28,7 +23,7 @@ namespace KoreCode.Trees.Binary
             }
         }
 
-        public virtual string Label
+        public override string Label
         {
             get
             {
@@ -43,43 +38,11 @@ namespace KoreCode.Trees.Binary
             }
         }
 
-        public bool IsRoot
-        {
-            get
-            {
-                return Parent == Parent.Parent;
-            }
-        }
-
-        public bool IsLeaf
-        {
-            get
-            {
-                return !IsRoot && Left.IsNil && Right.IsNil;
-            }
-        }
-
-        public bool IsInternalNode
-        {
-            get
-            {
-                return !IsLeaf && !IsRoot;
-            }
-        }
-
         public IBinaryNode Sibling
         {
             get
             {
                 return this == Parent.Left ? Parent.Right : Parent.Left;
-            }
-        }
-
-        public IBinaryNode Grandparent
-        {
-            get
-            {
-                return Parent.Parent;
             }
         }
 
@@ -99,11 +62,19 @@ namespace KoreCode.Trees.Binary
             }
         }
 
-        public bool IsNil
+        public override bool IsNil
         {
             get
             {
                 return Left == this && Right == this && Parent == this;
+            }
+        }
+
+        public override bool IsLeaf
+        {
+            get
+            {
+                return !IsRoot && Left.IsNil && Right.IsNil;
             }
         }
 
@@ -120,7 +91,7 @@ namespace KoreCode.Trees.Binary
         }
 
         //TODO: optimise
-        public virtual int Height
+        public override int Height
         {
             get
             {

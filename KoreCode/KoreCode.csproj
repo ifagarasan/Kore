@@ -85,6 +85,7 @@
     <Compile Include="Trees\Binary\RedBlackTree\RedBlackTree.cs" />
     <Compile Include="Trees\Binary\RedBlackTree\RedBlackNode.cs" />
     <Compile Include="Trees\ITreeNode.cs" />
+    <Compile Include="Trees\TreeNode.cs" />
     <Compile Include="Util\ArrayOps.cs" />
     <Compile Include="Util\Comparers.cs" />
     <Compile Include="Util\Exchange.cs" />

@@ -95,16 +95,15 @@ namespace KoreCodeTests.Tree.Binary.Nodes
         #region IsRoot
 
         [TestMethod]
-        public void IsRootReturnsTrueIfACircularReferenceToTheParentIsDetected()
+        public void IsRootReturnsTrueIfNodeParentIsNil()
         {
             var node = BuildNode();
-            node.Parent = node;
 
             Assert.IsTrue(node.IsRoot);
         }
 
         [TestMethod]
-        public void IsRootReturnsFalseIfACircularReferenceToTheParentIsNotDetected()
+        public void IsRootReturnsFalseIfNodeParentIsNotNil()
         {
             var node = BuildNode();
             node.Parent = BuildNode();
