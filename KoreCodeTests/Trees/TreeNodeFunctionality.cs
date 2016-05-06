@@ -20,11 +20,6 @@ namespace KoreCodeTests.Tree.Binary.Nodes
             DecorateNode(Nil);
         }
 
-        protected Mock<T> CreateMockNode()
-        {
-            return new Mock<T> { CallBase = true };
-        }
-
         protected abstract T CreateNode();
         protected abstract void DecorateNode(T node);
 
@@ -95,18 +90,18 @@ namespace KoreCodeTests.Tree.Binary.Nodes
             Assert.IsFalse(node.IsInternalNode);
         }
 
-        ////[TestMethod] TODO: fix using Moq
-        ////public void IsInternalNodeReturnsTrueIfIsNotLeafAndIsNotRoot()
-        ////{
-        ////    var nodeMock = CreateMockNode();
+        [TestMethod]
+        public abstract void IsInternalNodeReturnsTrueIfIsNotLeafAndIsNotRoot();
 
-        ////    nodeMock.Setup(node => node.IsLeaf).Returns(() => false);
-        ////    nodeMock.Setup(node => node.IsRoot).Returns(() => false);
+        protected virtual void RunIsInternalNodeReturnsTrueIfIsNotLeafAndIsNotRoot<R>() where R : class, ITreeNode<T>
+        {
+            var mock = new Mock<R> { CallBase = true };
 
-        ////    var result = nodeMock.Object.IsInternalNodeFunc();
+            mock.Setup(node => node.IsLeaf).Returns(() => false);
+            mock.Setup(node => node.IsRoot).Returns(() => false);
 
-        ////    Assert.IsTrue(result);
-        ////}
+            Assert.IsTrue(mock.Object.IsInternalNode);
+        }
 
         #endregion
     }

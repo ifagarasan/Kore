@@ -43,5 +43,15 @@ namespace KoreCodeTests.Tree.Binary.Nodes
         }
 
         #endregion
+
+        #region IsInternalNode
+
+        [TestMethod]
+        public override void IsInternalNodeReturnsTrueIfIsNotLeafAndIsNotRoot()
+        {
+            RunIsInternalNodeReturnsTrueIfIsNotLeafAndIsNotRoot<RedBlackNode>();
+        }
+
+        #endregion
     }
 }

@@ -4,6 +4,7 @@ using KoreCode.Trees.Binary;
 using KoreCode.Exceptions;
 using KoreCode.Trees;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace KoreCodeTests.Tree.Binary.Nodes
 {
@@ -205,6 +206,16 @@ namespace KoreCodeTests.Tree.Binary.Nodes
             node.Parent = node;
 
             Assert.IsTrue(node.IsNil);
+        }
+
+        #endregion
+
+        #region IsInternalNode
+
+        [TestMethod]
+        public override void IsInternalNodeReturnsTrueIfIsNotLeafAndIsNotRoot()
+        {
+            RunIsInternalNodeReturnsTrueIfIsNotLeafAndIsNotRoot<BinaryNode>();
         }
 
         #endregion
