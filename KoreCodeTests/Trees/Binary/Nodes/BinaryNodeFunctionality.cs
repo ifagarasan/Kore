@@ -1,36 +1,21 @@
 ﻿using System;
 
 using KoreCode.Trees.Binary;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using KoreCode.Exceptions;
+using KoreCode.Trees;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace KoreCodeTests.Tree.Binary.Nodes
 {
     [TestClass]
-    public class BinaryNodeFunctionality
+    public class BinaryNodeFunctionality: TreeNodeFunctionality<IBinaryNode>
     {
-        protected IBinaryNode Nil;
-
-        [TestInitialize]
-        public virtual void SetUp()
-        {
-            Nil = CreateNode();
-            DecorateNode(Nil);
-        }
-
-        protected virtual IBinaryNode CreateNode()
+        protected override IBinaryNode CreateNode()
         {
             return new BinaryNode();
         }
 
-        protected virtual IBinaryNode BuildNode()
-        {
-            IBinaryNode node = CreateNode();
-            DecorateNode(node);
-            return node;
-        }
-
-        protected virtual void DecorateNode(IBinaryNode node)
+        protected override void DecorateNode(IBinaryNode node)
         {
             node.Left = node.Right = node.Parent = Nil;
         }
@@ -75,44 +60,6 @@ namespace KoreCodeTests.Tree.Binary.Nodes
 
         #endregion
 
-        #region Grandparent
-
-        [TestMethod]
-        public void GrandparentReturnsParentParent()
-        {
-            IBinaryNode grandParent = BuildNode();
-            IBinaryNode parent = BuildNode();
-            IBinaryNode node = CreateNode();
-
-            parent.Parent = grandParent;
-            node.Parent = parent;
-
-            Assert.AreSame(grandParent, node.Grandparent);
-        }
-
-        #endregion
-
-        #region IsRoot
-
-        [TestMethod]
-        public void IsRootReturnsTrueIfNodeParentIsNil()
-        {
-            var node = BuildNode();
-
-            Assert.IsTrue(node.IsRoot);
-        }
-
-        [TestMethod]
-        public void IsRootReturnsFalseIfNodeParentIsNotNil()
-        {
-            var node = BuildNode();
-            node.Parent = BuildNode();
-
-            Assert.IsFalse(node.IsRoot);
-        }
-
-        #endregion
-
         #region IsLeaf
 
         [TestMethod]
@@ -142,40 +89,6 @@ namespace KoreCodeTests.Tree.Binary.Nodes
         public void IsLeafReturnsFalseIfNodeIsRoot()
         {
             var node = BuildNode();
-
-            Assert.IsFalse(node.IsLeaf);
-        }
-
-        #endregion
-
-        #region IsInternalNode
-
-        [TestMethod]
-        public void IsInternalNodeReturnsFalseIfNodeIsRoot()
-        {
-            var node = BuildNode();
-
-            Assert.IsTrue(node.IsRoot);
-            Assert.IsFalse(node.IsInternalNode);
-        }
-
-        [TestMethod]
-        public void IsInternalNodeReturnsFalseIfIsLeaf()
-        {
-            var node = BuildNode();
-            var root = BuildNode();
-
-            node.Parent = root;
-
-            Assert.IsFalse(node.IsInternalNode);
-        }
-
-        [TestMethod]
-        public void IsInternalNodeReturnsTrueIfIsNotLeafAndIsNotRoot()
-        {
-            var node = BuildNode();
-            node.Left = BuildNode();
-            node.Right = BuildNode();
 
             Assert.IsFalse(node.IsLeaf);
         }
@@ -295,6 +208,5 @@ namespace KoreCodeTests.Tree.Binary.Nodes
         }
 
         #endregion
-
     }
 }

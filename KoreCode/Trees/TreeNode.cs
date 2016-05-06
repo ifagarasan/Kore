@@ -16,11 +16,11 @@ namespace KoreCode.Trees
             Key = key;
         }
 
-        public int Key { get; set; }
+        public virtual int Key { get; set; }
 
-        public T Parent { get; set; }
+        public virtual T Parent { get; set; }
 
-        public bool IsRoot
+        public virtual bool IsRoot
         {
             get
             {
@@ -28,7 +28,12 @@ namespace KoreCode.Trees
             }
         }
 
-        public bool IsInternalNode
+        public virtual bool IsInternalNodeFunc()
+        {
+            return !IsLeaf && !IsRoot;
+        }
+
+        public virtual bool IsInternalNode
         {
             get
             {
@@ -36,7 +41,7 @@ namespace KoreCode.Trees
             }
         }
 
-        public T Grandparent
+        public virtual T Grandparent
         {
             get
             {

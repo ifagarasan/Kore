@@ -15,6 +15,9 @@ namespace KoreCode.Trees
         bool IsRoot { get; }
         bool IsLeaf { get; }
         bool IsInternalNode { get; }
+
+        bool IsInternalNodeFunc();
+
         int Height { get; }
     }
 }

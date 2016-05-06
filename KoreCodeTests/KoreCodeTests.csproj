@@ -69,6 +69,7 @@
     <Compile Include="Sort\SelectionSortFunctionality.cs" />
     <Compile Include="Sort\SortFunctionality.cs" />
     <Compile Include="Stack\StackFunctional.cs" />
+    <Compile Include="Trees\TreeNodeFunctionality.cs" />
     <Compile Include="Trees\Binary\AvlTree\BalanceProviderFunctionality.cs" />
     <Compile Include="Trees\Binary\AvlTree\AvlFunctionality.cs" />
     <Compile Include="Trees\Binary\Nodes\BinaryNodeHeightFunctionality.cs" />
