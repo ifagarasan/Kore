@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KoreCode.Trees
 {
-    public interface ITreeNode<T>
+    public interface ITreeNode<T>: IEnumerable<T>
     {
         T Parent { get; set; }
         T Grandparent { get; }

@@ -101,5 +101,11 @@ namespace KoreCode.Trees.Binary
                 return 1 + Math.Max(Left.Height, Right.Height);
             }
         }
+
+        public override IEnumerator<IBinaryNode> GetEnumerator()
+        {
+            yield return Left;
+            yield return Right;
+        }
     }
 }

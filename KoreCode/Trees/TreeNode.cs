@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -57,6 +58,12 @@ namespace KoreCode.Trees
             }
         }
 
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        public abstract IEnumerator<T> GetEnumerator();
         public abstract int Height { get; }
         public abstract bool IsNil { get; }
         public abstract bool IsLeaf { get; }

@@ -219,5 +219,48 @@ namespace KoreCodeTests.Tree.Binary.Nodes
         }
 
         #endregion
+
+        #region Enumerator
+
+        [TestMethod]
+        public void ForeachIncludesBothLeftAndRightNodes()
+        {
+            IBinaryNode[] collection = new BinaryNode[2];
+            collection[0] = BuildNode();
+            collection[1] = BuildNode();
+
+            var node = BuildNode();
+
+            node.Left = collection[0];
+            node.Right = collection[1];
+
+            int index = 0;
+
+            foreach(IBinaryNode child in node)
+            {
+                Assert.AreSame(collection[index], child);
+                index++;
+            }
+
+            Assert.AreEqual(collection.Length, index);
+        }
+
+        [TestMethod]
+        public void ForeachIncludesBothLeftAndRightNodesWhenNil()
+        {
+            var node = BuildNode();
+
+            int index = 0;
+
+            foreach (IBinaryNode child in node)
+            {
+                Assert.AreSame(Nil, child);
+                index++;
+            }
+
+            Assert.AreEqual(2, index);
+        }
+
+        #endregion
     }
 }
