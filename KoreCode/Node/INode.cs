@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace KoreCode.Node
 {
-    public interface INode
+    public interface INode<T> : IEnumerable<T>
     {
         //TODO: Key becomes generic
-        //TODO: implements IEnumerable, to traversals can be reused - not only for trees, but also for graphs
         int Key { get; set; }
+        string Label { get; }
     }
 }

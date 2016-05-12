@@ -13,7 +13,7 @@ namespace KoreCode.Trees.Binary
         Black
     }
 
-    public interface IBinaryNode: INode, ITreeNode<IBinaryNode>
+    public interface IBinaryNode: ITreeNode<IBinaryNode>
     {
         IBinaryNode Left { get; set; }
         IBinaryNode Right { get; set; }

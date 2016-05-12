@@ -29,11 +29,6 @@ namespace KoreCode.Trees
             }
         }
 
-        public virtual bool IsInternalNodeFunc()
-        {
-            return !IsLeaf && !IsRoot;
-        }
-
         public virtual bool IsInternalNode
         {
             get

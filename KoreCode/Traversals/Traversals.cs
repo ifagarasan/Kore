@@ -1,4 +1,5 @@
-﻿using KoreCode.Trees.Binary;
+﻿using KoreCode.Node;
+using KoreCode.Trees.Binary;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,28 +8,23 @@ using System.Threading.Tasks;
 
 namespace KoreCode.Traversals
 {
-    public delegate bool NodeProcessor(IBinaryNode node);
+    public delegate bool NodeProcessor<T>(T node);
 
-    public static class Traversals
+    public static class Traversals<T>
     {
-        public static void BreadthFirstSearch(BinaryTree tree, NodeProcessor processor)
+        public static void BreadthFirstSearch(INode<T> node, INode<T> Nil, NodeProcessor<INode<T>> processor)
         {
-            if (tree == null)
-                throw new ArgumentNullException("tree");
+            if (node == Nil)
+                return;
 
-            BreadthFirstSearch(tree.Root, tree.Nil, processor);
-        }
-
-        public static void BreadthFirstSearch(IBinaryNode node, IBinaryNode Nil, NodeProcessor processor)
-        {
-            Queue<IBinaryNode> queue = new Queue<IBinaryNode>();
+            Queue<INode<T>> queue = new Queue<INode<T>>();
 
             queue.Enqueue(node);
 
             bool continueExecution = true;
             while (queue.Count > 0 && continueExecution)
             {
-                IBinaryNode current = queue.Dequeue();
+                INode<T> current = queue.Dequeue();
 
                 if (current == Nil)
                     break;
@@ -36,10 +32,9 @@ namespace KoreCode.Traversals
                 if (processor != null)
                     continueExecution = processor(current);
 
-                if (current.Left != Nil)
-                    queue.Enqueue(current.Left);
-                if (current.Right != Nil)
-                    queue.Enqueue(current.Right);
+                foreach(INode<T> child in current)
+                    if (child != Nil)
+                        queue.Enqueue(child);
             }
         }
     }

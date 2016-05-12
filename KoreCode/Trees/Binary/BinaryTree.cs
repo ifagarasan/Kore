@@ -143,14 +143,14 @@ namespace KoreCode.Trees.Binary
 
         #region Traversals
 
-        public void Inorder(NodeProcessor processor)
+        public void Inorder(NodeProcessor<IBinaryNode> processor)
         {
             bool continueExecution = true;
 
             Inorder(Root, processor, ref continueExecution);
         }
 
-        protected void Inorder(IBinaryNode node, NodeProcessor processor, ref bool continueExecution)
+        protected void Inorder(IBinaryNode node, NodeProcessor<IBinaryNode> processor, ref bool continueExecution)
         {
             if (node == Nil || !continueExecution)
                 return;
@@ -163,12 +163,12 @@ namespace KoreCode.Trees.Binary
             Inorder(node.Right, processor, ref continueExecution);
         }
 
-        public void Preorder(NodeProcessor processor)
+        public void Preorder(NodeProcessor<IBinaryNode> processor)
         {
             Preorder(Root, processor);
         }
 
-        protected void Preorder(IBinaryNode node, NodeProcessor processor)
+        protected void Preorder(IBinaryNode node, NodeProcessor<IBinaryNode> processor)
         {
             if (node == Nil)
                 return;
@@ -192,13 +192,13 @@ namespace KoreCode.Trees.Binary
             }
         }
 
-        public void Postorder(NodeProcessor processor)
+        public void Postorder(NodeProcessor<IBinaryNode> processor)
         {
             bool continueExecution = true;
             Postorder(Root, processor, ref continueExecution);
         }
 
-        protected void Postorder(IBinaryNode node, NodeProcessor processor, ref bool continueExecution)
+        protected void Postorder(IBinaryNode node, NodeProcessor<IBinaryNode> processor, ref bool continueExecution)
         {
             if (node == Nil || !continueExecution)
                 return;
@@ -218,7 +218,7 @@ namespace KoreCode.Trees.Binary
         {
             string result = string.Empty;
 
-            Traversals.Traversals.BreadthFirstSearch(this, (x) => { result += string.Format("{0} ", x.Label); return true; } );
+            Traversals<IBinaryNode>.BreadthFirstSearch(Root, Nil, (x) => { result += string.Format("{0} ", x.Label); return true; } );
 
             return result;
         }
