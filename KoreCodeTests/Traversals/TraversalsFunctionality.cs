@@ -9,35 +9,19 @@ using KoreCode.Util;
 using KoreCode.Traversals;
 using KoreCode.Trees.Binary;
 using System.Collections.Generic;
+using KoreCode.Nodes.Builders;
 
 namespace KoreCodeTest.Util
 {
     [TestClass]
     public class TraversalsFunctionality
     {
-        IBinaryNode Nil;
-
-        IBinaryNode CreateNode(int key)
-        {
-            return new BinaryNode(key);
-        }
-
-        void DecorateNode(IBinaryNode node)
-        {
-            node.Left = node.Right = node.Parent = Nil;
-        }
-
-        IBinaryNode BuildNode(int key = 0)
-        {
-            var node = CreateNode(key);
-            DecorateNode(node);
-            return node;
-        }
+        BinaryNodeBuilder<BinaryNode> nodeBuilder;
 
         [TestInitialize]
         public void Setup()
         {
-            Nil = BuildNode();
+            nodeBuilder = new BinaryNodeBuilder<BinaryNode>();
         }
 
         #region BreadthFirstSearch
@@ -47,7 +31,7 @@ namespace KoreCodeTest.Util
         {
             List<IBinaryNode> order = new List<IBinaryNode>();
             for (int i = 1; i <= 5; ++i)
-                order.Add(BuildNode(i));
+                order.Add(nodeBuilder.BuildNode(i));
 
             IBinaryNode root = order[0];
             root.Left = order[1];
@@ -57,7 +41,7 @@ namespace KoreCodeTest.Util
 
             int index = 0;
 
-            Traversals<IBinaryNode>.BreadthFirstSearch(root, Nil, (x) =>
+            Traversals<IBinaryNode>.BreadthFirstSearch(root, nodeBuilder.Nil, (x) =>
             {
                 Assert.AreSame(order[index], x);
                 index++;
@@ -72,7 +56,7 @@ namespace KoreCodeTest.Util
         {
             int index = 0;
 
-            Traversals<IBinaryNode>.BreadthFirstSearch(Nil, Nil, (x) =>
+            Traversals<IBinaryNode>.BreadthFirstSearch(nodeBuilder.Nil, nodeBuilder.Nil, (x) =>
             {
                 index++;
                 return true;
