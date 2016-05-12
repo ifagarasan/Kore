@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Node\Builders\BinaryNodeBuilder.cs" />
     <Compile Include="Exceptions\ComparisonException.cs" />
     <Compile Include="Exceptions\DuplicateKeyException.cs" />
     <Compile Include="Exceptions\ElementNotFoundException.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="Util\RandomOps.cs" />
     <Compile Include="Util\IO.cs" />
     <Compile Include="Sort\Sort.cs" />
+    <Compile Include="Util\Types.cs" />
     <Compile Include="Validation\ArrayValidation.cs" />
     <Compile Include="Validation\ComparisoniValidation.cs" />
   </ItemGroup>
