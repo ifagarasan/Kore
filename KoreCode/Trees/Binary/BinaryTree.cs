@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using KoreCode.Exceptions;
+using KoreCode.Traversals;
 
 namespace KoreCode.Trees.Binary
 {
-    public delegate bool NodeProcessor(IBinaryNode node);
-
     public enum RotateDirection
     {
         Left = 0,
@@ -144,35 +143,6 @@ namespace KoreCode.Trees.Binary
 
         #region Traversals
 
-        public void BreadthFirstSearch(NodeProcessor processor)
-        {
-            BreadthFirstSearch(Root, processor);
-        }
-
-        protected void BreadthFirstSearch(IBinaryNode node, NodeProcessor processor)
-        {
-            Queue<IBinaryNode> queue = new Queue<IBinaryNode>();
-
-            queue.Enqueue(node);
-
-            bool continueExecution = true;
-            while (queue.Count > 0 && continueExecution)
-            {
-                IBinaryNode current = queue.Dequeue();
-
-                if (current == Nil)
-                    break;
-
-                if (processor != null)
-                    continueExecution = processor(current);
-
-                if (current.Left != Nil)
-                    queue.Enqueue(current.Left);
-                if (current.Right != Nil)
-                    queue.Enqueue(current.Right);
-            }
-        }
-
         public void Inorder(NodeProcessor processor)
         {
             bool continueExecution = true;
@@ -248,7 +218,7 @@ namespace KoreCode.Trees.Binary
         {
             string result = string.Empty;
 
-            BreadthFirstSearch((x) => { result += string.Format("{0} ", x.Label); return true; } );
+            Traversals.Traversals.BreadthFirstSearch(this, (x) => { result += string.Format("{0} ", x.Label); return true; } );
 
             return result;
         }
