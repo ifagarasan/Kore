@@ -5,15 +5,22 @@ using KoreCode.Trees.Binary;
 using KoreCode.Trees.Binary.RedBlackTree;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using KoreCode.Nodes.Builders;
 
 namespace KoreCodeTests.Tree.Binary.Nodes
 {
     [TestClass]
     public class RedBlackNodeFunctionality: BinaryNodeFunctionality
     {
-        protected override IBinaryNode CreateNode()
+        [TestInitialize]
+        public override void SetUp()
         {
-            return new RedBlackNode();
+            nodeBuilder = new RedBlackNodeBuilder();
+        }
+
+        protected override IBinaryNode BuildNode(int key = 0)
+        {
+            return nodeBuilder.BuildNode(key);
         }
 
         #region Height
@@ -21,7 +28,7 @@ namespace KoreCodeTests.Tree.Binary.Nodes
         [TestMethod]
         public void HeightReturnsZeroForNil()
         {
-            Assert.AreEqual(0, Nil.Height);
+            Assert.AreEqual(0, nodeBuilder.Nil.Height);
         }
 
         [TestMethod]

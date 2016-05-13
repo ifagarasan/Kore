@@ -5,30 +5,17 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using KoreCode.Exceptions;
 using KoreCode.Trees;
 using Moq;
+using KoreCode.Nodes.Builders;
 
 namespace KoreCodeTests.Tree.Binary.Nodes
 {
     [TestClass]
     public abstract class TreeNodeFunctionality<T> where T : class, ITreeNode<T>
     {
-        protected T Nil;
-
         [TestInitialize]
-        public virtual void SetUp()
-        {
-            Nil = CreateNode();
-            DecorateNode(Nil);
-        }
+        public abstract void SetUp();
 
-        protected abstract T CreateNode();
-        protected abstract void DecorateNode(T node);
-
-        protected virtual T BuildNode()
-        {
-            T node = CreateNode();
-            DecorateNode(node);
-            return node;
-        }
+        protected abstract T BuildNode(int key = 0);
 
         #region Grandparent
 
@@ -37,7 +24,7 @@ namespace KoreCodeTests.Tree.Binary.Nodes
         {
             T grandParent = BuildNode();
             T parent = BuildNode();
-            T node = CreateNode();
+            T node = BuildNode();
 
             parent.Parent = grandParent;
             node.Parent = parent;

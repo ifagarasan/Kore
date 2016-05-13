@@ -12,12 +12,12 @@ namespace KoreCodeTests.Tree.Binary.AvlTree
     [TestClass]
     public class BalanceProviderFunctionality
     {
-        protected BinaryNodeBuilder<BinaryNode> nodeBuilder;
+        protected BinaryNodeBuilder nodeBuilder;
 
         [TestInitialize]
         public virtual void SetUp()
         {
-            nodeBuilder = new BinaryNodeBuilder<BinaryNode>();
+            nodeBuilder = new BinaryNodeBuilder();
         }
 
         [TestMethod]

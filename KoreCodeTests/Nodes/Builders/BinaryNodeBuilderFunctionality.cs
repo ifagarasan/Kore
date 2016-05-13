@@ -17,12 +17,12 @@ namespace KoreCodeTest.Nodes.Builders
     [TestClass]
     public class BinaryNodeBuilderFunctionality
     {
-        BinaryNodeBuilder<BinaryNode> nodeBuilder;
+        BinaryNodeBuilder nodeBuilder;
 
         [TestInitialize]
         public void Setup()
         {
-            nodeBuilder = new BinaryNodeBuilder<BinaryNode>();
+            nodeBuilder = new BinaryNodeBuilder();
         }
 
         #region Nil

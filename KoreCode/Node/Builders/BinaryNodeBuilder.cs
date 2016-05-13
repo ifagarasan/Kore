@@ -3,33 +3,16 @@ using KoreCode.Trees.Binary;
 
 namespace KoreCode.Nodes.Builders
 {
-    public class BinaryNodeBuilder<T> where T: IBinaryNode, new()
+    public class BinaryNodeBuilder: TreeNodeBuilder<BinaryNode>
     {
-        public BinaryNodeBuilder()
+        protected override BinaryNode CreateNode(int value)
         {
-            Nil = CreateNode(0);
-            DecorateNode(Nil);
+            return new BinaryNode(value);
         }
 
-        public T Nil { get; private set; }
-
-        private T CreateNode(int value)
-        {
-            var node = new T();
-            node.Key = value;
-            return node;
-        }
-
-        private void DecorateNode(IBinaryNode node)
+        protected override void DecorateNode(BinaryNode node)
         {
             node.Left = node.Right = node.Parent = Nil;
-        }
-
-        public IBinaryNode BuildNode(int key = 0)
-        {
-            var node = CreateNode(key);
-            DecorateNode(node);
-            return node;
         }
     }
 }

@@ -5,20 +5,24 @@ using KoreCode.Exceptions;
 using KoreCode.Trees;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using KoreCode.Nodes.Builders;
 
 namespace KoreCodeTests.Tree.Binary.Nodes
 {
     [TestClass]
     public class BinaryNodeFunctionality: TreeNodeFunctionality<IBinaryNode>
     {
-        protected override IBinaryNode CreateNode()
+        protected BinaryNodeBuilder nodeBuilder;
+
+        [TestInitialize]
+        public override void SetUp()
         {
-            return new BinaryNode();
+            nodeBuilder = new BinaryNodeBuilder();
         }
 
-        protected override void DecorateNode(IBinaryNode node)
+        protected override IBinaryNode BuildNode(int key = 0)
         {
-            node.Left = node.Right = node.Parent = Nil;
+            return nodeBuilder.BuildNode(key);
         }
 
         #region Uncle
@@ -77,7 +81,6 @@ namespace KoreCodeTests.Tree.Binary.Nodes
         public void IsLeafReturnsFalseIfLeftDoesNotEqualRight()
         {
             var parent = BuildNode();
-
             var node = BuildNode();
             node.Left = BuildNode();
             node.Right = BuildNode();
@@ -185,7 +188,7 @@ namespace KoreCodeTests.Tree.Binary.Nodes
         [TestMethod]
         public void IsNilReturnsTrueIfLeftRightAndParentEqualThis()
         {
-            Assert.IsTrue(Nil.IsNil);
+            Assert.IsTrue(nodeBuilder.Nil.IsNil);
         }
 
         [TestMethod]
@@ -230,7 +233,6 @@ namespace KoreCodeTests.Tree.Binary.Nodes
             collection[1] = BuildNode();
 
             var node = BuildNode();
-
             node.Left = collection[0];
             node.Right = collection[1];
 
@@ -254,7 +256,7 @@ namespace KoreCodeTests.Tree.Binary.Nodes
 
             foreach (IBinaryNode child in node)
             {
-                Assert.AreSame(Nil, child);
+                Assert.AreSame(nodeBuilder.Nil, child);
                 index++;
             }
 

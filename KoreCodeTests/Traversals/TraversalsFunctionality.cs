@@ -16,12 +16,12 @@ namespace KoreCodeTest.Util
     [TestClass]
     public class TraversalsFunctionality
     {
-        BinaryNodeBuilder<BinaryNode> nodeBuilder;
+        BinaryNodeBuilder nodeBuilder;
 
         [TestInitialize]
         public void Setup()
         {
-            nodeBuilder = new BinaryNodeBuilder<BinaryNode>();
+            nodeBuilder = new BinaryNodeBuilder();
         }
 
         #region BreadthFirstSearch
