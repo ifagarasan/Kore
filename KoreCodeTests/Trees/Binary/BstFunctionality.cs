@@ -15,20 +15,6 @@ namespace KoreCodeTests.Tree.Binary
             return new Bst();
         }
 
-        #region CreateNode
-
-        [TestMethod]
-        public void CreatNodeReturnsNodeThatHasAllLinksWithNil()
-        {
-            var node = binaryTree.CreateNode();
-
-            Assert.AreSame(binaryTree.Nil, node.Parent);
-            Assert.AreSame(binaryTree.Nil, node.Right);
-            Assert.AreSame(binaryTree.Nil, node.Left);
-        }
-
-        #endregion
-
         #region Insert
 
         [TestMethod]

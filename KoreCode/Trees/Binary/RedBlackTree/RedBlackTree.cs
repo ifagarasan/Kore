@@ -2,23 +2,15 @@
 using System.Diagnostics;
 
 using KoreCode.Exceptions;
+using KoreCode.Nodes.Builders;
 
 namespace KoreCode.Trees.Binary.RedBlackTree
 {
     public class RedBlackTree : Bst
     {
-        protected override void DecorateNode(IBinaryNode node)
+        protected override BinaryNodeBuilder CreateNodeBuilder()
         {
-            base.DecorateNode(node);
-
-            node.Color = node == Nil ? Color.Black : Color.Red;
-        }
-
-        public override IBinaryNode CreateNode()
-        {
-            IBinaryNode node = new RedBlackNode();
-            DecorateNode(node);
-            return node;
+            return new RedBlackNodeBuilder();
         }
 
         #region IsBalanced

@@ -12,16 +12,6 @@ namespace KoreCodeTests.Tree.Binary.RedBlackTree
             return new KoreCode.Trees.Binary.RedBlackTree.RedBlackTree();
         }
 
-        #region CreateNode
-
-        [TestMethod]
-        public void CreatNodeSetsNodeColorToRed()
-        {
-            Assert.AreEqual(Color.Red, binaryTree.CreateNode().Color);
-        }
-
-        #endregion
-
         #region Nil
 
         [TestMethod]

@@ -1,21 +1,14 @@
 ﻿using System;
 using KoreCode.Exceptions;
+using KoreCode.Nodes.Builders;
 
 namespace KoreCode.Trees.Binary
 {
     public class Bst : BinaryTree
     {
-        protected override void DecorateNode(IBinaryNode node)
+        protected override BinaryNodeBuilder CreateNodeBuilder()
         {
-            node.Parent = node.Left = node.Right = Nil;
-        }
-
-        public override IBinaryNode CreateNode()
-        {
-            IBinaryNode node = new BinaryNode();
-            DecorateNode(node);
-
-            return node;
+            return new BinaryNodeBuilder();
         }
 
         public override void Insert(IBinaryNode node)

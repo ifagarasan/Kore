@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using KoreCode.Exceptions;
 using KoreCode.Traversals;
+using KoreCode.Nodes.Builders;
 
 namespace KoreCode.Trees.Binary
 {
@@ -13,14 +14,15 @@ namespace KoreCode.Trees.Binary
 
     public abstract class BinaryTree
     {
-        private IBinaryNode nil;
+        public BinaryNodeBuilder NodeBuilder { get; protected set; }
 
         public BinaryTree()
         {
-            nil = CreateNode();
-            DecorateNode(nil);
-            Root = nil;
+            NodeBuilder = CreateNodeBuilder();
+            Root = NodeBuilder.Nil;
         }
+
+        protected abstract BinaryNodeBuilder CreateNodeBuilder();
 
         public IBinaryNode Root { get; protected set; }
 
@@ -30,7 +32,7 @@ namespace KoreCode.Trees.Binary
         {
             get
             {
-                return nil;
+                return NodeBuilder.Nil;
             }
         }
 
@@ -260,7 +262,7 @@ namespace KoreCode.Trees.Binary
             IBinaryNode current = node;
             IBinaryNode parent = node.Parent;
 
-            while (parent != nil && parent.Right == current)
+            while (parent != Nil && parent.Right == current)
             {
                 current = current.Parent;
                 parent = parent.Parent;
@@ -355,8 +357,7 @@ namespace KoreCode.Trees.Binary
             if (Search(key) != Nil)
                 throw new DuplicateKeyException(key.ToString());
 
-            IBinaryNode node = CreateNode();
-            node.Key = key;
+            IBinaryNode node = NodeBuilder.BuildNode(key);
     
             Insert(node);
             Count++;
@@ -364,10 +365,8 @@ namespace KoreCode.Trees.Binary
             return node;
         }
 
-        public abstract IBinaryNode CreateNode();
         public abstract void Insert(IBinaryNode node);
         public abstract IBinaryNode Search(int key);
         protected abstract void Remove(IBinaryNode node);
-        protected abstract void DecorateNode(IBinaryNode nil);
     }
 }
