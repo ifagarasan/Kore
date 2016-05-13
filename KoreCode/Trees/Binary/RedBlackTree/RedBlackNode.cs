@@ -8,9 +8,12 @@ namespace KoreCode.Trees.Binary.RedBlackTree
 {
     public class RedBlackNode : BinaryNode
     {
-        public RedBlackNode() { }
+        public RedBlackNode(): this(0) { }
 
-        public RedBlackNode(int key): base(key) { } //TODO: have Red as default
+        public RedBlackNode(int key): base(key)
+        {
+            Color = Color.Red;
+        }
 
         public override Color Color { get; set; }
 

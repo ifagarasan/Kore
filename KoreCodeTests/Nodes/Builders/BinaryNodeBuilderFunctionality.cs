@@ -17,12 +17,12 @@ namespace KoreCodeTest.Nodes.Builders
     [TestClass]
     public class BinaryNodeBuilderFunctionality
     {
-        BinaryNodeBuilder nodeBuilder;
+        public BinaryNodeBuilder NodeBuilder { get; protected set; }
 
         [TestInitialize]
-        public void Setup()
+        public virtual void Setup()
         {
-            nodeBuilder = new BinaryNodeBuilder();
+            NodeBuilder = new BinaryNodeBuilder();
         }
 
         #region Nil
@@ -30,26 +30,26 @@ namespace KoreCodeTest.Nodes.Builders
         [TestMethod]
         public void NilIsDefinedAtInitialisation()
         {
-            Assert.IsNotNull(nodeBuilder.Nil);
+            Assert.IsNotNull(NodeBuilder.Nil);
         }
 
         [TestMethod]
         public void NilIsHasParentLeftAndRightPointingBackToItself()
         {
-            AssertDecorations(nodeBuilder.Nil);
+            AssertDecorations(NodeBuilder.Nil);
         }
 
         private void AssertDecorations(IBinaryNode node)
         {
-            Assert.AreSame(nodeBuilder.Nil, node.Parent);
-            Assert.AreSame(nodeBuilder.Nil, node.Left);
-            Assert.AreSame(nodeBuilder.Nil, node.Right);
+            Assert.AreSame(NodeBuilder.Nil, node.Parent);
+            Assert.AreSame(NodeBuilder.Nil, node.Left);
+            Assert.AreSame(NodeBuilder.Nil, node.Right);
         }
 
         [TestMethod]
         public void NilIsHasDefaultKey()
         {
-            Assert.AreEqual(Types.GetDefaultValue(nodeBuilder.Nil.Key.GetType()), nodeBuilder.Nil.Key);
+            Assert.AreEqual(Types.GetDefaultValue(NodeBuilder.Nil.Key.GetType()), NodeBuilder.Nil.Key);
         }
 
         #endregion
@@ -60,14 +60,14 @@ namespace KoreCodeTest.Nodes.Builders
         public void BuildNodeCreatesANodeWithSpecifiedKey()
         {
             int key = 32;
-            var node = nodeBuilder.BuildNode(key);
+            var node = NodeBuilder.BuildNode(key);
             Assert.AreEqual(key, node.Key);
         }
 
         [TestMethod]
         public void BuildNodeCreatesANodeHavingParentLeftAndRightNil()
         {
-            var node = nodeBuilder.BuildNode();
+            var node = NodeBuilder.BuildNode();
             AssertDecorations(node);
         }
 
