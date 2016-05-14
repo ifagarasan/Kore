@@ -3,48 +3,32 @@
 using KoreCode.Trees.Binary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using KoreCode.Exceptions;
+using KoreCode.Nodes.Builders;
 
 namespace KoreCodeTests.Tree.Binary.Nodes
 {
     [TestClass]
     public class BinaryNodeHeightFunctionality
     {
-        protected IBinaryNode Nil;
+        BinaryNodeBuilder nodeBuilder;
 
         [TestInitialize]
         public virtual void SetUp()
         {
-            Nil = CreateNode();
-            DecorateNode(Nil);
+            nodeBuilder = new BinaryNodeBuilder();
         }
 
-        private IBinaryNode CreateNode()
-        {
-            return new BinaryNode();
-        }
-
-        private IBinaryNode BuildNode()
-        {
-            IBinaryNode node = CreateNode();
-            DecorateNode(node);
-            return node;
-        }
-
-        private void DecorateNode(IBinaryNode node)
-        {
-            node.Left = node.Right = node.Parent = Nil;
-        }
 
         [TestMethod]
         public void HeightReturnsZeroForNil()
         {
-            Assert.AreEqual(0, Nil.Height);
+            Assert.AreEqual(0, nodeBuilder.Nil.Height);
         }
 
         [TestMethod]
         public void HeightReturnsZeroForSingleNode()
         {
-            var node = BuildNode();
+            var node = nodeBuilder.BuildNode();
 
             Assert.AreEqual(0, node.Height);
         }
@@ -52,10 +36,10 @@ namespace KoreCodeTests.Tree.Binary.Nodes
         [TestMethod]
         public void HeightReturnsMaxNumberOfEdgesInSubtree()
         {
-            var root = BuildNode();
-            root.Left = BuildNode();
-            root.Left.Left = BuildNode();
-            root.Right = BuildNode();
+            var root = nodeBuilder.BuildNode();
+            root.Left = nodeBuilder.BuildNode();
+            root.Left.Left = nodeBuilder.BuildNode();
+            root.Right = nodeBuilder.BuildNode();
 
             Assert.AreEqual(2, root.Height);
         }
