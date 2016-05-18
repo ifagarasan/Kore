@@ -9,8 +9,8 @@ using KoreCode.Util;
 using KoreCode.Traversals;
 using KoreCode.Trees.Binary;
 using System.Collections.Generic;
+using KoreCode.Node.Builders;
 using Moq;
-using KoreCode.Nodes.Builders;
 
 namespace KoreCodeTest.Nodes.Builders
 {

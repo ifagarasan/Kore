@@ -3,7 +3,7 @@
 using KoreCode.Trees.Binary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using KoreCode.Exceptions;
-using KoreCode.Nodes.Builders;
+using KoreCode.Node.Builders;
 
 namespace KoreCodeTests.Tree.Binary.Nodes
 {

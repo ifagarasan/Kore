@@ -1,6 +1,6 @@
 ﻿using System;
 using KoreCode.Exceptions;
-using KoreCode.Nodes.Builders;
+using KoreCode.Node.Builders;
 
 namespace KoreCode.Trees.Binary
 {

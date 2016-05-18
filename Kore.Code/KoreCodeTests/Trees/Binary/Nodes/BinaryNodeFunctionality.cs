@@ -2,10 +2,10 @@
 
 using KoreCode.Trees.Binary;
 using KoreCode.Exceptions;
+using KoreCode.Node.Builders;
 using KoreCode.Trees;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using KoreCode.Nodes.Builders;
 
 namespace KoreCodeTests.Tree.Binary.Nodes
 {

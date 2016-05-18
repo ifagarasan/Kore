@@ -1,11 +1,11 @@
 ﻿using System;
 using KoreCode.Exceptions;
+using KoreCode.Node.Builders;
 using KoreCode.Trees;
 using KoreCode.Trees.Binary;
 using KoreCode.Trees.Binary.RedBlackTree;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using KoreCode.Nodes.Builders;
 
 namespace KoreCodeTests.Tree.Binary.Nodes
 {

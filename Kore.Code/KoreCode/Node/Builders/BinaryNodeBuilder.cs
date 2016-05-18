@@ -1,7 +1,6 @@
-﻿using System;
-using KoreCode.Trees.Binary;
+﻿using KoreCode.Trees.Binary;
 
-namespace KoreCode.Nodes.Builders
+namespace KoreCode.Node.Builders
 {
     public class BinaryNodeBuilder: TreeNodeBuilder<BinaryNode>
     {

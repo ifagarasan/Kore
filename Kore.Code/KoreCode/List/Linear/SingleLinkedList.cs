@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-using KoreCode.Exceptions;
-
-namespace KoreCode.List
+namespace KoreCode.List.Linear
 {
     public class SingleLinkedList<T>: LinearLinkedList<T> where T: IComparable
     {

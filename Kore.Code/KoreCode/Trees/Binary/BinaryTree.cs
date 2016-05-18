@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using KoreCode.Exceptions;
+using KoreCode.Node.Builders;
 using KoreCode.Traversals;
-using KoreCode.Nodes.Builders;
 
 namespace KoreCode.Trees.Binary
 {

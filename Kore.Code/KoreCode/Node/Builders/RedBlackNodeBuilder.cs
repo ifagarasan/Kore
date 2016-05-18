@@ -1,8 +1,7 @@
-﻿using System;
-using KoreCode.Trees.Binary;
+﻿using KoreCode.Trees.Binary;
 using KoreCode.Trees.Binary.RedBlackTree;
 
-namespace KoreCode.Nodes.Builders
+namespace KoreCode.Node.Builders
 {
     public class RedBlackNodeBuilder: BinaryNodeBuilder
     {

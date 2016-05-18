@@ -1,9 +1,7 @@
 ﻿using System;
 using System.IO;
 
-using KoreCode.Util;
-
-namespace KoreCode.Tests
+namespace KoreCode.Functional.Tests
 {
     public delegate void TestFound(string folderPath);
 

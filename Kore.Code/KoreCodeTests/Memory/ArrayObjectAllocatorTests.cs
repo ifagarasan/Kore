@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using KoreCode.List;
+using KoreCode.List.Linear;
 using KoreCode.Memory;
 
 namespace KoreCodeTests.Memory
