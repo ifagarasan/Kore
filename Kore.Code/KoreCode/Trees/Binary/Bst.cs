@@ -1,6 +1,4 @@
-﻿using System;
-using KoreCode.Exceptions;
-using KoreCode.Node.Builders;
+﻿using KoreCode.Node.Builders;
 
 namespace KoreCode.Trees.Binary
 {
@@ -18,9 +16,9 @@ namespace KoreCode.Trees.Binary
                 Root = node;
                 return;
             }
-            
-            IBinaryNode current = Root;
-            IBinaryNode parent = Root;
+
+            var current = Root;
+            var parent = Root;
 
             while (current != Nil)
             {
@@ -44,7 +42,7 @@ namespace KoreCode.Trees.Binary
                 Transplant(node, node.Left);
             else
             {
-                IBinaryNode successor = Min(node.Right);
+                var successor = Min(node.Right);
                 if (successor != node.Right)
                 {
                     Transplant(successor, successor.Right);
@@ -60,7 +58,7 @@ namespace KoreCode.Trees.Binary
 
         public override IBinaryNode Search(int key)
         {
-            IBinaryNode node = Root;
+            var node = Root;
 
             while (node != Nil)
             {

@@ -1,10 +1,6 @@
-﻿using KoreCode.Validation;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using KoreCode.Validation;
 
 namespace KoreCode.Util
 {
@@ -14,15 +10,15 @@ namespace KoreCode.Util
         {
             ComparisonValidation<int>.IsLargerThan(count, 0);
 
-            List<int> items = new List<int>();
+            var items = new List<int>();
 
-            for (int i = startValue; i < count; ++i)
+            for (var i = startValue; i < count; ++i)
                 items.Add(i + startValue);
 
-            int[] result = new int[count];
+            var result = new int[count];
             int resultIndex = 0, index;
 
-            System.Random random = new System.Random();
+            var random = new Random();
             while (items.Count > 0)
             {
                 index = random.Next(items.Count);

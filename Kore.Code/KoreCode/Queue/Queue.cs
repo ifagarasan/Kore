@@ -5,15 +5,13 @@ namespace KoreCode.Queue
 {
     public class Queue<T>
     {
-        int count;
-        QueueItem<T> head, tail;
+        private int count;
+        private QueueItem<T> head;
+        private QueueItem<T> tail;
 
         public int Count
         {
-            get
-            {
-                return count;
-            }
+            get { return count; }
             private set
             {
                 if (value < 0)
@@ -25,7 +23,7 @@ namespace KoreCode.Queue
 
         public void Enqueue(T value)
         {
-            QueueItem<T> newItem = new QueueItem<T>(value);
+            var newItem = new QueueItem<T>(value);
 
             if (head == null)
             {
@@ -51,7 +49,7 @@ namespace KoreCode.Queue
             if (head == null)
                 throw new Exception("head null");
 
-            T value = head.Value;
+            var value = head.Value;
             head = head.Next;
             Count--;
 

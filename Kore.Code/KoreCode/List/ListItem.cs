@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KoreCode.List
+﻿namespace KoreCode.List
 {
     public abstract class ListItem<T>
     {
-        public ListItem() { }
+        public ListItem()
+        {
+        }
 
         public ListItem(T value)
         {

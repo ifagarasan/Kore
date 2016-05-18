@@ -9,13 +9,13 @@ namespace KoreCode.Sort
         {
             ArrayValidation<T>.ValidateArray(input);
 
-            Func<T, T, bool> comparisonFunc = Sort<T>.GetComparisonFunc(direction);
+            var comparisonFunc = Sort<T>.GetComparisonFunc(direction);
 
-            for (int i = 0; i < input.Length; ++i)
+            for (var i = 0; i < input.Length; ++i)
             {
-                T currentValue = input[i];
+                var currentValue = input[i];
 
-                int k = i;
+                var k = i;
                 while (k > 0 && comparisonFunc(currentValue, input[k - 1]))
                 {
                     input[k] = input[k - 1];

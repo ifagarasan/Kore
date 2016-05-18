@@ -8,7 +8,7 @@
             DecorateNode(Nil);
         }
 
-        public T Nil { get; private set; }
+        public T Nil { get; }
 
         public T BuildNode(int key = 0)
         {

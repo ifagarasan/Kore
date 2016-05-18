@@ -1,6 +1,4 @@
-﻿using KoreCode.Exceptions;
-using System;
-using System.Collections.Generic;
+﻿using System;
 
 namespace KoreCode.Trees.Binary.AvlTree
 {
@@ -13,7 +11,7 @@ namespace KoreCode.Trees.Binary.AvlTree
 
             if (node.Left.IsNil)
                 return -node.Height;
-            else if (node.Right.IsNil)
+            if (node.Right.IsNil)
                 return node.Height;
 
             return node.Left.Height - node.Right.Height;

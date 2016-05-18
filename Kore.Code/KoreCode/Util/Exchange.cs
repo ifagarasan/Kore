@@ -4,7 +4,7 @@ namespace KoreCode.Util
 {
     public static class Exchange<T>
     {
-        public static void ArrayExchange (T[] input, int sourceIndex, int destinationIndex)
+        public static void ArrayExchange(T[] input, int sourceIndex, int destinationIndex)
         {
             ArrayValidation<T>.ValidateArrayIndex(input, sourceIndex);
             ArrayValidation<T>.ValidateArrayIndex(input, destinationIndex);
@@ -12,7 +12,7 @@ namespace KoreCode.Util
             if (sourceIndex == destinationIndex)
                 return;
 
-            T temp = input[sourceIndex];
+            var temp = input[sourceIndex];
 
             input[sourceIndex] = input[destinationIndex];
             input[destinationIndex] = temp;

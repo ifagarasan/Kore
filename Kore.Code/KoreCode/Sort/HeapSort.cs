@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using KoreCode.Util;
 using KoreCode.Heaps;
 using KoreCode.Validation;
 
@@ -15,10 +10,10 @@ namespace KoreCode.Sort
         {
             ArrayValidation<T>.ValidateArray(input);
 
-            HeapType heapType = direction == SortDirection.Ascending ? HeapType.Min : HeapType.Max;
-            BinaryHeap<T, object> heap = new BinaryHeap<T, object>(input, heapType);
+            var heapType = direction == SortDirection.Ascending ? HeapType.Min : HeapType.Max;
+            var heap = new BinaryHeap<T, object>(input, heapType);
 
-            for (int i = 0; i < input.Length; ++i)
+            for (var i = 0; i < input.Length; ++i)
                 input[i] = heap.ExtractRoot().Key;
         }
     }

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using KoreCode.Util;
 using KoreCode.Validation;
 
@@ -14,11 +10,11 @@ namespace KoreCode.Sort
         {
             ArrayValidation<T>.ValidateArray(input);
 
-            Func<T, T, bool> comparisonFunc = Sort<T>.GetComparisonFunc(direction);
+            var comparisonFunc = Sort<T>.GetComparisonFunc(direction);
 
-            for (int i = 0; i < input.Length; ++i)
+            for (var i = 0; i < input.Length; ++i)
             {
-                int extremeIndex = ArrayOps<T>.GetExtremeIndex(input, i, comparisonFunc);
+                var extremeIndex = ArrayOps<T>.GetExtremeIndex(input, i, comparisonFunc);
 
                 if (i != extremeIndex)
                     Exchange<T>.ArrayExchange(input, i, extremeIndex);

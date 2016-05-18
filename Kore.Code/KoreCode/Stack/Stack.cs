@@ -3,14 +3,14 @@ using KoreCode.Exceptions;
 
 namespace KoreCode.Stack
 {
-    public class Stack<T>: IStack<T>
+    public class Stack<T> : IStack<T>
     {
-        int count;
-        Item<T> top;
+        private int count;
+        private Item<T> top;
 
         public void Push(T value)
         {
-            Item<T> newItem = new Item<T>(value);
+            var newItem = new Item<T>(value);
 
             if (top == null)
                 top = newItem;
@@ -25,10 +25,7 @@ namespace KoreCode.Stack
 
         public int Count
         {
-            get
-            {
-                return count;
-            }
+            get { return count; }
             private set
             {
                 if (value < 0)
@@ -43,7 +40,7 @@ namespace KoreCode.Stack
             if (Count == 0)
                 throw new CollectionEmptyException();
 
-            T result = top.Value;
+            var result = top.Value;
 
             top = top.Bottom;
             Count--;

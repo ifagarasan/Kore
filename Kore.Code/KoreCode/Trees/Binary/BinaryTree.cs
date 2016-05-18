@@ -10,19 +10,17 @@ namespace KoreCode.Trees.Binary
     {
         Left = 0,
         Right
-    };
+    }
 
     public abstract class BinaryTree
     {
-        public BinaryNodeBuilder NodeBuilder { get; protected set; }
-
         public BinaryTree()
         {
             NodeBuilder = CreateNodeBuilder();
             Root = NodeBuilder.Nil;
         }
 
-        protected abstract BinaryNodeBuilder CreateNodeBuilder();
+        public BinaryNodeBuilder NodeBuilder { get; protected set; }
 
         public IBinaryNode Root { get; protected set; }
 
@@ -30,18 +28,17 @@ namespace KoreCode.Trees.Binary
 
         public IBinaryNode Nil
         {
-            get
-            {
-                return NodeBuilder.Nil;
-            }
+            get { return NodeBuilder.Nil; }
         }
+
+        protected abstract BinaryNodeBuilder CreateNodeBuilder();
 
         public virtual void Insert(int[] keys)
         {
             if (keys == null)
                 throw new ArgumentNullException("key");
 
-            foreach (int key in keys)
+            foreach (var key in keys)
                 Insert(key);
         }
 
@@ -78,12 +75,13 @@ namespace KoreCode.Trees.Binary
             return IsBst(Root.Left, Root.Key, 0) && IsBst(Root.Right, int.MaxValue, Root.Key);
         }
 
-        bool IsBst(IBinaryNode node, int maxValue, int minValue)
+        private bool IsBst(IBinaryNode node, int maxValue, int minValue)
         {
             if (node == Nil)
                 return true;
 
-            if (node.Key >= maxValue || node.Key < minValue) // not <=, because let's say the keys with equal value are located to the right
+            if (node.Key >= maxValue || node.Key < minValue)
+                // not <=, because let's say the keys with equal value are located to the right
                 return false;
 
             return IsBst(node.Left, node.Key, minValue) && IsBst(node.Right, maxValue, node.Key);
@@ -94,8 +92,8 @@ namespace KoreCode.Trees.Binary
             if (Root == Nil)
                 throw new CollectionEmptyException();
 
-            IBinaryNode x = Search(key1);
-            IBinaryNode y = Search(key2);
+            var x = Search(key1);
+            var y = Search(key2);
 
             if (x == Nil)
                 throw new ElementNotFoundException("node with key '" + key1 + "' was not found");
@@ -106,7 +104,7 @@ namespace KoreCode.Trees.Binary
             if (x == y)
                 return x;
 
-            Dictionary<int, IBinaryNode> visited = new Dictionary<int, IBinaryNode>();
+            var visited = new Dictionary<int, IBinaryNode>();
 
             while (x != Nil && y != Nil)
             {
@@ -143,84 +141,17 @@ namespace KoreCode.Trees.Binary
             return Nil;
         }
 
-        #region Traversals
-
-        public void Inorder(NodeProcessor<IBinaryNode> processor)
-        {
-            bool continueExecution = true;
-
-            Inorder(Root, processor, ref continueExecution);
-        }
-
-        protected void Inorder(IBinaryNode node, NodeProcessor<IBinaryNode> processor, ref bool continueExecution)
-        {
-            if (node == Nil || !continueExecution)
-                return;
-
-            Inorder(node.Left, processor, ref continueExecution);
-
-            if (processor != null)
-                continueExecution = processor(node);
-
-            Inorder(node.Right, processor, ref continueExecution);
-        }
-
-        public void Preorder(NodeProcessor<IBinaryNode> processor)
-        {
-            Preorder(Root, processor);
-        }
-
-        protected void Preorder(IBinaryNode node, NodeProcessor<IBinaryNode> processor)
-        {
-            if (node == Nil)
-                return;
-
-            Stack<IBinaryNode> stack = new Stack<IBinaryNode>();
-            stack.Push(node);
-
-            bool continueExecution = true;
-            while (stack.Count > 0 && continueExecution)
-            {
-                IBinaryNode current = stack.Pop();
-
-                if (processor != null)
-                    continueExecution = processor(current);
-
-                if (current.Right != Nil)
-                    stack.Push(current.Right);
-
-                if (current.Left != Nil)
-                    stack.Push(current.Left);
-            }
-        }
-
-        public void Postorder(NodeProcessor<IBinaryNode> processor)
-        {
-            bool continueExecution = true;
-            Postorder(Root, processor, ref continueExecution);
-        }
-
-        protected void Postorder(IBinaryNode node, NodeProcessor<IBinaryNode> processor, ref bool continueExecution)
-        {
-            if (node == Nil || !continueExecution)
-                return;
-
-            Postorder(node.Left, processor, ref continueExecution);
-            Postorder(node.Right, processor, ref continueExecution);
-
-            if (processor != null)
-                continueExecution = processor(node);
-        }
-
-        #endregion
-
         #region Print
 
         public string PrettyPrintBFS()
         {
-            string result = string.Empty;
+            var result = string.Empty;
 
-            Traversals<IBinaryNode>.BreadthFirstSearch(Root, Nil, (x) => { result += string.Format("{0} ", x.Label); return true; } );
+            Traversals<IBinaryNode>.BreadthFirstSearch(Root, Nil, x =>
+            {
+                result += string.Format("{0} ", x.Label);
+                return true;
+            });
 
             return result;
         }
@@ -229,7 +160,7 @@ namespace KoreCode.Trees.Binary
 
         public virtual void Remove(int key)
         {
-            IBinaryNode node = Search(key);
+            var node = Search(key);
 
             if (node == Nil)
                 throw new ElementNotFoundException(key.ToString());
@@ -259,8 +190,8 @@ namespace KoreCode.Trees.Binary
             if (node.Right != Nil)
                 return Min(node.Right);
 
-            IBinaryNode current = node;
-            IBinaryNode parent = node.Parent;
+            var current = node;
+            var parent = node.Parent;
 
             while (parent != Nil && parent.Right == current)
             {
@@ -275,9 +206,9 @@ namespace KoreCode.Trees.Binary
         {
             if (node.Left != Nil)
                 return Max(node.Left);
-            
-            IBinaryNode current = node;
-            IBinaryNode parent = current.Parent;
+
+            var current = node;
+            var parent = current.Parent;
 
             while (parent != Nil && parent.Left == current)
             {
@@ -288,6 +219,94 @@ namespace KoreCode.Trees.Binary
             return parent;
         }
 
+        public IBinaryNode Insert(int key)
+        {
+            if (Search(key) != Nil)
+                throw new DuplicateKeyException(key.ToString());
+
+            IBinaryNode node = NodeBuilder.BuildNode(key);
+
+            Insert(node);
+            Count++;
+
+            return node;
+        }
+
+        public abstract void Insert(IBinaryNode node);
+        public abstract IBinaryNode Search(int key);
+        protected abstract void Remove(IBinaryNode node);
+
+        #region Traversals
+
+        public void Inorder(NodeProcessor<IBinaryNode> processor)
+        {
+            var continueExecution = true;
+
+            Inorder(Root, processor, ref continueExecution);
+        }
+
+        protected void Inorder(IBinaryNode node, NodeProcessor<IBinaryNode> processor, ref bool continueExecution)
+        {
+            if (node == Nil || !continueExecution)
+                return;
+
+            Inorder(node.Left, processor, ref continueExecution);
+
+            if (processor != null)
+                continueExecution = processor(node);
+
+            Inorder(node.Right, processor, ref continueExecution);
+        }
+
+        public void Preorder(NodeProcessor<IBinaryNode> processor)
+        {
+            Preorder(Root, processor);
+        }
+
+        protected void Preorder(IBinaryNode node, NodeProcessor<IBinaryNode> processor)
+        {
+            if (node == Nil)
+                return;
+
+            var stack = new Stack<IBinaryNode>();
+            stack.Push(node);
+
+            var continueExecution = true;
+            while (stack.Count > 0 && continueExecution)
+            {
+                var current = stack.Pop();
+
+                if (processor != null)
+                    continueExecution = processor(current);
+
+                if (current.Right != Nil)
+                    stack.Push(current.Right);
+
+                if (current.Left != Nil)
+                    stack.Push(current.Left);
+            }
+        }
+
+        public void Postorder(NodeProcessor<IBinaryNode> processor)
+        {
+            var continueExecution = true;
+            Postorder(Root, processor, ref continueExecution);
+        }
+
+        protected void Postorder(IBinaryNode node, NodeProcessor<IBinaryNode> processor, ref bool continueExecution)
+        {
+            if (node == Nil || !continueExecution)
+                return;
+
+            Postorder(node.Left, processor, ref continueExecution);
+            Postorder(node.Right, processor, ref continueExecution);
+
+            if (processor != null)
+                continueExecution = processor(node);
+        }
+
+        #endregion
+
         #region Rotations
 
         public void RotateLeft(IBinaryNode node)
@@ -295,7 +314,7 @@ namespace KoreCode.Trees.Binary
             if (node == Nil)
                 throw new ArgumentNullException("node");
 
-            IBinaryNode target = node.Right;
+            var target = node.Right;
             if (target == Nil)
                 throw new NullReferenceException("node.Right null");
 
@@ -322,7 +341,7 @@ namespace KoreCode.Trees.Binary
             if (node == Nil)
                 throw new ArgumentNullException("node");
 
-            IBinaryNode target = node.Left;
+            var target = node.Left;
             if (target == Nil)
                 throw new NullReferenceException("node.Left is Nil");
 
@@ -351,22 +370,5 @@ namespace KoreCode.Trees.Binary
         }
 
         #endregion
-
-        public IBinaryNode Insert(int key)
-        {
-            if (Search(key) != Nil)
-                throw new DuplicateKeyException(key.ToString());
-
-            IBinaryNode node = NodeBuilder.BuildNode(key);
-    
-            Insert(node);
-            Count++;
-
-            return node;
-        }
-
-        public abstract void Insert(IBinaryNode node);
-        public abstract IBinaryNode Search(int key);
-        protected abstract void Remove(IBinaryNode node);
     }
 }

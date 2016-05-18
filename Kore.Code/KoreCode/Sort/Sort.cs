@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using KoreCode.Util;
 
 namespace KoreCode.Sort
@@ -19,8 +15,7 @@ namespace KoreCode.Sort
         {
             if (direction == SortDirection.Ascending)
                 return Comparers<T>.LessThan;
-            else
-                return Comparers<T>.LargerThan;
+            return Comparers<T>.LargerThan;
         }
     }
 }

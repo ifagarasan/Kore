@@ -8,49 +8,42 @@ namespace KoreCode.Heaps
     {
         Max = 0,
         Min
-    };
+    }
 
     public class BinaryHeap<T, R> where T : IComparable
     {
-        HeapType heapType = HeapType.Max;
-
-        const int Nil = 0;
+        private const int Nil = 0;
+        private readonly HeapType heapType = HeapType.Max;
 
         public BinaryHeap(int capacity, HeapType heapType = HeapType.Max)
         {
             ComparisonValidation<int>.IsLargerThan(capacity, 0);
 
             Capacity = capacity;
-            Array = new HeapItem<T, R>[capacity+1];
+            Array = new HeapItem<T, R>[capacity + 1];
             this.heapType = heapType;
             CompareFunc = GetComparisonFunction();
         }
 
-        public BinaryHeap(T[] input, HeapType heapType = HeapType.Max): this(input.Length + 1, heapType)
+        public BinaryHeap(T[] input, HeapType heapType = HeapType.Max) : this(input.Length + 1, heapType)
         {
             Insert(input);
         }
 
-        public int Capacity { get; private set; }
+        public int Capacity { get; }
         public int Count { get; private set; }
-        public HeapItem<T, R>[] Array { get; private set; }
+        public HeapItem<T, R>[] Array { get; }
 
-        public Func<T, T, bool> CompareFunc { get; private set; }
+        public Func<T, T, bool> CompareFunc { get; }
 
         public bool IsFull
         {
-            get
-            {
-                return Count == Capacity;
-            }
+            get { return Count == Capacity; }
         }
 
         public bool IsEmpty
         {
-            get
-            {
-                return Count == 0;
-            }
+            get { return Count == 0; }
         }
 
         public HeapItem<T, R> this[int index]
@@ -83,28 +76,28 @@ namespace KoreCode.Heaps
         {
             ValidateHeapIndex(index);
 
-            return index / 2;
+            return index/2;
         }
 
         public int GetLeftChildIndex(int index)
         {
             ValidateHeapIndex(index);
 
-            return GetValidIndex(2 * index);
+            return GetValidIndex(2*index);
         }
 
         public int GetRightChildIndex(int index)
         {
             ValidateHeapIndex(index);
 
-            return GetValidIndex(2 * index + 1);
+            return GetValidIndex(2*index + 1);
         }
 
         public bool HasChildren(int index)
         {
             ValidateHeapIndex(index);
 
-            return index * 2 <= Count;
+            return index*2 <= Count;
         }
 
         private int GetValidIndex(int index)
@@ -120,8 +113,8 @@ namespace KoreCode.Heaps
             if (IsEmpty)
                 return true;
 
-            int index = 1;
-            int childExtremeIndex = GetChildrenExtremeIndex(index);
+            var index = 1;
+            var childExtremeIndex = GetChildrenExtremeIndex(index);
 
             while (childExtremeIndex != Nil)
             {
@@ -137,21 +130,21 @@ namespace KoreCode.Heaps
 
         public bool ContainsKey(T key)
         {
-            for (int i = 1; i <= Count; ++i)
+            for (var i = 1; i <= Count; ++i)
                 if (Array[i].Key.CompareTo(key) == 0)
                     return true;
 
             return false;
         }
 
-        public int Insert(T key, R data=default(R))
+        public int Insert(T key, R data = default(R))
         {
             if (IsFull)
                 throw new Exception("collection is full");
 
             Count++;
             Array[Count] = new HeapItem<T, R>(key, data);
-            int index = Count;
+            var index = Count;
 
             HeapifyUp(GetParentIndex(Count), ref index);
 
@@ -162,7 +155,7 @@ namespace KoreCode.Heaps
         {
             ArrayValidation<T>.ValidateArray(keys);
 
-            foreach (T value in keys)
+            foreach (var value in keys)
                 Insert(value);
         }
 
@@ -170,7 +163,7 @@ namespace KoreCode.Heaps
         {
             ValidateHeapIndex(index);
 
-            HeapItem<T, R> removed = Array[index];
+            var removed = Array[index];
 
             Array[index] = Array[Count--];
 
@@ -198,14 +191,14 @@ namespace KoreCode.Heaps
 
         private int GetChildrenExtremeIndex(int index)
         {
-            int leftIndex = GetLeftChildIndex(index);
-            int rightIndex = GetRightChildIndex(index);
+            var leftIndex = GetLeftChildIndex(index);
+            var rightIndex = GetRightChildIndex(index);
 
             if (leftIndex == Nil && rightIndex == Nil)
                 return Nil;
-            else if (leftIndex == Nil)
+            if (leftIndex == Nil)
                 return rightIndex;
-            else if (rightIndex == Nil)
+            if (rightIndex == Nil)
                 return leftIndex;
 
             return CompareFunc(Array[leftIndex].Key, Array[rightIndex].Key) ? leftIndex : rightIndex;
@@ -213,7 +206,7 @@ namespace KoreCode.Heaps
 
         private void HeapifyDown(int index)
         {
-            int childExtremeIndex = GetChildrenExtremeIndex(index);
+            var childExtremeIndex = GetChildrenExtremeIndex(index);
             if (childExtremeIndex == Nil)
                 return;
 
@@ -229,8 +222,8 @@ namespace KoreCode.Heaps
             if (index == Nil)
                 return;
 
-            int childExtremeIndex = GetChildrenExtremeIndex(index);
-            int parentIndex = GetParentIndex(index);
+            var childExtremeIndex = GetChildrenExtremeIndex(index);
+            var parentIndex = GetParentIndex(index);
 
             if (childExtremeIndex == Nil)
                 HeapifyUp(parentIndex, ref finalIndex);

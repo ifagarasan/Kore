@@ -2,7 +2,9 @@
 {
     public class QueueItem<T>
     {
-        public QueueItem() { }
+        public QueueItem()
+        {
+        }
 
         public QueueItem(T value)
         {

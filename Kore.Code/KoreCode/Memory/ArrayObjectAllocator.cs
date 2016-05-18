@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KoreCode.Memory
 {
-    public class ArrayObjectAllocator<T> where T :  new()
+    public class ArrayObjectAllocator<T> where T : new()
     {
-        T[] memory;
-        Dictionary<T, bool> memoryMap;
-        List<T> freeMemory;
+        private readonly List<T> freeMemory;
+        private readonly T[] memory;
+        private readonly Dictionary<T, bool> memoryMap;
 
         public ArrayObjectAllocator(uint size)
         {
@@ -21,7 +18,7 @@ namespace KoreCode.Memory
             freeMemory = new List<T>();
             memoryMap = new Dictionary<T, bool>();
 
-            for (int i = 0; i < size; ++i)
+            for (var i = 0; i < size; ++i)
             {
                 memory[i] = new T();
                 freeMemory.Add(memory[i]);
@@ -31,10 +28,7 @@ namespace KoreCode.Memory
 
         public int FreeMemory
         {
-            get
-            {
-                return freeMemory.Count;
-            }
+            get { return freeMemory.Count; }
         }
 
         public T Allocate()
@@ -42,7 +36,7 @@ namespace KoreCode.Memory
             if (freeMemory.Count == 0)
                 throw new OutOfMemoryException();
 
-            T memoryObject = freeMemory[0];
+            var memoryObject = freeMemory[0];
             freeMemory.RemoveAt(0);
             memoryMap[memoryObject] = true;
 

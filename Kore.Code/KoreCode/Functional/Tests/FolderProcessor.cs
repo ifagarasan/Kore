@@ -17,7 +17,7 @@ namespace KoreCode.Functional.Tests
             if (!Directory.Exists(testFolder))
                 throw new IOException("Folder " + testFolder + " was not found");
 
-            foreach (string subfolder in Directory.GetDirectories(testFolder))
+            foreach (var subfolder in Directory.GetDirectories(testFolder))
                 OnTestFound(subfolder);
         }
     }

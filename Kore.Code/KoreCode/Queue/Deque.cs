@@ -6,9 +6,10 @@ namespace KoreCode.Queue
     public class Deque<T>
     {
         //TODO: investigate whether the count can be removed and inferred from indices
-        T[] content;
-        int headIndex, tailIndex;
-        int count;
+        private readonly T[] content;
+        private int count;
+        private int headIndex;
+        private int tailIndex;
 
         public Deque(uint capacity)
         {
@@ -20,19 +21,13 @@ namespace KoreCode.Queue
 
         public int Capacity
         {
-            get
-            {
-                return content.Length;
-            }
+            get { return content.Length; }
         }
 
 
         public int Count
         {
-            get
-            {
-                return count;
-            }
+            get { return count; }
             private set
             {
                 if (value < 0)
@@ -68,7 +63,7 @@ namespace KoreCode.Queue
             if (Count == 0)
                 throw new CollectionEmptyException();
 
-            T value = content[headIndex];
+            var value = content[headIndex];
 
             headIndex = GetNextIndex(headIndex);
             Count--;
@@ -102,7 +97,7 @@ namespace KoreCode.Queue
             if (Count == 0)
                 throw new CollectionEmptyException();
 
-            T value = content[tailIndex];
+            var value = content[tailIndex];
 
             tailIndex = GetPrevIndex(tailIndex);
             Count--;

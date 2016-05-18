@@ -2,7 +2,7 @@
 
 namespace KoreCode.List.Linear
 {
-    public class SingleLinkedList<T>: LinearLinkedList<T> where T: IComparable
+    public class SingleLinkedList<T> : LinearLinkedList<T> where T : IComparable
     {
         protected override void AddListItem(ListItem<T> listItem)
         {
@@ -11,7 +11,7 @@ namespace KoreCode.List.Linear
 
         protected override void InsertListItem(ListItem<T> listItem, int index)
         {
-            ListItem<T> targetListItem = GetListItemByIndex(index - 1);
+            var targetListItem = GetListItemByIndex(index - 1);
             listItem.Next = targetListItem.Next;
             targetListItem.Next = listItem;
         }
@@ -27,7 +27,7 @@ namespace KoreCode.List.Linear
                 head = head.Next;
             else
             {
-                ListItem<T> targetListItem = GetListItemByIndex(index - 1);
+                var targetListItem = GetListItemByIndex(index - 1);
                 targetListItem.Next = targetListItem.Next.Next;
             }
         }

@@ -1,11 +1,12 @@
 ﻿using System;
-using KoreCode.Util;
 
 namespace KoreCode.Heaps
 {
     public class HeapItem<T, R> where T : IComparable
     {
-        public HeapItem() { }
+        public HeapItem()
+        {
+        }
 
         public HeapItem(T key)
         {

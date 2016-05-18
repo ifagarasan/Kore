@@ -1,5 +1,4 @@
 ﻿using System;
-
 using KoreCode.Exceptions;
 using KoreCode.Util;
 

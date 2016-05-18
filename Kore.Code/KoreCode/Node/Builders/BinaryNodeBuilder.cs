@@ -2,7 +2,7 @@
 
 namespace KoreCode.Node.Builders
 {
-    public class BinaryNodeBuilder: TreeNodeBuilder<BinaryNode>
+    public class BinaryNodeBuilder : TreeNodeBuilder<BinaryNode>
     {
         protected override BinaryNode CreateNode(int value)
         {

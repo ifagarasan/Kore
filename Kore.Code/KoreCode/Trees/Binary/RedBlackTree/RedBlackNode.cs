@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KoreCode.Trees.Binary.RedBlackTree
+﻿namespace KoreCode.Trees.Binary.RedBlackTree
 {
     public class RedBlackNode : BinaryNode
     {
-        public RedBlackNode(): this(0) { }
+        public RedBlackNode() : this(0)
+        {
+        }
 
-        public RedBlackNode(int key): base(key)
+        public RedBlackNode(int key) : base(key)
         {
             Color = Color.Red;
         }
@@ -19,10 +15,7 @@ namespace KoreCode.Trees.Binary.RedBlackTree
 
         public override string Label
         {
-            get
-            {
-                return string.Format("{0} ({1})", base.Label, Color.ToString());
-            }
+            get { return string.Format("{0} ({1})", base.Label, Color); }
         }
 
         //TODO: optimise
@@ -33,8 +26,8 @@ namespace KoreCode.Trees.Binary.RedBlackTree
                 if (IsNil)
                     return 0;
 
-                IBinaryNode current = Left;
-                int amount = 1;
+                var current = Left;
+                var amount = 1;
 
                 while (!current.IsNil)
                 {

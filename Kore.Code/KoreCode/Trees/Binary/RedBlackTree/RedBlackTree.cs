@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
-
-using KoreCode.Exceptions;
 using KoreCode.Node.Builders;
 
 namespace KoreCode.Trees.Binary.RedBlackTree
@@ -13,58 +10,6 @@ namespace KoreCode.Trees.Binary.RedBlackTree
             return new RedBlackNodeBuilder();
         }
 
-        #region IsBalanced
-
-        public override bool IsBalanced()
-        {
-            if (Root.Color == Color.Red)
-                return false;
-
-            bool result = true;
-
-            Inorder((x) => {
-                if (IsRedNodeWithARedChild(x) || (x.IsLeaf && BlackHeightDiffers(x)))
-                {
-                    result = false;
-                    return false;
-                }
-
-                return true;
-            });
-
-            return result;
-        }
-
-        private bool IsRedNodeWithARedChild(IBinaryNode node)
-        {
-            return node.Color == Color.Red && (node.Left.Color == Color.Red || node.Right.Color == Color.Red);
-        }
-
-        private bool BlackHeightDiffers(IBinaryNode node)
-        {
-            if (!node.IsLeaf)
-                throw new Exception("node with Key '" + node.Key + "' is not a leaf");
-
-            return Root.Height != GetBlackHeighFromNodeUpwards(node);
-        }
-
-        private int GetBlackHeighFromNodeUpwards(IBinaryNode node)
-        {
-            int height = 0;
-
-            while (node != Nil)
-            {
-                if (node.Color == Color.Black)
-                    height++;
-
-                node = node.Parent;
-            }
-
-            return height;
-        }
-
-        #endregion
-
         public override void Insert(IBinaryNode node)
         {
             base.Insert(node);
@@ -73,7 +18,7 @@ namespace KoreCode.Trees.Binary.RedBlackTree
 
         protected override void Remove(IBinaryNode node)
         {
-            Color originalColor = node.Color;
+            var originalColor = node.Color;
             IBinaryNode fixTarget = null;
 
             if (node.Left == Nil)
@@ -88,7 +33,7 @@ namespace KoreCode.Trees.Binary.RedBlackTree
             }
             else
             {
-                IBinaryNode successor = Min(node.Right);
+                var successor = Min(node.Right);
                 originalColor = successor.Color;
                 fixTarget = successor.Right;
 
@@ -115,7 +60,7 @@ namespace KoreCode.Trees.Binary.RedBlackTree
         {
             while (node != Root && node.Color == Color.Black)
             {
-                 // Case 1:
+                // Case 1:
                 if (node.Sibling.Color == Color.Red)
                 {
                     node.Sibling.Color = Color.Black;
@@ -123,7 +68,7 @@ namespace KoreCode.Trees.Binary.RedBlackTree
 
                     Rotate(node.Parent, node.IsLeftChild ? RotateDirection.Left : RotateDirection.Right);
                 }
-                
+
                 // In all cases below the sibling is Black
 
                 // Case 2:
@@ -146,7 +91,7 @@ namespace KoreCode.Trees.Binary.RedBlackTree
                     // Case 4:
                     node.Sibling.Color = node.Parent.Color;
                     node.Parent.Color = node.Sibling.Right.Color = Color.Black;
-    
+
                     Rotate(node.Parent, node.IsLeftChild ? RotateDirection.Left : RotateDirection.Right);
 
                     node = Root;
@@ -169,7 +114,9 @@ namespace KoreCode.Trees.Binary.RedBlackTree
                 else
                 {
                     // the primary rotation takes place around the node grandparent
-                    RotateDirection primaryRotationDirection = node.Parent.IsLeftChild ? RotateDirection.Right : RotateDirection.Left;
+                    var primaryRotationDirection = node.Parent.IsLeftChild
+                        ? RotateDirection.Right
+                        : RotateDirection.Left;
 
                     // the secondary rotation takes place around the node parent, only if the node and grand parent are not colinear
                     RotateDirection? secondaryRotationDirection = null;
@@ -199,5 +146,58 @@ namespace KoreCode.Trees.Binary.RedBlackTree
 
             Root.Color = Color.Black;
         }
+
+        #region IsBalanced
+
+        public override bool IsBalanced()
+        {
+            if (Root.Color == Color.Red)
+                return false;
+
+            var result = true;
+
+            Inorder(x =>
+            {
+                if (IsRedNodeWithARedChild(x) || (x.IsLeaf && BlackHeightDiffers(x)))
+                {
+                    result = false;
+                    return false;
+                }
+
+                return true;
+            });
+
+            return result;
+        }
+
+        private bool IsRedNodeWithARedChild(IBinaryNode node)
+        {
+            return node.Color == Color.Red && (node.Left.Color == Color.Red || node.Right.Color == Color.Red);
+        }
+
+        private bool BlackHeightDiffers(IBinaryNode node)
+        {
+            if (!node.IsLeaf)
+                throw new Exception("node with Key '" + node.Key + "' is not a leaf");
+
+            return Root.Height != GetBlackHeighFromNodeUpwards(node);
+        }
+
+        private int GetBlackHeighFromNodeUpwards(IBinaryNode node)
+        {
+            var height = 0;
+
+            while (node != Nil)
+            {
+                if (node.Color == Color.Black)
+                    height++;
+
+                node = node.Parent;
+            }
+
+            return height;
+        }
+
+        #endregion
     }
 }

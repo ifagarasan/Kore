@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using KoreCode.Exceptions;
 
 namespace KoreCode.Validation
@@ -24,7 +21,7 @@ namespace KoreCode.Validation
             ValidateArray(input);
 
             if (index < 0 || index >= input.Length)
-                throw new IndexOutOfRangeException("invalid value '" + index.ToString() + "' for index");
+                throw new IndexOutOfRangeException("invalid value '" + index + "' for index");
         }
 
         #endregion

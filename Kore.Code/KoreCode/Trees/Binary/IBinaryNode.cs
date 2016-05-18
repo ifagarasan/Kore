@@ -1,11 +1,4 @@
-﻿using KoreCode.Node;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KoreCode.Trees.Binary
+﻿namespace KoreCode.Trees.Binary
 {
     public enum Color
     {
@@ -13,7 +6,7 @@ namespace KoreCode.Trees.Binary
         Black
     }
 
-    public interface IBinaryNode: ITreeNode<IBinaryNode>
+    public interface IBinaryNode : ITreeNode<IBinaryNode>
     {
         IBinaryNode Left { get; set; }
         IBinaryNode Right { get; set; }

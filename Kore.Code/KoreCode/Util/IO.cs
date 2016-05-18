@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KoreCode.Util
+﻿namespace KoreCode.Util
 {
     public static class IO
     {
@@ -14,7 +7,7 @@ namespace KoreCode.Util
             if (string.IsNullOrEmpty(path))
                 return string.Empty;
 
-            string[] temp = path.Split('\\');
+            var temp = path.Split('\\');
 
             return temp[temp.Length - 1];
         }

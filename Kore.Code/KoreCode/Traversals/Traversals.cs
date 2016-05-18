@@ -1,10 +1,5 @@
-﻿using KoreCode.Node;
-using KoreCode.Trees.Binary;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using KoreCode.Node;
 
 namespace KoreCode.Traversals
 {
@@ -17,14 +12,14 @@ namespace KoreCode.Traversals
             if (node == Nil)
                 return;
 
-            Queue<INode<T>> queue = new Queue<INode<T>>();
+            var queue = new Queue<INode<T>>();
 
             queue.Enqueue(node);
 
-            bool continueExecution = true;
+            var continueExecution = true;
             while (queue.Count > 0 && continueExecution)
             {
-                INode<T> current = queue.Dequeue();
+                var current = queue.Dequeue();
 
                 if (current == Nil)
                     break;
@@ -32,7 +27,7 @@ namespace KoreCode.Traversals
                 if (processor != null)
                     continueExecution = processor(current);
 
-                foreach(INode<T> child in current)
+                foreach (INode<T> child in current)
                     if (child != Nil)
                         queue.Enqueue(child);
             }

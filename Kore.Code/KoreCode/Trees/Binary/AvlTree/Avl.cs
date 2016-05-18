@@ -1,5 +1,4 @@
-﻿using KoreCode.Exceptions;
-using System;
+﻿using System;
 
 namespace KoreCode.Trees.Binary.AvlTree
 {
@@ -15,7 +14,7 @@ namespace KoreCode.Trees.Binary.AvlTree
         {
             while (node != Nil)
             {
-                int balance = BalanceProvider.GetBalanceOffset(node);
+                var balance = BalanceProvider.GetBalanceOffset(node);
 
                 if (Math.Abs(balance) > 2)
                     throw new Exception(string.Format("unexpected node {0} to have balance {1}", node.Key, balance));
@@ -24,7 +23,7 @@ namespace KoreCode.Trees.Binary.AvlTree
                 {
                     if (balance == 2)
                     {
-                        int leftBalance = BalanceProvider.GetBalanceOffset(node.Left);
+                        var leftBalance = BalanceProvider.GetBalanceOffset(node.Left);
 
                         if (leftBalance < 0)
                             RotateLeft(node.Left);
@@ -34,7 +33,7 @@ namespace KoreCode.Trees.Binary.AvlTree
                     }
                     else
                     {
-                        int rightBalance = BalanceProvider.GetBalanceOffset(node.Right);
+                        var rightBalance = BalanceProvider.GetBalanceOffset(node.Right);
 
                         if (rightBalance > 0)
                             RotateRight(node.Right);

@@ -4,9 +4,9 @@ using KoreCode.List.Linear;
 
 namespace KoreCode.List.Circular
 {
-    public class CircularList<T>: LinkedList<T> where T : IComparable
+    public class CircularList<T> : LinkedList<T> where T : IComparable
     {
-        DoubleLinkedListItem<T> sentinel;
+        private readonly DoubleLinkedListItem<T> sentinel;
 
         public CircularList()
         {
@@ -27,8 +27,8 @@ namespace KoreCode.List.Circular
 
         public override IEnumerator GetEnumerator()
         {
-            ListItem<T> listItem = sentinel.Next;
-            for (int i = 0; i < Count; ++i)
+            var listItem = sentinel.Next;
+            for (var i = 0; i < Count; ++i)
             {
                 yield return listItem;
                 listItem = listItem.Next;
@@ -52,7 +52,7 @@ namespace KoreCode.List.Circular
         {
             ListItem<T> listItem = sentinel;
 
-            for (int i = 0; i <= index; ++i)
+            for (var i = 0; i <= index; ++i)
                 listItem = listItem.Next;
 
             return listItem;
@@ -60,7 +60,7 @@ namespace KoreCode.List.Circular
 
         protected override void RemoveListItemAt(int index)
         {
-            ListItem<T> targetListItem = GetListItemByIndex(index);
+            var targetListItem = GetListItemByIndex(index);
             targetListItem.Prev.Next = targetListItem.Next;
             targetListItem.Next.Prev = targetListItem.Prev;
         }

@@ -3,7 +3,7 @@ using KoreCode.Trees.Binary.RedBlackTree;
 
 namespace KoreCode.Node.Builders
 {
-    public class RedBlackNodeBuilder: BinaryNodeBuilder
+    public class RedBlackNodeBuilder : BinaryNodeBuilder
     {
         public RedBlackNodeBuilder()
         {
