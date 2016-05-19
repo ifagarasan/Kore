@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
+# Visual Studio Express 14 for Web
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kore.Code", "Kore.Code\Kore.Code.csproj", "{EBB71342-AD45-4119-B1D5-4334451DFA2B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kore.Code.Tests", "Kore.Code.Tests\Kore.Code.Tests.csproj", "{DF271693-23B4-4D63-8DEF-C7B5411244B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kore.Code.Acceptance", "Kore.Code.Acceptance\Kore.Code.Acceptance.csproj", "{02E28408-033C-4C82-8958-CA8093991E6C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{DF271693-23B4-4D63-8DEF-C7B5411244B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF271693-23B4-4D63-8DEF-C7B5411244B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF271693-23B4-4D63-8DEF-C7B5411244B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02E28408-033C-4C82-8958-CA8093991E6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02E28408-033C-4C82-8958-CA8093991E6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02E28408-033C-4C82-8958-CA8093991E6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02E28408-033C-4C82-8958-CA8093991E6C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
