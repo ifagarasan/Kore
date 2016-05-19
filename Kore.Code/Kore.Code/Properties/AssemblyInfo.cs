@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 
 [assembly: AssemblyTitle("KoreCode")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyDescription("A Collection of Fundamental Code")]
+[assembly: AssemblyConfiguration("Ioan Fagarasan")]
+[assembly: AssemblyCompany("Not Applicable")]
 [assembly: AssemblyProduct("KoreCode")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
