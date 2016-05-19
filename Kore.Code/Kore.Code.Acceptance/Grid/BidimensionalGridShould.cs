@@ -16,8 +16,8 @@ namespace Kore.Code.Acceptance
                 for (uint j = 0; j < 10; ++j)
                 {
                     int currentValue = (int)(i * 10 + j);
-                    grid.SaveValue(i, j, currentValue);
-                    Assert.AreEqual(currentValue, grid.RetrieveValue(i, j));
+                    grid[i, j] = currentValue;
+                    Assert.AreEqual(currentValue, grid[i, j]);
                 }
         }
     }

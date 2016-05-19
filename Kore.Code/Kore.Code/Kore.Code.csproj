@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\InvalidQuantityException.cs" />
     <Compile Include="Grid\BidimensionalGrid.cs" />
     <Compile Include="Node\Builders\RedBlackNodeBuilder.cs" />
     <Compile Include="Node\Builders\TreeNodeBuilder.cs" />

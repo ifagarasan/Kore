@@ -1,4 +1,5 @@
 ﻿using System;
+using Kore.Code.Exceptions;
 
 namespace Kore.Code.Grid
 {
@@ -7,20 +8,36 @@ namespace Kore.Code.Grid
         public uint Rows { get; private set; }
         public uint Columns { get; private set; }
 
+        private readonly T[] _grid;
+
         public BidimensionalGrid(uint rows, uint columns)
         {
+            if (rows == 0 || columns == 0)
+                throw  new InvalidQuantityException();
+
             Rows = rows;
             Columns = columns;
+
+            _grid = new T[rows * columns];
         }
 
-        public void SaveValue(uint row, uint column, int currentValue)
+        public T this[uint row, uint column]
         {
-            throw new NotImplementedException();
+            get
+            {
+                uint index = GetIndex(row, column);
+                return _grid[index];
+            }
+            set
+            {
+                uint index = GetIndex(row, column);
+                _grid[index] = value;
+            }
         }
 
-        public int RetrieveValue(uint row, uint column)
+        private uint GetIndex(uint row, uint column)
         {
-            throw new NotImplementedException();
+            return row * Columns + column;
         }
     }
 }
