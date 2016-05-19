@@ -7,8 +7,8 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("KoreCode")]
 [assembly: AssemblyDescription("A Collection of Fundamental Code")]
-[assembly: AssemblyConfiguration("Ioan Fagarasan")]
-[assembly: AssemblyCompany("Not Applicable")]
+[assembly: AssemblyConfiguration("Release")]
+[assembly: AssemblyCompanyAttribute("Ioan Fagarasan")]
 [assembly: AssemblyProduct("KoreCode")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
