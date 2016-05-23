@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections;
 using Kore.Code.Exceptions;
 
 namespace Kore.Code.Grid
 {
-    public class BidimensionalGrid<T>
+    public class BidimensionalGrid<T>: IGrid
     {
         public uint Rows { get; private set; }
         public uint Columns { get; private set; }
@@ -38,6 +39,11 @@ namespace Kore.Code.Grid
         private uint GetIndex(uint row, uint column)
         {
             return row * Columns + column;
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            return _grid.GetEnumerator();
         }
     }
 }
