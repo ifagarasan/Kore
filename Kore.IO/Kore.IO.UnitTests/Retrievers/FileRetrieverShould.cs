@@ -27,14 +27,13 @@ namespace Kore.IO.UnitTests.Retrievers
             ScannerUtil.AddFiles(ScannerUtil.TestFolderOneLevel, ScannerUtil.HiddenFileList, _expectedFiles);
 
             List<string> actualFiles = _fileRetriever.GetFiles(ScannerUtil.TestFolderOneLevel, "*");
-
             AssertUtil.AssertFileListsAreEqual(_expectedFiles, actualFiles);
         }
 
         [TestMethod]
         public void ReturnsAllFilesInAFolderIncludingHiddenRecursively()
         {
-            ScannerUtil.BuildTestFilesList(_expectedFiles);
+            _expectedFiles = ScannerUtil.BuildDeepTestFilesList(true, true);
 
             List<string> actualFiles = _fileRetriever.GetFiles(ScannerUtil.TestFolderDeep, "*");
 

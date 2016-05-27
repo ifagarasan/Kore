@@ -7,6 +7,8 @@ using System.Reflection.Emit;
 using Kore.IO.Scanners;
 using Kore.IO.Retrievers;
 using Kore.IO.TestUtil;
+using Kore.IO.Filters;
+using Kore.IO.Util;
 
 namespace Kore.IO.AcceptanceTests.Scanners
 {
@@ -15,14 +17,16 @@ namespace Kore.IO.AcceptanceTests.Scanners
     {
         List<string> _expectedFileList;
         FileScanner _fileScanner;
+        FileScanOptions _fileScanOptions;
 
         [TestInitialize]
         public void Setup()
         {
             _fileScanner = new FileScanner(new FileRetriever());
             _expectedFileList = new List<string>();
+            _fileScanOptions = new FileScanOptions();
 
-            ScannerUtil.BuildTestFilesList(_expectedFileList);
+            _expectedFileList = ScannerUtil.BuildDeepTestFilesList(true, true);
         }
 
         [TestMethod]
@@ -34,14 +38,24 @@ namespace Kore.IO.AcceptanceTests.Scanners
         }
 
         [TestMethod]
+        public void ReturnsVisibleFilesWhenFilterIsSpecified()
+        {
+            _fileScanOptions.Filters.Add(new VisibleFileFilter(new FileInfoProvider()));
+
+            List<string> fileList = _fileScanner.Scan(ScannerUtil.TestFolderDeep, _fileScanOptions);
+
+            _expectedFileList = ScannerUtil.BuildDeepTestFilesList(true, false);
+
+            AssertUtil.AssertFileListsAreEqual(_expectedFileList, fileList);
+        }
+
+        [TestMethod]
         public void AllowFilteringOfFilesBySearchPattern()
         {
-            FileScanOptions options = new FileScanOptions();
-            options.SearchPattern = "*.txt";
-            List<string> fileList = _fileScanner.Scan(ScannerUtil.TestFolderDeep, options);
+            _fileScanOptions.SearchPattern = "*.txt";
+            List<string> fileList = _fileScanner.Scan(ScannerUtil.TestFolderDeep, _fileScanOptions);
 
-            _expectedFileList.Clear();
-            ScannerUtil.BuildTestFilesList(_expectedFileList, "txt");
+            _expectedFileList = ScannerUtil.BuildDeepTestFilesList(true, true, "txt");
             AssertUtil.AssertFileListsAreEqual(_expectedFileList, fileList);
         }
     }

@@ -62,9 +62,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Filters\VisibleShould.cs" />
     <Compile Include="Retrievers\FileRetrieverShould.cs" />
     <Compile Include="Scanners\FileScannerShould.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\FileInfoShould.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

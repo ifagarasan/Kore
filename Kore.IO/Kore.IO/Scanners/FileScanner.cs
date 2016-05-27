@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Kore.IO.Retrievers;
+using Kore.IO.Filters;
 
 namespace Kore.IO.Scanners
 {
@@ -23,7 +24,12 @@ namespace Kore.IO.Scanners
             if (options == null)
                 throw new ArgumentNullException("options");
 
-            return _fileRetriever.GetFiles(folder, options.SearchPattern);
+            List<string> files = _fileRetriever.GetFiles(folder, options.SearchPattern);
+
+            foreach (IFileFilter filter in options.Filters)
+                files = filter.Filter(files);
+
+            return files;
         }
     }
 }

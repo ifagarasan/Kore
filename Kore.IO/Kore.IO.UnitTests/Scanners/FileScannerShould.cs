@@ -5,22 +5,24 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Kore.IO.Retrievers;
 using Kore.IO.Scanners;
+using Kore.IO.TestUtil;
+using Kore.IO.Filters;
 
 namespace Kore.IO.UnitTests.Scanners
 {
     [TestClass]
     public class FileScannerShould
     {
-        Mock<IFileRetriever> mockFileRetriever;
-        FileScanner fileScanner;
-        FileScanOptions fileScanOptions;
+        Mock<IFileRetriever> _mockFileRetriever;
+        FileScanner _fileScanner;
+        FileScanOptions _fileScanOptions;
 
         [TestInitialize]
         public void Setup()
         {
-            mockFileRetriever = new Mock<IFileRetriever>();
-            fileScanner = new FileScanner(mockFileRetriever.Object);
-            fileScanOptions = new FileScanOptions();
+            _mockFileRetriever = new Mock<IFileRetriever>();
+            _fileScanner = new FileScanner(_mockFileRetriever.Object);
+            _fileScanOptions = new FileScanOptions();
         }
 
         [TestMethod]
@@ -28,32 +30,61 @@ namespace Kore.IO.UnitTests.Scanners
         {
             string folder = "TestFolderDeep";
 
-            mockFileRetriever.Setup(m => m.GetFiles(It.IsAny<string>(), It.IsAny<string>()));
+            _mockFileRetriever.Setup(m => m.GetFiles(It.IsAny<string>(), It.IsAny<string>()));
 
-            fileScanner.Scan(folder);
+            _fileScanner.Scan(folder);
 
-            mockFileRetriever.Verify(m => m.GetFiles(folder, fileScanOptions.SearchPattern));
+            _mockFileRetriever.Verify(m => m.GetFiles(folder, _fileScanOptions.SearchPattern));
         }
 
         [TestMethod]
         public void CallFileRetrieverGetFilesPassingScanOptionsSearchPattern()
         {   
-            fileScanOptions.SearchPattern = "*.txt";
+            _fileScanOptions.SearchPattern = "*.txt";
 
             string folder = "TestFolderDeep";
 
-            mockFileRetriever.Setup(m => m.GetFiles(It.IsAny<string>(), It.IsAny<string>()));
+            _mockFileRetriever.Setup(m => m.GetFiles(It.IsAny<string>(), It.IsAny<string>()));
 
-            fileScanner.Scan(folder, fileScanOptions);
+            _fileScanner.Scan(folder, _fileScanOptions);
 
-            mockFileRetriever.Verify(m => m.GetFiles(folder, fileScanOptions.SearchPattern));
+            _mockFileRetriever.Verify(m => m.GetFiles(folder, _fileScanOptions.SearchPattern));
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void ThrowArgumentNullExceptionIfFileScanOptionsIsNull()
         {
-            fileScanner.Scan("TestFolderDeep", null);
+            _fileScanner.Scan("TestFolderDeep", null);
+        }
+
+        [TestMethod]
+        public void CallFilterForEveryFilter()
+        {
+            Mock<IFileFilter> mockFileFilter = new Mock<IFileFilter>();
+
+            List<string> filteredFiles = new List<string>();
+            List<string> inputFiles = ScannerUtil.BuildDeepTestFilesList(true, false);
+            List<string>[] expected = new List<string>[2];
+
+            expected[0] = inputFiles;
+            expected[1] = filteredFiles;
+            int index = 0;
+
+            mockFileFilter.Setup(m => m.Filter(It.IsAny<List<string>>())).Returns(filteredFiles).Callback(
+                (List<string> files) =>
+                {
+                    Assert.AreSame(expected[index++], files);
+                });
+
+            _mockFileRetriever.Setup(m => m.GetFiles(It.IsAny<string>(), It.IsAny<string>())).Returns(inputFiles);
+
+            _fileScanOptions.Filters.Add(mockFileFilter.Object);
+            _fileScanOptions.Filters.Add(mockFileFilter.Object);
+
+            _fileScanner.Scan("TestFolderDeep", _fileScanOptions);
+
+            Assert.AreEqual(2, index);
         }
     }
 }

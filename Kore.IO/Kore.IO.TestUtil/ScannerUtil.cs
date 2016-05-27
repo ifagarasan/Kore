@@ -31,30 +31,42 @@ namespace Kore.IO.TestUtil
             {
                 "to watch.txt"
             };
+
+            SetupTestFiles();
         }
 
-        public static void BuildTestFilesList(List<string> outputList)
+        public static void SetupTestFiles()
         {
-            BuildTestFilesList(outputList, string.Empty);
+            FolderUtil.EnsureExits(TestFolder);
+            FolderUtil.EnsureExits(TestFolderDeep);
+            FolderUtil.EnsureExits(TestFolderOneLevel);
+
+            EnsureVisibleFilesExist(BuildDeepTestFilesList(true, false));
+            EnsureHiddenFilesExist(BuildDeepTestFilesList(false, true));
+
+            EnsureVisibleFilesExist(BuildOneLevelTestFilesList(true, false));
+            EnsureHiddenFilesExist(BuildOneLevelTestFilesList(false, true));
         }
 
-        public static void BuildTestFilesList(List<string> outputList, string extension)
+        private static void EnsureVisibleFilesExist(List<string> files)
         {
-            string currentFolder = TestFolderDeep;
+            foreach (string file in files)
+            {
+                FileUtil.EnsureExits(file);
+                FileInfo fi = new FileInfo(file);
+                if (fi.Attributes.HasFlag(FileAttributes.Hidden))
+                    File.SetAttributes(file, FileAttributes.Normal);
+            }
+        }
 
-            AddFiles(currentFolder, VisibleFileList, outputList, extension);
-            AddFiles(currentFolder, HiddenFileList, outputList, extension);
-
-            currentFolder = Path.Combine(currentFolder, "1");
-            AddFiles(currentFolder, VisibleFileList, outputList, extension);
-            AddFiles(currentFolder, HiddenFileList, outputList, extension);
-
-            currentFolder = Path.Combine(currentFolder, "1");
-            AddFiles(currentFolder, HiddenFileList, outputList, extension);
-
-            currentFolder = Path.Combine(currentFolder, "1");
-            AddFiles(currentFolder, VisibleFileList, outputList, extension);
-            AddFiles(currentFolder, HiddenFileList, outputList, extension);
+        private static void EnsureHiddenFilesExist(List<string> files)
+        {
+            foreach (string file in files)
+            {
+                FileUtil.EnsureExits(file);
+                FileInfo fi = new FileInfo(file);
+                File.SetAttributes(file, FileAttributes.Hidden);
+            }
         }
 
         public static void AddFiles(string folder, List<string> inputList, List<string> outputList)
@@ -67,6 +79,38 @@ namespace Kore.IO.TestUtil
             foreach (string inputItem in inputList)
                 if (inputItem.EndsWith(extension))
                     outputList.Add(Path.Combine(folder, inputItem));
+        }
+
+        private static void BuildFilesForFolder(string folder, List<string> outputList, string extension, bool addVisible, bool addHidden)
+        {
+            if (addVisible)
+                AddFiles(folder, VisibleFileList, outputList, extension);
+            if (addHidden)
+                AddFiles(folder, HiddenFileList, outputList, extension);
+        }
+
+        public static List<string> BuildDeepTestFilesList(bool addVisible, bool addHidden, string extension = "")
+        {
+            List<string> outputList = new List<string>();
+
+            string currentFolder = TestFolderDeep;
+
+            for (int i = 0; i < 1; ++i)
+            {
+                BuildFilesForFolder(currentFolder, outputList, extension, addVisible, addHidden);
+                currentFolder = Path.Combine(currentFolder, "1");
+            }
+
+            return outputList;
+        }
+
+        public static List<string> BuildOneLevelTestFilesList(bool addVisible, bool addHidden, string extension = "")
+        {
+            List<string> outputList = new List<string>();
+
+            BuildFilesForFolder(TestFolderOneLevel, outputList, extension, addVisible, addHidden);
+
+            return outputList;
         }
     }
 }
