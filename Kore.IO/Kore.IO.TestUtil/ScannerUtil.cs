@@ -35,27 +35,38 @@ namespace Kore.IO.TestUtil
 
         public static void BuildTestFilesList(List<string> outputList)
         {
+            BuildTestFilesList(outputList, string.Empty);
+        }
+
+        public static void BuildTestFilesList(List<string> outputList, string extension)
+        {
             string currentFolder = TestFolderDeep;
 
-            AddFiles(currentFolder, VisibleFileList, outputList);
-            AddFiles(currentFolder, HiddenFileList, outputList);
+            AddFiles(currentFolder, VisibleFileList, outputList, extension);
+            AddFiles(currentFolder, HiddenFileList, outputList, extension);
 
             currentFolder = Path.Combine(currentFolder, "1");
-            AddFiles(currentFolder, VisibleFileList, outputList);
-            AddFiles(currentFolder, HiddenFileList, outputList);
+            AddFiles(currentFolder, VisibleFileList, outputList, extension);
+            AddFiles(currentFolder, HiddenFileList, outputList, extension);
 
             currentFolder = Path.Combine(currentFolder, "1");
-            AddFiles(currentFolder, HiddenFileList, outputList);
+            AddFiles(currentFolder, HiddenFileList, outputList, extension);
 
             currentFolder = Path.Combine(currentFolder, "1");
-            AddFiles(currentFolder, VisibleFileList, outputList);
-            AddFiles(currentFolder, HiddenFileList, outputList);
+            AddFiles(currentFolder, VisibleFileList, outputList, extension);
+            AddFiles(currentFolder, HiddenFileList, outputList, extension);
         }
 
         public static void AddFiles(string folder, List<string> inputList, List<string> outputList)
         {
+            AddFiles(folder, inputList, outputList, string.Empty);
+        }
+
+        public static void AddFiles(string folder, List<string> inputList, List<string> outputList, string extension)
+        {
             foreach (string inputItem in inputList)
-                outputList.Add(Path.Combine(folder, inputItem));
+                if (inputItem.EndsWith(extension))
+                    outputList.Add(Path.Combine(folder, inputItem));
         }
     }
 }

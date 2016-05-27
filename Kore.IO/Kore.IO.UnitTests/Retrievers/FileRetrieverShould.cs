@@ -26,7 +26,7 @@ namespace Kore.IO.UnitTests.Retrievers
             ScannerUtil.AddFiles(ScannerUtil.TestFolderOneLevel, ScannerUtil.VisibleFileList, _expectedFiles);
             ScannerUtil.AddFiles(ScannerUtil.TestFolderOneLevel, ScannerUtil.HiddenFileList, _expectedFiles);
 
-            List<string> actualFiles = _fileRetriever.GetFiles(ScannerUtil.TestFolderOneLevel);
+            List<string> actualFiles = _fileRetriever.GetFiles(ScannerUtil.TestFolderOneLevel, "*");
 
             AssertUtil.AssertFileListsAreEqual(_expectedFiles, actualFiles);
         }
@@ -36,7 +36,7 @@ namespace Kore.IO.UnitTests.Retrievers
         {
             ScannerUtil.BuildTestFilesList(_expectedFiles);
 
-            List<string> actualFiles = _fileRetriever.GetFiles(ScannerUtil.TestFolderDeep);
+            List<string> actualFiles = _fileRetriever.GetFiles(ScannerUtil.TestFolderDeep, "*");
 
             AssertUtil.AssertFileListsAreEqual(_expectedFiles, actualFiles);
         }

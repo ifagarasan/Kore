@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Kore.IO.Retrievers;
 
 namespace Kore.IO.Scanners
@@ -14,7 +15,15 @@ namespace Kore.IO.Scanners
 
         public List<string> Scan(string folder)
         {
-            return _fileRetriever.GetFiles(folder);
+            return Scan(folder, new FileScanOptions());
+        }
+
+        public List<string> Scan(string folder, FileScanOptions options)
+        {
+            if (options == null)
+                throw new ArgumentNullException("options");
+
+            return _fileRetriever.GetFiles(folder, options.SearchPattern);
         }
     }
 }
