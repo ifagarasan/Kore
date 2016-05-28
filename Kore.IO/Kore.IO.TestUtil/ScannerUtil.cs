@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using Kore.IO.Util;
 
 namespace Kore.IO.TestUtil
 {
@@ -9,7 +11,7 @@ namespace Kore.IO.TestUtil
         public static List<string> VisibleFileList { get; }
         public static List<string> HiddenFileList { get; }
 
-        static string TestFolder { get; }
+        public static string TestFolder { get; }
         public static string TestFolderDeep { get; }
         public static string TestFolderOneLevel { get; }
 
@@ -48,40 +50,36 @@ namespace Kore.IO.TestUtil
             EnsureHiddenFilesExist(BuildOneLevelTestFilesList(false, true));
         }
 
-        private static void EnsureVisibleFilesExist(List<string> files)
+        private static void EnsureVisibleFilesExist(List<IKoreFileInfo> files)
         {
-            foreach (string file in files)
+            foreach (IKoreFileInfo fileInfo in files)
             {
-                FileUtil.EnsureExits(file);
-                FileInfo fi = new FileInfo(file);
-                if (fi.Attributes.HasFlag(FileAttributes.Hidden))
-                    File.SetAttributes(file, FileAttributes.Normal);
+                FileUtil.EnsureExits(fileInfo);
+                if (fileInfo.Hidden)
+                    File.SetAttributes(fileInfo.FullName, FileAttributes.Normal);
             }
         }
 
-        private static void EnsureHiddenFilesExist(List<string> files)
+        private static void EnsureHiddenFilesExist(List<IKoreFileInfo> files)
         {
-            foreach (string file in files)
+            foreach (IKoreFileInfo fileInfo in files)
             {
-                FileUtil.EnsureExits(file);
-                FileInfo fi = new FileInfo(file);
-                File.SetAttributes(file, FileAttributes.Hidden);
+                FileUtil.EnsureExits(fileInfo);
+                File.SetAttributes(fileInfo.FullName, FileAttributes.Hidden);
             }
         }
 
-        public static void AddFiles(string folder, List<string> inputList, List<string> outputList)
+        public static void AddFiles(string folder, List<string> inputList, List<IKoreFileInfo> outputList)
         {
             AddFiles(folder, inputList, outputList, string.Empty);
         }
 
-        public static void AddFiles(string folder, List<string> inputList, List<string> outputList, string extension)
+        public static void AddFiles(string folder, List<string> inputList, List<IKoreFileInfo> outputList, string extension)
         {
-            foreach (string inputItem in inputList)
-                if (inputItem.EndsWith(extension))
-                    outputList.Add(Path.Combine(folder, inputItem));
+            outputList.AddRange((from inputItem in inputList where inputItem.EndsWith(extension) select new KoreFileInfo(Path.Combine(folder, inputItem))).Cast<IKoreFileInfo>());
         }
 
-        private static void BuildFilesForFolder(string folder, List<string> outputList, string extension, bool addVisible, bool addHidden)
+        private static void BuildFilesForFolder(string folder, List<IKoreFileInfo> outputList, string extension, bool addVisible, bool addHidden)
         {
             if (addVisible)
                 AddFiles(folder, VisibleFileList, outputList, extension);
@@ -89,13 +87,13 @@ namespace Kore.IO.TestUtil
                 AddFiles(folder, HiddenFileList, outputList, extension);
         }
 
-        public static List<string> BuildDeepTestFilesList(bool addVisible, bool addHidden, string extension = "")
+        public static List<IKoreFileInfo> BuildDeepTestFilesList(bool addVisible, bool addHidden, string extension = "")
         {
-            List<string> outputList = new List<string>();
+            List<IKoreFileInfo> outputList = new List<IKoreFileInfo>();
 
             string currentFolder = TestFolderDeep;
 
-            for (int i = 0; i < 1; ++i)
+            for (int i = 0; i < 2; ++i)
             {
                 BuildFilesForFolder(currentFolder, outputList, extension, addVisible, addHidden);
                 currentFolder = Path.Combine(currentFolder, "1");
@@ -104,9 +102,9 @@ namespace Kore.IO.TestUtil
             return outputList;
         }
 
-        public static List<string> BuildOneLevelTestFilesList(bool addVisible, bool addHidden, string extension = "")
+        public static List<IKoreFileInfo> BuildOneLevelTestFilesList(bool addVisible, bool addHidden, string extension = "")
         {
-            List<string> outputList = new List<string>();
+            List<IKoreFileInfo> outputList = new List<IKoreFileInfo>();
 
             BuildFilesForFolder(TestFolderOneLevel, outputList, extension, addVisible, addHidden);
 

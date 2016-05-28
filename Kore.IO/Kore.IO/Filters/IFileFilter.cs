@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using Kore.IO.Util;
 
 namespace Kore.IO.Filters
 {
     public interface IFileFilter
     {
-        List<string> Filter(List<string> list);
+        List<IKoreFileInfo> Filter(List<IKoreFileInfo> list);
     }
 }

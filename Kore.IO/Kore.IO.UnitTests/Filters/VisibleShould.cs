@@ -1,39 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using Castle.Components.DictionaryAdapter;
-using Kore.IO.Retrievers;
-using Kore.IO.TestUtil;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Collections.Generic;
 using Kore.IO.Filters;
 using Kore.IO.Util;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
-namespace Kore.IO.UnitTests.Retrievers
+namespace Kore.IO.UnitTests.Filters
 {
     [TestClass]
     public class VisibleShould
     {
-        Mock<IFileInfoProvider> _mockFileInfoProvider;
         VisibleFileFilter _visibleFileFilter;
         Mock<IKoreFileInfo> _mockFileInfo;
+        List<IKoreFileInfo> _inputFiles;
 
         [TestInitialize]
         public void Setup()
         {
-            _mockFileInfoProvider = new Mock<IFileInfoProvider>();
-            _visibleFileFilter = new VisibleFileFilter(_mockFileInfoProvider.Object);
             _mockFileInfo = new Mock<IKoreFileInfo>();
+            _visibleFileFilter = new VisibleFileFilter();            
+            _inputFiles = new List<IKoreFileInfo>() { _mockFileInfo.Object, _mockFileInfo.Object, _mockFileInfo.Object };
         }
 
         public void FilterOutHiddenFiles()
         {
-            _mockFileInfo.Setup(m => m.Hidden).Returns(true);
+            _mockFileInfo.Setup(m => m.Hidden).Returns(true);   
 
-            _mockFileInfoProvider.Setup(m => m.GetFileInfo(It.IsAny<string>())).Returns(_mockFileInfo.Object);
-
-            List<string> inputFiles = new List<string>() { "a", "b", "c" };
-
-            List<string> output = _visibleFileFilter.Filter(inputFiles);
+            List<IKoreFileInfo> output = _visibleFileFilter.Filter(_inputFiles);
 
             Assert.AreEqual(0, output.Count);
         }
@@ -43,13 +35,9 @@ namespace Kore.IO.UnitTests.Retrievers
         {
             _mockFileInfo.Setup(m => m.Hidden).Returns(false);
 
-            _mockFileInfoProvider.Setup(m => m.GetFileInfo(It.IsAny<string>())).Returns(_mockFileInfo.Object);
+            List<IKoreFileInfo> output = _visibleFileFilter.Filter(_inputFiles);
 
-            List<string> inputFiles = new List<string>() { "a", "b", "c" };
-
-            List<string> output = _visibleFileFilter.Filter(inputFiles);
-
-            Assert.AreEqual(inputFiles.Count, output.Count);
+            Assert.AreEqual(_inputFiles.Count, output.Count);
         }
     }
 }

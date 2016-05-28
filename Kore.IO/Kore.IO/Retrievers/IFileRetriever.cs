@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using Kore.IO.Util;
 
 namespace Kore.IO.Retrievers
 {
     public interface IFileRetriever
     {
-        List<string> GetFiles(string folder, string searchPattern);
+        List<IKoreFileInfo> GetFiles(string folder, string searchPattern);
     }
 }

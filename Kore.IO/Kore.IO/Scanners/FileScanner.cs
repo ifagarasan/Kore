@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Kore.IO.Retrievers;
 using Kore.IO.Filters;
+using Kore.IO.Util;
 
 namespace Kore.IO.Scanners
 {
@@ -14,22 +16,19 @@ namespace Kore.IO.Scanners
             _fileRetriever = fileRetriever;
         }
 
-        public List<string> Scan(string folder)
+        public List<IKoreFileInfo> Scan(string folder)
         {
             return Scan(folder, new FileScanOptions());
         }
 
-        public List<string> Scan(string folder, FileScanOptions options)
+        public List<IKoreFileInfo> Scan(string folder, FileScanOptions options)
         {
             if (options == null)
-                throw new ArgumentNullException("options");
+                throw new ArgumentNullException(nameof(options));
 
-            List<string> files = _fileRetriever.GetFiles(folder, options.SearchPattern);
+            List<IKoreFileInfo> files = _fileRetriever.GetFiles(folder, options.SearchPattern);
 
-            foreach (IFileFilter filter in options.Filters)
-                files = filter.Filter(files);
-
-            return files;
+            return options.Filters.Aggregate(files, (current, filter) => filter.Filter(current));
         }
     }
 }

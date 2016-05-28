@@ -56,6 +56,12 @@
     <Compile Include="AssertUtil.cs" />
     <Compile Include="ScannerUtil.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Kore.IO\Kore.IO.csproj">
+      <Project>{F923D453-B912-4A53-B98F-6A1714692182}</Project>
+      <Name>Kore.IO</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

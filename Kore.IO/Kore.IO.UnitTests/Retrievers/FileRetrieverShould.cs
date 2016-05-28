@@ -3,21 +3,29 @@ using System.Collections.Generic;
 using Castle.Components.DictionaryAdapter;
 using Kore.IO.Retrievers;
 using Kore.IO.TestUtil;
+using Kore.IO.Util;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace Kore.IO.UnitTests.Retrievers
 {
     [TestClass]
     public class FileRetrieverShould
     {
-        private List<string> _expectedFiles;
+        private List<IKoreFileInfo> _expectedFiles;
         private FileRetriever _fileRetriever;
+        private Mock<IFileInfoProvider> _mockFileInfoProvider;
+        private Mock<IKoreFileInfo> _mockFileInfo;
 
         [TestInitialize]
         public void Setup()
         {
-            _expectedFiles = new List<string>();
-            _fileRetriever = new FileRetriever();
+            _expectedFiles = new List<IKoreFileInfo>();
+            _mockFileInfo = new Mock<IKoreFileInfo>();
+            _mockFileInfoProvider = new Mock<IFileInfoProvider>();
+            _mockFileInfoProvider.Setup(m => m.GetFileInfo(It.IsAny<string>())).Returns(_mockFileInfo.Object);
+
+            _fileRetriever = new FileRetriever(_mockFileInfoProvider.Object);
         }
 
         [TestMethod]
@@ -26,8 +34,8 @@ namespace Kore.IO.UnitTests.Retrievers
             ScannerUtil.AddFiles(ScannerUtil.TestFolderOneLevel, ScannerUtil.VisibleFileList, _expectedFiles);
             ScannerUtil.AddFiles(ScannerUtil.TestFolderOneLevel, ScannerUtil.HiddenFileList, _expectedFiles);
 
-            List<string> actualFiles = _fileRetriever.GetFiles(ScannerUtil.TestFolderOneLevel, "*");
-            AssertUtil.AssertFileListsAreEqual(_expectedFiles, actualFiles);
+            List<IKoreFileInfo> actualFiles = _fileRetriever.GetFiles(ScannerUtil.TestFolderOneLevel, "*");
+            Assert.AreEqual(_expectedFiles.Count, actualFiles.Count);
         }
 
         [TestMethod]
@@ -35,9 +43,9 @@ namespace Kore.IO.UnitTests.Retrievers
         {
             _expectedFiles = ScannerUtil.BuildDeepTestFilesList(true, true);
 
-            List<string> actualFiles = _fileRetriever.GetFiles(ScannerUtil.TestFolderDeep, "*");
+            List<IKoreFileInfo> actualFiles = _fileRetriever.GetFiles(ScannerUtil.TestFolderDeep, "*");
 
-            AssertUtil.AssertFileListsAreEqual(_expectedFiles, actualFiles);
+            Assert.AreEqual(_expectedFiles.Count, actualFiles.Count);
         }
     }
 }
