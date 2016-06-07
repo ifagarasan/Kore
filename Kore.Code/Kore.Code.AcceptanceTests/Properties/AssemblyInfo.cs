@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Kore.Code.Acceptance")]
+[assembly: AssemblyTitle("Kore.Code.AcceptanceTests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Kore.Code.Acceptance")]
+[assembly: AssemblyProduct("Kore.Code.AcceptanceTests")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("02e28408-033c-4c82-8958-ca8093991e6c")]
+[assembly: Guid("848168d7-0ac9-4293-9c1e-bb06d1b8c2ab")]
 
 // Version information for an assembly consists of the following four values:
 //
