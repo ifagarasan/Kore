@@ -26,17 +26,17 @@ namespace Kore.Code.Grid
         {
             get
             {
-                uint index = GetIndex(row, column);
+                uint index = ComputeIndex(row, column);
                 return _grid[index];
             }
             set
             {
-                uint index = GetIndex(row, column);
+                uint index = ComputeIndex(row, column);
                 _grid[index] = value;
             }
         }
 
-        private uint GetIndex(uint row, uint column)
+        private uint ComputeIndex(uint row, uint column)
         {
             return row * Columns + column;
         }
