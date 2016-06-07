@@ -6,10 +6,10 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Kore.IO")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Kore.IO")]
+[assembly: AssemblyDescription("IO Support")]
+[assembly: AssemblyConfiguration("Release")]
+[assembly: AssemblyCompanyAttribute("Ioan Fagarasan")]
+[assembly: AssemblyProduct("KoreCode")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
