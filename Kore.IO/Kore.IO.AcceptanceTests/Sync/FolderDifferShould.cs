@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using Kore.IO.Filters;
 using Kore.IO.Retrievers;
 using Kore.IO.Scanners;
@@ -61,7 +62,7 @@ namespace Kore.IO.AcceptanceTests.Sync
 
             EnsureFilesExist(_sourceFiles);
             EnsureFilesExist(_destinationFiles);
-
+            
             var now = DateTime.Now;
             _sourceFiles[0].LastWriteTime = now;
             _destinationFiles[0].LastWriteTime = now;

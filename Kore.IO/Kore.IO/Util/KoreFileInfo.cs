@@ -1,47 +1,48 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 
 namespace Kore.IO.Util
 {
     public class KoreFileInfo : IKoreFileInfo
     {
-        readonly FileInfo _fileInfo;
+        private readonly string _file;
 
         public KoreFileInfo(string file)
         {
-            _fileInfo = new FileInfo(file);
+            _file = file;
         }
 
         public bool Hidden
         {
             get
             {
-                return _fileInfo.Attributes.HasFlag(FileAttributes.Hidden);
+                return new FileInfo(_file).Attributes.HasFlag(FileAttributes.Hidden);
             }
             set
             {
-                File.SetAttributes(_fileInfo.FullName, value ? FileAttributes.Hidden : FileAttributes.Normal);
+                File.SetAttributes(_file, value ? FileAttributes.Hidden : FileAttributes.Normal);
             }
         }
 
-        public string FullName => _fileInfo.FullName;
+        public string FullName => Path.GetFullPath(_file);
 
-        public bool Exists => _fileInfo.Exists;
+        public bool Exists => File.Exists(_file);
 
-        public string DirectoryFullName => _fileInfo.DirectoryName;
+        public string DirectoryFullName => Path.GetDirectoryName(_file);
 
         public DateTime LastWriteTime
         {
             get
             {
-                ValidateExistance();
-                return File.GetLastWriteTime(_fileInfo.FullName);
+                ValidateExistence();
+                return File.GetLastWriteTime(_file);
             }
 
             set
             {
-                ValidateExistance();
-                File.SetLastWriteTime(_fileInfo.FullName, value);
+                ValidateExistence();
+                File.SetLastWriteTime(_file, value);
             }
         }
 
@@ -57,10 +58,11 @@ namespace Kore.IO.Util
                 return;
 
             EnsureDirectoryExists();
-            File.Create(FullName);
+
+            using (FileStream fs = File.Create(FullName)) { }
         }
 
-        private void ValidateExistance()
+        private void ValidateExistence()
         {
             if (!Exists)
                 throw new FileNotFoundException();
