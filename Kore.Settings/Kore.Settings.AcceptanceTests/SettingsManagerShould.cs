@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using Kore.Settings.Serializers;
+using Kore.IO.Util;
 
 namespace Kore.Settings.AcceptanceTests
 {
@@ -24,13 +25,13 @@ namespace Kore.Settings.AcceptanceTests
             Car car = new Car() { Make = "Ford", Model = "Focus", Year = 2008 };
             SettingsManager<Car> settings = new SettingsManager<Car>(car, new XmlSerializer<Car>());
 
-            string file = Path.Combine(testFolder, string.Format("settings_{0}.xml", DateTime.Now.Ticks));
-            settings.Write(file);
+            KoreFileInfo fileInfo = new KoreFileInfo(Path.Combine(testFolder, string.Format("settings_{0}.xml", DateTime.Now.Ticks)));
+            settings.Write(fileInfo);
 
-            Assert.IsTrue(File.Exists(file));
+            Assert.IsTrue(fileInfo.Exists);
 
             settings.Data = null;
-            settings.Read(file);
+            settings.Read(fileInfo);
 
             Assert.AreEqual(car, settings.Data);
         }

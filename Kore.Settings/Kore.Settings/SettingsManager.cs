@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Kore.Settings.Serializers;
 using System.IO;
+using Kore.IO.Util;
 
 namespace Kore.Settings
 {
@@ -14,6 +15,9 @@ namespace Kore.Settings
 
         public SettingsManager(T data, ISerializer<T> serializer)
         {
+            if (data == null)
+                throw new ArgumentNullException(nameof(data));
+
             this.Data = data;
             this._serializer = serializer;
         }
@@ -22,17 +26,26 @@ namespace Kore.Settings
         {
         }
 
-        public void Write(string file)
+        public void Write(IKoreFileInfo fileInfo)
         {
-            using (FileStream stream = new FileStream(file, FileMode.OpenOrCreate))
+            if (fileInfo == null)
+                throw new ArgumentNullException(nameof(fileInfo));
+
+            using (FileStream stream = new FileStream(fileInfo.FullName, FileMode.OpenOrCreate))
             {
                 _serializer.Serialize(Data, stream);
             }
         }
 
-        public void Read(string file)
+        public void Read(IKoreFileInfo fileInfo)
         {
-            using (FileStream stream = new FileStream(file, FileMode.Open))
+            if (fileInfo == null)
+                throw new ArgumentNullException(nameof(fileInfo));
+
+            if (!fileInfo.Exists)
+                return;
+
+            using (FileStream stream = new FileStream(fileInfo.FullName, FileMode.Open))
             {
                 Data = _serializer.Deserialize(stream);
             }
