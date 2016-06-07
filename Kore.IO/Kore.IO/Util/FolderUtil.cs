@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Threading;
+﻿using System.IO;
 
-namespace Kore.IO.TestUtil
+namespace Kore.IO.Util
 {
     public static class FolderUtil
     {
+        //TODO: to be removed and included in a future IKoreDirectoryInfo
         public static void EnsureExits(string folder)
         {
             if (!Directory.Exists(folder))

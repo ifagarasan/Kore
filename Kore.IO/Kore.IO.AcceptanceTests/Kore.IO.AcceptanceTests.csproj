@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Scanners\FileScannerShould.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sync\FolderDifferShould.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Kore.IO.TestUtil\Kore.IO.TestUtil.csproj">
@@ -63,6 +64,7 @@
       <Name>Kore.IO</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

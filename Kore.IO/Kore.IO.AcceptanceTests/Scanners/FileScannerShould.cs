@@ -32,9 +32,9 @@ namespace Kore.IO.AcceptanceTests.Scanners
         [TestMethod]
         public void ReturnAllFiles()
         {
-            List<IKoreFileInfo> fileList = _fileScanner.Scan(ScannerUtil.TestFolderDeep);
+            FileScanResult scanResult = _fileScanner.Scan(ScannerUtil.TestFolderDeep);
 
-            AssertUtil.AssertFileListsAreEqual(_expectedFileList, fileList);
+            AssertUtil.AssertFileListsAreEqual(_expectedFileList, scanResult.Files);
         }
 
         [TestMethod]
@@ -42,21 +42,21 @@ namespace Kore.IO.AcceptanceTests.Scanners
         {
             _fileScanOptions.Filters.Add(new VisibleFileFilter());
 
-            List<IKoreFileInfo> fileList = _fileScanner.Scan(ScannerUtil.TestFolderDeep, _fileScanOptions);
+            FileScanResult scanResult = _fileScanner.Scan(ScannerUtil.TestFolderDeep, _fileScanOptions);
 
             _expectedFileList = ScannerUtil.BuildDeepTestFilesList(true, false);
 
-            AssertUtil.AssertFileListsAreEqual(_expectedFileList, fileList);
+            AssertUtil.AssertFileListsAreEqual(_expectedFileList, scanResult.Files);
         }
 
         [TestMethod]
         public void AllowFilteringOfFilesBySearchPattern()
         {
             _fileScanOptions.SearchPattern = "*.txt";
-            List<IKoreFileInfo> fileList = _fileScanner.Scan(ScannerUtil.TestFolderDeep, _fileScanOptions);
+            FileScanResult scanResult = _fileScanner.Scan(ScannerUtil.TestFolderDeep, _fileScanOptions);
 
             _expectedFileList = ScannerUtil.BuildDeepTestFilesList(true, true, "txt");
-            AssertUtil.AssertFileListsAreEqual(_expectedFileList, fileList);
+            AssertUtil.AssertFileListsAreEqual(_expectedFileList, scanResult.Files);
         }
     }
 }

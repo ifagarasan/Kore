@@ -50,8 +50,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="FileUtil.cs" />
-    <Compile Include="FolderUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AssertUtil.cs" />
     <Compile Include="ScannerUtil.cs" />

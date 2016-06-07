@@ -9,12 +9,26 @@ namespace Kore.IO.TestUtil
 {
     public static class AssertUtil
     {
-        public static void AssertFileListsAreEqual(List<IKoreFileInfo> expectedFileList, List<IKoreFileInfo> actualFileList)
+        public static void AssertFileListsAreEqual(List<IKoreFileInfo> expectedFileList, IReadOnlyList<IKoreFileInfo> actualFileList)
         {
             Assert.AreEqual(expectedFileList.Count, actualFileList.Count);
 
-            foreach (IKoreFileInfo expectedFile in expectedFileList)
-                Assert.IsTrue(actualFileList.Exists(fileInfo => fileInfo.FullName.Equals(expectedFile.FullName)));
+            foreach (IKoreFileInfo expectedFileInfo in expectedFileList)
+            {
+                string expectedFileName = expectedFileInfo.FullName.ToLower();
+                bool found = false;
+
+                foreach (IKoreFileInfo actualFileInfo in actualFileList)
+                {
+                    if (actualFileInfo.FullName.ToLower().Equals(expectedFileName))
+                    {
+                        found = true;
+                        break;
+                    }
+                }
+
+                Assert.IsTrue(found);
+            }
         }
     }
 }

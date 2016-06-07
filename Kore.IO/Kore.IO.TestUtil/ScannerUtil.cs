@@ -43,29 +43,19 @@ namespace Kore.IO.TestUtil
             FolderUtil.EnsureExits(TestFolderDeep);
             FolderUtil.EnsureExits(TestFolderOneLevel);
 
-            EnsureVisibleFilesExist(BuildDeepTestFilesList(true, false));
-            EnsureHiddenFilesExist(BuildDeepTestFilesList(false, true));
+            EnsureFilesExist(BuildDeepTestFilesList(true, false), false);
+            EnsureFilesExist(BuildDeepTestFilesList(false, true), true);
 
-            EnsureVisibleFilesExist(BuildOneLevelTestFilesList(true, false));
-            EnsureHiddenFilesExist(BuildOneLevelTestFilesList(false, true));
+            EnsureFilesExist(BuildOneLevelTestFilesList(true, false), false);
+            EnsureFilesExist(BuildOneLevelTestFilesList(false, true), true);
         }
 
-        private static void EnsureVisibleFilesExist(List<IKoreFileInfo> files)
+        private static void EnsureFilesExist(IEnumerable<IKoreFileInfo> files, bool hidden)
         {
             foreach (IKoreFileInfo fileInfo in files)
             {
-                FileUtil.EnsureExits(fileInfo);
-                if (fileInfo.Hidden)
-                    File.SetAttributes(fileInfo.FullName, FileAttributes.Normal);
-            }
-        }
-
-        private static void EnsureHiddenFilesExist(List<IKoreFileInfo> files)
-        {
-            foreach (IKoreFileInfo fileInfo in files)
-            {
-                FileUtil.EnsureExits(fileInfo);
-                File.SetAttributes(fileInfo.FullName, FileAttributes.Hidden);
+                fileInfo.EnsureExits();
+                fileInfo.Hidden = hidden;
             }
         }
 

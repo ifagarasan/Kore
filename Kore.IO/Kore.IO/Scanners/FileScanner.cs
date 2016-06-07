@@ -16,19 +16,19 @@ namespace Kore.IO.Scanners
             _fileRetriever = fileRetriever;
         }
 
-        public List<IKoreFileInfo> Scan(string folder)
+        public FileScanResult Scan(string folder)
         {
             return Scan(folder, new FileScanOptions());
         }
 
-        public List<IKoreFileInfo> Scan(string folder, FileScanOptions options)
+        public FileScanResult Scan(string folder, FileScanOptions options)
         {
             if (options == null)
                 throw new ArgumentNullException(nameof(options));
 
             List<IKoreFileInfo> files = _fileRetriever.GetFiles(folder, options.SearchPattern);
 
-            return options.Filters.Aggregate(files, (current, filter) => filter.Filter(current));
+            return new FileScanResult(folder, options.Filters.Aggregate(files, (current, filter) => filter.Filter(current)));
         }
     }
 }

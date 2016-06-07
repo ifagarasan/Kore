@@ -22,6 +22,8 @@ namespace Kore.IO.UnitTests.Scanners
         public void Setup()
         {
             _mockFileRetriever = new Mock<IFileRetriever>();
+            _mockFileRetriever.Setup(m => m.GetFiles(It.IsAny<string>(), It.IsAny<string>())).Returns(new List<IKoreFileInfo>());
+
             _fileScanner = new FileScanner(_mockFileRetriever.Object);
             _fileScanOptions = new FileScanOptions();
         }
@@ -30,8 +32,6 @@ namespace Kore.IO.UnitTests.Scanners
         public void CallFileRetrieverGetFiles()
         {
             string folder = "TestFolderDeep";
-
-            _mockFileRetriever.Setup(m => m.GetFiles(It.IsAny<string>(), It.IsAny<string>()));
 
             _fileScanner.Scan(folder);
 
@@ -44,8 +44,6 @@ namespace Kore.IO.UnitTests.Scanners
             _fileScanOptions.SearchPattern = "*.txt";
 
             string folder = "TestFolderDeep";
-
-            _mockFileRetriever.Setup(m => m.GetFiles(It.IsAny<string>(), It.IsAny<string>()));
 
             _fileScanner.Scan(folder, _fileScanOptions);
 
