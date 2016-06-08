@@ -41,6 +41,12 @@
   <ItemGroup>
     <Compile Include="Comparers\Comparer.cs" />
     <Compile Include="Comparers\ComparisonResult.cs" />
+    <Compile Include="Exceptions\CollectionEmptyException.cs" />
+    <Compile Include="Exceptions\CollectionFullException.cs" />
+    <Compile Include="Exceptions\ComparisonException.cs" />
+    <Compile Include="Exceptions\DuplicateKeyException.cs" />
+    <Compile Include="Exceptions\ElementNotFoundException.cs" />
+    <Compile Include="Exceptions\InvalidQuantityException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
