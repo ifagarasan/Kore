@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Kore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Kore.1.0.0-CI00014\lib\net40\Kore.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -94,7 +98,6 @@
     <Compile Include="Trees\ITreeNode.cs" />
     <Compile Include="Trees\TreeNode.cs" />
     <Compile Include="Util\ArrayOps.cs" />
-    <Compile Include="Util\Comparers.cs" />
     <Compile Include="Util\Exchange.cs" />
     <Compile Include="Util\RandomOps.cs" />
     <Compile Include="Util\IO.cs" />
@@ -103,7 +106,9 @@
     <Compile Include="Validation\ArrayValidation.cs" />
     <Compile Include="Validation\ComparisoniValidation.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

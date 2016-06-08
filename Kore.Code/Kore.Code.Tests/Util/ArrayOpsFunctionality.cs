@@ -133,11 +133,11 @@ namespace Kore.Code.Tests.Util
         {
             int[] input = new int[] { 1, 2, 3 };
 
-            Assert.AreEqual(0, ArrayOps<int>.GetExtremeIndex(input, Comparers<int>.LessThan));
+            Assert.AreEqual(0, ArrayOps<int>.GetExtremeIndex(input, Comparers.Comparer<int>.SmallerThan));
 
             input = new int[] { 3, 2, 1 };
 
-            Assert.AreEqual(2, ArrayOps<int>.GetExtremeIndex(input, Comparers<int>.LessThan));
+            Assert.AreEqual(2, ArrayOps<int>.GetExtremeIndex(input, Comparers.Comparer<int>.SmallerThan));
         }
 
         [TestMethod]
@@ -145,11 +145,11 @@ namespace Kore.Code.Tests.Util
         {
             int[] input = new int[] { 1, 2, 3 };
 
-            Assert.AreEqual(0, ArrayOps<int>.GetExtremeIndex(input, 0, Comparers<int>.LessThan));
+            Assert.AreEqual(0, ArrayOps<int>.GetExtremeIndex(input, 0, Comparers.Comparer<int>.SmallerThan));
 
             input = new int[] { 3, 2, 1 };
 
-            Assert.AreEqual(2, ArrayOps<int>.GetExtremeIndex(input, 2, Comparers<int>.LessThan));
+            Assert.AreEqual(2, ArrayOps<int>.GetExtremeIndex(input, 2, Comparers.Comparer<int>.SmallerThan));
         }
 
         #endregion
@@ -163,7 +163,7 @@ namespace Kore.Code.Tests.Util
             int[] input2 = new int[] { 1 };
             int[] expected = new int[] { 1, 1, 2, 3 };
 
-            int[] result = ArrayOps<int>.Merge(input1, input2, Comparers<int>.LessThan);
+            int[] result = ArrayOps<int>.Merge(input1, input2, Comparers.Comparer<int>.SmallerThan);
 
             CollectionAssert.AreEqual(expected, result);
         }
@@ -175,7 +175,7 @@ namespace Kore.Code.Tests.Util
             int[] input2 = new int[] { 1 };
             int[] result = new int[4];
 
-            int[] actual = ArrayOps<int>.Merge(input1, input2, result, Comparers<int>.LessThan);
+            int[] actual = ArrayOps<int>.Merge(input1, input2, result, Comparers.Comparer<int>.SmallerThan);
 
             Assert.AreSame(result, actual);
         }
@@ -186,7 +186,7 @@ namespace Kore.Code.Tests.Util
             int[] input1 = new int[] { 1, 2, 3 };
             int[] input2 = new int[] { };
 
-            int[] result = ArrayOps<int>.Merge(input1, input2, Comparers<int>.LessThan);
+            int[] result = ArrayOps<int>.Merge(input1, input2, Comparers.Comparer<int>.SmallerThan);
 
             Assert.AreEqual(input1.Length + input2.Length, result.Length);
         }
@@ -199,7 +199,7 @@ namespace Kore.Code.Tests.Util
             int[] result = new int[6];
             int[] expected = new int[] { 0, 1, 1, 2, 3, 0 };
 
-            int[] actual = ArrayOps<int>.Merge(input1, input2, result, 1, Comparers<int>.LessThan);
+            int[] actual = ArrayOps<int>.Merge(input1, input2, result, 1, Comparers.Comparer<int>.SmallerThan);
 
             CollectionAssert.AreEqual(expected, actual);
         }
@@ -210,7 +210,7 @@ namespace Kore.Code.Tests.Util
             int[] input = new int[] { 2, 4, 6, 1, 3, 5 };
             int[] expected = new int[] { 1, 2, 3, 4, 5, 6 };
 
-            int[] actual = ArrayOps<int>.Merge(input, 0, 3, 3, 3, Comparers<int>.LessThan);
+            int[] actual = ArrayOps<int>.Merge(input, 0, 3, 3, 3, Comparers.Comparer<int>.SmallerThan);
 
             CollectionAssert.AreEqual(expected, actual);
         }

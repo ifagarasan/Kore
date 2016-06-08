@@ -184,9 +184,9 @@ namespace Kore.Code.Heaps
         private Func<T, T, bool> GetComparisonFunction()
         {
             if (heapType == HeapType.Max)
-                return Comparers<T>.LargerThan;
+                return Comparers.Comparer<T>.LargerThan;
 
-            return Comparers<T>.LessThan;
+            return Comparers.Comparer<T>.SmallerThan;
         }
 
         private int GetChildrenExtremeIndex(int index)

@@ -40,7 +40,7 @@ namespace Kore.Code.Util
 
         public static int GetMinimumIndex(T[] input, int startIndex)
         {
-            return GetExtremeIndex(input, startIndex, Comparers<T>.LessThan);
+            return GetExtremeIndex(input, startIndex, Comparers.Comparer<T>.SmallerThan);
         }
 
         public static int GetMaximumIndex(T[] input)
@@ -50,7 +50,7 @@ namespace Kore.Code.Util
 
         public static int GetMaximumIndex(T[] input, int startIndex)
         {
-            return GetExtremeIndex(input, startIndex, Comparers<T>.LargerThan);
+            return GetExtremeIndex(input, startIndex, Comparers.Comparer<T>.LargerThan);
         }
 
         public static int GetExtremeIndex(T[] input, Func<T, T, bool> func)

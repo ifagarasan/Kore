@@ -14,8 +14,8 @@ namespace Kore.Code.Sort
         public static Func<T, T, bool> GetComparisonFunc(SortDirection direction)
         {
             if (direction == SortDirection.Ascending)
-                return Comparers<T>.LessThan;
-            return Comparers<T>.LargerThan;
+                return Comparers.Comparer<T>.SmallerThan;
+            return Comparers.Comparer<T>.LargerThan;
         }
     }
 }
