@@ -22,5 +22,20 @@ namespace Kore
 
             return _comparisonResults[comparisonResult];
         }
+
+        public static bool LargerThan(T value1, T value2)
+        {
+            return Compare(value1, value2) == ComparisonResult.LargerThan;
+        }
+
+        public static bool Equal(T value1, T value2)
+        {
+            return Compare(value1, value2) == ComparisonResult.Equal;
+        }
+
+        public static bool SmallerThan(T value1, T value2)
+        {
+            return Compare(value1, value2) == ComparisonResult.SmallerThan;
+        }
     }
 }
