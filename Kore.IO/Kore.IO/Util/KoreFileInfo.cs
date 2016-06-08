@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kore.IO.Validation;
+using System;
 using System.IO;
 using System.Threading;
 
@@ -17,7 +18,8 @@ namespace Kore.IO.Util
         {
             get
             {
-                return new FileInfo(_file).Attributes.HasFlag(FileAttributes.Hidden);
+                FileValidation.Exists(this);
+                return File.GetAttributes(_file).HasFlag(FileAttributes.Hidden);
             }
             set
             {
@@ -35,13 +37,13 @@ namespace Kore.IO.Util
         {
             get
             {
-                ValidateExistence();
+                FileValidation.Exists(this);
                 return File.GetLastWriteTime(_file);
             }
 
             set
             {
-                ValidateExistence();
+                FileValidation.Exists(this);
                 File.SetLastWriteTime(_file, value);
             }
         }
@@ -60,12 +62,6 @@ namespace Kore.IO.Util
             EnsureDirectoryExists();
 
             using (FileStream fs = File.Create(FullName)) { }
-        }
-
-        private void ValidateExistence()
-        {
-            if (!Exists)
-                throw new FileNotFoundException();
         }
     }
 }

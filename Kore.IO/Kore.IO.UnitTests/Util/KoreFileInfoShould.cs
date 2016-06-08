@@ -95,6 +95,15 @@ namespace Kore.IO.UnitTests.Util
 
         [TestMethod]
         [ExpectedException(typeof(FileNotFoundException))]
+        public void HiddenGetThrowsFileNotFoundExceptionIfFileDoesNotExist()
+        {
+            KoreFileInfo fileInfo = new KoreFileInfo(@"C:\123\abc.txt");
+
+            var info = fileInfo.Hidden;
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(FileNotFoundException))]
         public void LastWriteTimeGetThrowsFileNotFoundExceptionIfFileDoesNotExist()
         {
             KoreFileInfo fileInfo = new KoreFileInfo(@"C:\123\abc.txt");

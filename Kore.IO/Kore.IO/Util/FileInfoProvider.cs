@@ -2,7 +2,7 @@
 {
     public class FileInfoProvider : IFileInfoProvider
     {
-        public IKoreFileInfo GetFileInfo(string file)
+        public IKoreFileInfo CreateFileInfo(string file)
         {
             return new KoreFileInfo(file);
         }

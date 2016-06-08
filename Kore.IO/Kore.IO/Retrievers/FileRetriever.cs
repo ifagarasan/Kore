@@ -17,7 +17,7 @@ namespace Kore.IO.Retrievers
         public List<IKoreFileInfo> GetFiles(string folder, string searchPattern)
         {
             return Directory.EnumerateFiles(folder, searchPattern, SearchOption.AllDirectories).
-                Select(file => _fileInfoProvider.GetFileInfo(file)).ToList();
+                Select(file => _fileInfoProvider.CreateFileInfo(file)).ToList();
         }
     }
 }

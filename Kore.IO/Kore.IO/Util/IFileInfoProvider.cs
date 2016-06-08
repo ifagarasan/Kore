@@ -2,6 +2,6 @@
 {
     public interface IFileInfoProvider
     {
-        IKoreFileInfo GetFileInfo(string file);
+        IKoreFileInfo CreateFileInfo(string file);
     }
 }

@@ -58,6 +58,7 @@
     <Compile Include="Util\IKoreFileInfo.cs" />
     <Compile Include="Util\IFileInfoProvider.cs" />
     <Compile Include="Util\KoreFileInfo.cs" />
+    <Compile Include="Validation\FileValidation.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
