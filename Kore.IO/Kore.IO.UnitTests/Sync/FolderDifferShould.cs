@@ -128,6 +128,36 @@ namespace Kore.IO.UnitTests.Sync
             Assert.AreEqual(1, _diff.Diffs.Count);
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void ThrowInvalidOperationExceptionWhenDuplicateFileInfosWereFoundInSource()
+        {
+            TestDuplicateFileInfos(new List<IKoreFileInfo> { _mockSourceFileInfo.Object, _mockSourceFileInfo.Object },
+                new List<IKoreFileInfo> { _mockDestinationFileInfo.Object });
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void ThrowInvalidOperationExceptionWhenDuplicateFileInfosWereFoundInDestination()
+        {
+            TestDuplicateFileInfos(new List<IKoreFileInfo> { _mockSourceFileInfo.Object },
+                new List<IKoreFileInfo> { _mockDestinationFileInfo.Object, _mockDestinationFileInfo.Object });
+        }
+
+        private void TestDuplicateFileInfos(List<IKoreFileInfo> sourceFileInfoList, List<IKoreFileInfo> destinationFileInfoList)
+        {
+            _mockSourceFileInfo.Setup(m => m.FullName).Returns(Path.Combine(SourceFolder, "data", "file1.txt"));
+
+            _mockDestinationFileInfo.Setup(m => m.FullName).Returns(Path.Combine(DestinationFolder, "data", "File1.txt"));
+
+            _mockSourceScanResult.Setup(m => m.Files).Returns(sourceFileInfoList);
+            _mockDestinationScanResult.Setup(m => m.Files).Returns(destinationFileInfoList);
+
+            _folderDiffer = new FolderDiffer(_mockSourceScanResult.Object, _mockDestinationScanResult.Object);
+
+            _diff = _folderDiffer.BuildDiff();
+        }
+
         private void TestIdenticalFileFullNameDiffs(DateTime sourceLastWriteTime, DateTime destinationLastWriteTime, DiffType expectedDiffType)
         {
             _mockSourceFileInfo.Setup(m => m.FullName).Returns(Path.Combine(SourceFolder, "data", "file1.txt"));

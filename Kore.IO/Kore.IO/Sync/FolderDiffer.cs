@@ -34,7 +34,7 @@ namespace Kore.IO.Sync
             {
                 string relativeFullFileName = ExtractRelativeFullFileName(sourceFileInfo, sourceScanResult.Folder.Length);
 
-                IKoreFileInfo destinationFileInfo = destinationScanResult.Files.FirstOrDefault(
+                IKoreFileInfo destinationFileInfo = destinationScanResult.Files.SingleOrDefault(
                     f => f.FullName.Substring(destinationScanResult.Folder.Length).ToLower().Equals(relativeFullFileName));
 
                 DiffType? diffType = diffFunc(sourceFileInfo, destinationFileInfo);
