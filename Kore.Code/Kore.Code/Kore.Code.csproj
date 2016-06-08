@@ -31,7 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Kore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Kore.1.0.0-CI00014\lib\net40\Kore.dll</HintPath>
+      <HintPath>..\packages\Kore.1.0.0-CI00016\lib\net40\Kore.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -44,17 +44,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Exceptions\InvalidQuantityException.cs" />
     <Compile Include="Grid\BidimensionalGrid.cs" />
     <Compile Include="Grid\IGrid.cs" />
     <Compile Include="Node\Builders\RedBlackNodeBuilder.cs" />
     <Compile Include="Node\Builders\TreeNodeBuilder.cs" />
     <Compile Include="Node\Builders\BinaryNodeBuilder.cs" />
-    <Compile Include="Exceptions\ComparisonException.cs" />
-    <Compile Include="Exceptions\DuplicateKeyException.cs" />
-    <Compile Include="Exceptions\ElementNotFoundException.cs" />
-    <Compile Include="Exceptions\CollectionFullException.cs" />
-    <Compile Include="Exceptions\CollectionEmptyException.cs" />
     <Compile Include="Functional\Readers\ArrayReader.cs" />
     <Compile Include="Functional\Readers\MatrixReader.cs" />
     <Compile Include="Functional\Tests\FolderProcessor.cs" />
@@ -100,7 +94,6 @@
     <Compile Include="Util\ArrayOps.cs" />
     <Compile Include="Util\Exchange.cs" />
     <Compile Include="Util\RandomOps.cs" />
-    <Compile Include="Util\IO.cs" />
     <Compile Include="Sort\Sort.cs" />
     <Compile Include="Util\Types.cs" />
     <Compile Include="Validation\ArrayValidation.cs" />

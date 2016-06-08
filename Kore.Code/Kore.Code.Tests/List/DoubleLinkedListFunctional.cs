@@ -15,7 +15,7 @@ namespace Kore.Code.Tests.List
         [TestInitialize]
         public void SetUp()
         {
-            list = new DoubleLinkedList<int>();
+            List = new DoubleLinkedList<int>();
         }
     }
 }

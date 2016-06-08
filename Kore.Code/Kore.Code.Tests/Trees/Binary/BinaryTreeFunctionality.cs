@@ -1,24 +1,22 @@
 ﻿using System;
-
-using Kore.Code.Trees.Binary;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Kore.Code.Exceptions;
 using System.Collections.Generic;
-using System.Collections;
+using Kore.Code.Trees.Binary;
+using Kore.Exceptions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Kore.Code.Tests.Tree.Binary
+namespace Kore.Code.Tests.Trees.Binary
 {
     [TestClass]
     public abstract class BinaryTreeFunctionality
     {
-        protected BinaryTree binaryTree;
+        protected BinaryTree BinaryTree;
 
         protected abstract BinaryTree CreateBinaryTree();
 
         [TestInitialize]
         public virtual void SetUp()
         {
-            binaryTree = CreateBinaryTree();
+            BinaryTree = CreateBinaryTree();
         }
 
         #region Initialisation
@@ -26,13 +24,13 @@ namespace Kore.Code.Tests.Tree.Binary
         [TestMethod]
         public void RootIsNilAfterInit()
         {
-            Assert.AreSame(binaryTree.Nil, binaryTree.Root);
+            Assert.AreSame(BinaryTree.Nil, BinaryTree.Root);
         }
 
         [TestMethod]
         public void CountIsZero()
         {
-            Assert.AreEqual(0, binaryTree.Count);
+            Assert.AreEqual(0, BinaryTree.Count);
         }
 
         #region Nil
@@ -40,25 +38,25 @@ namespace Kore.Code.Tests.Tree.Binary
         [TestMethod]
         public void NilIsDefined()
         {
-            Assert.IsNotNull(binaryTree.Nil);
+            Assert.IsNotNull(BinaryTree.Nil);
         }
 
         [TestMethod]
         public void NilIsParentIsNill()
         {
-            Assert.AreSame(binaryTree.Nil, binaryTree.Nil.Parent);
+            Assert.AreSame(BinaryTree.Nil, BinaryTree.Nil.Parent);
         }
 
         [TestMethod]
         public void NilIsLeftIsNill()
         {
-            Assert.AreSame(binaryTree.Nil, binaryTree.Nil.Left);
+            Assert.AreSame(BinaryTree.Nil, BinaryTree.Nil.Left);
         }
 
         [TestMethod]
         public void NilIsRightIsNill()
         {
-            Assert.AreSame(binaryTree.Nil, binaryTree.Nil.Right);
+            Assert.AreSame(BinaryTree.Nil, BinaryTree.Nil.Right);
         }
 
         #endregion
@@ -70,83 +68,83 @@ namespace Kore.Code.Tests.Tree.Binary
         [TestMethod]
         public void IsBstReturnsTrueForNillNode()
         {
-            Assert.IsTrue(binaryTree.IsBst());
+            Assert.IsTrue(BinaryTree.IsBst());
         }
 
         [TestMethod]
         public void IsBstReturnsTrueForNodeWithoutChildren()
         {
-            binaryTree.Insert(1);
+            BinaryTree.Insert(1);
 
-            Assert.IsTrue(binaryTree.IsBst());
+            Assert.IsTrue(BinaryTree.IsBst());
         }
 
         [TestMethod]
         public void IsBstReturnsTrueForIfLeftNodeKeyIsSmallerThanParentNodeKey()
         {
-            binaryTree.Insert(new int[] { 2, 1});
+            BinaryTree.Insert(new int[] { 2, 1});
 
-            Assert.IsTrue(binaryTree.IsBst());
+            Assert.IsTrue(BinaryTree.IsBst());
         }
 
         [TestMethod]
         public void IsBstReturnsFalseIfLeftNodeKeyIsLargerThanParentNodeKey()
         {
-            binaryTree.Insert(2);
-            binaryTree.Root.Left = new BinaryNode(3);
+            BinaryTree.Insert(2);
+            BinaryTree.Root.Left = new BinaryNode(3);
 
-            Assert.IsFalse(binaryTree.IsBst());
+            Assert.IsFalse(BinaryTree.IsBst());
         }
 
         [TestMethod]
         public void IsBstReturnsFalseIfLeftNodeKeyIsEqualToParentNodeKey()
         {
-            binaryTree.Insert(2);
-            binaryTree.Root.Left = new BinaryNode(2);
+            BinaryTree.Insert(2);
+            BinaryTree.Root.Left = new BinaryNode(2);
 
-            Assert.IsFalse(binaryTree.IsBst());
+            Assert.IsFalse(BinaryTree.IsBst());
         }
 
         [TestMethod]
         public void IsBstReturnsTrueIfRightNodeKeyIsEqualToParentNodeKey()
         {
-            binaryTree.Insert(2);
-            binaryTree.Insert(3);
+            BinaryTree.Insert(2);
+            BinaryTree.Insert(3);
 
-            binaryTree.Root.Right.Key = 2;
+            BinaryTree.Root.Right.Key = 2;
 
-            Assert.IsTrue(binaryTree.IsBst());
+            Assert.IsTrue(BinaryTree.IsBst());
         }
 
         [TestMethod]
         public void IsBstReturnsTrueIfRightNodeKeyIsLargerThanParentNodeKey()
         {
-            binaryTree.Insert(2);
-            binaryTree.Insert(3);
+            BinaryTree.Insert(2);
+            BinaryTree.Insert(3);
 
-            Assert.IsTrue(binaryTree.IsBst());
+            Assert.IsTrue(BinaryTree.IsBst());
         }
 
         [TestMethod]
         public void IsBstReturnsFalseIfRightNodeKeyIsSmallerrThanParentNodeKey()
         {
-            binaryTree.Insert(2);
-            binaryTree.Root.Right = new BinaryNode(1);
+            BinaryTree.Insert(2);
+            BinaryTree.Root.Right = new BinaryNode(1);
 
-            Assert.IsFalse(binaryTree.IsBst());
+            Assert.IsFalse(BinaryTree.IsBst());
         }
 
         [TestMethod]
         public void IsBstProcessesNodesRecursively()
         {
-            binaryTree.Insert(new int[] { 2, 1, 6, 4, 5, 7 });
+            BinaryTree.Insert(new int[] { 2, 1, 6, 4, 5, 7 });
 
-            Assert.IsTrue(binaryTree.IsBst());
+            Assert.IsTrue(BinaryTree.IsBst());
 
-            IBinaryNode node = binaryTree.Search(4);
+            IBinaryNode node = BinaryTree.Search(4);
             node.Left = new BinaryNode(120);
 
-            Assert.IsFalse(binaryTree.IsBst());
+            Assert.IsFalse(BinaryTree.IsBst());
         }
 
         #endregion
@@ -156,7 +154,7 @@ namespace Kore.Code.Tests.Tree.Binary
         [TestMethod]
         public void IsBalancedReturnsTrueForEmptyTree()
         {
-            Assert.IsTrue(binaryTree.IsBalanced());
+            Assert.IsTrue(BinaryTree.IsBalanced());
         }
 
         #endregion
@@ -176,12 +174,12 @@ namespace Kore.Code.Tests.Tree.Binary
             while (inputArray.Count > 0)
             {
                 int index = random.Next(inputArray.Count);
-                binaryTree.Insert(inputArray[index]);
+                BinaryTree.Insert(inputArray[index]);
                 inputArray.RemoveAt(index);
             }
 
             int currentIndex = 0;
-            binaryTree.Inorder((IBinaryNode node) => {
+            BinaryTree.Inorder((IBinaryNode node) => {
                 Assert.AreEqual(input[currentIndex], node.Key);
                 currentIndex++;
                 return true;
@@ -197,23 +195,23 @@ namespace Kore.Code.Tests.Tree.Binary
         [TestMethod]
         public void MinReturnsNilIfNodeNil()
         {
-            Assert.AreSame(binaryTree.Nil, binaryTree.Min(binaryTree.Root));
+            Assert.AreSame(BinaryTree.Nil, BinaryTree.Min(BinaryTree.Root));
         }
 
         [TestMethod]
         public void MinReturnsNodeIfNodeHasNoLeftChild()
         {
-            binaryTree.Insert(1);
+            BinaryTree.Insert(1);
 
-            Assert.AreSame(binaryTree.Root, binaryTree.Min(binaryTree.Root));
+            Assert.AreSame(BinaryTree.Root, BinaryTree.Min(BinaryTree.Root));
         }
 
         [TestMethod]
         public void MinReturnsNodeWithSmallestKey()
         {
-            binaryTree.Insert(new int[] { 3, 2, 1 });
+            BinaryTree.Insert(new int[] { 3, 2, 1 });
             
-            Assert.AreSame(binaryTree.Search(1), binaryTree.Min(binaryTree.Root));
+            Assert.AreSame(BinaryTree.Search(1), BinaryTree.Min(BinaryTree.Root));
         }
 
         #endregion
@@ -223,23 +221,23 @@ namespace Kore.Code.Tests.Tree.Binary
         [TestMethod]
         public void MaxReturnsNilIfNodeNil()
         {
-            Assert.AreSame(binaryTree.Nil, binaryTree.Max(binaryTree.Root));
+            Assert.AreSame(BinaryTree.Nil, BinaryTree.Max(BinaryTree.Root));
         }
 
         [TestMethod]
         public void MaxReturnsNodeIfNodeHasNoRightChild()
         {
-            binaryTree.Insert(1);
+            BinaryTree.Insert(1);
 
-            Assert.AreSame(binaryTree.Root, binaryTree.Max(binaryTree.Root));
+            Assert.AreSame(BinaryTree.Root, BinaryTree.Max(BinaryTree.Root));
         }
 
         [TestMethod]
         public void MaxReturnsNodeWithLargestKey()
         {
-            binaryTree.Insert(new int[] { 1, 2, 3 });
+            BinaryTree.Insert(new int[] { 1, 2, 3 });
 
-            Assert.AreSame(binaryTree.Search(3), binaryTree.Max(binaryTree.Root));
+            Assert.AreSame(BinaryTree.Search(3), BinaryTree.Max(BinaryTree.Root));
         }
 
         #endregion
@@ -249,11 +247,11 @@ namespace Kore.Code.Tests.Tree.Binary
         [TestMethod]
         public void SuccesorReturnsNilForMaximum()
         {
-            binaryTree.Insert(new int[] { 2, 3, 1 });
+            BinaryTree.Insert(new int[] { 2, 3, 1 });
 
-            var minimum = binaryTree.Search(3);
+            var minimum = BinaryTree.Search(3);
 
-            Assert.AreSame(binaryTree.Nil, binaryTree.Successor(minimum));
+            Assert.AreSame(BinaryTree.Nil, BinaryTree.Successor(minimum));
         }
 
         [TestMethod]
@@ -261,7 +259,7 @@ namespace Kore.Code.Tests.Tree.Binary
         {
             int[] array = new int[] { 10, 5, 7, 8, 9 };
 
-            binaryTree.Insert(array);
+            BinaryTree.Insert(array);
 
             List<int> list = new List<int>(array);
 
@@ -269,10 +267,10 @@ namespace Kore.Code.Tests.Tree.Binary
 
             for (int i = 0; i < list.Count - 1; ++i)
             {
-                IBinaryNode expected = binaryTree.Search(list[i + 1]);
-                IBinaryNode current = binaryTree.Search(list[i]);
+                IBinaryNode expected = BinaryTree.Search(list[i + 1]);
+                IBinaryNode current = BinaryTree.Search(list[i]);
 
-                Assert.AreSame(expected, binaryTree.Successor(current));
+                Assert.AreSame(expected, BinaryTree.Successor(current));
             }
         }
 
@@ -283,11 +281,11 @@ namespace Kore.Code.Tests.Tree.Binary
         [TestMethod]
         public void PredecessorReturnsNilForMinimum()
         {
-            binaryTree.Insert(new int[] { 2, 3, 1 });
+            BinaryTree.Insert(new int[] { 2, 3, 1 });
 
-            var minimum = binaryTree.Search(1);
+            var minimum = BinaryTree.Search(1);
 
-            Assert.AreSame(binaryTree.Nil, binaryTree.Predecessor(minimum));
+            Assert.AreSame(BinaryTree.Nil, BinaryTree.Predecessor(minimum));
         }
 
         [TestMethod]
@@ -295,7 +293,7 @@ namespace Kore.Code.Tests.Tree.Binary
         {
             int[] array = new int[] { 10, 5, 7, 8, 9 };
 
-            binaryTree.Insert(array);
+            BinaryTree.Insert(array);
 
             List<int> list = new List<int>(array);
 
@@ -303,10 +301,10 @@ namespace Kore.Code.Tests.Tree.Binary
 
             for (int i = 1; i < list.Count; ++i)
             {
-                IBinaryNode expected = binaryTree.Search(list[i-1]);
-                IBinaryNode current = binaryTree.Search(list[i]);
+                IBinaryNode expected = BinaryTree.Search(list[i-1]);
+                IBinaryNode current = BinaryTree.Search(list[i]);
 
-                Assert.AreSame(expected, binaryTree.Predecessor(current));
+                Assert.AreSame(expected, BinaryTree.Predecessor(current));
             }
         }
 
@@ -317,18 +315,18 @@ namespace Kore.Code.Tests.Tree.Binary
         [TestMethod]
         public void TransplantDoesNotThrowExceptionIfNode1IsNil()
         {
-            binaryTree.Transplant(binaryTree.Nil, new BinaryNode());
+            BinaryTree.Transplant(BinaryTree.Nil, new BinaryNode());
         }
 
         [TestMethod]
         public void TransplantSetsRootToVIfUIsRoot()
         {
             BinaryNode v = new BinaryNode();
-            binaryTree.Insert(1);
+            BinaryTree.Insert(1);
 
-            binaryTree.Transplant(binaryTree.Root, v);
+            BinaryTree.Transplant(BinaryTree.Root, v);
 
-            Assert.AreSame(binaryTree.Root, v);
+            Assert.AreSame(BinaryTree.Root, v);
         }
 
         [TestMethod]
@@ -340,7 +338,7 @@ namespace Kore.Code.Tests.Tree.Binary
             parent.Left = u;
             u.Parent = parent;
 
-            binaryTree.Transplant(u, v);
+            BinaryTree.Transplant(u, v);
 
             Assert.AreSame(parent.Left, v);
         }
@@ -354,7 +352,7 @@ namespace Kore.Code.Tests.Tree.Binary
             parent.Right = u;
             u.Parent = parent;
 
-            binaryTree.Transplant(u, v);
+            BinaryTree.Transplant(u, v);
 
             Assert.AreSame(parent.Right, v);
         }
@@ -362,10 +360,10 @@ namespace Kore.Code.Tests.Tree.Binary
         [TestMethod]
         public void TransplantDoesNotErrorIsVIsNil()
         {
-            binaryTree.Insert(1);
-            binaryTree.Transplant(binaryTree.Root, binaryTree.Nil);
+            BinaryTree.Insert(1);
+            BinaryTree.Transplant(BinaryTree.Root, BinaryTree.Nil);
 
-            Assert.AreSame(binaryTree.Nil, binaryTree.Root);
+            Assert.AreSame(BinaryTree.Nil, BinaryTree.Root);
         }
 
         [TestMethod]
@@ -376,7 +374,7 @@ namespace Kore.Code.Tests.Tree.Binary
             BinaryNode parent = new BinaryNode();
             u.Parent = parent;
 
-            binaryTree.Transplant(u, v);
+            BinaryTree.Transplant(u, v);
 
             Assert.AreSame(v.Parent, parent);
         }
@@ -391,27 +389,27 @@ namespace Kore.Code.Tests.Tree.Binary
         [ExpectedException(typeof(ArgumentNullException))]
         public void RotateLeftThrowsExceptionIfNodeIsNil()
         {
-            binaryTree.RotateLeft(binaryTree.Nil);
+            BinaryTree.RotateLeft(BinaryTree.Nil);
         }
 
         [TestMethod]
         [ExpectedException(typeof(NullReferenceException), "right node null")]
         public void RotateLeftThrowsExceptionIfNodeRightIsNil()
         {
-            binaryTree.Insert(1);
+            BinaryTree.Insert(1);
 
-            binaryTree.RotateLeft(binaryTree.Root);
+            BinaryTree.RotateLeft(BinaryTree.Root);
         }
 
         [TestMethod]
         public void RotateLeftSetsNodesParentToNewParent()
         {
-            binaryTree.Insert(new int[] { 1, 2 });
+            BinaryTree.Insert(new int[] { 1, 2 });
 
-            IBinaryNode one = binaryTree.Search(1);
-            IBinaryNode two = binaryTree.Search(2);
+            IBinaryNode one = BinaryTree.Search(1);
+            IBinaryNode two = BinaryTree.Search(2);
 
-            binaryTree.RotateLeft(one);
+            BinaryTree.RotateLeft(one);
 
             Assert.AreSame(one.Parent, two);
             Assert.AreSame(two.Left, one);
@@ -420,13 +418,13 @@ namespace Kore.Code.Tests.Tree.Binary
         [TestMethod]
         public virtual void RotateLeftSetsNodeRightToNewNodeLeft()
         {
-            binaryTree.Insert(new int[] { 10, 2, 1, 5, 3, 6 });
+            BinaryTree.Insert(new int[] { 10, 2, 1, 5, 3, 6 });
 
-            IBinaryNode target = binaryTree.Search(2);
-            IBinaryNode newNode = binaryTree.Search(5);
+            IBinaryNode target = BinaryTree.Search(2);
+            IBinaryNode newNode = BinaryTree.Search(5);
             IBinaryNode expected = newNode.Left;
 
-            binaryTree.RotateLeft(target);
+            BinaryTree.RotateLeft(target);
 
             Assert.AreSame(target.Right, expected);
             Assert.AreSame(expected.Parent, target);
@@ -435,12 +433,12 @@ namespace Kore.Code.Tests.Tree.Binary
         [TestMethod]
         public virtual void RotateLeftUpdatesNodeNewNodeRelationship()
         {
-            binaryTree.Insert(new int[] { 10, 2, 1, 5, 3, 6 });
+            BinaryTree.Insert(new int[] { 10, 2, 1, 5, 3, 6 });
 
-            IBinaryNode target = binaryTree.Search(2);
-            IBinaryNode newNode = binaryTree.Search(5);
+            IBinaryNode target = BinaryTree.Search(2);
+            IBinaryNode newNode = BinaryTree.Search(5);
 
-            binaryTree.RotateLeft(target);
+            BinaryTree.RotateLeft(target);
 
             Assert.AreSame(target.Parent, newNode);
             Assert.AreSame(newNode.Left, target);
@@ -449,14 +447,14 @@ namespace Kore.Code.Tests.Tree.Binary
         [TestMethod]
         public void RotateLeftUpdatesRootIfNodeIsRoot()
         {
-            binaryTree.Insert(new int[] { 2, 1, 5, 3, 6 });
+            BinaryTree.Insert(new int[] { 2, 1, 5, 3, 6 });
 
-            IBinaryNode target = binaryTree.Search(2);
-            IBinaryNode newNode = binaryTree.Search(5);
+            IBinaryNode target = BinaryTree.Search(2);
+            IBinaryNode newNode = BinaryTree.Search(5);
 
-            binaryTree.RotateLeft(target);
+            BinaryTree.RotateLeft(target);
 
-            Assert.AreSame(binaryTree.Root, newNode);
+            Assert.AreSame(BinaryTree.Root, newNode);
         }
 
         #endregion
@@ -467,27 +465,27 @@ namespace Kore.Code.Tests.Tree.Binary
         [ExpectedException(typeof(ArgumentNullException))]
         public void RotateRightThrowsExceptionIfNodeIsNull()
         {
-            binaryTree.RotateRight(binaryTree.Nil);
+            BinaryTree.RotateRight(BinaryTree.Nil);
         }
 
         [TestMethod]
         [ExpectedException(typeof(NullReferenceException), "right node null")]
         public void RotateRightThrowsExceptionIfNodeRightIsNull()
         {
-            binaryTree.Insert(1);
+            BinaryTree.Insert(1);
 
-            binaryTree.RotateRight(binaryTree.Root);
+            BinaryTree.RotateRight(BinaryTree.Root);
         }
 
         [TestMethod]
         public void RotateRightSetsNodesParentToNewParent()
         {
-            binaryTree.Insert(new int[] { 2, 1 });
+            BinaryTree.Insert(new int[] { 2, 1 });
 
-            IBinaryNode one = binaryTree.Search(1);
-            IBinaryNode two = binaryTree.Search(2);
+            IBinaryNode one = BinaryTree.Search(1);
+            IBinaryNode two = BinaryTree.Search(2);
 
-            binaryTree.RotateRight(two);
+            BinaryTree.RotateRight(two);
 
             Assert.AreSame(two.Parent, one);
             Assert.AreSame(one.Right, two);
@@ -496,16 +494,16 @@ namespace Kore.Code.Tests.Tree.Binary
         [TestMethod]
         public void RotateRightUpdatesNodeNewNodeRelationship()
         {
-            binaryTree.Insert(new int[] { 10, 11, 5, 2, 1, 3, 6 });
+            BinaryTree.Insert(new int[] { 10, 11, 5, 2, 1, 3, 6 });
 
-            IBinaryNode target = binaryTree.Root;
-            IBinaryNode newParent = binaryTree.Root.Left;
+            IBinaryNode target = BinaryTree.Root;
+            IBinaryNode newParent = BinaryTree.Root.Left;
             IBinaryNode newParentRight = newParent.Right;
 
-            Assert.AreNotSame(binaryTree.Nil, newParent);
-            Assert.AreNotSame(binaryTree.Nil, newParentRight);
+            Assert.AreNotSame(BinaryTree.Nil, newParent);
+            Assert.AreNotSame(BinaryTree.Nil, newParentRight);
 
-            binaryTree.RotateRight(target);
+            BinaryTree.RotateRight(target);
 
             Assert.AreSame(target.Parent, newParent);
             Assert.AreSame(newParent.Right, target);
@@ -516,14 +514,14 @@ namespace Kore.Code.Tests.Tree.Binary
         [TestMethod]
         public void RotateRightUpdatesRootIfNodeIsRoot()
         {
-            binaryTree.Insert(new int[] { 5, 2, 1, 3, 6 });
+            BinaryTree.Insert(new int[] { 5, 2, 1, 3, 6 });
 
-            IBinaryNode target = binaryTree.Root;
-            IBinaryNode newNode = binaryTree.Root.Left;
+            IBinaryNode target = BinaryTree.Root;
+            IBinaryNode newNode = BinaryTree.Root.Left;
 
-            binaryTree.RotateRight(target);
+            BinaryTree.RotateRight(target);
 
-            Assert.AreSame(binaryTree.Root, newNode);
+            Assert.AreSame(BinaryTree.Root, newNode);
         }
 
         #endregion
@@ -535,30 +533,30 @@ namespace Kore.Code.Tests.Tree.Binary
         [TestMethod]
         public void InsertIncrementsCount()
         {
-            int initialValue = binaryTree.Count;
+            int initialValue = BinaryTree.Count;
 
-            binaryTree.Insert(1);
+            BinaryTree.Insert(1);
 
-            Assert.AreEqual(initialValue + 1, binaryTree.Count);
+            Assert.AreEqual(initialValue + 1, BinaryTree.Count);
         }
 
         [TestMethod]
         public void InsertMultipleIncrementsCountAccordingly()
         {
-            int initialValue = binaryTree.Count;
+            int initialValue = BinaryTree.Count;
             int[] input = new int[] { 1, 2, 3 };
 
-            binaryTree.Insert(input);
+            BinaryTree.Insert(input);
 
-            Assert.AreEqual(initialValue + input.Length, binaryTree.Count);
+            Assert.AreEqual(initialValue + input.Length, BinaryTree.Count);
         }
 
         [TestMethod]
         [ExpectedException(typeof(DuplicateKeyException))]
         public void InsertThrowsDuplicateKeyExceptionOnDuplcateKey()
         {
-            binaryTree.Insert(1);
-            binaryTree.Insert(1);
+            BinaryTree.Insert(1);
+            BinaryTree.Insert(1);
         }
 
         #endregion
@@ -568,13 +566,13 @@ namespace Kore.Code.Tests.Tree.Binary
         [TestMethod]
         public void RemoveDecrementsCount()
         {
-            binaryTree.Insert(1);
+            BinaryTree.Insert(1);
 
-            int initialValue = binaryTree.Count;
+            int initialValue = BinaryTree.Count;
 
-            binaryTree.Remove(1);
+            BinaryTree.Remove(1);
 
-            Assert.AreEqual(initialValue - 1, binaryTree.Count);
+            Assert.AreEqual(initialValue - 1, BinaryTree.Count);
         }
 
         #endregion

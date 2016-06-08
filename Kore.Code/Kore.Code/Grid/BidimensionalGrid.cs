@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections;
-using Kore.Code.Exceptions;
+using Kore.Exceptions;
 
 namespace Kore.Code.Grid
 {
@@ -14,7 +14,7 @@ namespace Kore.Code.Grid
         public BidimensionalGrid(uint rows, uint columns)
         {
             if (rows == 0 || columns == 0)
-                throw  new InvalidQuantityException();
+                throw new InvalidQuantityException();
 
             Rows = rows;
             Columns = columns;

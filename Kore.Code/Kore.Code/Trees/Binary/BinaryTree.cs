@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Kore.Code.Exceptions;
 using Kore.Code.Node.Builders;
 using Kore.Code.Traversals;
+using Kore.Exceptions;
 
 namespace Kore.Code.Trees.Binary
 {
@@ -14,7 +14,7 @@ namespace Kore.Code.Trees.Binary
 
     public abstract class BinaryTree
     {
-        public BinaryTree()
+        protected BinaryTree()
         {
             NodeBuilder = CreateNodeBuilder();
             Root = NodeBuilder.Nil;

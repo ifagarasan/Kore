@@ -1,7 +1,7 @@
 ﻿using System;
 using Kore.Comparers;
-using Kore.Code.Exceptions;
 using Kore.Code.Util;
+using Kore.Exceptions;
 
 namespace Kore.Code.Validation
 {

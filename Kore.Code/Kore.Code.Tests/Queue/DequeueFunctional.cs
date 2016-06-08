@@ -4,8 +4,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Kore.Code.Queue;
+using Kore.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Kore.Code.Exceptions;
 
 namespace Kore.Code.Tests.Queue
 {

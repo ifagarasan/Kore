@@ -1,39 +1,39 @@
 ﻿using System;
-using Kore.Code.Exceptions;
+using Kore.Exceptions;
 
 namespace Kore.Code.Queue
 {
     public class Deque<T>
     {
         //TODO: investigate whether the count can be removed and inferred from indices
-        private readonly T[] content;
-        private int count;
-        private int headIndex;
-        private int tailIndex;
+        private readonly T[] _content;
+        private int _count;
+        private int _headIndex;
+        private int _tailIndex;
 
         public Deque(uint capacity)
         {
             if (capacity == 0)
                 throw new Exception("capacity cannot be 0");
 
-            content = new T[capacity];
+            _content = new T[capacity];
         }
 
         public int Capacity
         {
-            get { return content.Length; }
+            get { return _content.Length; }
         }
 
 
         public int Count
         {
-            get { return count; }
+            get { return _count; }
             private set
             {
                 if (value < 0)
                     throw new IndexOutOfRangeException("Count cannot be negative");
 
-                count = value;
+                _count = value;
             }
         }
 
@@ -43,11 +43,11 @@ namespace Kore.Code.Queue
                 throw new CollectionFullException("Deque");
 
             if (Count == 0)
-                content[headIndex] = value;
+                _content[_headIndex] = value;
             else
             {
-                tailIndex = GetNextIndex(tailIndex);
-                content[tailIndex] = value;
+                _tailIndex = GetNextIndex(_tailIndex);
+                _content[_tailIndex] = value;
             }
 
             Count++;
@@ -55,7 +55,7 @@ namespace Kore.Code.Queue
 
         public T Peek()
         {
-            return Peek(headIndex);
+            return Peek(_headIndex);
         }
 
         public T Dequeue()
@@ -63,9 +63,9 @@ namespace Kore.Code.Queue
             if (Count == 0)
                 throw new CollectionEmptyException();
 
-            var value = content[headIndex];
+            var value = _content[_headIndex];
 
-            headIndex = GetNextIndex(headIndex);
+            _headIndex = GetNextIndex(_headIndex);
             Count--;
 
             return value;
@@ -77,11 +77,11 @@ namespace Kore.Code.Queue
                 throw new CollectionFullException("Deque");
 
             if (Count == 0)
-                content[headIndex] = value;
+                _content[_headIndex] = value;
             else
             {
-                headIndex = GetPrevIndex(headIndex);
-                content[headIndex] = value;
+                _headIndex = GetPrevIndex(_headIndex);
+                _content[_headIndex] = value;
             }
 
             Count++;
@@ -89,7 +89,7 @@ namespace Kore.Code.Queue
 
         public T PeekTail()
         {
-            return Peek(tailIndex);
+            return Peek(_tailIndex);
         }
 
         public T DequeueTail()
@@ -97,9 +97,9 @@ namespace Kore.Code.Queue
             if (Count == 0)
                 throw new CollectionEmptyException();
 
-            var value = content[tailIndex];
+            var value = _content[_tailIndex];
 
-            tailIndex = GetPrevIndex(tailIndex);
+            _tailIndex = GetPrevIndex(_tailIndex);
             Count--;
 
             return value;
@@ -120,7 +120,7 @@ namespace Kore.Code.Queue
             if (Count == 0)
                 throw new CollectionEmptyException();
 
-            return content[index];
+            return _content[index];
         }
     }
 }

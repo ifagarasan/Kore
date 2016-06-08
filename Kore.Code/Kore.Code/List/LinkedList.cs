@@ -1,24 +1,24 @@
 ﻿using System;
 using System.Collections;
-using Kore.Code.Exceptions;
+using Kore.Exceptions;
 
 namespace Kore.Code.List
 {
     public abstract class LinkedList<T> : IList<T>, IEnumerable where T : IComparable
     {
-        private int count;
+        private int _count;
 
         public abstract IEnumerator GetEnumerator();
 
         public int Count
         {
-            get { return count; }
+            get { return _count; }
             protected set
             {
                 if (value < 0)
                     throw new IndexOutOfRangeException("Count cannot be negative");
 
-                count = value;
+                _count = value;
             }
         }
 

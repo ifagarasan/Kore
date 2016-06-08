@@ -1,7 +1,7 @@
 ﻿using System;
-using Kore.Code.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Kore.Code.Grid;
+using Kore.Exceptions;
 
 namespace Kore.Code.Tests.Grid
 {

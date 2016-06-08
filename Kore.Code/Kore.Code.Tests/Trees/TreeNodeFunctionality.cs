@@ -1,12 +1,8 @@
-﻿using System;
-
-using Kore.Code.Trees.Binary;
+﻿using Kore.Code.Trees;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Kore.Code.Exceptions;
-using Kore.Code.Trees;
 using Moq;
 
-namespace Kore.Code.Tests.Tree.Binary.Nodes
+namespace Kore.Code.Tests.Trees
 {
     [TestClass]
     public abstract class TreeNodeFunctionality<T> where T : class, ITreeNode<T>

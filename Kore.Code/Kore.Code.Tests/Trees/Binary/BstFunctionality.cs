@@ -1,11 +1,10 @@
-﻿using Kore.Code.Exceptions;
+﻿using System.Collections.Generic;
 using Kore.Code.Trees.Binary;
 using Kore.Code.Util;
+using Kore.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
 
-namespace Kore.Code.Tests.Tree.Binary
+namespace Kore.Code.Tests.Trees.Binary
 {
     [TestClass]
     public class BstFunctionality: BinaryTreeFunctionality
@@ -20,10 +19,10 @@ namespace Kore.Code.Tests.Tree.Binary
         [TestMethod]
         public void InsertSetsRootIfTreeEmpty()
         {
-            binaryTree.Insert(1);
+            BinaryTree.Insert(1);
 
-            Assert.IsNotNull(binaryTree.Root);
-            Assert.AreEqual(1, binaryTree.Root.Key);
+            Assert.IsNotNull(BinaryTree.Root);
+            Assert.AreEqual(1, BinaryTree.Root.Key);
         }
 
         [TestMethod]
@@ -33,7 +32,7 @@ namespace Kore.Code.Tests.Tree.Binary
 
             foreach(int key in input)
             {
-                binaryTree.Insert(key);
+                BinaryTree.Insert(key);
 
                 TestTreeCorrectness();
             }
@@ -41,7 +40,7 @@ namespace Kore.Code.Tests.Tree.Binary
 
         protected virtual void TestTreeCorrectness()
         {
-            Assert.IsTrue(binaryTree.IsBst());
+            Assert.IsTrue(BinaryTree.IsBst());
         }
 
         #endregion
@@ -51,36 +50,36 @@ namespace Kore.Code.Tests.Tree.Binary
         [TestMethod]
         public void SearchOnEmptyTreeReturnsNil()
         {
-            Assert.AreSame(binaryTree.Root, binaryTree.Search(1));
+            Assert.AreSame(BinaryTree.Root, BinaryTree.Search(1));
         }
 
         [TestMethod]
         public void SearchFindsRootAndReturnsReference()
         {
-            binaryTree.Insert(1);
+            BinaryTree.Insert(1);
 
-            Assert.AreSame(binaryTree.Root, binaryTree.Search(1));
+            Assert.AreSame(BinaryTree.Root, BinaryTree.Search(1));
         }
 
         [TestMethod]
         public void SearchReturnsNilWhenNodeIsNotFound()
         {
-            binaryTree.Insert(3);
-            binaryTree.Insert(2);
-            binaryTree.Insert(4);
+            BinaryTree.Insert(3);
+            BinaryTree.Insert(2);
+            BinaryTree.Insert(4);
 
-            Assert.AreSame(binaryTree.Nil, binaryTree.Search(5));
+            Assert.AreSame(BinaryTree.Nil, BinaryTree.Search(5));
         }
 
         [TestMethod]
         public void SearchReturnsReferenceToNodeWhenFound()
         {
-            binaryTree.Insert(3);
-            binaryTree.Insert(2);
-            IBinaryNode node = binaryTree.Insert(5);
-            binaryTree.Insert(4);
+            BinaryTree.Insert(3);
+            BinaryTree.Insert(2);
+            IBinaryNode node = BinaryTree.Insert(5);
+            BinaryTree.Insert(4);
 
-            Assert.AreSame(node, binaryTree.Search(5));
+            Assert.AreSame(node, BinaryTree.Search(5));
         }
 
         #endregion
@@ -90,10 +89,10 @@ namespace Kore.Code.Tests.Tree.Binary
         [TestMethod]
         public void RemoveRoot()
         {
-            binaryTree.Insert(1);
-            binaryTree.Remove(1);
+            BinaryTree.Insert(1);
+            BinaryTree.Remove(1);
 
-            Assert.AreSame(binaryTree.Nil, binaryTree.Root);
+            Assert.AreSame(BinaryTree.Nil, BinaryTree.Root);
         }
 
         [TestMethod]
@@ -112,34 +111,34 @@ namespace Kore.Code.Tests.Tree.Binary
         [TestMethod]
         public virtual void RemoveNodeWithOneLeftChildReplacesNodeWithChild()
         {
-            binaryTree.Insert(new int[] { 3, 2, 1});
+            BinaryTree.Insert(new int[] { 3, 2, 1});
 
-            binaryTree.Remove(2);
+            BinaryTree.Remove(2);
 
-            var one = binaryTree.Search(1);
+            var one = BinaryTree.Search(1);
 
-            Assert.AreSame(one, binaryTree.Root.Left);
-            Assert.AreSame(binaryTree.Root, one.Parent);
+            Assert.AreSame(one, BinaryTree.Root.Left);
+            Assert.AreSame(BinaryTree.Root, one.Parent);
         }
 
         [TestMethod]
         public virtual void RemoveNodeWithOneRightChildReplacesNodeWithChild()
         {
-            binaryTree.Insert(new int[] { 2, 1, 3, 4 });
+            BinaryTree.Insert(new int[] { 2, 1, 3, 4 });
 
-            binaryTree.Remove(3);
+            BinaryTree.Remove(3);
 
-            var three = binaryTree.Search(4);
+            var three = BinaryTree.Search(4);
 
-            Assert.AreSame(three, binaryTree.Root.Right);
-            Assert.AreSame(binaryTree.Root, three.Parent);
+            Assert.AreSame(three, BinaryTree.Root.Right);
+            Assert.AreSame(BinaryTree.Root, three.Parent);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ElementNotFoundException), "element '1' not found in collection")]
         public void RemoveNonExistentThrowsElementNotFound()
         {
-            binaryTree.Remove(1);
+            BinaryTree.Remove(1);
         }
 
         [TestMethod]
@@ -158,23 +157,23 @@ namespace Kore.Code.Tests.Tree.Binary
         {
             List<int> keyList = new List<int>(keys);
 
-            binaryTree = CreateBinaryTree();
+            BinaryTree = CreateBinaryTree();
 
             //TODO: investigate why this doesn't work
             //while (binaryTree.Root != binaryTree.Nil)
             //    binaryTree.Remove(binaryTree.Root.Key);
 
-            binaryTree.Insert(keys);
+            BinaryTree.Insert(keys);
 
             int keyToRemove = keys[index];
 
-            binaryTree.Remove(keyToRemove);
+            BinaryTree.Remove(keyToRemove);
 
-            Assert.AreEqual(binaryTree.Nil, binaryTree.Search(keyToRemove));
+            Assert.AreEqual(BinaryTree.Nil, BinaryTree.Search(keyToRemove));
 
             foreach (int key in keys)
                 if (key != keyToRemove)
-                    Assert.AreEqual(key, binaryTree.Search(key).Key);
+                    Assert.AreEqual(key, BinaryTree.Search(key).Key);
 
             TestTreeCorrectness();
         }

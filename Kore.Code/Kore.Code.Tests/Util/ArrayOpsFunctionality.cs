@@ -4,8 +4,8 @@ using System.Collections;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using Kore.Code;
-using Kore.Code.Exceptions;
 using Kore.Code.Util;
+using Kore.Exceptions;
 
 namespace Kore.Code.Tests.Util
 {

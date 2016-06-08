@@ -1,4 +1,5 @@
-﻿using Kore.Code.Trees.Binary;
+﻿using Kore.Code.Tests.Trees.Binary;
+using Kore.Code.Trees.Binary;
 using Kore.Code.Trees.Binary.RedBlackTree;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -17,7 +18,7 @@ namespace Kore.Code.Tests.Tree.Binary.RedBlackTree
         [TestMethod]
         public void NilIsBlack()
         {
-            Assert.AreEqual(Color.Black, binaryTree.Nil.Color);
+            Assert.AreEqual(Color.Black, BinaryTree.Nil.Color);
         }
 
         #endregion
@@ -27,28 +28,28 @@ namespace Kore.Code.Tests.Tree.Binary.RedBlackTree
         [TestMethod]
         public void IsBalancedReturnsFalseIfRootIsRed()
         {
-            binaryTree.Insert(1);
-            binaryTree.Root.Color = Color.Red;
+            BinaryTree.Insert(1);
+            BinaryTree.Root.Color = Color.Red;
 
-            Assert.IsFalse(binaryTree.IsBalanced());
+            Assert.IsFalse(BinaryTree.IsBalanced());
         }
 
         [TestMethod]
         public void IsBalancedReturnsFalseIfARedNodeHasARedChild()
         {
-            binaryTree.Insert(new int[] { 2, 1, 3, 5, 6 });
+            BinaryTree.Insert(new int[] { 2, 1, 3, 5, 6 });
 
-            IBinaryNode node = binaryTree.Search(5);
+            IBinaryNode node = BinaryTree.Search(5);
             node.Color = Color.Red;
 
             node.Left.Color = Color.Black;
 
-            Assert.IsFalse(binaryTree.IsBalanced());
+            Assert.IsFalse(BinaryTree.IsBalanced());
 
             node.Left.Color = Color.Red;
             node.Right.Color = Color.Black;
 
-            Assert.IsFalse(binaryTree.IsBalanced());
+            Assert.IsFalse(BinaryTree.IsBalanced());
         }
 
         #endregion
@@ -58,31 +59,31 @@ namespace Kore.Code.Tests.Tree.Binary.RedBlackTree
         [TestMethod]
         public void InsertRootIsColoredBlack()
         {
-            binaryTree.Insert(1);
+            BinaryTree.Insert(1);
 
-            Assert.AreEqual(Color.Black, binaryTree.Root.Color);
+            Assert.AreEqual(Color.Black, BinaryTree.Root.Color);
         }
 
         [TestMethod]
         public void InsertTurnsParentAndUncleRedGrandparentRedWhenUncleIsRed()
         {
-            binaryTree.Insert(new int[] { 10, 12, 8, 6, 5, 7 });
+            BinaryTree.Insert(new int[] { 10, 12, 8, 6, 5, 7 });
 
-            Assert.AreEqual(Color.Red, binaryTree.Search(6).Color);
-            Assert.AreEqual(Color.Black, binaryTree.Search(5).Color);
-            Assert.AreEqual(Color.Black, binaryTree.Search(8).Color);
+            Assert.AreEqual(Color.Red, BinaryTree.Search(6).Color);
+            Assert.AreEqual(Color.Black, BinaryTree.Search(5).Color);
+            Assert.AreEqual(Color.Black, BinaryTree.Search(8).Color);
         }
 
         [TestMethod]
         public void InsertCase3PerformsRightRotationAroundGrandparentAndSetsGrandparentToRedAndParentToBlack()
         {
-            var grandparent = binaryTree.Insert(6);
-            var parent = binaryTree.Insert(5);
-            var node = binaryTree.Insert(1);
+            var grandparent = BinaryTree.Insert(6);
+            var parent = BinaryTree.Insert(5);
+            var node = BinaryTree.Insert(1);
 
-            Assert.AreSame(parent, binaryTree.Root);
-            Assert.AreSame(node, binaryTree.Root.Left);
-            Assert.AreSame(grandparent, binaryTree.Root.Right);
+            Assert.AreSame(parent, BinaryTree.Root);
+            Assert.AreSame(node, BinaryTree.Root.Left);
+            Assert.AreSame(grandparent, BinaryTree.Root.Right);
 
             Assert.AreEqual(Color.Red, node.Color);
             Assert.AreEqual(Color.Black, parent.Color);
@@ -92,13 +93,13 @@ namespace Kore.Code.Tests.Tree.Binary.RedBlackTree
         [TestMethod]
         public void InsertCase3IncludesCase2kWhenNodeIsRightChild()
         {
-            var grandparent = binaryTree.Insert(6);
-            var parent = binaryTree.Insert(3);
-            var node = binaryTree.Insert(5);
+            var grandparent = BinaryTree.Insert(6);
+            var parent = BinaryTree.Insert(3);
+            var node = BinaryTree.Insert(5);
 
-            Assert.AreSame(node, binaryTree.Root);
-            Assert.AreSame(parent, binaryTree.Root.Left);
-            Assert.AreSame(grandparent, binaryTree.Root.Right);
+            Assert.AreSame(node, BinaryTree.Root);
+            Assert.AreSame(parent, BinaryTree.Root.Left);
+            Assert.AreSame(grandparent, BinaryTree.Root.Right);
 
             Assert.AreEqual(Color.Black, node.Color);
             Assert.AreEqual(Color.Red, parent.Color);
@@ -108,13 +109,13 @@ namespace Kore.Code.Tests.Tree.Binary.RedBlackTree
         [TestMethod]
         public void InsertCase3PerformsLeftRotationAroundGrandparentAndSetsGrandparentToRedAndParentToBlack()
         {
-            var grandparent = binaryTree.Insert(1);
-            var parent = binaryTree.Insert(4);
-            var node = binaryTree.Insert(6);
+            var grandparent = BinaryTree.Insert(1);
+            var parent = BinaryTree.Insert(4);
+            var node = BinaryTree.Insert(6);
 
-            Assert.AreSame(parent, binaryTree.Root);
-            Assert.AreSame(node, binaryTree.Root.Right);
-            Assert.AreSame(grandparent, binaryTree.Root.Left);
+            Assert.AreSame(parent, BinaryTree.Root);
+            Assert.AreSame(node, BinaryTree.Root.Right);
+            Assert.AreSame(grandparent, BinaryTree.Root.Left);
 
             Assert.AreEqual(Color.Red, node.Color);
             Assert.AreEqual(Color.Black, parent.Color);
@@ -124,13 +125,13 @@ namespace Kore.Code.Tests.Tree.Binary.RedBlackTree
         [TestMethod]
         public void InsertCase3IncludesCase2kWhenNodeIsLeftChild()
         {
-            var grandparent = binaryTree.Insert(1);
-            var parent = binaryTree.Insert(4);
-            var node = binaryTree.Insert(3);
+            var grandparent = BinaryTree.Insert(1);
+            var parent = BinaryTree.Insert(4);
+            var node = BinaryTree.Insert(3);
 
-            Assert.AreSame(node, binaryTree.Root);
-            Assert.AreSame(parent, binaryTree.Root.Right);
-            Assert.AreSame(grandparent, binaryTree.Root.Left);
+            Assert.AreSame(node, BinaryTree.Root);
+            Assert.AreSame(parent, BinaryTree.Root.Right);
+            Assert.AreSame(grandparent, BinaryTree.Root.Left);
 
             Assert.AreEqual(Color.Black, node.Color);
             Assert.AreEqual(Color.Red, parent.Color);
@@ -141,7 +142,7 @@ namespace Kore.Code.Tests.Tree.Binary.RedBlackTree
         {
             base.TestTreeCorrectness();
 
-            Assert.IsTrue(binaryTree.IsBalanced());
+            Assert.IsTrue(BinaryTree.IsBalanced());
         }
 
         #endregion
@@ -151,22 +152,22 @@ namespace Kore.Code.Tests.Tree.Binary.RedBlackTree
         [TestMethod]
         public void RemoveRootSetsNewRootToBlack()
         {
-            binaryTree.Insert(new int[] { 1, 2 });
+            BinaryTree.Insert(new int[] { 1, 2 });
 
-            binaryTree.Remove(1);
+            BinaryTree.Remove(1);
 
-            Assert.AreEqual(Color.Black, binaryTree.Root.Color);
+            Assert.AreEqual(Color.Black, BinaryTree.Root.Color);
         }
 
         [TestMethod]
         public override void RemoveNodeWithOneRightChildReplacesNodeWithChild()
         {
-            binaryTree.Insert(new int[] { 10, 8, 12, 6, 5, 7 });
+            BinaryTree.Insert(new int[] { 10, 8, 12, 6, 5, 7 });
 
-            IBinaryNode node = binaryTree.Search(6);
-            IBinaryNode newNode = binaryTree.Search(7);
+            IBinaryNode node = BinaryTree.Search(6);
+            IBinaryNode newNode = BinaryTree.Search(7);
 
-            binaryTree.Remove(8);
+            BinaryTree.Remove(8);
 
             Assert.AreSame(newNode, node.Right);
             Assert.AreSame(node, newNode.Parent);
@@ -175,14 +176,14 @@ namespace Kore.Code.Tests.Tree.Binary.RedBlackTree
         [TestMethod]
         public void RemoveNodeWithOneRightChildDoesNotReplaceChildColor()
         {
-            binaryTree.Insert(new int[] { 10, 8, 12, 6, 5, 7 });
+            BinaryTree.Insert(new int[] { 10, 8, 12, 6, 5, 7 });
 
-            IBinaryNode node = binaryTree.Search(6);
-            IBinaryNode newNode = binaryTree.Search(7);
+            IBinaryNode node = BinaryTree.Search(6);
+            IBinaryNode newNode = BinaryTree.Search(7);
 
             Assert.AreEqual(Color.Red, newNode.Color);
 
-            binaryTree.Remove(8);   
+            BinaryTree.Remove(8);   
 
             Assert.AreSame(node, newNode.Parent);
         }
@@ -190,12 +191,12 @@ namespace Kore.Code.Tests.Tree.Binary.RedBlackTree
         [TestMethod]
         public override void RemoveNodeWithOneLeftChildReplacesNodeWithChild()
         {
-            binaryTree.Insert(new int[] { 10, 8, 12, 6, 5, 4 });
+            BinaryTree.Insert(new int[] { 10, 8, 12, 6, 5, 4 });
 
-            IBinaryNode node = binaryTree.Search(6);
-            IBinaryNode newNode = binaryTree.Search(4);
+            IBinaryNode node = BinaryTree.Search(6);
+            IBinaryNode newNode = BinaryTree.Search(4);
 
-            binaryTree.Remove(5);
+            BinaryTree.Remove(5);
 
             Assert.AreSame(newNode, node.Left);
             Assert.AreSame(node, newNode.Parent);
@@ -204,14 +205,14 @@ namespace Kore.Code.Tests.Tree.Binary.RedBlackTree
         [TestMethod]
         public void RemoveNodeWithOneLeftChildDoesNotReplaceChildColor()
         {
-            binaryTree.Insert(new int[] { 10, 8, 12, 6, 5, 4 });
+            BinaryTree.Insert(new int[] { 10, 8, 12, 6, 5, 4 });
 
-            IBinaryNode node = binaryTree.Search(6);
-            IBinaryNode newNode = binaryTree.Search(4);
+            IBinaryNode node = BinaryTree.Search(6);
+            IBinaryNode newNode = BinaryTree.Search(4);
 
             Assert.AreEqual(Color.Red, newNode.Color);
 
-            binaryTree.Remove(5);
+            BinaryTree.Remove(5);
 
             Assert.AreSame(node, newNode.Parent);
         }
@@ -219,18 +220,18 @@ namespace Kore.Code.Tests.Tree.Binary.RedBlackTree
         [TestMethod]
         public void RemoveNodeWithTwoChildrenAndSuccessorRedReplacesNodeWithSuccessorOfColorBlack()
         {
-            binaryTree.Insert(new int[] { 10, 8, 12, 6, 5 });
+            BinaryTree.Insert(new int[] { 10, 8, 12, 6, 5 });
 
-            IBinaryNode node = binaryTree.Search(6);
+            IBinaryNode node = BinaryTree.Search(6);
             IBinaryNode nodeLeft = node.Left;
-            IBinaryNode newNode = binaryTree.Search(8);
+            IBinaryNode newNode = BinaryTree.Search(8);
 
             Assert.AreEqual(Color.Red, newNode.Color);
 
-            binaryTree.Remove(6);
+            BinaryTree.Remove(6);
 
-            Assert.AreSame(newNode, binaryTree.Root.Left);
-            Assert.AreSame(binaryTree.Root, newNode.Parent);
+            Assert.AreSame(newNode, BinaryTree.Root.Left);
+            Assert.AreSame(BinaryTree.Root, newNode.Parent);
             Assert.AreSame(nodeLeft, newNode.Left);
             Assert.AreSame(newNode, nodeLeft.Parent);
         }
@@ -239,7 +240,7 @@ namespace Kore.Code.Tests.Tree.Binary.RedBlackTree
         {
             base.TestRemoveAtIndex(keys, index);
 
-            Assert.IsTrue(binaryTree.IsBalanced());
+            Assert.IsTrue(BinaryTree.IsBalanced());
         }
 
         //TODO: clear the tree starting from an index - yea, baybee!

@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections;
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-using Kore.Code;
-using Kore.Code.Exceptions;
-using Kore.Code.Util;
+﻿using System.Collections.Generic;
+using Kore.Code.Node.Builders;
 using Kore.Code.Traversals;
 using Kore.Code.Trees.Binary;
-using System.Collections.Generic;
-using Kore.Code.Node.Builders;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Kore.Code.Tests.Util
+namespace Kore.Code.Tests.Traversals
 {
     [TestClass]
     public class TraversalsFunctionality

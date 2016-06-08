@@ -1,7 +1,7 @@
 ﻿using System;
 
-using Kore.Code.Exceptions;
 using Kore.Code.Stack;
+using Kore.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Kore.Code.Tests.Stack
@@ -9,90 +9,90 @@ namespace Kore.Code.Tests.Stack
     [TestClass]
     public class StackFunctional
     {
-        protected IStack<int> stack;
+        protected IStack<int> Stack;
 
         [TestInitialize]
         public virtual void SetUp()
         {
-            stack = new Stack<int>();
+            Stack = new Stack<int>();
         }
 
         [TestMethod]
         public void InitialCountIsZero()
         {
-            Assert.AreEqual(0, stack.Count);
+            Assert.AreEqual(0, Stack.Count);
         }
 
         [TestMethod]
         public void NewlyAddedItemBecomesTop()
         {
-            stack.Push(3);
+            Stack.Push(3);
 
-            Assert.AreEqual(3, stack.Peek());
+            Assert.AreEqual(3, Stack.Peek());
         }
 
         [TestMethod]
         public void NewlyAddedItemIncrementsCount()
         {
-            Assert.AreEqual(0, stack.Count);
+            Assert.AreEqual(0, Stack.Count);
 
-            stack.Push(3);
+            Stack.Push(3);
 
-            Assert.AreEqual(1, stack.Count);
+            Assert.AreEqual(1, Stack.Count);
         }
 
         [TestMethod]
         public void PopRemovesElementAndTopIsChanged()
         {
-            stack.Push(3);
-            stack.Push(2);
+            Stack.Push(3);
+            Stack.Push(2);
 
-            int top = stack.Pop();
+            int top = Stack.Pop();
 
             Assert.AreEqual(top, 2);
-            Assert.AreEqual(3, stack.Peek());
+            Assert.AreEqual(3, Stack.Peek());
         }
 
         [TestMethod]
         public void PopDecrementsCount()
         {
-            stack.Push(3);
+            Stack.Push(3);
 
-            Assert.AreEqual(1, stack.Count);
+            Assert.AreEqual(1, Stack.Count);
 
-            stack.Pop();
+            Stack.Pop();
 
-            Assert.AreEqual(0, stack.Count);
+            Assert.AreEqual(0, Stack.Count);
         }
 
         [TestMethod]
         public void PeekDoesNotDecrementCount()
         {
-            stack.Push(3);
+            Stack.Push(3);
 
-            Assert.AreEqual(1, stack.Count);
+            Assert.AreEqual(1, Stack.Count);
 
-            stack.Peek();
+            Stack.Peek();
 
-            Assert.AreEqual(1, stack.Count);
+            Assert.AreEqual(1, Stack.Count);
         }
 
         [TestMethod]
         [ExpectedException(typeof(CollectionEmptyException))]
         public void PopOnEmptyStackThrowsException()
         {
-            Assert.AreEqual(0, stack.Count);
+            Assert.AreEqual(0, Stack.Count);
 
-            stack.Pop();
+            Stack.Pop();
         }
 
         [TestMethod]
         [ExpectedException(typeof(CollectionEmptyException))]
         public void PeekOnEmptyStackThrowsException()
         {
-            Assert.AreEqual(0, stack.Count);
+            Assert.AreEqual(0, Stack.Count);
 
-            stack.Peek();
+            Stack.Peek();
         }
     }
 }

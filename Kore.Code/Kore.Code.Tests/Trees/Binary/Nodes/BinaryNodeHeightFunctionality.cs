@@ -1,34 +1,30 @@
-﻿using System;
-
-using Kore.Code.Trees.Binary;
+﻿using Kore.Code.Node.Builders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Kore.Code.Exceptions;
-using Kore.Code.Node.Builders;
 
-namespace Kore.Code.Tests.Tree.Binary.Nodes
+namespace Kore.Code.Tests.Trees.Binary.Nodes
 {
     [TestClass]
     public class BinaryNodeHeightFunctionality
     {
-        BinaryNodeBuilder nodeBuilder;
+        BinaryNodeBuilder _nodeBuilder;
 
         [TestInitialize]
         public virtual void SetUp()
         {
-            nodeBuilder = new BinaryNodeBuilder();
+            _nodeBuilder = new BinaryNodeBuilder();
         }
 
 
         [TestMethod]
         public void HeightReturnsZeroForNil()
         {
-            Assert.AreEqual(0, nodeBuilder.Nil.Height);
+            Assert.AreEqual(0, _nodeBuilder.Nil.Height);
         }
 
         [TestMethod]
         public void HeightReturnsZeroForSingleNode()
         {
-            var node = nodeBuilder.BuildNode();
+            var node = _nodeBuilder.BuildNode();
 
             Assert.AreEqual(0, node.Height);
         }
@@ -36,10 +32,10 @@ namespace Kore.Code.Tests.Tree.Binary.Nodes
         [TestMethod]
         public void HeightReturnsMaxNumberOfEdgesInSubtree()
         {
-            var root = nodeBuilder.BuildNode();
-            root.Left = nodeBuilder.BuildNode();
-            root.Left.Left = nodeBuilder.BuildNode();
-            root.Right = nodeBuilder.BuildNode();
+            var root = _nodeBuilder.BuildNode();
+            root.Left = _nodeBuilder.BuildNode();
+            root.Left.Left = _nodeBuilder.BuildNode();
+            root.Right = _nodeBuilder.BuildNode();
 
             Assert.AreEqual(2, root.Height);
         }

@@ -1,5 +1,5 @@
 ﻿using System;
-using Kore.Code.Exceptions;
+using Kore.Exceptions;
 
 namespace Kore.Code.Validation
 {
@@ -10,7 +10,7 @@ namespace Kore.Code.Validation
         public static void ValidateArray(T[] input, bool allowEmpty = true)
         {
             if (input == null)
-                throw new ArgumentNullException("input");
+                throw new ArgumentNullException(nameof(input));
 
             if (!allowEmpty && input.Length == 0)
                 throw new CollectionEmptyException("collection empty");

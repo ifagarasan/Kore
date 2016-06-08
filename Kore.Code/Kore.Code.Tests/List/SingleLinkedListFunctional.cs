@@ -15,7 +15,7 @@ namespace Kore.Code.Tests.List
         [TestInitialize]
         public void SetUp()
         {
-            list = new SingleLinkedList<int>();
+            List = new SingleLinkedList<int>();
         }
     }
 }

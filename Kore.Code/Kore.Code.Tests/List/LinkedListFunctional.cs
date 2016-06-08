@@ -4,14 +4,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Kore.Code.List;
+using Kore.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Kore.Code.Exceptions;
 
 namespace Kore.Code.Tests.List
 {
     public abstract class LinkedListFunctional
     {
-        protected IList<int> list;
+        protected IList<int> List;
 
         #region Indexer
 
@@ -19,42 +19,42 @@ namespace Kore.Code.Tests.List
         [ExpectedException(typeof(CollectionEmptyException))]
         public void IndexerThrowsExceptionOnEmptyCollection()
         {
-            list[0] = 0;
+            List[0] = 0;
         }
 
         [TestMethod]
         [ExpectedException(typeof(IndexOutOfRangeException))]
         public void IndexerThrowsExceptionOnPositiveOutOfBoundsIndex()
         {
-            list.Add(1);
+            List.Add(1);
 
-            list[2] = 0;
+            List[2] = 0;
         }
 
         [TestMethod]
         [ExpectedException(typeof(IndexOutOfRangeException))]
         public void IndexerThrowsExceptionOnNegativeOutOfBoundsIndex()
         {
-            list.Add(1);
+            List.Add(1);
 
-            list[-1] = 0;
+            List[-1] = 0;
         }
 
         [TestMethod]
         public void IndexerReturnsItemValueAtIndex()
         {
-            list.Add(1);
+            List.Add(1);
 
-            Assert.AreEqual(1, list[0]);
+            Assert.AreEqual(1, List[0]);
         }
 
         [TestMethod]
         public void IndexerSetsItemValueAtIndex()
         {
-            list.Add(1);
-            list[0] = 2;
+            List.Add(1);
+            List[0] = 2;
 
-            Assert.AreEqual(2, list[0]);
+            Assert.AreEqual(2, List[0]);
         }
 
         #endregion
@@ -64,25 +64,25 @@ namespace Kore.Code.Tests.List
         [TestMethod]
         public void ContainsReturnsFalseWhenCollectionIsEmpty()
         {
-            Assert.AreEqual(0, list.Count);
+            Assert.AreEqual(0, List.Count);
 
-            Assert.IsFalse(list.Contains(3));
+            Assert.IsFalse(List.Contains(3));
         }
 
         [TestMethod]
         public void ContainsReturnsFalseWhenItemWasNotFoundInCollection()
         {
-            list.Add(1);
+            List.Add(1);
 
-            Assert.IsFalse(list.Contains(2));
+            Assert.IsFalse(List.Contains(2));
         }
 
         [TestMethod]
         public void ContainsReturnsTrueWhenItemWasFoundInCollection()
         {
-            list.Add(1);
+            List.Add(1);
 
-            Assert.IsTrue(list.Contains(1));
+            Assert.IsTrue(List.Contains(1));
         }
 
         #endregion
@@ -92,20 +92,20 @@ namespace Kore.Code.Tests.List
         [TestMethod]
         public void AddAppendsItemAtEnd()
         {
-            list.Add(1);
-            list.Add(2);
+            List.Add(1);
+            List.Add(2);
 
-            Assert.AreEqual(2, list[1]);
+            Assert.AreEqual(2, List[1]);
         }
 
         [TestMethod]
         public void AddIncrementsCount()
         {
-            Assert.AreEqual(0, list.Count);
+            Assert.AreEqual(0, List.Count);
 
-            list.Add(1);
+            List.Add(1);
 
-            Assert.AreEqual(1, list.Count);
+            Assert.AreEqual(1, List.Count);
         }
 
         #endregion
@@ -116,36 +116,36 @@ namespace Kore.Code.Tests.List
         [ExpectedException(typeof(IndexOutOfRangeException))]
         public void InsertAtThrowsExceptionOnNegativeOutOfBoundsIndex()
         {
-            list.Insert(1, -1);
+            List.Insert(1, -1);
         }
 
         [TestMethod]
         [ExpectedException(typeof(IndexOutOfRangeException))]
         public void InsertAtThrowsExceptionOnPositiveOutOfBoundsIndex()
         {
-            list.Add(1);
-            list.Insert(1, 2);
+            List.Add(1);
+            List.Insert(1, 2);
         }
 
         [TestMethod]
         public void InsertAtIncrementsCount()
         {
-            Assert.AreEqual(0, list.Count);
+            Assert.AreEqual(0, List.Count);
 
-            list.Insert(1, 0);
+            List.Insert(1, 0);
 
-            Assert.AreEqual(1, list.Count);
+            Assert.AreEqual(1, List.Count);
         }
 
         [TestMethod]
         public void InsertAtZeroInsertsAtBeginning()
         {
-            Assert.AreEqual(0, list.Count);
+            Assert.AreEqual(0, List.Count);
 
-            list.Insert(1, 0);
-            list.Insert(2, 0);
+            List.Insert(1, 0);
+            List.Insert(2, 0);
 
-            Assert.AreEqual(2, list[0]);
+            Assert.AreEqual(2, List[0]);
         }
 
         #endregion
@@ -156,92 +156,92 @@ namespace Kore.Code.Tests.List
         [ExpectedException(typeof(IndexOutOfRangeException))]
         public void RemoveAtThrowsExceptionOnOutOfBoundsIndex()
         {
-            list.Add(1);
+            List.Add(1);
 
-            list.RemoveAt(2);
+            List.RemoveAt(2);
         }
 
         [TestMethod]
         [ExpectedException(typeof(CollectionEmptyException))]
         public void RemoveAtThrowsExceptionIfCollectionIsEmpty()
         {
-            list.RemoveAt(0);
+            List.RemoveAt(0);
         }
 
         [TestMethod]
         public void RemoveAtRemovesFirstElementWhenIndexIsZero()
         {
-            list.Add(1);
-            list.Add(2);
+            List.Add(1);
+            List.Add(2);
 
-            list.RemoveAt(0);
+            List.RemoveAt(0);
 
-            Assert.AreEqual(2, list[0]);
+            Assert.AreEqual(2, List[0]);
         }
 
         [TestMethod]
         public void RemoveAtRemovesDecrementsCount()
         {
-            list.Add(1);
-            list.Add(2);
+            List.Add(1);
+            List.Add(2);
 
-            Assert.AreEqual(2, list.Count);
+            Assert.AreEqual(2, List.Count);
 
-            list.RemoveAt(0);
+            List.RemoveAt(0);
 
-            Assert.AreEqual(1, list.Count);
+            Assert.AreEqual(1, List.Count);
         }
 
         [TestMethod]
         public void RemoveAtRemovesLastItem()
         {
-            list.Add(1);
-            list.Add(2);
+            List.Add(1);
+            List.Add(2);
 
-            list.RemoveAt(1);
+            List.RemoveAt(1);
 
-            Assert.AreEqual(1, list.Count);
-            Assert.IsFalse(list.Contains(2));
+            Assert.AreEqual(1, List.Count);
+            Assert.IsFalse(List.Contains(2));
         }
 
         [TestMethod]
         public void RemoveAtRemovesItemInTheMiddle()
         {
-            list.Add(1);
-            list.Add(2);
-            list.Add(3);
+            List.Add(1);
+            List.Add(2);
+            List.Add(3);
 
-            list.RemoveAt(1);
+            List.RemoveAt(1);
 
-            Assert.AreEqual(2, list.Count);
-            Assert.IsFalse(list.Contains(2));
+            Assert.AreEqual(2, List.Count);
+            Assert.IsFalse(List.Contains(2));
         }
 
         [TestMethod]
         public void RemoveAtPrevervesConsistencyAfterTotalRemoval()
         {
-            list.Add(1);
-            list.Add(2);
+            List.Add(1);
+            List.Add(2);
 
-            list.RemoveAt(0);
-            list.RemoveAt(0);
+            List.RemoveAt(0);
+            List.RemoveAt(0);
 
-            Assert.AreEqual(0, list.Count);
-            Assert.IsFalse(list.Contains(1));
-            Assert.IsFalse(list.Contains(2));
+            Assert.AreEqual(0, List.Count);
+            Assert.IsFalse(List.Contains(1));
+            Assert.IsFalse(List.Contains(2));
 
-            list.Add(3);
-            list.Add(4);
+            List.Add(3);
+            List.Add(4);
 
-            Assert.AreEqual(2, list.Count);
-            Assert.IsFalse(list.Contains(1));
-            Assert.IsFalse(list.Contains(2));
+            Assert.AreEqual(2, List.Count);
+            Assert.IsFalse(List.Contains(1));
+            Assert.IsFalse(List.Contains(2));
             
-            Assert.IsTrue(list.Contains(3));
-            Assert.IsTrue(list.Contains(4));
+            Assert.IsTrue(List.Contains(3));
+            Assert.IsTrue(List.Contains(4));
 
-            Assert.AreEqual(3, list[0]);
-            Assert.AreEqual(4, list[1]);
+            Assert.AreEqual(3, List[0]);
+            Assert.AreEqual(4, List[1]);
         }
 
         #endregion

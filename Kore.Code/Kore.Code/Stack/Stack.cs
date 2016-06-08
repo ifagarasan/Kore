@@ -1,23 +1,23 @@
 ﻿using System;
-using Kore.Code.Exceptions;
+using Kore.Exceptions;
 
 namespace Kore.Code.Stack
 {
     public class Stack<T> : IStack<T>
     {
-        private int count;
-        private Item<T> top;
+        private int _count;
+        private Item<T> _top;
 
         public void Push(T value)
         {
             var newItem = new Item<T>(value);
 
-            if (top == null)
-                top = newItem;
+            if (_top == null)
+                _top = newItem;
             else
             {
-                newItem.Bottom = top;
-                top = newItem;
+                newItem.Bottom = _top;
+                _top = newItem;
             }
 
             Count++;
@@ -25,13 +25,13 @@ namespace Kore.Code.Stack
 
         public int Count
         {
-            get { return count; }
+            get { return _count; }
             private set
             {
                 if (value < 0)
                     throw new IndexOutOfRangeException("count cannot be negative");
 
-                count = value;
+                _count = value;
             }
         }
 
@@ -40,9 +40,9 @@ namespace Kore.Code.Stack
             if (Count == 0)
                 throw new CollectionEmptyException();
 
-            var result = top.Value;
+            var result = _top.Value;
 
-            top = top.Bottom;
+            _top = _top.Bottom;
             Count--;
 
             return result;
@@ -53,7 +53,7 @@ namespace Kore.Code.Stack
             if (Count == 0)
                 throw new CollectionEmptyException();
 
-            return top.Value;
+            return _top.Value;
         }
     }
 }

@@ -1,23 +1,23 @@
 ﻿using System;
-using Kore.Code.Exceptions;
+using Kore.Exceptions;
 
 namespace Kore.Code.Queue
 {
     public class Queue<T>
     {
-        private int count;
-        private QueueItem<T> head;
-        private QueueItem<T> tail;
+        private int _count;
+        private QueueItem<T> _head;
+        private QueueItem<T> _tail;
 
         public int Count
         {
-            get { return count; }
+            get { return _count; }
             private set
             {
                 if (value < 0)
                     throw new IndexOutOfRangeException("Count cannot be negative");
 
-                count = value;
+                _count = value;
             }
         }
 
@@ -25,17 +25,17 @@ namespace Kore.Code.Queue
         {
             var newItem = new QueueItem<T>(value);
 
-            if (head == null)
+            if (_head == null)
             {
-                head = tail = newItem;
+                _head = _tail = newItem;
             }
             else
             {
-                if (tail == null)
+                if (_tail == null)
                     throw new NullReferenceException("tail null");
 
-                tail.Next = newItem;
-                tail = newItem;
+                _tail.Next = newItem;
+                _tail = newItem;
             }
 
             Count++;
@@ -46,11 +46,11 @@ namespace Kore.Code.Queue
             if (Count == 0)
                 throw new CollectionEmptyException();
 
-            if (head == null)
+            if (_head == null)
                 throw new Exception("head null");
 
-            var value = head.Value;
-            head = head.Next;
+            var value = _head.Value;
+            _head = _head.Next;
             Count--;
 
             return value;
@@ -61,10 +61,10 @@ namespace Kore.Code.Queue
             if (Count == 0)
                 throw new CollectionEmptyException();
 
-            if (head == null)
+            if (_head == null)
                 throw new NullReferenceException("head null");
 
-            return head.Value;
+            return _head.Value;
         }
     }
 }
