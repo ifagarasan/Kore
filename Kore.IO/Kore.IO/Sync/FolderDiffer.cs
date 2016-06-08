@@ -44,8 +44,7 @@ namespace Kore.IO.Sync
             }
         }
 
-        private DiffType? SourceRelativeDiff(IKoreFileInfo sourceFileInfo,
-            IKoreFileInfo destinationFileInfo)
+        private DiffType? SourceRelativeDiff(IKoreFileInfo sourceFileInfo, IKoreFileInfo destinationFileInfo)
         {
             DiffType? diffType;
 
@@ -61,8 +60,7 @@ namespace Kore.IO.Sync
             return diffType;
         }
 
-        private DiffType? DestinationRelativeDiff(IKoreFileInfo sourceFileInfo,
-            IKoreFileInfo destinationFileInfo)
+        private DiffType? DestinationRelativeDiff(IKoreFileInfo sourceFileInfo, IKoreFileInfo destinationFileInfo)
         {
             DiffType? diffType = null;
 
