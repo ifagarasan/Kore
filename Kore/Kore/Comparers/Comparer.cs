@@ -2,7 +2,7 @@
 using Kore.Comparers;
 using System.Collections.Generic;
 
-namespace Kore
+namespace Kore.Comparers
 {
     public class Comparer<T> where T : IComparable
     {
