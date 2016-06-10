@@ -2,7 +2,7 @@
 
 namespace Kore.Settings
 {
-    public interface ISettingsManager<T>
+    public interface ISettingsManager<T> where T: new()
     {
         T Data { get; set; }
 

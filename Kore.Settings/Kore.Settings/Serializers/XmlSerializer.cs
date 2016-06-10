@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 
 namespace Kore.Settings.Serializers
 {
-    public class XmlSerializer<T> : ISerializer<T>
+    public class XmlSerializer<T> : ISerializer<T> where T: new()
     {
         readonly XmlSerializer _serializer;
 
