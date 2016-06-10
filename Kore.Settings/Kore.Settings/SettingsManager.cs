@@ -8,18 +8,18 @@ using Kore.IO.Util;
 
 namespace Kore.Settings
 {
-    public class SettingsManager<T> where T : new()
+    public class SettingsManager<T> : ISettingsManager<T> where T : new()
     {
         public T Data { get; set; }
-        private ISerializer<T> _serializer;
+        private readonly ISerializer<T> _serializer;
 
         public SettingsManager(T data, ISerializer<T> serializer)
         {
             if (data == null)
                 throw new ArgumentNullException(nameof(data));
 
-            this.Data = data;
-            this._serializer = serializer;
+            Data = data;
+            _serializer = serializer;
         }
 
         public SettingsManager(ISerializer<T> serializer): this(new T(), serializer)
