@@ -8,7 +8,7 @@ using Kore.IO.Util;
 
 namespace Kore.Settings
 {
-    public class SettingsManager<T> : ISettingsManager<T> where T: new()
+    public class SettingsManager<T> : ISettingsManager<T>
     {
         public T Data { get; set; }
         private readonly ISerializer<T> _serializer;

@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
+using System.Runtime.Serialization;
+using System.Xml;
 using Kore.Settings.Serializers;
 using Kore.IO.Util;
 
@@ -9,48 +11,59 @@ namespace Kore.Settings.AcceptanceTests
     [TestClass]
     public class SettingsManagerShould
     {
-        string testFolder;
+        private string _testFolder;
+        KoreFileInfo _settingsFileInfo;
 
         [TestInitialize]
         public void Setup()
         {
-            testFolder = Path.Combine(Environment.CurrentDirectory, "..", "..", "..", "TestData");
-            if (!Directory.Exists(testFolder))
-                Directory.CreateDirectory(testFolder);
+            _testFolder = Path.Combine(Environment.CurrentDirectory, "..", "..", "..", "TestData");
+            if (!Directory.Exists(_testFolder))
+                Directory.CreateDirectory(_testFolder);
+
+            _settingsFileInfo = new KoreFileInfo(Path.Combine(_testFolder, $"settings_{DateTime.Now.Ticks}.xml"));
         }
 
         [TestMethod]
         public void PersistData()
         {
-            Car car = new Car() { Make = "Ford", Model = "Focus", Year = 2008 };
-            SettingsManager<Car> settings = new SettingsManager<Car>(car, new XmlSerializer<Car>());
+            TestSerialization(CreateCar());
+        }
 
-            KoreFileInfo fileInfo = new KoreFileInfo(Path.Combine(testFolder, string.Format("settings_{0}.xml", DateTime.Now.Ticks)));
-            settings.Write(fileInfo);
+        private void TestSerialization(Car car, DataContractResolver contractResolver = null)
+        {
+            SettingsManager<Car> settings = new SettingsManager<Car>(car, new XmlSerializer<Car>(contractResolver));
 
-            Assert.IsTrue(fileInfo.Exists);
+            settings.Write(_settingsFileInfo);
+
+            Assert.IsTrue(_settingsFileInfo.Exists);
 
             settings.Data = null;
-            settings.Read(fileInfo);
+            settings.Read(_settingsFileInfo);
 
             Assert.AreEqual(car, settings.Data);
         }
-    }
 
-    public class Car
-    {
-        public string Make { get; set; }
-        public string Model { get; set; }
-        public int Year { get; set; }
-
-        public override bool Equals(object obj)
+        [TestMethod]
+        public void PersistDataUsingContract()
         {
-            Car car = obj as Car;
+            TestSerialization(CreateCar(), new CarContractResolver());
+        }
 
-            if (car == null)
-                return false;
+        private static Car CreateCar()
+        {
+            return new Car() { Make = "Ford", Model = "Focus", Year = 2008 };
+        }
 
-            return Make.Equals(car.Make) && Model.Equals(car.Model) && Year == car.Year;
+        public class CarContractResolver : IdentityContractResolver
+        {
+            public override Type ResolveName(string typeName, string typeNamespace, Type declaredType, DataContractResolver knownTypeResolver)
+            {
+                if (typeName == "Car" && typeNamespace.EndsWith("Kore.Settings.AcceptanceTests"))
+                    return typeof(Car);
+
+                return base.ResolveName(typeName, typeNamespace, declaredType, knownTypeResolver);
+            }
         }
     }
 }

@@ -1,26 +1,36 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.Serialization;
+using System.Xml;
+using System.Xml.Schema;
 using System.Xml.Serialization;
+using Kore.IO.Util;
 
 namespace Kore.Settings.Serializers
 {
-    public class XmlSerializer<T> : ISerializer<T> where T: new()
+    public class XmlSerializer<T> : ISerializer<T>
     {
-        readonly XmlSerializer _serializer;
+        private readonly DataContractResolver _contractResolver;
+        private readonly DataContractSerializer _serializer;
 
-        public XmlSerializer()
+        public XmlSerializer(DataContractResolver contractResolver=null)
         {
-            _serializer = new XmlSerializer(typeof(T));
+            _contractResolver = contractResolver ?? new IdentityContractResolver();
+            _serializer = new DataContractSerializer(typeof(T));
         }
 
         public T Deserialize(Stream stream)
         {
-            return (T)_serializer.Deserialize(stream);
+            return (T)_serializer.ReadObject(XmlDictionaryReader.CreateDictionaryReader(XmlReader.Create(stream)), false, _contractResolver);
         }
 
         public void Serialize(T data, Stream stream)
         {
-            _serializer.Serialize(stream, data);
+            using (var xmlWriter = XmlWriter.Create(stream))
+            {
+                _serializer.WriteObject(XmlDictionaryWriter.CreateDictionaryWriter(xmlWriter), data, _contractResolver);
+                xmlWriter.Flush();
+            }
         }
     }
 }
