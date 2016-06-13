@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Comparers\ComparerShould.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validation\ObjectValidationShould.cs" />
     <Compile Include="Validation\ComparisonValidationShould.cs" />
   </ItemGroup>
   <ItemGroup>
