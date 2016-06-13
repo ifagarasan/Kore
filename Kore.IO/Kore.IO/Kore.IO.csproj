@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Scanners\IFileScanner.cs" />
     <Compile Include="Scanners\IFileScanResult.cs" />
     <Compile Include="Filters\VisibleFileFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -54,6 +55,9 @@
     <Compile Include="Sync\DiffType.cs" />
     <Compile Include="Sync\FolderDiff.cs" />
     <Compile Include="Sync\FolderDiffer.cs" />
+    <Compile Include="Sync\IDiff.cs" />
+    <Compile Include="Sync\IFolderDiff.cs" />
+    <Compile Include="Sync\IFolderDiffer.cs" />
     <Compile Include="Util\FileInfoProvider.cs" />
     <Compile Include="Util\FolderUtil.cs" />
     <Compile Include="Util\IKoreFileInfo.cs" />

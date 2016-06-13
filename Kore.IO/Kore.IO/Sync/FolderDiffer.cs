@@ -6,7 +6,7 @@ using Kore.IO.Util;
 
 namespace Kore.IO.Sync
 {
-    public class FolderDiffer
+    public class FolderDiffer : IFolderDiffer
     {
         private readonly IFileScanResult _sourceScanResult;
         private readonly IFileScanResult _destinationScanResult;

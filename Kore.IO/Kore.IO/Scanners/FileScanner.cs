@@ -7,7 +7,7 @@ using Kore.IO.Util;
 
 namespace Kore.IO.Scanners
 {
-    public class FileScanner
+    public class FileScanner : IFileScanner
     {
         private readonly IFileRetriever _fileRetriever;
 

@@ -2,7 +2,7 @@
 
 namespace Kore.IO.Sync
 {
-    public class Diff
+    public class Diff : IDiff
     {
         public Diff(IKoreFileInfo sourceFileInfo, IKoreFileInfo destinationFileInfo, DiffType type)
         {

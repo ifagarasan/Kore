@@ -2,7 +2,7 @@
 
 namespace Kore.IO.Sync
 {
-    public class FolderDiff
+    public class FolderDiff : IFolderDiff
     {
         public FolderDiff(List<Diff> diffs)
         {
