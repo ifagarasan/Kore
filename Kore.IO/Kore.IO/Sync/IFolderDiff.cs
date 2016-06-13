@@ -4,6 +4,6 @@ namespace Kore.IO.Sync
 {
     public interface IFolderDiff
     {
-        IReadOnlyList<Diff> Diffs { get; set; }
+        IReadOnlyList<IDiff> Diffs { get; set; }
     }
 }

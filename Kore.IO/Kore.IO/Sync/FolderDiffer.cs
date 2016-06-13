@@ -17,9 +17,9 @@ namespace Kore.IO.Sync
             _destinationScanResult = destinationScanResult;
         }
 
-        public FolderDiff BuildDiff()
+        public IFolderDiff BuildDiff()
         {
-            List<Diff> diffs = new List<Diff>();
+            List<IDiff> diffs = new List<IDiff>();
 
             ProcessScanResultFiles(_sourceScanResult, _destinationScanResult, SourceRelativeDiff, diffs);
             ProcessScanResultFiles(_destinationScanResult, _sourceScanResult, DestinationRelativeDiff, diffs);
@@ -28,7 +28,7 @@ namespace Kore.IO.Sync
         }
 
         private void ProcessScanResultFiles(IFileScanResult sourceScanResult, IFileScanResult destinationScanResult,
-            Func<IKoreFileInfo, IKoreFileInfo, DiffType?> diffFunc, List<Diff> diffs)
+            Func<IKoreFileInfo, IKoreFileInfo, DiffType?> diffFunc, List<IDiff> diffs)
         {
             foreach (IKoreFileInfo sourceFileInfo in sourceScanResult.Files)
             {

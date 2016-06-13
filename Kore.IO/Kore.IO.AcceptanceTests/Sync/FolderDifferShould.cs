@@ -83,9 +83,9 @@ namespace Kore.IO.AcceptanceTests.Sync
         [TestMethod]
         public void ReturnAListOfDiffItems()
         {
-            FolderDiffer folderDiffer = new FolderDiffer(_sourceScanResult, _destinationScanResult);
+            IFolderDiffer folderDiffer = new FolderDiffer(_sourceScanResult, _destinationScanResult);
 
-            FolderDiff folderDiff = folderDiffer.BuildDiff();
+            IFolderDiff folderDiff = folderDiffer.BuildDiff();
 
             Assert.AreEqual(DiffType.Identical, folderDiff.Diffs[0].Type);
             Assert.AreEqual(DiffType.SourceNew, folderDiff.Diffs[1].Type);

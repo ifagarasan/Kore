@@ -2,6 +2,6 @@
 {
     public interface IFolderDiffer
     {
-        FolderDiff BuildDiff();
+        IFolderDiff BuildDiff();
     }
 }

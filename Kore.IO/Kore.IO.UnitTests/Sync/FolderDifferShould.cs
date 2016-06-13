@@ -14,8 +14,8 @@ namespace Kore.IO.UnitTests.Sync
     [TestClass]
     public class FolderDifferShould
     {
-        private FolderDiffer _folderDiffer;
-        private FolderDiff _diff;
+        private IFolderDiffer _folderDiffer;
+        private IFolderDiff _diff;
         private const string SourceFolder = @"C:\source";
         private const string DestinationFolder = @"C:\source";
         private Mock<IFileScanResult> _mockSourceScanResult;

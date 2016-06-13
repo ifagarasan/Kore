@@ -4,11 +4,11 @@ namespace Kore.IO.Sync
 {
     public class FolderDiff : IFolderDiff
     {
-        public FolderDiff(List<Diff> diffs)
+        public FolderDiff(List<IDiff> diffs)
         {
             Diffs = diffs;
         }
 
-        public IReadOnlyList<Diff> Diffs { get; set; }
+        public IReadOnlyList<IDiff> Diffs { get; set; }
     }
 }
