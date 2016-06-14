@@ -21,18 +21,18 @@ namespace Kore.Settings.AcceptanceTests
             if (!Directory.Exists(_testFolder))
                 Directory.CreateDirectory(_testFolder);
 
-            _settingsFileInfo = new KoreFileInfo(Path.Combine(_testFolder, $"settings_{DateTime.Now.Ticks}.xml"));
+            _settingsFileInfo = new KoreFileInfo(Path.Combine(_testFolder, $"settings_{DateTime.Now.Ticks}.set"));
         }
 
         [TestMethod]
-        public void PersistData()
+        public void PersistDataInXmlFormat()
         {
-            TestSerialization(CreateCar());
+            TestSerialization(CreateCar(), new XmlSerializer<Car>());
         }
 
-        private void TestSerialization(Car car, DataContractResolver contractResolver = null)
+        private void TestSerialization(Car car, ISerializer<Car> serializer=null)
         {
-            SettingsManager<Car> settings = new SettingsManager<Car>(car, new XmlSerializer<Car>(contractResolver));
+            SettingsManager<Car> settings = new SettingsManager<Car>(car, serializer);
 
             settings.Write(_settingsFileInfo);
 
@@ -45,9 +45,9 @@ namespace Kore.Settings.AcceptanceTests
         }
 
         [TestMethod]
-        public void PersistDataUsingContract()
+        public void PersistDataInXmlFormatUsingContract()
         {
-            TestSerialization(CreateCar(), new CarContractResolver());
+            TestSerialization(CreateCar(), new XmlSerializer<Car>(new CarContractResolver()));
         }
 
         private static Car CreateCar()
