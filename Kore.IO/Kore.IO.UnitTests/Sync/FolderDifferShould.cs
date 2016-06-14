@@ -35,6 +35,8 @@ namespace Kore.IO.UnitTests.Sync
 
             _mockDestinationScanResult = new Mock<IFileScanResult>();
             InitialiseScanResultMock(_mockDestinationScanResult, DestinationFolder);
+
+            _folderDiffer = new FolderDiffer();
         }
 
         private static void InitialiseScanResultMock(Mock<IFileScanResult> mockScanResult, string folder)
@@ -46,9 +48,7 @@ namespace Kore.IO.UnitTests.Sync
         [TestMethod]
         public void ReturnEmptyListWhenSourceAndDestinationAreEmpty()
         {
-            _folderDiffer = new FolderDiffer(_mockSourceScanResult.Object, _mockDestinationScanResult.Object);
-
-            _diff = _folderDiffer.BuildDiff();
+            _diff = _folderDiffer.BuildDiff(_mockSourceScanResult.Object, _mockDestinationScanResult.Object);
 
             Assert.AreEqual(0, _diff.Diffs.Count);
         }
@@ -59,9 +59,7 @@ namespace Kore.IO.UnitTests.Sync
             _mockSourceFileInfo.Setup(m => m.FullName).Returns(Path.Combine(SourceFolder, @"file1.txt"));
             _mockSourceScanResult.Setup(m => m.Files).Returns(new List<IKoreFileInfo> { _mockSourceFileInfo.Object });
 
-            _folderDiffer = new FolderDiffer(_mockSourceScanResult.Object, _mockDestinationScanResult.Object);
-
-            _diff = _folderDiffer.BuildDiff();
+            _diff = _folderDiffer.BuildDiff(_mockSourceScanResult.Object, _mockDestinationScanResult.Object);
 
             Assert.AreEqual(1, _diff.Diffs.Count);
             Assert.AreEqual(DiffType.SourceNew, _diff.Diffs[0].Type);
@@ -99,9 +97,7 @@ namespace Kore.IO.UnitTests.Sync
             _mockDestinationFileInfo.Setup(m => m.FullName).Returns(Path.Combine(DestinationFolder, @"file1.txt"));
             _mockDestinationScanResult.Setup(m => m.Files).Returns(new List<IKoreFileInfo> { _mockDestinationFileInfo.Object });
 
-            _folderDiffer = new FolderDiffer(_mockSourceScanResult.Object, _mockDestinationScanResult.Object);
-
-            _diff = _folderDiffer.BuildDiff();
+            _diff = _folderDiffer.BuildDiff(_mockSourceScanResult.Object, _mockDestinationScanResult.Object);
 
             Assert.AreEqual(1, _diff.Diffs.Count);
             Assert.AreEqual(DiffType.DestinationOrphan, _diff.Diffs[0].Type);
@@ -121,9 +117,7 @@ namespace Kore.IO.UnitTests.Sync
             _mockSourceScanResult.Setup(m => m.Files).Returns(new List<IKoreFileInfo> { _mockSourceFileInfo.Object });
             _mockDestinationScanResult.Setup(m => m.Files).Returns(new List<IKoreFileInfo> { _mockDestinationFileInfo.Object });
 
-            _folderDiffer = new FolderDiffer(_mockSourceScanResult.Object, _mockDestinationScanResult.Object);
-
-            _diff = _folderDiffer.BuildDiff();
+            _diff = _folderDiffer.BuildDiff(_mockSourceScanResult.Object, _mockDestinationScanResult.Object);
 
             Assert.AreEqual(1, _diff.Diffs.Count);
         }
@@ -153,9 +147,7 @@ namespace Kore.IO.UnitTests.Sync
             _mockSourceScanResult.Setup(m => m.Files).Returns(sourceFileInfoList);
             _mockDestinationScanResult.Setup(m => m.Files).Returns(destinationFileInfoList);
 
-            _folderDiffer = new FolderDiffer(_mockSourceScanResult.Object, _mockDestinationScanResult.Object);
-
-            _diff = _folderDiffer.BuildDiff();
+            _diff = _folderDiffer.BuildDiff(_mockSourceScanResult.Object, _mockDestinationScanResult.Object);
         }
 
         private void TestIdenticalFileFullNameDiffs(DateTime sourceLastWriteTime, DateTime destinationLastWriteTime, DiffType expectedDiffType)
@@ -169,9 +161,7 @@ namespace Kore.IO.UnitTests.Sync
             _mockSourceScanResult.Setup(m => m.Files).Returns(new List<IKoreFileInfo> { _mockSourceFileInfo.Object });
             _mockDestinationScanResult.Setup(m => m.Files).Returns(new List<IKoreFileInfo> { _mockDestinationFileInfo.Object });
 
-            _folderDiffer = new FolderDiffer(_mockSourceScanResult.Object, _mockDestinationScanResult.Object);
-
-            _diff = _folderDiffer.BuildDiff();
+            _diff = _folderDiffer.BuildDiff(_mockSourceScanResult.Object, _mockDestinationScanResult.Object);
 
             Assert.AreEqual(1, _diff.Diffs.Count);
             Assert.AreEqual(expectedDiffType, _diff.Diffs[0].Type);

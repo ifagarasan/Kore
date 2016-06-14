@@ -8,21 +8,12 @@ namespace Kore.IO.Sync
 {
     public class FolderDiffer : IFolderDiffer
     {
-        private readonly IFileScanResult _sourceScanResult;
-        private readonly IFileScanResult _destinationScanResult;
-
-        public FolderDiffer(IFileScanResult sourceScanResult, IFileScanResult destinationScanResult)
-        {
-            _sourceScanResult = sourceScanResult;
-            _destinationScanResult = destinationScanResult;
-        }
-
-        public IFolderDiff BuildDiff()
+        public IFolderDiff BuildDiff(IFileScanResult sourceScanResult, IFileScanResult destinationScanResult)
         {
             List<IDiff> diffs = new List<IDiff>();
 
-            ProcessScanResultFiles(_sourceScanResult, _destinationScanResult, SourceRelativeDiff, diffs);
-            ProcessScanResultFiles(_destinationScanResult, _sourceScanResult, DestinationRelativeDiff, diffs);
+            ProcessScanResultFiles(sourceScanResult, destinationScanResult, SourceRelativeDiff, diffs);
+            ProcessScanResultFiles(destinationScanResult, sourceScanResult, DestinationRelativeDiff, diffs);
 
             return new FolderDiff(diffs);
         }

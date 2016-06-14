@@ -1,7 +1,9 @@
-﻿namespace Kore.IO.Sync
+﻿using Kore.IO.Scanners;
+
+namespace Kore.IO.Sync
 {
     public interface IFolderDiffer
     {
-        IFolderDiff BuildDiff();
+        IFolderDiff BuildDiff(IFileScanResult sourceScanResult, IFileScanResult destinationScanResult);
     }
 }
