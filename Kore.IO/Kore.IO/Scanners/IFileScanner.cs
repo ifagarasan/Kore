@@ -2,7 +2,7 @@
 {
     public interface IFileScanner
     {
-        FileScanResult Scan(string folder);
-        FileScanResult Scan(string folder, FileScanOptions options);
+        IFileScanResult Scan(string folder);
+        IFileScanResult Scan(string folder, FileScanOptions options);
     }
 }

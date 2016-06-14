@@ -16,12 +16,12 @@ namespace Kore.IO.Scanners
             _fileRetriever = fileRetriever;
         }
 
-        public FileScanResult Scan(string folder)
+        public IFileScanResult Scan(string folder)
         {
             return Scan(folder, new FileScanOptions());
         }
 
-        public FileScanResult Scan(string folder, FileScanOptions options)
+        public IFileScanResult Scan(string folder, FileScanOptions options)
         {
             if (options == null)
                 throw new ArgumentNullException(nameof(options));
