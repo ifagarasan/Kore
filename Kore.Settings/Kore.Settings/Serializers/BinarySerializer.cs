@@ -16,6 +16,8 @@ namespace Kore.Settings.Serializers
 
         public T Deserialize(Stream stream)
         {
+            ObjectValidation.IsNotNull(stream, nameof(stream));
+
             return (T)_binaryFormatter.Deserialize(stream);
         }
 
