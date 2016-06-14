@@ -1,7 +1,9 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 
 namespace Kore.Settings.AcceptanceTests
 {
+    [Serializable]
     [KnownType(typeof(Car))]
     public class Car : ICar
     {

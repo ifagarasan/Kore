@@ -18,17 +18,38 @@ namespace Kore.Settings.AcceptanceTests
         public void Setup()
         {
             _testFolder = Path.Combine(Environment.CurrentDirectory, "..", "..", "..", "TestData");
+
             if (!Directory.Exists(_testFolder))
                 Directory.CreateDirectory(_testFolder);
 
             _settingsFileInfo = new KoreFileInfo(Path.Combine(_testFolder, $"settings_{DateTime.Now.Ticks}.set"));
         }
 
+        #region Xml
+
         [TestMethod]
         public void PersistDataInXmlFormat()
         {
             TestSerialization(CreateCar(), new XmlSerializer<Car>());
         }
+
+        [TestMethod]
+        public void PersistDataInXmlFormatUsingContract()
+        {
+            TestSerialization(CreateCar(), new XmlSerializer<Car>(new CarContractResolver()));
+        }
+
+        #endregion
+
+        #region Binary
+
+        [TestMethod]
+        public void PersistDataInBinaryFormat()
+        {
+            TestSerialization(CreateCar(), new BinarySerializer<Car>());
+        }
+
+        #endregion
 
         private void TestSerialization(Car car, ISerializer<Car> serializer=null)
         {
@@ -42,12 +63,6 @@ namespace Kore.Settings.AcceptanceTests
             settings.Read(_settingsFileInfo);
 
             Assert.AreEqual(car, settings.Data);
-        }
-
-        [TestMethod]
-        public void PersistDataInXmlFormatUsingContract()
-        {
-            TestSerialization(CreateCar(), new XmlSerializer<Car>(new CarContractResolver()));
         }
 
         private static Car CreateCar()

@@ -1,6 +1,4 @@
-﻿using System.Runtime.Serialization;
-
-namespace Kore.Settings.AcceptanceTests
+﻿namespace Kore.Settings.AcceptanceTests
 {
     public interface ICar
     {
