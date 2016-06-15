@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kore.Test", "Kore.Test\Kore.Test.csproj", "{8EB45E18-A8D6-4749-95A3-3D9C79BF03C3}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kore.Test.UnitTests", "Kore.Test.UnitTests\Kore.Test.UnitTests.csproj", "{C913A33B-AE55-41CD-93DC-B8E4D07086AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kore.Test", "Kore.Test\Kore.Test.csproj", "{FAEFC6B7-DB54-48D5-91A1-7D682FD28942}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8EB45E18-A8D6-4749-95A3-3D9C79BF03C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8EB45E18-A8D6-4749-95A3-3D9C79BF03C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8EB45E18-A8D6-4749-95A3-3D9C79BF03C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8EB45E18-A8D6-4749-95A3-3D9C79BF03C3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C913A33B-AE55-41CD-93DC-B8E4D07086AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C913A33B-AE55-41CD-93DC-B8E4D07086AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C913A33B-AE55-41CD-93DC-B8E4D07086AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C913A33B-AE55-41CD-93DC-B8E4D07086AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAEFC6B7-DB54-48D5-91A1-7D682FD28942}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAEFC6B7-DB54-48D5-91A1-7D682FD28942}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAEFC6B7-DB54-48D5-91A1-7D682FD28942}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAEFC6B7-DB54-48D5-91A1-7D682FD28942}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

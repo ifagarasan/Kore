@@ -58,7 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Kore.Test\Kore.Test.csproj">
-      <Project>{8eb45e18-a8d6-4749-95a3-3d9c79bf03c3}</Project>
+      <Project>{faefc6b7-db54-48d5-91a1-7d682fd28942}</Project>
       <Name>Kore.Test</Name>
     </ProjectReference>
   </ItemGroup>
