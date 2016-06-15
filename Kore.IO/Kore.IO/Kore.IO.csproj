@@ -60,6 +60,7 @@
     <Compile Include="Sync\IFolderDiffer.cs" />
     <Compile Include="Util\FileInfoProvider.cs" />
     <Compile Include="Util\FolderUtil.cs" />
+    <Compile Include="Util\IKoreIoNodeInfo.cs" />
     <Compile Include="Util\IKoreFileInfo.cs" />
     <Compile Include="Util\IFileInfoProvider.cs" />
     <Compile Include="Util\IKoreFolderInfo.cs" />

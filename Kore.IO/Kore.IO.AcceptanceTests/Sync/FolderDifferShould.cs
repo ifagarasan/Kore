@@ -77,7 +77,7 @@ namespace Kore.IO.AcceptanceTests.Sync
         private void EnsureFilesExist(List<IKoreFileInfo> fileList)
         {
             foreach (IKoreFileInfo fileInfo in fileList)
-                fileInfo.EnsureExits();
+                fileInfo.EnsureExists();
         }
 
         [TestMethod]

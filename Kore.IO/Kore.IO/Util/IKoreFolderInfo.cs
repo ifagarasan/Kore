@@ -1,9 +1,6 @@
 ﻿namespace Kore.IO.Util
 {
-    public interface IKoreFolderInfo
+    public interface IKoreFolderInfo: IKoreIoNodeInfo
     {
-        string FullName { get; }
-        bool Exists { get; }
-        void EnsureExists();
     }
 }

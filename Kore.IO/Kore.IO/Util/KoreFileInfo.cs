@@ -49,7 +49,7 @@ namespace Kore.IO.Util
 
         public IKoreFolderInfo FolderInfo { get; }
 
-        public void EnsureExits()
+        public void EnsureExists()
         {
             if (Exists)
                 return;

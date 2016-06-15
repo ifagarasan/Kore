@@ -2,16 +2,12 @@
 
 namespace Kore.IO.Util
 {
-    public interface IKoreFileInfo
+    public interface IKoreFileInfo: IKoreIoNodeInfo
     {
         bool Hidden { get; set; }
-        string FullName { get; }
-        bool Exists { get; }
         
         DateTime LastWriteTime { get; set; }
 
         IKoreFolderInfo FolderInfo { get; }
-
-        void EnsureExits();
     }
 }

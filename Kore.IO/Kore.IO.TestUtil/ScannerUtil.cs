@@ -54,7 +54,7 @@ namespace Kore.IO.TestUtil
         {
             foreach (IKoreFileInfo fileInfo in files)
             {
-                fileInfo.EnsureExits();
+                fileInfo.EnsureExists();
                 fileInfo.Hidden = hidden;
             }
         }
