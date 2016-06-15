@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
-using Kore.Test.Util;
+using Kore.Dev.Util;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Kore.Test.UnitTests.Util
+namespace Kore.Dev.UnitTests.Util
 {
     [TestClass]
     public class IoUtilShould

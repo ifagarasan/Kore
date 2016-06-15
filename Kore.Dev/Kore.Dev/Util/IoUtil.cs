@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Kore.Test.Util
+namespace Kore.Dev.Util
 {
     public static class IoUtil
     {

@@ -8,5 +8,7 @@ namespace Kore.IO.Util
         bool Exists { get; }
 
         void EnsureExists();
+
+        void Copy(IKoreIoNodeInfo nodeInfo);
     }
 }

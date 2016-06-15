@@ -3,12 +3,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C913A33B-AE55-41CD-93DC-B8E4D07086AE}</ProjectGuid>
+    <ProjectGuid>{5879922F-3FB7-47A1-B8C4-535448B207E2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Kore.Test.UnitTests</RootNamespace>
-    <AssemblyName>Kore.Test.UnitTests</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <RootNamespace>Kore.Dev.UnitTests</RootNamespace>
+    <AssemblyName>Kore.Dev.UnitTests</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -16,7 +16,6 @@
     <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
     <IsCodedUITest>False</IsCodedUITest>
     <TestProjectType>UnitTest</TestProjectType>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,9 +45,7 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
-          <Private>False</Private>
-        </Reference>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
       </ItemGroup>
     </Otherwise>
   </Choose>
@@ -57,9 +54,9 @@
     <Compile Include="Util\IoUtilShould.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Kore.Test\Kore.Test.csproj">
-      <Project>{faefc6b7-db54-48d5-91a1-7d682fd28942}</Project>
-      <Name>Kore.Test</Name>
+    <ProjectReference Include="..\Kore.Dev\Kore.Dev.csproj">
+      <Project>{f3177c84-5eeb-44c5-9ecf-5b5c21d24c67}</Project>
+      <Name>Kore.Dev</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
