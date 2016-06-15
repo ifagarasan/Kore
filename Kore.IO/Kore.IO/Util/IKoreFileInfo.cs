@@ -7,10 +7,11 @@ namespace Kore.IO.Util
         bool Hidden { get; set; }
         string FullName { get; }
         bool Exists { get; }
-        string DirectoryFullName { get; }
+        
         DateTime LastWriteTime { get; set; }
 
-        void EnsureDirectoryExists();
+        IKoreFolderInfo FolderInfo { get; }
+
         void EnsureExits();
     }
 }

@@ -12,6 +12,7 @@ namespace Kore.IO.Util
         public KoreFileInfo(string file)
         {
             _file = file;
+            FolderInfo = new KoreFolderInfo(Path.GetDirectoryName(_file));
         }
 
         public bool Hidden
@@ -31,8 +32,6 @@ namespace Kore.IO.Util
 
         public bool Exists => File.Exists(_file);
 
-        public string DirectoryFullName => Path.GetDirectoryName(_file);
-
         public DateTime LastWriteTime
         {
             get
@@ -48,18 +47,14 @@ namespace Kore.IO.Util
             }
         }
 
-        public void EnsureDirectoryExists()
-        {
-            if (!Directory.Exists(DirectoryFullName))
-                Directory.CreateDirectory(DirectoryFullName);
-        }
+        public IKoreFolderInfo FolderInfo { get; }
 
         public void EnsureExits()
         {
             if (Exists)
                 return;
 
-            EnsureDirectoryExists();
+            FolderInfo.EnsureExists();
 
             using (FileStream fs = File.Create(FullName)) { }
         }

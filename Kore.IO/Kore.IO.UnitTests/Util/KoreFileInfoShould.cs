@@ -10,10 +10,15 @@ namespace Kore.IO.UnitTests.Util
     [TestClass]
     public class KoreFileInfoShould
     {
+        const string FileName = @"C:\123\abc.txt";
+        KoreFileInfo _fileInfo;
+
         [TestInitialize]
         public void Setup()
         {
             ScannerUtil.SetupTestFiles();
+
+            _fileInfo = new KoreFileInfo(FileName);
         }
 
         [TestMethod]
@@ -43,11 +48,7 @@ namespace Kore.IO.UnitTests.Util
         [TestMethod]
         public void FullNameContainsFullPathPlusName()
         {
-            const string name = @"C:\123\abc.txt";
-
-            KoreFileInfo fileInfo = new KoreFileInfo(name);
-
-            Assert.AreEqual(name, fileInfo.FullName);
+            Assert.AreEqual(FileName, _fileInfo.FullName);
         }
 
         [TestMethod]
@@ -75,10 +76,10 @@ namespace Kore.IO.UnitTests.Util
             DateTime dateTime = new DateTime(1989, 2, 27);
 
             string file = Path.Combine(ScannerUtil.TestFolderOneLevel, ScannerUtil.VisibleFileList[0]);
-            KoreFileInfo fileInfo = new KoreFileInfo(file);
+            _fileInfo = new KoreFileInfo(file);
             File.SetLastWriteTime(file, dateTime);
 
-            Assert.AreEqual(dateTime, fileInfo.LastWriteTime);
+            Assert.AreEqual(dateTime, _fileInfo.LastWriteTime);
         }
 
         [TestMethod]
@@ -88,7 +89,7 @@ namespace Kore.IO.UnitTests.Util
 
             DateTime dateTime = File.GetLastWriteTime(file).AddDays(1);
 
-            KoreFileInfo fileInfo = new KoreFileInfo(file) {LastWriteTime = dateTime};
+            _fileInfo = new KoreFileInfo(file) {LastWriteTime = dateTime};
 
             Assert.AreEqual(dateTime, File.GetLastWriteTime(file));
         }
@@ -97,27 +98,33 @@ namespace Kore.IO.UnitTests.Util
         [ExpectedException(typeof(FileNotFoundException))]
         public void HiddenGetThrowsFileNotFoundExceptionIfFileDoesNotExist()
         {
-            KoreFileInfo fileInfo = new KoreFileInfo(@"C:\123\abc.txt");
-
-            var info = fileInfo.Hidden;
+            var info = _fileInfo.Hidden;
         }
 
         [TestMethod]
         [ExpectedException(typeof(FileNotFoundException))]
         public void LastWriteTimeGetThrowsFileNotFoundExceptionIfFileDoesNotExist()
         {
-            KoreFileInfo fileInfo = new KoreFileInfo(@"C:\123\abc.txt");
-
-            var lastWriteTime = fileInfo.LastWriteTime;
+            var lastWriteTime = _fileInfo.LastWriteTime;
         }
 
         [TestMethod]
         [ExpectedException(typeof(FileNotFoundException))]
         public void LastWriteTimeSetThrowsFileNotFoundExceptionIfFileDoesNotExist()
         {
-            KoreFileInfo fileInfo = new KoreFileInfo(@"C:\123\abc.txt");
+            _fileInfo.LastWriteTime = DateTime.Now;
+        }
 
-            fileInfo.LastWriteTime = DateTime.Now;
+        [TestMethod]
+        public void ReturnsIKoreFolderInfoWithDirectoryName()
+        {
+            string folder = "C:\\123";
+            string file = Path.Combine(folder, "abc.txt");
+
+            _fileInfo = new KoreFileInfo(file);
+            IKoreFolderInfo folderInfo = _fileInfo.FolderInfo;
+
+            Assert.AreEqual(folder, folderInfo.FullName);
         }
     }
 }
