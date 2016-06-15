@@ -19,5 +19,10 @@ namespace Kore.IO.Util{
 
             Directory.CreateDirectory(FullName);
         }
+
+        public void Copy(IKoreIoNodeInfo nodeInfo)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

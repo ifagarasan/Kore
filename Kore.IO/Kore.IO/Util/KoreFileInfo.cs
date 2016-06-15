@@ -58,5 +58,10 @@ namespace Kore.IO.Util
 
             using (FileStream fs = File.Create(FullName)) { }
         }
+
+        public void Copy(IKoreIoNodeInfo nodeInfo)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
