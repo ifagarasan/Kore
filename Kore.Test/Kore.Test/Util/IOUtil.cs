@@ -1,9 +1,17 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace Kore.Test.Util
 {
     public static class IoUtil
     {
+        public static string TestRoot;
+
+        static IoUtil()
+        {
+            TestRoot = Path.Combine(Environment.CurrentDirectory, "..", "..", "..", "TestData");
+        }
+
         public static void EnsureFolderExits(string folder)
         {
             if (Directory.Exists((folder)))
@@ -16,6 +24,8 @@ namespace Kore.Test.Util
         {
             if (File.Exists((file)))
                 return;
+
+            EnsureFolderExits(Path.GetDirectoryName(file));
 
             using (var fs = File.Create(file)) { }
         }
