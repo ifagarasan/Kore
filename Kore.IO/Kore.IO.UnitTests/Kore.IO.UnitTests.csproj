@@ -68,6 +68,7 @@
     <Compile Include="Scanners\FileScannerShould.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sync\FolderDifferShould.cs" />
+    <Compile Include="Util\KoreFolderInfoShould.cs" />
     <Compile Include="Util\KoreFileInfoShould.cs" />
     <Compile Include="Validation\FileValidationShould.cs" />
   </ItemGroup>

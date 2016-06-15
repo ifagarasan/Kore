@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("IO Support")]
 [assembly: AssemblyConfiguration("Release")]
 [assembly: AssemblyCompanyAttribute("Ioan Fagarasan")]
-[assembly: AssemblyProduct("KoreCode")]
+[assembly: AssemblyProduct("Kore.Code.IO")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

@@ -1,4 +1,6 @@
-﻿namespace Kore.IO.Util{
+﻿using System.IO;
+
+namespace Kore.IO.Util{
     public class KoreFolderInfo : IKoreFolderInfo
     {
         public KoreFolderInfo(string folder)
@@ -8,9 +10,14 @@
 
         public string FullName { get; }
 
+        public bool Exists => Directory.Exists(FullName);
+
         public void EnsureExists()
         {
-            throw new System.NotImplementedException();
+            if (Directory.Exists(FullName))
+                return;
+
+            Directory.CreateDirectory(FullName);
         }
     }
 }
