@@ -4,107 +4,109 @@ using System.IO;
 using Kore.IO.TestUtil;
 using Kore.IO.Util;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Kore.Dev.Util;
 
 namespace Kore.IO.UnitTests.Util
 {
     [TestClass]
-    public class KoreFileInfoShould
+    public class KoreFileInfoShould: KoreIoNodeInfoShould
     {
-        const string FileName = @"C:\123\abc.txt";
         KoreFileInfo _fileInfo;
 
         [TestInitialize]
-        public void Setup()
+        public override void Setup()
         {
-            ScannerUtil.SetupTestFiles();
+            if (!FullName.EndsWith(".txt"))
+                FullName = $"{FullName}.txt";
 
-            _fileInfo = new KoreFileInfo(FileName);
+            base.Setup();
+
+            _fileInfo = new KoreFileInfo(FullName);
+            EnsureNodeExists(_fileInfo);
         }
+
+        [TestMethod]
+        public void ReturnFullPathForFullName()
+        {
+            Assert.AreEqual(Path.GetFullPath(FullName), _fileInfo.FullName);
+        }
+
+        #region Hidden
 
         [TestMethod]
         public void ReturnFalseForHiddenIfFileIsNotHidden()
         {
-            List<IKoreFileInfo> inputFileList = ScannerUtil.BuildOneLevelTestFilesList(true, false);
-
-            Assert.AreNotEqual(0, inputFileList.Count);
-
-            foreach(IKoreFileInfo fileInfo in inputFileList)
-                Assert.IsFalse(fileInfo.Hidden);
+            Assert.IsFalse(_fileInfo.Hidden);
         }
 
         [TestMethod]
         public void ReturnTrueForHiddenIfFileIsHidden()
         {
-            List<IKoreFileInfo> inputFileList = new List<IKoreFileInfo>();
+            File.SetAttributes(_fileInfo.FullName, FileAttributes.Hidden);
 
-            ScannerUtil.AddFiles(ScannerUtil.TestFolderOneLevel, ScannerUtil.HiddenFileList, inputFileList);
-
-            Assert.AreNotEqual(0, inputFileList.Count);
-
-            foreach (IKoreFileInfo fileInfo in inputFileList)
-                Assert.IsTrue(fileInfo.Hidden);
+            Assert.IsTrue(_fileInfo.Hidden);
         }
 
         [TestMethod]
-        public void FullNameContainsFullPathPlusName()
+        public void AllowSettingHidden()
         {
-            Assert.AreEqual(FileName, _fileInfo.FullName);
+            _fileInfo.Hidden = true;
+
+            Assert.IsTrue(_fileInfo.Hidden);
         }
 
         [TestMethod]
-        public void ExistsReturnsFalseIfFileDoesNotExistOnDisk()
+        [ExpectedException(typeof(FileNotFoundException))]
+        public void ThrowsFileNotFoundExceptionIfFileDoesNotExistOnHiddenGet()
         {
-            Assert.IsFalse(new KoreFileInfo("abc").Exists);
+            File.Delete(FullName);
+
+            var info = _fileInfo.Hidden;
         }
 
         [TestMethod]
-        public void ExistsReturnsTrueIfFileExistsOnDisk()
+        [ExpectedException(typeof(FileNotFoundException))]
+        public void ThrowsFileNotFoundExceptionIfFileDoesNotExistOnHiddenSet()
         {
-            List<IKoreFileInfo> inputFileList = new List<IKoreFileInfo>();
+            File.Delete(FullName);
 
-            ScannerUtil.AddFiles(ScannerUtil.TestFolderOneLevel, ScannerUtil.HiddenFileList, inputFileList);
-
-            Assert.AreNotEqual(0, inputFileList.Count);
-
-            foreach(IKoreFileInfo fileInfo in inputFileList)
-                Assert.IsTrue(fileInfo.Exists);
+            _fileInfo.Hidden = true;
         }
+
+        #endregion
+
+        #region LastWriteTime
 
         [TestMethod]
         public void LastWriteTimeGetsDateTimeOfLastWrite()
         {
-            DateTime dateTime = new DateTime(1989, 2, 27);
+            var now = new DateTime(1989, 2, 27);
 
-            string file = Path.Combine(ScannerUtil.TestFolderOneLevel, ScannerUtil.VisibleFileList[0]);
-            _fileInfo = new KoreFileInfo(file);
-            File.SetLastWriteTime(file, dateTime);
+            File.SetLastWriteTime(FullName, now);
 
-            Assert.AreEqual(dateTime, _fileInfo.LastWriteTime);
+            Assert.AreEqual(now, _fileInfo.LastWriteTime);
         }
 
         [TestMethod]
         public void LastWriteTimeSetsDateTimeOfLastWrite()
         {
-            string file = Path.Combine(ScannerUtil.TestFolderOneLevel, ScannerUtil.VisibleFileList[0]);
+            var date = new DateTime(1989, 2, 27);
 
-            DateTime dateTime = File.GetLastWriteTime(file).AddDays(1);
+            File.SetLastWriteTime(FullName, date);
 
-            _fileInfo = new KoreFileInfo(file) {LastWriteTime = dateTime};
+            date.AddMinutes(13);
 
-            Assert.AreEqual(dateTime, File.GetLastWriteTime(file));
-        }
+            _fileInfo.LastWriteTime = date;
 
-        [TestMethod]
-        [ExpectedException(typeof(FileNotFoundException))]
-        public void HiddenGetThrowsFileNotFoundExceptionIfFileDoesNotExist()
-        {
-            var info = _fileInfo.Hidden;
+            Assert.AreEqual(date, _fileInfo.LastWriteTime);
         }
 
         [TestMethod]
         [ExpectedException(typeof(FileNotFoundException))]
         public void LastWriteTimeGetThrowsFileNotFoundExceptionIfFileDoesNotExist()
         {
+            File.Delete(FullName);
+
             var lastWriteTime = _fileInfo.LastWriteTime;
         }
 
@@ -112,19 +114,29 @@ namespace Kore.IO.UnitTests.Util
         [ExpectedException(typeof(FileNotFoundException))]
         public void LastWriteTimeSetThrowsFileNotFoundExceptionIfFileDoesNotExist()
         {
+            File.Delete(FullName);
+
             _fileInfo.LastWriteTime = DateTime.Now;
         }
+
+        #endregion
 
         [TestMethod]
         public void ReturnsIKoreFolderInfoWithDirectoryName()
         {
-            string folder = "C:\\123";
-            string file = Path.Combine(folder, "abc.txt");
-
-            _fileInfo = new KoreFileInfo(file);
             IKoreIoNodeInfo folderInfo = _fileInfo.FolderInfo;
 
-            Assert.AreEqual(folder, folderInfo.FullName);
+            Assert.AreEqual($"{folderInfo.FullName}\\{Path.GetFileName(FullName)}", FullName);
+        }
+
+        protected override IKoreIoNodeInfo CreateNodeInfo(string fullName)
+        {
+            return new KoreFileInfo(fullName);
+        }
+
+        protected override void EnsureNodeExists(IKoreIoNodeInfo nodeInfo)
+        {
+            IoUtil.EnsureFileExits(nodeInfo.FullName);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Kore.IO.Util;
+using Kore.Validation;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,8 +13,7 @@ namespace Kore.IO.Validation
     {
         public static void Exists(IKoreIoNodeInfo fileInfo)
         {
-            if (fileInfo == null)
-                throw new ArgumentNullException(nameof(fileInfo));
+            ObjectValidation.IsNotNull(fileInfo, nameof(fileInfo));
 
             if (!fileInfo.Exists)
                 throw new FileNotFoundException(fileInfo.FullName);
