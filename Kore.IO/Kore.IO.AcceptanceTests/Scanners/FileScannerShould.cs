@@ -34,7 +34,7 @@ namespace Kore.IO.AcceptanceTests.Scanners
         {
             IFileScanResult scanResult = _fileScanner.Scan(ScannerUtil.TestFolderDeep);
 
-            AssertUtil.AssertFileListsAreEqual(_expectedFileList, scanResult.Files);
+            AssertUtil.AssertIKoreFileInfoListsAreEqual(_expectedFileList, scanResult.Files);
         }
 
         [TestMethod]
@@ -46,7 +46,7 @@ namespace Kore.IO.AcceptanceTests.Scanners
 
             _expectedFileList = ScannerUtil.BuildDeepTestFilesList(true, false);
 
-            AssertUtil.AssertFileListsAreEqual(_expectedFileList, scanResult.Files);
+            AssertUtil.AssertIKoreFileInfoListsAreEqual(_expectedFileList, scanResult.Files);
         }
 
         [TestMethod]
@@ -56,7 +56,7 @@ namespace Kore.IO.AcceptanceTests.Scanners
             IFileScanResult scanResult = _fileScanner.Scan(ScannerUtil.TestFolderDeep, _fileScanOptions);
 
             _expectedFileList = ScannerUtil.BuildDeepTestFilesList(true, true, "txt");
-            AssertUtil.AssertFileListsAreEqual(_expectedFileList, scanResult.Files);
+            AssertUtil.AssertIKoreFileInfoListsAreEqual(_expectedFileList, scanResult.Files);
         }
     }
 }

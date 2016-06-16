@@ -9,7 +9,7 @@ namespace Kore.IO.TestUtil
 {
     public static class AssertUtil
     {
-        public static void AssertFileListsAreEqual(List<IKoreFileInfo> expectedFileList, IReadOnlyList<IKoreFileInfo> actualFileList)
+        public static void AssertIKoreFileInfoListsAreEqual(List<IKoreFileInfo> expectedFileList, IReadOnlyList<IKoreFileInfo> actualFileList)
         {
             Assert.AreEqual(expectedFileList.Count, actualFileList.Count);
 

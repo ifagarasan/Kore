@@ -9,6 +9,7 @@ using Kore.IO.TestUtil;
 using Kore.IO.Util;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Kore.IO.Sync;
+using Kore.Dev.Util;
 
 namespace Kore.IO.AcceptanceTests.Sync
 {
@@ -56,9 +57,9 @@ namespace Kore.IO.AcceptanceTests.Sync
 
         private void EnsureTestFilesExist()
         {
-            FolderUtil.EnsureExits(_testFolder);
-            FolderUtil.EnsureExits(_sourceFolder);
-            FolderUtil.EnsureExits(_destinationFolder);
+            IoUtil.EnsureFolderExits(_testFolder);
+            IoUtil.EnsureFolderExits(_sourceFolder);
+            IoUtil.EnsureFolderExits(_destinationFolder);
 
             EnsureFilesExist(_sourceFiles);
             EnsureFilesExist(_destinationFiles);

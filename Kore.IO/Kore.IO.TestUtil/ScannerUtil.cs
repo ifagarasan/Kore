@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Kore.IO.Util;
+using Kore.Dev.Util;
 
 namespace Kore.IO.TestUtil
 {
@@ -39,9 +40,9 @@ namespace Kore.IO.TestUtil
 
         public static void SetupTestFiles()
         {
-            FolderUtil.EnsureExits(TestFolder);
-            FolderUtil.EnsureExits(TestFolderDeep);
-            FolderUtil.EnsureExits(TestFolderOneLevel);
+            IoUtil.EnsureFolderExits(TestFolder);
+            IoUtil.EnsureFolderExits(TestFolderDeep);
+            IoUtil.EnsureFolderExits(TestFolderOneLevel);
 
             EnsureFilesExist(BuildDeepTestFilesList(true, false), false);
             EnsureFilesExist(BuildDeepTestFilesList(false, true), true);
