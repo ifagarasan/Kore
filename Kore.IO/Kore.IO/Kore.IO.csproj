@@ -64,6 +64,7 @@
     <Compile Include="Util\IFileInfoProvider.cs" />
     <Compile Include="Util\IKoreFolderInfo.cs" />
     <Compile Include="Util\KoreFileInfo.cs" />
+    <Compile Include="Util\KoreIoNodeInfo.cs" />
     <Compile Include="Util\KoreFolderInfo.cs" />
     <Compile Include="Validation\FileValidation.cs" />
   </ItemGroup>

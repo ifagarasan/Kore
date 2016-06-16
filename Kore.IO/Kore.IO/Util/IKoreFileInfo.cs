@@ -8,6 +8,6 @@ namespace Kore.IO.Util
         
         DateTime LastWriteTime { get; set; }
 
-        IKoreFolderInfo FolderInfo { get; }
+        IKoreIoNodeInfo FolderInfo { get; }
     }
 }

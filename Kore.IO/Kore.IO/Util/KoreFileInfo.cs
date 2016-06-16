@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace Kore.IO.Util
 {
-    public class KoreFileInfo : IKoreFileInfo
+    public class KoreFileInfo : KoreIoNodeInfo, IKoreFileInfo
     {
         private readonly string _file;
 
@@ -28,9 +28,9 @@ namespace Kore.IO.Util
             }
         }
 
-        public string FullName => Path.GetFullPath(_file);
+        public override string FullName => Path.GetFullPath(_file);
 
-        public bool Exists => File.Exists(_file);
+        public override bool Exists => File.Exists(_file);
 
         public DateTime LastWriteTime
         {
@@ -47,19 +47,16 @@ namespace Kore.IO.Util
             }
         }
 
-        public IKoreFolderInfo FolderInfo { get; }
+        public IKoreIoNodeInfo FolderInfo { get; }
 
-        public void EnsureExists()
+        protected override void EnsureNodeExists()
         {
-            if (Exists)
-                return;
-
             FolderInfo.EnsureExists();
 
             using (FileStream fs = File.Create(FullName)) { }
         }
 
-        public void Copy(IKoreIoNodeInfo nodeInfo)
+        protected override void CopyNode(IKoreIoNodeInfo nodeInfo)
         {
             throw new NotImplementedException();
         }

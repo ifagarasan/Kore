@@ -1,26 +1,23 @@
 ﻿using System.IO;
 
 namespace Kore.IO.Util{
-    public class KoreFolderInfo : IKoreFolderInfo
+    public class KoreFolderInfo : KoreIoNodeInfo, IKoreFolderInfo
     {
         public KoreFolderInfo(string folder)
         {
             FullName = folder;
         }
 
-        public string FullName { get; }
+        public override string FullName { get; }
 
-        public bool Exists => Directory.Exists(FullName);
+        public override bool Exists => Directory.Exists(FullName);
 
-        public void EnsureExists()
+        protected override void EnsureNodeExists()
         {
-            if (Directory.Exists(FullName))
-                return;
-
             Directory.CreateDirectory(FullName);
         }
 
-        public void Copy(IKoreIoNodeInfo nodeInfo)
+        protected override void CopyNode(IKoreIoNodeInfo nodeInfo)
         {
             throw new System.NotImplementedException();
         }

@@ -10,7 +10,7 @@ namespace Kore.IO.Validation
 {
     public static class FileValidation
     {
-        public static void Exists(IKoreFileInfo fileInfo)
+        public static void Exists(IKoreIoNodeInfo fileInfo)
         {
             if (fileInfo == null)
                 throw new ArgumentNullException(nameof(fileInfo));

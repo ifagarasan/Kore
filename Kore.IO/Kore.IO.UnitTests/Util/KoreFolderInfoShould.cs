@@ -12,7 +12,7 @@ namespace Kore.IO.UnitTests.Util
     public class KoreFolderInfoShould
     {
         private static readonly string CurrentWorkingFolder;
-        IKoreFolderInfo folderInfo;
+        IKoreIoNodeInfo folderInfo;
 
         static KoreFolderInfoShould()
         {

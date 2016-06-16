@@ -122,7 +122,7 @@ namespace Kore.IO.UnitTests.Util
             string file = Path.Combine(folder, "abc.txt");
 
             _fileInfo = new KoreFileInfo(file);
-            IKoreFolderInfo folderInfo = _fileInfo.FolderInfo;
+            IKoreIoNodeInfo folderInfo = _fileInfo.FolderInfo;
 
             Assert.AreEqual(folder, folderInfo.FullName);
         }
