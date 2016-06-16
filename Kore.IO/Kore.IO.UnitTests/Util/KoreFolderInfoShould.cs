@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using Kore.Dev.Util;
 using Kore.IO.TestUtil;
 using Kore.IO.Util;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -10,16 +11,19 @@ namespace Kore.IO.UnitTests.Util
     [TestClass]
     public class KoreFolderInfoShould
     {
-        private readonly string _testFolder;
-        private string _currentWorkingFolder;
+        private static readonly string CurrentWorkingFolder;
+        IKoreFolderInfo folderInfo;
 
-        public KoreFolderInfoShould()
+        static KoreFolderInfoShould()
         {
-            _testFolder = Path.Combine(Environment.CurrentDirectory, "..", "..", "..", "TestData", "KoreFolderInfo");
-            _currentWorkingFolder = $"{_testFolder}\\{DateTime.Now.Ticks}";
+            CurrentWorkingFolder = $"{IoUtil.TestRoot}\\KoreFolderInfo\\{DateTime.Now.Ticks}";
+        }
 
-            EnsureFolderExits(_testFolder);
-            EnsureFolderExits(_currentWorkingFolder);
+        [TestInitialize]
+        public void Setup()
+        {
+            IoUtil.EnsureFolderExits(IoUtil.TestRoot);
+            IoUtil.EnsureFolderExits(CurrentWorkingFolder);
         }
 
         [TestMethod]
@@ -35,7 +39,7 @@ namespace Kore.IO.UnitTests.Util
         {
             string folder = $"C:\\test\\{DateTime.Now.Ticks}\\abc";
 
-            IKoreFolderInfo folderInfo = new KoreFolderInfo(folder);
+            folderInfo = new KoreFolderInfo(folder);
 
             Assert.IsFalse(folderInfo.Exists);
         }
@@ -43,7 +47,7 @@ namespace Kore.IO.UnitTests.Util
         [TestMethod]
         public void ReturnTrueForExistsIfFolderExists()
         {
-            IKoreFolderInfo folderInfo = new KoreFolderInfo(_testFolder);
+            folderInfo = new KoreFolderInfo(IoUtil.TestRoot);
 
             Assert.IsTrue(folderInfo.Exists);
         }
@@ -51,21 +55,13 @@ namespace Kore.IO.UnitTests.Util
         [TestMethod]
         public void EnsureExistsCreatesFolder()
         {
-            IKoreFolderInfo folderInfo = new KoreFolderInfo(Path.Combine(_currentWorkingFolder, "EnsureExists"));
+            folderInfo = new KoreFolderInfo(Path.Combine(CurrentWorkingFolder, "EnsureExists"));
 
             Assert.IsFalse(folderInfo.Exists);
 
             folderInfo.EnsureExists();
 
             Assert.IsTrue(folderInfo.Exists);
-        }
-
-        private static void EnsureFolderExits(string folder)
-        {
-            if (Directory.Exists((folder)))
-                return;
-
-            Directory.CreateDirectory(folder);
         }
     }
 }
