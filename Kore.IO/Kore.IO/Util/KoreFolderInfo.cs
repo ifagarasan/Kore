@@ -5,7 +5,7 @@ namespace Kore.IO.Util{
     {
         public KoreFolderInfo(string folder)
         {
-            FullName = folder;
+            FullName = Path.GetFullPath(folder);
         }
 
         public override string FullName { get; }

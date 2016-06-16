@@ -11,7 +11,7 @@ namespace Kore.IO.Util
 
         public KoreFileInfo(string file)
         {
-            _file = file;
+            _file = Path.GetFullPath(file);
             FolderInfo = new KoreFolderInfo(Path.GetDirectoryName(_file));
         }
 

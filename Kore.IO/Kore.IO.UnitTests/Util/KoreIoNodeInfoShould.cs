@@ -13,7 +13,7 @@ namespace Kore.IO.UnitTests.Util
     {
         protected static string FullName { get; set; }
         IKoreIoNodeInfo _nodeInfo;
-        static string CurrentWorkingFolder;
+        protected static string CurrentWorkingFolder;
 
         static KoreIoNodeInfoShould()
         {
@@ -28,6 +28,12 @@ namespace Kore.IO.UnitTests.Util
         public virtual void Setup()
         {
             _nodeInfo = CreateNodeInfo(FullName);
+        }
+
+        [TestMethod]
+        public void ReturnFullPathForFullName()
+        {
+            Assert.AreEqual(Path.GetFullPath(FullName), _nodeInfo.FullName);
         }
 
         [TestMethod]
@@ -46,7 +52,18 @@ namespace Kore.IO.UnitTests.Util
             Assert.IsTrue(_nodeInfo.Exists);
         }
 
+        [TestMethod]
+        public void EnsureExistsCreatesNode()
+        {
+            DeleteNode(_nodeInfo);
+
+            _nodeInfo.EnsureExists();
+
+            Assert.IsTrue(_nodeInfo.Exists);
+        }
+
         protected abstract IKoreIoNodeInfo CreateNodeInfo(string fullName);
         protected abstract void EnsureNodeExists(IKoreIoNodeInfo nodeInfo);
+        protected abstract void DeleteNode(IKoreIoNodeInfo nodeInfo);
     }
 }

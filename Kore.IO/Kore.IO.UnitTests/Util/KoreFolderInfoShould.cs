@@ -9,59 +9,30 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Kore.IO.UnitTests.Util
 {
     [TestClass]
-    public class KoreFolderInfoShould
+    public class KoreFolderInfoShould: KoreIoNodeInfoShould
     {
-        private static readonly string CurrentWorkingFolder;
-        IKoreIoNodeInfo folderInfo;
-
-        static KoreFolderInfoShould()
-        {
-            CurrentWorkingFolder = $"{IoUtil.TestRoot}\\KoreFolderInfo\\{DateTime.Now.Ticks}";
-        }
-
         [TestInitialize]
-        public void Setup()
+        public override void Setup()
         {
-            IoUtil.EnsureFolderExits(IoUtil.TestRoot);
-            IoUtil.EnsureFolderExits(CurrentWorkingFolder);
+            base.Setup();
+
+            if (!CurrentWorkingFolder.EndsWith("folder"))
+                CurrentWorkingFolder = $"{CurrentWorkingFolder}_folder";
         }
 
-        [TestMethod]
-        public void ReturnFullNameAsPassedInValue()
+        protected override IKoreIoNodeInfo CreateNodeInfo(string fullName)
         {
-            string folder = @"C:\test\abc";
-
-            Assert.AreEqual(folder, new KoreFolderInfo(folder).FullName);
+            return new KoreFolderInfo(fullName);
         }
 
-        [TestMethod]
-        public void ReturnFalseForExistsIfFolderDoesNotExist()
+        protected override void DeleteNode(IKoreIoNodeInfo nodeInfo)
         {
-            string folder = $"C:\\test\\{DateTime.Now.Ticks}\\abc";
-
-            folderInfo = new KoreFolderInfo(folder);
-
-            Assert.IsFalse(folderInfo.Exists);
+            Directory.Delete(nodeInfo.FullName, true);
         }
 
-        [TestMethod]
-        public void ReturnTrueForExistsIfFolderExists()
+        protected override void EnsureNodeExists(IKoreIoNodeInfo nodeInfo)
         {
-            folderInfo = new KoreFolderInfo(IoUtil.TestRoot);
-
-            Assert.IsTrue(folderInfo.Exists);
-        }
-
-        [TestMethod]
-        public void EnsureExistsCreatesFolder()
-        {
-            folderInfo = new KoreFolderInfo(Path.Combine(CurrentWorkingFolder, "EnsureExists"));
-
-            Assert.IsFalse(folderInfo.Exists);
-
-            folderInfo.EnsureExists();
-
-            Assert.IsTrue(folderInfo.Exists);
+            IoUtil.EnsureFolderExits(nodeInfo.FullName);
         }
     }
 }

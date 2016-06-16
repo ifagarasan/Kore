@@ -25,12 +25,6 @@ namespace Kore.IO.UnitTests.Util
             EnsureNodeExists(_fileInfo);
         }
 
-        [TestMethod]
-        public void ReturnFullPathForFullName()
-        {
-            Assert.AreEqual(Path.GetFullPath(FullName), _fileInfo.FullName);
-        }
-
         #region Hidden
 
         [TestMethod]
@@ -126,7 +120,7 @@ namespace Kore.IO.UnitTests.Util
         {
             IKoreIoNodeInfo folderInfo = _fileInfo.FolderInfo;
 
-            Assert.AreEqual($"{folderInfo.FullName}\\{Path.GetFileName(FullName)}", FullName);
+            Assert.AreEqual($"{folderInfo.FullName}\\{Path.GetFileName(FullName)}", Path.GetFullPath(FullName));
         }
 
         protected override IKoreIoNodeInfo CreateNodeInfo(string fullName)
@@ -137,6 +131,11 @@ namespace Kore.IO.UnitTests.Util
         protected override void EnsureNodeExists(IKoreIoNodeInfo nodeInfo)
         {
             IoUtil.EnsureFileExits(nodeInfo.FullName);
+        }
+
+        protected override void DeleteNode(IKoreIoNodeInfo nodeInfo)
+        {
+            File.Delete(nodeInfo.FullName);
         }
     }
 }
