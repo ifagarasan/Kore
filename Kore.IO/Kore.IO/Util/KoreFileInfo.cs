@@ -58,6 +58,9 @@ namespace Kore.IO.Util
 
         protected override void CopyNode(IKoreIoNodeInfo nodeInfo)
         {
+            IKoreFileInfo destination = new KoreFileInfo(nodeInfo.FullName);
+            destination.FolderInfo.EnsureExists();
+
             File.Copy(FullName, nodeInfo.FullName, true);
         }
     }

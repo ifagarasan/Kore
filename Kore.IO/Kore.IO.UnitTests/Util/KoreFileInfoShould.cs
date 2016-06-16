@@ -142,6 +142,18 @@ namespace Kore.IO.UnitTests.Util
             Assert.AreEqual(date, destinationFileInfo.LastWriteTime);
         }
 
+        [TestMethod]
+        public void CreatesDestinationFoldersOnCopy()
+        {
+            string destination = Path.Combine(FullName.Remove(FullName.Length - 4), "dest", "file1.txt");
+
+            IKoreFileInfo destinationFileInfo = new KoreFileInfo(destination);
+
+            _fileInfo.Copy(destinationFileInfo);
+
+            Assert.IsTrue(File.Exists(destinationFileInfo.FullName));
+        }
+
         #endregion
 
         [TestMethod]
