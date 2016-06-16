@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\InvalidDestinationNodeException.cs" />
     <Compile Include="Scanners\IFileScanner.cs" />
     <Compile Include="Scanners\IFileScanResult.cs" />
     <Compile Include="Filters\VisibleFileFilter.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="Sync\IDiff.cs" />
     <Compile Include="Sync\IFolderDiff.cs" />
     <Compile Include="Sync\IFolderDiffer.cs" />
+    <Compile Include="Exceptions\NodeNotFoundException.cs" />
     <Compile Include="Util\FileInfoProvider.cs" />
     <Compile Include="Util\IKoreIoNodeInfo.cs" />
     <Compile Include="Util\IKoreFileInfo.cs" />

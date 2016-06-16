@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using Kore.IO.Exceptions;
+using Kore.Validation;
 
 namespace Kore.IO.Util
 {
@@ -11,6 +13,14 @@ namespace Kore.IO.Util
 
         public void Copy(IKoreIoNodeInfo nodeInfo)
         {
+            ObjectValidation.IsNotNull(nodeInfo, nameof(nodeInfo));
+
+            if (!Exists)
+                throw new NodeNotFoundException();
+
+            if (FullName.Equals(nodeInfo.FullName))
+                throw new InvalidDestinationNodeException();
+
             CopyNode(nodeInfo);
         }
 

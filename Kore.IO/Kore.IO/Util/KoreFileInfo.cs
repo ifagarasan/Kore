@@ -58,7 +58,7 @@ namespace Kore.IO.Util
 
         protected override void CopyNode(IKoreIoNodeInfo nodeInfo)
         {
-            throw new NotImplementedException();
+            File.Copy(FullName, nodeInfo.FullName, true);
         }
     }
 }

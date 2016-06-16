@@ -115,6 +115,35 @@ namespace Kore.IO.UnitTests.Util
 
         #endregion
 
+        #region Copy
+
+        [TestMethod]
+        public void CopySourceFileToProvidedFile()
+        {
+            IKoreFileInfo destinationFileInfo = new KoreFileInfo(FullName.Replace(".txt", ".cpy"));
+
+            _fileInfo.Copy(destinationFileInfo);
+
+            Assert.IsTrue(File.Exists(destinationFileInfo.FullName));
+        }
+
+        [TestMethod]
+        public void OverridesDestinationOnCopy()
+        {
+            IKoreFileInfo destinationFileInfo = new KoreFileInfo(FullName.Replace(".txt", ".cpy"));
+
+            EnsureNodeExists(destinationFileInfo);
+
+            var date = new DateTime(1989, 2, 27);
+
+            _fileInfo.LastWriteTime = date;
+            _fileInfo.Copy(destinationFileInfo);
+
+            Assert.AreEqual(date, destinationFileInfo.LastWriteTime);
+        }
+
+        #endregion
+
         [TestMethod]
         public void ReturnsIKoreFolderInfoWithDirectoryName()
         {
