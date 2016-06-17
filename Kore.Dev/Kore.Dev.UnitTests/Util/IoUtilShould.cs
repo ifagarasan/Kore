@@ -34,7 +34,7 @@ namespace Kore.Dev.UnitTests.Util
         [TestMethod]
         public void CreateFileAtLocation()
         {
-            IoUtil.EnsureFileExits(_file);
+            IoUtil.EnsureFileExists(_file);
 
             Assert.IsTrue(File.Exists(_file));
         }
@@ -44,7 +44,7 @@ namespace Kore.Dev.UnitTests.Util
         {
             _file = Path.Combine(CurrentTestFolder, "folder2", "file1.txt");
 
-            IoUtil.EnsureFileExits(_file);
+            IoUtil.EnsureFileExists(_file);
 
             Assert.IsTrue(File.Exists(_file));
         }
@@ -54,7 +54,7 @@ namespace Kore.Dev.UnitTests.Util
         {
             string folder = Path.Combine(CurrentTestFolder, "folder1");
 
-            IoUtil.EnsureFolderExits(folder);
+            IoUtil.EnsureFolderExists(folder);
 
             Assert.IsTrue(Directory.Exists(folder));
         }

@@ -12,7 +12,7 @@ namespace Kore.Dev.Util
             TestRoot = Path.Combine(Environment.CurrentDirectory, "..", "..", "..", "TestData");
         }
 
-        public static void EnsureFolderExits(string folder)
+        public static void EnsureFolderExists(string folder)
         {
             if (Directory.Exists((folder)))
                 return;
@@ -20,12 +20,12 @@ namespace Kore.Dev.Util
             Directory.CreateDirectory(folder);
         }
 
-        public static void EnsureFileExits(string file)
+        public static void EnsureFileExists(string file)
         {
             if (File.Exists((file)))
                 return;
 
-            EnsureFolderExits(Path.GetDirectoryName(file));
+            EnsureFolderExists(Path.GetDirectoryName(file));
 
             using (var fs = File.Create(file)) { }
         }
