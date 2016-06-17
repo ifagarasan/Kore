@@ -15,7 +15,7 @@ namespace Kore.IO.Sync
             ProcessScanResultFiles(sourceScanResult, destinationScanResult, SourceRelativeDiff, diffs);
             ProcessScanResultFiles(destinationScanResult, sourceScanResult, DestinationRelativeDiff, diffs);
 
-            return new FolderDiff(diffs);
+            return new FolderDiff(new KoreFolderInfo(sourceScanResult.Folder), new KoreFolderInfo(destinationScanResult.Folder), diffs);
         }
 
         private void ProcessScanResultFiles(IFileScanResult sourceScanResult, IFileScanResult destinationScanResult,

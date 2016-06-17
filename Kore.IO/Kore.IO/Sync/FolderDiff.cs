@@ -1,13 +1,25 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Kore.IO.Util;
+using Kore.Validation;
 
 namespace Kore.IO.Sync
 {
     public class FolderDiff : IFolderDiff
     {
-        public FolderDiff(List<IDiff> diffs)
+        public FolderDiff(IKoreFolderInfo source, IKoreFolderInfo destination, List<IDiff> diffs)
         {
-            Diffs = diffs;
+            ObjectValidation.IsNotNull(source);
+            ObjectValidation.IsNotNull(destination);
+            ObjectValidation.IsNotNull(diffs);
+
+            Source = source;
+            Destination = destination;
+            Diffs = diffs.AsReadOnly();
         }
+
+        public IKoreFolderInfo Source { get; }
+        public IKoreFolderInfo Destination { get; }
 
         public IReadOnlyList<IDiff> Diffs { get; set; }
     }
