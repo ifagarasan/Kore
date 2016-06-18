@@ -5,6 +5,7 @@ using Kore.Validation;
 
 namespace Kore.IO.Util
 {
+    [Serializable]
     public abstract class KoreIoNodeInfo : IKoreIoNodeInfo
     {
         public abstract bool Exists { get; }
