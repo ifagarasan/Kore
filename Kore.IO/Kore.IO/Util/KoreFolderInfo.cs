@@ -17,6 +17,11 @@ namespace Kore.IO.Util{
             Directory.CreateDirectory(FullName);
         }
 
+        protected override void DeleteNode()
+        {
+            Directory.Delete(FullName, true);
+        }
+
         protected override void CopyNode(IKoreIoNodeInfo nodeInfo)
         {
             throw new System.NotImplementedException();

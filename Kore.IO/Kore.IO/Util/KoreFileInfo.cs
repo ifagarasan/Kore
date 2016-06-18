@@ -56,6 +56,11 @@ namespace Kore.IO.Util
             using (FileStream fs = File.Create(FullName)) { }
         }
 
+        protected override void DeleteNode()
+        {
+            File.Delete(FullName);
+        }
+
         protected override void CopyNode(IKoreIoNodeInfo nodeInfo)
         {
             IKoreFileInfo destination = new KoreFileInfo(nodeInfo.FullName);

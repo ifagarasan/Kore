@@ -10,5 +10,6 @@ namespace Kore.IO.Util
         void EnsureExists();
 
         void Copy(IKoreIoNodeInfo nodeInfo);
+        void Delete();
     }
 }

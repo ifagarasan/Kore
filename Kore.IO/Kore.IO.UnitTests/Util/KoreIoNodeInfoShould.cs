@@ -93,6 +93,18 @@ namespace Kore.IO.UnitTests.Util
 
         #endregion
 
+        #region Delete
+
+        [TestMethod]
+        public void DeleteTheNodeIfItExists()
+        {
+            _nodeInfo.Delete();
+
+            Assert.IsFalse(_nodeInfo.Exists);
+        }
+
+        #endregion
+
         protected abstract IKoreIoNodeInfo CreateNodeInfo(string fullName);
         protected abstract void EnsureNodeExists(IKoreIoNodeInfo nodeInfo);
         protected abstract void DeleteNode(IKoreIoNodeInfo nodeInfo);

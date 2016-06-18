@@ -24,6 +24,14 @@ namespace Kore.IO.Util
             CopyNode(nodeInfo);
         }
 
+        public void Delete()
+        {
+            if (!Exists)
+                return;
+
+            DeleteNode();
+        }
+
         public void EnsureExists()
         {
             if (Exists)
@@ -34,5 +42,6 @@ namespace Kore.IO.Util
 
         protected abstract void CopyNode(IKoreIoNodeInfo nodeInfo);
         protected abstract void EnsureNodeExists();
+        protected abstract void DeleteNode();
     }
 }
