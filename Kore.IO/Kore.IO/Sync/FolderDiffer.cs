@@ -28,10 +28,17 @@ namespace Kore.IO.Sync
                 IKoreFileInfo destinationFileInfo = destinationScanResult.Files.SingleOrDefault(
                     f => f.FullName.Substring(destinationScanResult.Folder.Length).ToLower().Equals(relativeFullFileName));
 
-                DiffType? diffType = diffFunc(sourceFileInfo, destinationFileInfo);
+                var diffType = diffFunc(sourceFileInfo, destinationFileInfo);
 
                 if (diffType.HasValue)
-                    diffs.Add(new Diff(sourceFileInfo, destinationFileInfo, diffType.Value));
+                {
+                    var diff = new Diff(sourceFileInfo, destinationFileInfo, diffType.Value);
+
+                    if (diffType.Value == DiffType.DestinationOrphan)
+                        diff = new Diff(destinationFileInfo, sourceFileInfo, diffType.Value);
+
+                    diffs.Add(diff);
+                }
             }
         }
 
