@@ -53,7 +53,7 @@ namespace Kore.Settings.AcceptanceTests
 
         private void TestSerialization(Car car, ISerializer<Car> serializer=null)
         {
-            SettingsManager<Car> settings = new SettingsManager<Car>(car, serializer);
+            SettingsManager<Car> settings = new SettingsManager<Car>(serializer) {Data = car};
 
             settings.Write(_settingsFileInfo);
 

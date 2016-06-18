@@ -4,7 +4,10 @@ using System.Linq;
 using System.Text;
 using Kore.Settings.Serializers;
 using System.IO;
+using System.Runtime.Serialization;
+using Kore.IO.Exceptions;
 using Kore.IO.Util;
+using static Kore.Validation.ObjectValidation;
 
 namespace Kore.Settings
 {
@@ -13,25 +16,20 @@ namespace Kore.Settings
         public T Data { get; set; }
         private readonly ISerializer<T> _serializer;
 
-        public SettingsManager(T data, ISerializer<T> serializer)
-        {
-            if (data == null)
-                throw new ArgumentNullException(nameof(data));
 
-            Data = data;
+        public SettingsManager(ISerializer<T> serializer)
+        {
             _serializer = serializer;
-        }
-
-        public SettingsManager(ISerializer<T> serializer): this(Activator.CreateInstance<T>(), serializer)
-        {
         }
 
         public void Write(IKoreFileInfo fileInfo)
         {
-            if (fileInfo == null)
-                throw new ArgumentNullException(nameof(fileInfo));
+            IsNotNull(fileInfo, nameof(fileInfo));
 
-            using (FileStream stream = new FileStream(fileInfo.FullName, FileMode.OpenOrCreate))
+            if (Data == null)
+                throw new SerializationException();
+
+            using (var stream = new FileStream(fileInfo.FullName, FileMode.OpenOrCreate))
             {
                 _serializer.Serialize(Data, stream);
             }
@@ -39,13 +37,12 @@ namespace Kore.Settings
 
         public void Read(IKoreFileInfo fileInfo)
         {
-            if (fileInfo == null)
-                throw new ArgumentNullException(nameof(fileInfo));
+            IsNotNull(fileInfo, nameof(fileInfo));
 
             if (!fileInfo.Exists)
-                return;
+                throw new NodeNotFoundException();
 
-            using (FileStream stream = new FileStream(fileInfo.FullName, FileMode.Open))
+            using (var stream = new FileStream(fileInfo.FullName, FileMode.Open))
             {
                 Data = _serializer.Deserialize(stream);
             }

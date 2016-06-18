@@ -3,6 +3,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Kore.Settings.Serializers;
 using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+using Kore.IO.Exceptions;
 using Kore.IO.Util;
 
 namespace Kore.Settings.UnitTests
@@ -26,12 +29,14 @@ namespace Kore.Settings.UnitTests
             _settings = new SettingsManager<DateTime>(_mockSerializer.Object);
         }
 
+        #region Write
+
         [TestMethod]
         public void CallSerializerUponWriting()
         {
-            DateTime now = DateTime.Now;
+            var now = DateTime.Now;
 
-            _settings = new SettingsManager<DateTime>(now, _mockSerializer.Object);
+            _settings = new SettingsManager<DateTime>(_mockSerializer.Object) {Data = now};
 
             _mockSerializer.Setup(m => m.Serialize(It.IsAny<DateTime>(), It.IsAny<Stream>()));
 
@@ -39,6 +44,19 @@ namespace Kore.Settings.UnitTests
 
             _mockSerializer.Verify(m => m.Serialize(now, It.IsAny<Stream>()));
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(SerializationException))]
+        public void ValidateDataOnWrite()
+        {
+            var settings = new SettingsManager<string>(new Mock<ISerializer<string>>().Object);
+
+            settings.Write(_mockFileInfo.Object);
+        }
+
+        #endregion
+
+        #region Read
 
         [TestMethod]
         public void CallSerializerUponReading()
@@ -51,22 +69,15 @@ namespace Kore.Settings.UnitTests
         }
 
         [TestMethod]
-        public void DoesNotErrorOnReadIfFileDoesNotExist()
+        [ExpectedException(typeof(NodeNotFoundException))]
+        public void ValidateFileExistsOnRead()
         {
-            _mockFileInfo.Setup(m => m.FullName).Returns("settings_does_not_exist.xml");
             _mockFileInfo.Setup(m => m.Exists).Returns(false);
 
             _settings.Read(_mockFileInfo.Object);
-
-            Assert.IsNotNull(_settings.Data);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void ThrowsArgumentNullExceptionWhenPassingNullAtConstruction()
-        {
-            SettingsManager<DateTime?> settings = new SettingsManager<DateTime?>(null, new Mock<ISerializer<DateTime?>>().Object);
-        }
+        #endregion
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
