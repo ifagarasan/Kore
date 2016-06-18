@@ -27,7 +27,7 @@ namespace Kore.IO.Util
         public void Delete()
         {
             if (!Exists)
-                return;
+                throw new NodeNotFoundException();
 
             DeleteNode();
         }

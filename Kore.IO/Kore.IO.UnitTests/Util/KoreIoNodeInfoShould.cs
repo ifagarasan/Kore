@@ -96,7 +96,16 @@ namespace Kore.IO.UnitTests.Util
         #region Delete
 
         [TestMethod]
-        public void DeleteTheNodeIfItExists()
+        [ExpectedException(typeof(NodeNotFoundException))]
+        public void ValidateNodeExists()
+        {
+            DeleteNode(_nodeInfo);
+
+            _nodeInfo.Delete();
+        }
+
+        [TestMethod]
+        public void DeleteTheNode()
         {
             _nodeInfo.Delete();
 
