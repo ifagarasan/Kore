@@ -14,7 +14,6 @@ namespace Kore.IO.UnitTests.Retrievers
     {
         private List<IKoreFileInfo> _expectedFiles;
         private FileRetriever _fileRetriever;
-        private Mock<IFileInfoProvider> _mockFileInfoProvider;
         private Mock<IKoreFileInfo> _mockFileInfo;
 
         [TestInitialize]
@@ -22,10 +21,8 @@ namespace Kore.IO.UnitTests.Retrievers
         {
             _expectedFiles = new List<IKoreFileInfo>();
             _mockFileInfo = new Mock<IKoreFileInfo>();
-            _mockFileInfoProvider = new Mock<IFileInfoProvider>();
-            _mockFileInfoProvider.Setup(m => m.CreateFileInfo(It.IsAny<string>())).Returns(_mockFileInfo.Object);
 
-            _fileRetriever = new FileRetriever(_mockFileInfoProvider.Object);
+            _fileRetriever = new FileRetriever();
         }
 
         [TestMethod]

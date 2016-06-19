@@ -64,10 +64,8 @@
     <Compile Include="Sync\IFolderDiff.cs" />
     <Compile Include="Sync\IFolderDiffer.cs" />
     <Compile Include="Exceptions\NodeNotFoundException.cs" />
-    <Compile Include="Util\FileInfoProvider.cs" />
     <Compile Include="Util\IKoreIoNodeInfo.cs" />
     <Compile Include="Util\IKoreFileInfo.cs" />
-    <Compile Include="Util\IFileInfoProvider.cs" />
     <Compile Include="Util\IKoreFolderInfo.cs" />
     <Compile Include="Util\KoreFileInfo.cs" />
     <Compile Include="Util\KoreIoNodeInfo.cs" />

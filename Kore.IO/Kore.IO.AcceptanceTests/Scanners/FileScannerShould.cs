@@ -22,7 +22,7 @@ namespace Kore.IO.AcceptanceTests.Scanners
         [TestInitialize]
         public void Setup()
         {
-            _fileScanner = new FileScanner(new FileRetriever(new FileInfoProvider()));
+            _fileScanner = new FileScanner(new FileRetriever());
             _expectedFileList = new List<IKoreFileInfo>();
             _fileScanOptions = new FileScanOptions();
 
