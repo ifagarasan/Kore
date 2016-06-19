@@ -5,6 +5,7 @@ using System.Threading;
 
 namespace Kore.IO.Util
 {
+    [Serializable]
     public class KoreFileInfo : KoreIoNodeInfo, IKoreFileInfo
     {
         private readonly string _file;
