@@ -46,6 +46,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Exceptions\InvalidDestinationNodeException.cs" />
+    <Compile Include="Management\FileCopier.cs" />
+    <Compile Include="Management\FileManager.cs" />
+    <Compile Include="Management\IFileCopier.cs" />
+    <Compile Include="Management\IFileManager.cs" />
     <Compile Include="Scanners\IFileScanner.cs" />
     <Compile Include="Scanners\IFileScanResult.cs" />
     <Compile Include="Filters\VisibleFileFilter.cs" />
@@ -75,6 +79,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
