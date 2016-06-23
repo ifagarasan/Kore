@@ -2,9 +2,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using System.Runtime.Serialization;
-using System.Xml;
+using Kore.IO;
 using Kore.Settings.Serializers;
-using Kore.IO.Util;
 
 namespace Kore.Settings.AcceptanceTests
 {

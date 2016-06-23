@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Xml.Serialization;
-using Kore.IO.Util;
+﻿using System.IO;
 
 namespace Kore.Settings.Serializers
 {

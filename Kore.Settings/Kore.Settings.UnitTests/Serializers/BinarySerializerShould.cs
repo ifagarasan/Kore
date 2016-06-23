@@ -1,9 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 using Kore.Settings.Serializers;
-using System.IO;
-using Kore.IO.Util;
 
 namespace Kore.Settings.UnitTests
 {

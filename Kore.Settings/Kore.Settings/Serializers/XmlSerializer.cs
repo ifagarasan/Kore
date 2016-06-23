@@ -1,10 +1,6 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Runtime.Serialization;
 using System.Xml;
-using System.Xml.Schema;
-using System.Xml.Serialization;
-using Kore.IO.Util;
 
 namespace Kore.Settings.Serializers
 {

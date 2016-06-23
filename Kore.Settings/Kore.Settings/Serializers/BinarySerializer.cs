@@ -1,5 +1,4 @@
 ﻿using Kore.Validation;
-using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 

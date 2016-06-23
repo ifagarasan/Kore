@@ -4,9 +4,8 @@ using Moq;
 using Kore.Settings.Serializers;
 using System.IO;
 using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
+using Kore.IO;
 using Kore.IO.Exceptions;
-using Kore.IO.Util;
 
 namespace Kore.Settings.UnitTests
 {
