@@ -87,11 +87,11 @@ namespace Kore.IO.AcceptanceTests.Sync
 
             IFolderDiff folderDiff = folderDiffer.BuildDiff(_sourceScanResult, _destinationScanResult);
 
-            Assert.AreEqual(DiffType.Identical, folderDiff.Diffs[0].Type);
-            Assert.AreEqual(DiffType.SourceNew, folderDiff.Diffs[1].Type);
-            Assert.AreEqual(DiffType.SourceNewer, folderDiff.Diffs[2].Type);
-            Assert.AreEqual(DiffType.SourceOlder, folderDiff.Diffs[3].Type);
-            Assert.AreEqual(DiffType.DestinationOrphan, folderDiff.Diffs[4].Type);
+            Assert.AreEqual(DiffRelation.Identical, folderDiff.Diffs[0].Relation);
+            Assert.AreEqual(DiffRelation.SourceNew, folderDiff.Diffs[1].Relation);
+            Assert.AreEqual(DiffRelation.SourceNewer, folderDiff.Diffs[2].Relation);
+            Assert.AreEqual(DiffRelation.SourceOlder, folderDiff.Diffs[3].Relation);
+            Assert.AreEqual(DiffRelation.DestinationOrphan, folderDiff.Diffs[4].Relation);
 
             Assert.AreEqual(5, folderDiff.Diffs.Count);
         }

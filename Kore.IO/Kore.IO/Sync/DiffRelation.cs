@@ -1,6 +1,6 @@
 ﻿namespace Kore.IO.Sync
 {
-    public enum DiffType
+    public enum DiffRelation
     {
         Identical,
         SourceNew,

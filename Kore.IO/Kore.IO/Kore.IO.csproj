@@ -61,7 +61,7 @@
     <Compile Include="Filters\IFileFilter.cs" />
     <Compile Include="Scanners\FileScanResult.cs" />
     <Compile Include="Sync\Diff.cs" />
-    <Compile Include="Sync\DiffType.cs" />
+    <Compile Include="Sync\DiffRelation.cs" />
     <Compile Include="Sync\FolderDiff.cs" />
     <Compile Include="Sync\FolderDiffer.cs" />
     <Compile Include="Sync\IDiff.cs" />

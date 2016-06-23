@@ -2,15 +2,15 @@
 {
     public class Diff : IDiff
     {
-        public Diff(IKoreFileInfo sourceFileInfo, IKoreFileInfo destinationFileInfo, DiffType type)
+        public Diff(IKoreFileInfo source, IKoreFileInfo destination, DiffRelation relation)
         {
-            SourceFileInfo = sourceFileInfo;
-            DestinationFileInfo = destinationFileInfo;
-            Type = type;
+            Source = source;
+            Destination = destination;
+            Relation = relation;
         }
 
-        public DiffType Type { get; }
-        public IKoreFileInfo DestinationFileInfo { get; }
-        public IKoreFileInfo SourceFileInfo { get; }
+        public DiffRelation Relation { get; }
+        public IKoreFileInfo Destination { get; }
+        public IKoreFileInfo Source { get; }
     }
 }

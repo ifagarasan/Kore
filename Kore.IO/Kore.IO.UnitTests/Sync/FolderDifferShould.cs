@@ -61,7 +61,7 @@ namespace Kore.IO.UnitTests.Sync
             _diff = _folderDiffer.BuildDiff(_mockSourceScanResult.Object, _mockDestinationScanResult.Object);
 
             Assert.AreEqual(1, _diff.Diffs.Count);
-            Assert.AreEqual(DiffType.SourceNew, _diff.Diffs[0].Type);
+            Assert.AreEqual(DiffRelation.SourceNew, _diff.Diffs[0].Relation);
         }
 
         [TestMethod]
@@ -69,7 +69,7 @@ namespace Kore.IO.UnitTests.Sync
         {
             DateTime lastWriteTime = DateTime.Now;
 
-            TestIdenticalFileFullNameDiffs(lastWriteTime, lastWriteTime, DiffType.Identical);
+            TestIdenticalFileFullNameDiffs(lastWriteTime, lastWriteTime, DiffRelation.Identical);
         }
 
         [TestMethod]
@@ -78,7 +78,7 @@ namespace Kore.IO.UnitTests.Sync
             DateTime sourceLastWriteTime = DateTime.Now;
             DateTime destinationLastWriteTime = sourceLastWriteTime.Subtract(new TimeSpan(1));
 
-            TestIdenticalFileFullNameDiffs(sourceLastWriteTime, destinationLastWriteTime, DiffType.SourceNewer);
+            TestIdenticalFileFullNameDiffs(sourceLastWriteTime, destinationLastWriteTime, DiffRelation.SourceNewer);
         }
 
         [TestMethod]
@@ -87,7 +87,7 @@ namespace Kore.IO.UnitTests.Sync
             DateTime sourceLastWriteTime = DateTime.Now;
             DateTime destinationLastWriteTime = sourceLastWriteTime.Add(new TimeSpan(1));
 
-            TestIdenticalFileFullNameDiffs(sourceLastWriteTime, destinationLastWriteTime, DiffType.SourceOlder);
+            TestIdenticalFileFullNameDiffs(sourceLastWriteTime, destinationLastWriteTime, DiffRelation.SourceOlder);
         }
 
         [TestMethod]
@@ -99,7 +99,7 @@ namespace Kore.IO.UnitTests.Sync
             _diff = _folderDiffer.BuildDiff(_mockSourceScanResult.Object, _mockDestinationScanResult.Object);
 
             Assert.AreEqual(1, _diff.Diffs.Count);
-            Assert.AreEqual(DiffType.DestinationOrphan, _diff.Diffs[0].Type);
+            Assert.AreEqual(DiffRelation.DestinationOrphan, _diff.Diffs[0].Relation);
         }
 
         [TestMethod]
@@ -149,7 +149,7 @@ namespace Kore.IO.UnitTests.Sync
             _diff = _folderDiffer.BuildDiff(_mockSourceScanResult.Object, _mockDestinationScanResult.Object);
         }
 
-        private void TestIdenticalFileFullNameDiffs(DateTime sourceLastWriteTime, DateTime destinationLastWriteTime, DiffType expectedDiffType)
+        private void TestIdenticalFileFullNameDiffs(DateTime sourceLastWriteTime, DateTime destinationLastWriteTime, DiffRelation expectedDiffRelation)
         {
             _mockSourceFileInfo.Setup(m => m.FullName).Returns(Path.Combine(SourceFolder, "data", "file1.txt"));
             _mockSourceFileInfo.Setup(m => m.LastWriteTime).Returns(sourceLastWriteTime);
@@ -163,7 +163,7 @@ namespace Kore.IO.UnitTests.Sync
             _diff = _folderDiffer.BuildDiff(_mockSourceScanResult.Object, _mockDestinationScanResult.Object);
 
             Assert.AreEqual(1, _diff.Diffs.Count);
-            Assert.AreEqual(expectedDiffType, _diff.Diffs[0].Type);
+            Assert.AreEqual(expectedDiffRelation, _diff.Diffs[0].Relation);
         }
     }
 }

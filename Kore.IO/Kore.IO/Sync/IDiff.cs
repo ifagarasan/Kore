@@ -2,8 +2,8 @@
 {
     public interface IDiff
     {
-        IKoreFileInfo DestinationFileInfo { get; }
-        IKoreFileInfo SourceFileInfo { get; }
-        DiffType Type { get; }
+        IKoreFileInfo Destination { get; }
+        IKoreFileInfo Source { get; }
+        DiffRelation Relation { get; }
     }
 }

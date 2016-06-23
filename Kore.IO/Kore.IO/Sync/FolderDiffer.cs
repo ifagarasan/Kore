@@ -9,7 +9,7 @@ namespace Kore.IO.Sync
     {
         public IFolderDiff BuildDiff(IFileScanResult sourceScanResult, IFileScanResult destinationScanResult)
         {
-            List<IDiff> diffs = new List<IDiff>();
+            var diffs = new List<IDiff>();
 
             ProcessScanResultFiles(sourceScanResult, destinationScanResult, SourceRelativeDiff, diffs);
             ProcessScanResultFiles(destinationScanResult, sourceScanResult, DestinationRelativeDiff, diffs);
@@ -18,13 +18,13 @@ namespace Kore.IO.Sync
         }
 
         private void ProcessScanResultFiles(IFileScanResult sourceScanResult, IFileScanResult destinationScanResult,
-            Func<IKoreFileInfo, IKoreFileInfo, DiffType?> diffFunc, List<IDiff> diffs)
+            Func<IKoreFileInfo, IKoreFileInfo, DiffRelation?> diffFunc, List<IDiff> diffs)
         {
-            foreach (IKoreFileInfo sourceFileInfo in sourceScanResult.Files)
+            foreach (var sourceFileInfo in sourceScanResult.Files)
             {
-                string relativeFullFileName = ExtractRelativeFullFileName(sourceFileInfo, sourceScanResult.Folder.Length);
+                var relativeFullFileName = ExtractRelativeFullFileName(sourceFileInfo, sourceScanResult.Folder.Length);
 
-                IKoreFileInfo destinationFileInfo = destinationScanResult.Files.SingleOrDefault(
+                var destinationFileInfo = destinationScanResult.Files.SingleOrDefault(
                     f => f.FullName.Substring(destinationScanResult.Folder.Length).ToLower().Equals(relativeFullFileName));
 
                 var diffType = diffFunc(sourceFileInfo, destinationFileInfo);
@@ -33,7 +33,7 @@ namespace Kore.IO.Sync
                 {
                     var diff = new Diff(sourceFileInfo, destinationFileInfo, diffType.Value);
 
-                    if (diffType.Value == DiffType.DestinationOrphan)
+                    if (diffType.Value == DiffRelation.DestinationOrphan)
                         diff = new Diff(destinationFileInfo, sourceFileInfo, diffType.Value);
 
                     diffs.Add(diff);
@@ -41,30 +41,30 @@ namespace Kore.IO.Sync
             }
         }
 
-        private DiffType? SourceRelativeDiff(IKoreFileInfo sourceFileInfo, IKoreFileInfo destinationFileInfo)
+        private DiffRelation? SourceRelativeDiff(IKoreFileInfo sourceFileInfo, IKoreFileInfo destinationFileInfo)
         {
-            DiffType? diffType;
+            DiffRelation? diffRelation;
 
             if (destinationFileInfo == null)
-                diffType = DiffType.SourceNew;
+                diffRelation = DiffRelation.SourceNew;
             else if (sourceFileInfo.LastWriteTime > destinationFileInfo.LastWriteTime)
-                diffType = DiffType.SourceNewer;
+                diffRelation = DiffRelation.SourceNewer;
             else if (sourceFileInfo.LastWriteTime < destinationFileInfo.LastWriteTime)
-                diffType = DiffType.SourceOlder;
+                diffRelation = DiffRelation.SourceOlder;
             else
-                diffType = DiffType.Identical;
+                diffRelation = DiffRelation.Identical;
 
-            return diffType;
+            return diffRelation;
         }
 
-        private DiffType? DestinationRelativeDiff(IKoreFileInfo sourceFileInfo, IKoreFileInfo destinationFileInfo)
+        private DiffRelation? DestinationRelativeDiff(IKoreFileInfo sourceFileInfo, IKoreFileInfo destinationFileInfo)
         {
-            DiffType? diffType = null;
+            DiffRelation? diffRelation = null;
 
             if (destinationFileInfo == null)
-                diffType = DiffType.DestinationOrphan;
+                diffRelation = DiffRelation.DestinationOrphan;
 
-            return diffType;
+            return diffRelation;
         }
 
         private static string ExtractRelativeFullFileName(IKoreFileInfo sourceFileInfo, int startIndex)
