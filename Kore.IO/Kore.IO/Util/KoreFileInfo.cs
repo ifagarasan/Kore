@@ -1,4 +1,5 @@
-﻿using Kore.IO.Validation;
+﻿using Kore.IO.Exceptions;
+using Kore.IO.Validation;
 using System;
 using System.IO;
 using System.Threading;
@@ -32,6 +33,17 @@ namespace Kore.IO.Util
         public override string FullName => Path.GetFullPath(_file);
 
         public override bool Exists => File.Exists(_file);
+
+        public override long Size
+        {
+            get
+            {
+                if (!Exists)
+                    throw new NodeNotFoundException();
+
+                return new FileInfo(_file).Length;
+            }
+        }
 
         public DateTime LastWriteTime
         {

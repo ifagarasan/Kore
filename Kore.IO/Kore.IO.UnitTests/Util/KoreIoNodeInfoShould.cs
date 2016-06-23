@@ -120,6 +120,8 @@ namespace Kore.IO.UnitTests.Util
             Assert.AreEqual(Path.GetFileName(_nodeInfo.FullName), _nodeInfo.Name);
         }
 
+        public abstract void ReturnContentLengthInBytesForSize();
+
         protected abstract IKoreIoNodeInfo CreateNodeInfo(string fullName);
         protected abstract void EnsureNodeExists(IKoreIoNodeInfo nodeInfo);
         protected abstract void DeleteNode(IKoreIoNodeInfo nodeInfo);

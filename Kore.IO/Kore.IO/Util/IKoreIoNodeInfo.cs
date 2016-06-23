@@ -7,6 +7,7 @@ namespace Kore.IO.Util
         string FullName { get; }
         bool Exists { get; }
         string Name { get; }
+        long Size { get; }
 
         void EnsureExists();
 

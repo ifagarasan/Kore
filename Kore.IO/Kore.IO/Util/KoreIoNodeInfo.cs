@@ -12,6 +12,8 @@ namespace Kore.IO.Util
 
         public abstract string FullName { get; }
 
+        public abstract long Size { get; }
+
         public string Name => Path.GetFileName(FullName);
 
         public void Copy(IKoreIoNodeInfo nodeInfo)

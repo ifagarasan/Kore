@@ -13,6 +13,8 @@ namespace Kore.IO.Util
 
         public override string FullName { get; }
 
+        public override long Size { get { throw new NotImplementedException(); } }
+
         public override bool Exists => Directory.Exists(FullName);
 
         protected override void EnsureNodeExists()

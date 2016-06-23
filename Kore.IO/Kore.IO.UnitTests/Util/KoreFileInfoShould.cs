@@ -5,6 +5,7 @@ using Kore.IO.TestUtil;
 using Kore.IO.Util;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Kore.Dev.Util;
+using Kore.IO.Exceptions;
 
 namespace Kore.IO.UnitTests.Util
 {
@@ -111,6 +112,32 @@ namespace Kore.IO.UnitTests.Util
             File.Delete(FullName);
 
             _fileInfo.LastWriteTime = DateTime.Now;
+        }
+
+        #endregion
+
+        #region Size
+
+        [TestMethod]
+        public override void ReturnContentLengthInBytesForSize()
+        {
+            using (StreamWriter wr = new StreamWriter(_fileInfo.FullName))
+            {
+                wr.Write('c');
+                wr.Write('d');
+                wr.Write('e');
+            }
+
+            Assert.AreEqual(3, _fileInfo.Size);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(NodeNotFoundException))]
+        public void ValidateFileExistsForSize()
+        {
+            DeleteNode(_fileInfo);
+
+            var size = _fileInfo.Size;
         }
 
         #endregion

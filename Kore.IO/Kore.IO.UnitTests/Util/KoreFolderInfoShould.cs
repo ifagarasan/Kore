@@ -20,6 +20,13 @@ namespace Kore.IO.UnitTests.Util
                 CurrentWorkingFolder = $"{CurrentWorkingFolder}_folder";
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(NotImplementedException))]
+        public override void ReturnContentLengthInBytesForSize()
+        {
+            throw new NotImplementedException();
+        }
+
         protected override IKoreIoNodeInfo CreateNodeInfo(string fullName)
         {
             return new KoreFolderInfo(fullName);
