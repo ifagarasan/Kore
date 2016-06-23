@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Kore.IO.Scanners;
-using Kore.IO.Util;
 
 namespace Kore.IO.Sync
 {

@@ -3,7 +3,7 @@ using System.IO;
 using Kore.IO.Exceptions;
 using Kore.Validation;
 
-namespace Kore.IO.Util
+namespace Kore.IO
 {
     [Serializable]
     public abstract class KoreIoNodeInfo : IKoreIoNodeInfo

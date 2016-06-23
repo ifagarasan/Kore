@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Kore.IO.Util
+namespace Kore.IO
 {
     [Serializable]
     public class KoreFolderInfo : KoreIoNodeInfo, IKoreFolderInfo

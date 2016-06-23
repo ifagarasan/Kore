@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Kore.IO.Util
+namespace Kore.IO
 {
     public interface IKoreIoNodeInfo
     {

@@ -1,5 +1,4 @@
-﻿using Kore.IO.Util;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Kore.IO.Sync
 {

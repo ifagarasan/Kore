@@ -5,7 +5,6 @@ using Castle.Components.DictionaryAdapter;
 using Kore.IO.Scanners;
 using Kore.IO.Sync;
 using Kore.IO.TestUtil;
-using Kore.IO.Util;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 

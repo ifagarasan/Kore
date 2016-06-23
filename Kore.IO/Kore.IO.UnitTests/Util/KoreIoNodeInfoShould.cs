@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using Kore.IO.TestUtil;
-using Kore.IO.Util;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Kore.Dev.Util;
 using Kore.IO.Exceptions;

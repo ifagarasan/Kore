@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Kore.IO.Retrievers;
-using Kore.IO.Filters;
-using Kore.IO.Util;
 
 namespace Kore.IO.Scanners
 {

@@ -64,12 +64,12 @@
     <Compile Include="Sync\IFolderDiff.cs" />
     <Compile Include="Sync\IFolderDiffer.cs" />
     <Compile Include="Exceptions\NodeNotFoundException.cs" />
-    <Compile Include="Util\IKoreIoNodeInfo.cs" />
-    <Compile Include="Util\IKoreFileInfo.cs" />
-    <Compile Include="Util\IKoreFolderInfo.cs" />
-    <Compile Include="Util\KoreFileInfo.cs" />
-    <Compile Include="Util\KoreIoNodeInfo.cs" />
-    <Compile Include="Util\KoreFolderInfo.cs" />
+    <Compile Include="IKoreIoNodeInfo.cs" />
+    <Compile Include="IKoreFileInfo.cs" />
+    <Compile Include="IKoreFolderInfo.cs" />
+    <Compile Include="KoreFileInfo.cs" />
+    <Compile Include="KoreIoNodeInfo.cs" />
+    <Compile Include="KoreFolderInfo.cs" />
     <Compile Include="Validation\FileValidation.cs" />
   </ItemGroup>
   <ItemGroup>

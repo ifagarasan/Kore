@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
-using Kore.IO.Filters;
-using Kore.IO.Util;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+
+using Kore.IO.Filters;
 
 namespace Kore.IO.UnitTests.Filters
 {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Kore.IO.Util;
+
 using Kore.Dev.Util;
 
 namespace Kore.IO.TestUtil

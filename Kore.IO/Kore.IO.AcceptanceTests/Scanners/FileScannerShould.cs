@@ -8,7 +8,6 @@ using Kore.IO.Scanners;
 using Kore.IO.Retrievers;
 using Kore.IO.TestUtil;
 using Kore.IO.Filters;
-using Kore.IO.Util;
 
 namespace Kore.IO.AcceptanceTests.Scanners
 {

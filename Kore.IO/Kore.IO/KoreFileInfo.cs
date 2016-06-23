@@ -4,7 +4,7 @@ using System;
 using System.IO;
 using System.Threading;
 
-namespace Kore.IO.Util
+namespace Kore.IO
 {
     [Serializable]
     public class KoreFileInfo : KoreIoNodeInfo, IKoreFileInfo

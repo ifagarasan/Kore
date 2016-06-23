@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Castle.Components.DictionaryAdapter;
 using Kore.IO.Retrievers;
 using Kore.IO.TestUtil;
-using Kore.IO.Util;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 

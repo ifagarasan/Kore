@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using Kore.Dev.Util;
 using Kore.IO.TestUtil;
-using Kore.IO.Util;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Kore.IO.UnitTests.Util

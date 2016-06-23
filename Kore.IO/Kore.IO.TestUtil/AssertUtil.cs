@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Kore.IO.Util;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Kore.IO.TestUtil

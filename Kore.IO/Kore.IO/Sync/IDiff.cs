@@ -1,6 +1,4 @@
-﻿using Kore.IO.Util;
-
-namespace Kore.IO.Sync
+﻿namespace Kore.IO.Sync
 {
     public interface IDiff
     {
