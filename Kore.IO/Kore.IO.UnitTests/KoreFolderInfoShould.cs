@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using Kore.Dev.Util;
-using Kore.IO.TestUtil;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Kore.IO.UnitTests.Util
+namespace Kore.IO.UnitTests
 {
     [TestClass]
     public class KoreFolderInfoShould: KoreIoNodeInfoShould

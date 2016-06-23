@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using Kore.IO.Exceptions;
+using static Kore.Validation.ObjectValidation;
 
 namespace Kore.IO.Management
 {
@@ -7,7 +9,18 @@ namespace Kore.IO.Management
     {
         public void Copy(IKoreFileInfo source, IKoreFileInfo destination)
         {
-            File.Copy(source.FullName, destination.FullName);
+            IsNotNull(source, nameof(source));
+            IsNotNull(destination, nameof(destination));
+
+            if (!source.Exists)
+                throw new NodeNotFoundException();
+
+            if (source.FullName.Equals(destination.FullName))
+                throw new InvalidDestinationNodeException();
+
+            destination.FolderInfo.EnsureExists();
+
+            File.Copy(source.FullName, destination.FullName, true);
         }
     }
 }

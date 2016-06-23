@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using Kore.IO.TestUtil;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Kore.Dev.Util;
 using Kore.IO.Exceptions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Kore.IO.UnitTests.Util
+namespace Kore.IO.UnitTests
 {
     [TestClass]
     public class KoreFileInfoShould: KoreIoNodeInfoShould
@@ -137,47 +135,6 @@ namespace Kore.IO.UnitTests.Util
             DeleteNode(_fileInfo);
 
             var size = _fileInfo.Size;
-        }
-
-        #endregion
-
-        #region Copy
-
-        [TestMethod]
-        public void CopySourceFileToProvidedFile()
-        {
-            IKoreFileInfo destinationFileInfo = new KoreFileInfo(FullName.Replace(".txt", ".cpy"));
-
-            _fileInfo.Copy(destinationFileInfo);
-
-            Assert.IsTrue(File.Exists(destinationFileInfo.FullName));
-        }
-
-        [TestMethod]
-        public void OverridesDestinationOnCopy()
-        {
-            IKoreFileInfo destinationFileInfo = new KoreFileInfo(FullName.Replace(".txt", ".cpy"));
-
-            EnsureNodeExists(destinationFileInfo);
-
-            var date = new DateTime(1989, 2, 27);
-
-            _fileInfo.LastWriteTime = date;
-            _fileInfo.Copy(destinationFileInfo);
-
-            Assert.AreEqual(date, destinationFileInfo.LastWriteTime);
-        }
-
-        [TestMethod]
-        public void CreatesDestinationFoldersOnCopy()
-        {
-            string destination = Path.Combine(FullName.Remove(FullName.Length - 4), "dest", "file1.txt");
-
-            IKoreFileInfo destinationFileInfo = new KoreFileInfo(destination);
-
-            _fileInfo.Copy(destinationFileInfo);
-
-            Assert.IsTrue(File.Exists(destinationFileInfo.FullName));
         }
 
         #endregion

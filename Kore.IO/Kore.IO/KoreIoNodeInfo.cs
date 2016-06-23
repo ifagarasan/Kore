@@ -16,19 +16,6 @@ namespace Kore.IO
 
         public string Name => Path.GetFileName(FullName);
 
-        public void Copy(IKoreIoNodeInfo nodeInfo)
-        {
-            ObjectValidation.IsNotNull(nodeInfo, nameof(nodeInfo));
-
-            if (!Exists)
-                throw new NodeNotFoundException();
-
-            if (FullName.Equals(nodeInfo.FullName))
-                throw new InvalidDestinationNodeException();
-
-            CopyNode(nodeInfo);
-        }
-
         public void Delete()
         {
             if (!Exists)

@@ -10,8 +10,6 @@ namespace Kore.IO
         long Size { get; }
 
         void EnsureExists();
-
-        void Copy(IKoreIoNodeInfo nodeInfo);
         void Delete();
     }
 }

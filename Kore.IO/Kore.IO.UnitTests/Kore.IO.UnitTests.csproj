@@ -70,14 +70,14 @@
     <Compile Include="Filters\VisibleShould.cs" />
     <Compile Include="Management\FileManagerShould.cs" />
     <Compile Include="Retrievers\FileRetrieverShould.cs" />
-    <Compile Include="Scanners\FileCopierShould.cs" />
+    <Compile Include="Management\FileCopierShould.cs" />
     <Compile Include="Scanners\FileScannerShould.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sync\FolderDiffShould.cs" />
     <Compile Include="Sync\FolderDifferShould.cs" />
-    <Compile Include="Util\KoreIoNodeInfoShould.cs" />
-    <Compile Include="Util\KoreFolderInfoShould.cs" />
-    <Compile Include="Util\KoreFileInfoShould.cs" />
+    <Compile Include="KoreIoNodeInfoShould.cs" />
+    <Compile Include="KoreFolderInfoShould.cs" />
+    <Compile Include="KoreFileInfoShould.cs" />
     <Compile Include="Validation\FileValidationShould.cs" />
   </ItemGroup>
   <ItemGroup>

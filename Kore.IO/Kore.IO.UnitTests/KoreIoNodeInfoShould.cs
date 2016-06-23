@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using Kore.IO.TestUtil;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Kore.Dev.Util;
 using Kore.IO.Exceptions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Kore.IO.UnitTests.Util
+namespace Kore.IO.UnitTests
 {
     [TestClass]
     public abstract class KoreIoNodeInfoShould
@@ -62,35 +60,6 @@ namespace Kore.IO.UnitTests.Util
 
             Assert.IsTrue(_nodeInfo.Exists);
         }
-
-        #region Copy
-
-        [TestMethod]
-        [ExpectedException(typeof(NodeNotFoundException))]
-        public void ValidatesSourceExistsOnCopy()
-        {
-            DeleteNode(_nodeInfo);
-
-            _nodeInfo.Copy(_nodeInfo);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void ValidatesDestinationOnCopy()
-        {
-            _nodeInfo.Copy(null);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(InvalidDestinationNodeException))]
-        public void ValidatesSourceAndDestinationDontMatchOnCopy()
-        {
-            var destinationNodeInfo = CreateNodeInfo(_nodeInfo.FullName);
-
-            _nodeInfo.Copy(destinationNodeInfo);
-        }
-
-        #endregion
 
         #region Delete
 
