@@ -78,6 +78,7 @@
     <Compile Include="KoreIoNodeInfoShould.cs" />
     <Compile Include="KoreFolderInfoShould.cs" />
     <Compile Include="KoreFileInfoShould.cs" />
+    <Compile Include="Util\IoNodeUtilShould.cs" />
     <Compile Include="Validation\FileValidationShould.cs" />
   </ItemGroup>
   <ItemGroup>
