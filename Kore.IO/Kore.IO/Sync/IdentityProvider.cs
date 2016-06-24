@@ -1,4 +1,4 @@
-﻿using System;
+﻿using static Kore.IdentityGenerators.NumericIdGenerator;
 
 namespace Kore.IO.Sync
 {
@@ -6,7 +6,7 @@ namespace Kore.IO.Sync
     {
         public long GenerateId()
         {
-            return 0; //TOOD: call Kore identity generator
+            return Generate();
         }
     }
 }

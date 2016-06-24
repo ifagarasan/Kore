@@ -62,7 +62,7 @@ namespace Kore.IO.UnitTests.Sync
 
             _mockIdentityProvider.Verify(m => m.GenerateId());
 
-            Assert.AreEqual(idToReturn, _diff.Diffs[0].ID);
+            Assert.AreEqual(idToReturn, _diff.Diffs[0].Id);
         }
 
         [TestMethod]

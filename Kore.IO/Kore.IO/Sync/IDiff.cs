@@ -5,6 +5,6 @@
         IKoreFileInfo Destination { get; }
         IKoreFileInfo Source { get; }
         DiffRelation Relation { get; }
-        long ID { get; }
+        long Id { get; }
     }
 }

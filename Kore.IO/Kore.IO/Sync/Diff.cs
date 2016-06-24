@@ -7,12 +7,12 @@
             Source = source;
             Destination = destination;
             Relation = relation;
-            ID = id;
+            Id = id;
         }
 
         public DiffRelation Relation { get; }
         public IKoreFileInfo Destination { get; }
         public IKoreFileInfo Source { get; }
-        public long ID { get; }
+        public long Id { get; }
     }
 }
