@@ -56,9 +56,9 @@ namespace Kore.IO.AcceptanceTests.Sync
 
         private void EnsureTestFilesExist()
         {
-            IoUtil.EnsureFolderExits(_testFolder);
-            IoUtil.EnsureFolderExits(_sourceFolder);
-            IoUtil.EnsureFolderExits(_destinationFolder);
+            IoUtil.EnsureFolderExists(_testFolder);
+            IoUtil.EnsureFolderExists(_sourceFolder);
+            IoUtil.EnsureFolderExists(_destinationFolder);
 
             EnsureFilesExist(_sourceFiles);
             EnsureFilesExist(_destinationFiles);
@@ -83,7 +83,7 @@ namespace Kore.IO.AcceptanceTests.Sync
         [TestMethod]
         public void ReturnAListOfDiffItems()
         {
-            IFolderDiffer folderDiffer = new FolderDiffer();
+            IFolderDiffer folderDiffer = new FolderDiffer(new IdentityProvider());
 
             IFolderDiff folderDiff = folderDiffer.BuildDiff(_sourceScanResult, _destinationScanResult);
 

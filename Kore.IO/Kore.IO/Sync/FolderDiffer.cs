@@ -7,6 +7,13 @@ namespace Kore.IO.Sync
 {
     public class FolderDiffer : IFolderDiffer
     {
+        private readonly IIdentityProvider _identityProvider;
+
+        public FolderDiffer(IIdentityProvider identityProvider)
+        {
+            _identityProvider = identityProvider;
+        }
+
         public IFolderDiff BuildDiff(IFileScanResult sourceScanResult, IFileScanResult destinationScanResult)
         {
             var diffs = new List<IDiff>();
@@ -31,10 +38,10 @@ namespace Kore.IO.Sync
 
                 if (diffType.HasValue)
                 {
-                    var diff = new Diff(sourceFileInfo, destinationFileInfo, diffType.Value);
+                    var diff = new Diff(sourceFileInfo, destinationFileInfo, diffType.Value, _identityProvider.GenerateId());
 
                     if (diffType.Value == DiffRelation.DestinationOrphan)
-                        diff = new Diff(destinationFileInfo, sourceFileInfo, diffType.Value);
+                        diff = new Diff(destinationFileInfo, sourceFileInfo, diffType.Value, _identityProvider.GenerateId());
 
                     diffs.Add(diff);
                 }

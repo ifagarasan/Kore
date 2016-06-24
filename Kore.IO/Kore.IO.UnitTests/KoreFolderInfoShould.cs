@@ -36,7 +36,7 @@ namespace Kore.IO.UnitTests
 
         protected override void EnsureNodeExists(IKoreIoNodeInfo nodeInfo)
         {
-            IoUtil.EnsureFolderExits(nodeInfo.FullName);
+            IoUtil.EnsureFolderExists(nodeInfo.FullName);
         }
     }
 }

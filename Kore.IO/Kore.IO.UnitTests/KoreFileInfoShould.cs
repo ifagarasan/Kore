@@ -154,7 +154,7 @@ namespace Kore.IO.UnitTests
 
         protected override void EnsureNodeExists(IKoreIoNodeInfo nodeInfo)
         {
-            IoUtil.EnsureFileExits(nodeInfo.FullName);
+            IoUtil.EnsureFileExists(nodeInfo.FullName);
         }
 
         protected override void DeleteNode(IKoreIoNodeInfo nodeInfo)

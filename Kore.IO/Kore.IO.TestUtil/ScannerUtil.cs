@@ -40,9 +40,9 @@ namespace Kore.IO.TestUtil
 
         public static void SetupTestFiles()
         {
-            IoUtil.EnsureFolderExits(TestFolder);
-            IoUtil.EnsureFolderExits(TestFolderDeep);
-            IoUtil.EnsureFolderExits(TestFolderOneLevel);
+            IoUtil.EnsureFolderExists(TestFolder);
+            IoUtil.EnsureFolderExists(TestFolderDeep);
+            IoUtil.EnsureFolderExists(TestFolderOneLevel);
 
             EnsureFilesExist(BuildDeepTestFilesList(true, false), false);
             EnsureFilesExist(BuildDeepTestFilesList(false, true), true);

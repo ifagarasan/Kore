@@ -37,7 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Kore.Dev, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Kore.Dev.1.0.0-CI00044\lib\net452\Kore.Dev.dll</HintPath>
+      <HintPath>..\packages\Kore.Dev.1.0.0-CI00071\lib\net452\Kore.Dev.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />

@@ -15,7 +15,7 @@ namespace Kore.IO.UnitTests
 
         static KoreIoNodeInfoShould()
         {
-            IoUtil.EnsureFolderExits(IoUtil.TestRoot);
+            IoUtil.EnsureFolderExists(IoUtil.TestRoot);
 
             CurrentWorkingFolder = $"{IoUtil.TestRoot}\\{DateTime.Now.Ticks}";
 

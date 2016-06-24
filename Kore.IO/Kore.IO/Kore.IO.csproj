@@ -32,7 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Kore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Kore.1.0.0-CI00046\lib\net40\Kore.dll</HintPath>
+      <HintPath>..\packages\Kore.1.0.0-CI00071\lib\net40\Kore.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -64,6 +64,7 @@
     <Compile Include="Sync\DiffRelation.cs" />
     <Compile Include="Sync\FolderDiff.cs" />
     <Compile Include="Sync\FolderDiffer.cs" />
+    <Compile Include="Sync\IdentityProvider.cs" />
     <Compile Include="Sync\IDiff.cs" />
     <Compile Include="Sync\IFolderDiff.cs" />
     <Compile Include="Sync\IFolderDiffer.cs" />
@@ -74,13 +75,13 @@
     <Compile Include="KoreFileInfo.cs" />
     <Compile Include="KoreIoNodeInfo.cs" />
     <Compile Include="KoreFolderInfo.cs" />
+    <Compile Include="Sync\IIdentityProvider.cs" />
     <Compile Include="Util\IoNode.cs" />
     <Compile Include="Validation\FileValidation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

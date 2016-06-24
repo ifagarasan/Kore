@@ -23,9 +23,16 @@ namespace Kore.IO.UnitTests.Sync
         private Mock<IKoreFileInfo> _mockSourceFileInfo;
         private Mock<IKoreFileInfo> _mockDestinationFileInfo;
 
+        private Mock<IIdentityProvider> _mockIdentityProvider;
+
+        long idToReturn = 2016;
+
         [TestInitialize]
         public void Setup()
         {
+            _mockIdentityProvider = new Mock<IIdentityProvider>();
+            _mockIdentityProvider.Setup(m => m.GenerateId()).Returns(idToReturn);
+
             _mockSourceFileInfo = new Mock<IKoreFileInfo>();
             _mockDestinationFileInfo = new Mock<IKoreFileInfo>();
 
@@ -35,13 +42,27 @@ namespace Kore.IO.UnitTests.Sync
             _mockDestinationScanResult = new Mock<IFileScanResult>();
             InitialiseScanResultMock(_mockDestinationScanResult, DestinationFolder);
 
-            _folderDiffer = new FolderDiffer();
+            _folderDiffer = new FolderDiffer(_mockIdentityProvider.Object);
         }
 
         private static void InitialiseScanResultMock(Mock<IFileScanResult> mockScanResult, string folder)
         {
             mockScanResult.Setup(m => m.Folder).Returns(folder);
             mockScanResult.Setup(m => m.Files).Returns(new List<IKoreFileInfo>());
+        }
+
+        [TestMethod]
+        public void UseTheIdentityProviderToInitialiseDiffIds()
+        {
+            var now = DateTime.Now;
+
+            SetupIOMocks(now, now);
+
+            _diff = _folderDiffer.BuildDiff(_mockSourceScanResult.Object, _mockDestinationScanResult.Object);
+
+            _mockIdentityProvider.Verify(m => m.GenerateId());
+
+            Assert.AreEqual(idToReturn, _diff.Diffs[0].ID);
         }
 
         [TestMethod]
@@ -151,6 +172,16 @@ namespace Kore.IO.UnitTests.Sync
 
         private void TestIdenticalFileFullNameDiffs(DateTime sourceLastWriteTime, DateTime destinationLastWriteTime, DiffRelation expectedDiffRelation)
         {
+            SetupIOMocks(sourceLastWriteTime, destinationLastWriteTime);
+
+            _diff = _folderDiffer.BuildDiff(_mockSourceScanResult.Object, _mockDestinationScanResult.Object);
+
+            Assert.AreEqual(1, _diff.Diffs.Count);
+            Assert.AreEqual(expectedDiffRelation, _diff.Diffs[0].Relation);
+        }
+
+        private void SetupIOMocks(DateTime sourceLastWriteTime, DateTime destinationLastWriteTime)
+        {
             _mockSourceFileInfo.Setup(m => m.FullName).Returns(Path.Combine(SourceFolder, "data", "file1.txt"));
             _mockSourceFileInfo.Setup(m => m.LastWriteTime).Returns(sourceLastWriteTime);
 
@@ -159,11 +190,6 @@ namespace Kore.IO.UnitTests.Sync
 
             _mockSourceScanResult.Setup(m => m.Files).Returns(new List<IKoreFileInfo> { _mockSourceFileInfo.Object });
             _mockDestinationScanResult.Setup(m => m.Files).Returns(new List<IKoreFileInfo> { _mockDestinationFileInfo.Object });
-
-            _diff = _folderDiffer.BuildDiff(_mockSourceScanResult.Object, _mockDestinationScanResult.Object);
-
-            Assert.AreEqual(1, _diff.Diffs.Count);
-            Assert.AreEqual(expectedDiffRelation, _diff.Diffs[0].Relation);
         }
     }
 }
