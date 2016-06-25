@@ -6,9 +6,9 @@ namespace Kore.IO.Retrievers
 {
     public class FileRetriever : IFileRetriever
     {
-        public List<IKoreFileInfo> GetFiles(IKoreFolderInfo folder, string searchPattern)
+        public List<IKoreFileInfo> GetFiles(IKoreFolderInfo folder)
         {
-            return Directory.EnumerateFiles(folder.FullName, searchPattern, SearchOption.AllDirectories).
+            return Directory.EnumerateFiles(folder.FullName, "*", SearchOption.AllDirectories).
                 Select(BuildFileInfo).ToList();
         }
 

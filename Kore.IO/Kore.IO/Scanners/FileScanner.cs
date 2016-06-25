@@ -24,7 +24,7 @@ namespace Kore.IO.Scanners
             if (options == null)
                 throw new ArgumentNullException(nameof(options));
 
-            List<IKoreFileInfo> files = _fileRetriever.GetFiles(folder, options.SearchPattern);
+            List<IKoreFileInfo> files = _fileRetriever.GetFiles(folder);
 
             return new FileScanResult(folder, options.Filters.Aggregate(files, (current, filter) => filter.Filter(current)));
         }

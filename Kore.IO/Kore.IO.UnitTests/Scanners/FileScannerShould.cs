@@ -22,7 +22,7 @@ namespace Kore.IO.UnitTests.Scanners
         public void Setup()
         {
             _mockFileRetriever = new Mock<IFileRetriever>();
-            _mockFileRetriever.Setup(m => m.GetFiles(It.IsAny<IKoreFolderInfo>(), It.IsAny<string>())).Returns(new List<IKoreFileInfo>());
+            _mockFileRetriever.Setup(m => m.GetFiles(It.IsAny<IKoreFolderInfo>())).Returns(new List<IKoreFileInfo>());
 
             _fileScanner = new FileScanner(_mockFileRetriever.Object);
             _fileScanOptions = new FileScanOptions();
@@ -56,7 +56,7 @@ namespace Kore.IO.UnitTests.Scanners
                     Assert.AreSame(expected[index++], files);
                 });
 
-            _mockFileRetriever.Setup(m => m.GetFiles(It.IsAny<IKoreFolderInfo>(), It.IsAny<string>())).Returns(inputFiles);
+            _mockFileRetriever.Setup(m => m.GetFiles(It.IsAny<IKoreFolderInfo>())).Returns(inputFiles);
 
             _fileScanOptions.Filters.Add(mockFileFilter.Object);
             _fileScanOptions.Filters.Add(mockFileFilter.Object);

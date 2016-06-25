@@ -50,15 +50,5 @@ namespace Kore.IO.AcceptanceTests.Scanners
 
             AssertUtil.AssertIKoreFileInfoListsAreEqual(_expectedFileList, scanResult.Files);
         }
-
-        [TestMethod]
-        public void AllowFilteringOfFilesBySearchPattern()
-        {
-            _fileScanOptions.SearchPattern = "*.txt";
-            IFileScanResult scanResult = _fileScanner.Scan(_testDeepFolderInfo, _fileScanOptions);
-
-            _expectedFileList = ScannerUtil.BuildDeepTestFilesList(true, true, "txt");
-            AssertUtil.AssertIKoreFileInfoListsAreEqual(_expectedFileList, scanResult.Files);
-        }
     }
 }
