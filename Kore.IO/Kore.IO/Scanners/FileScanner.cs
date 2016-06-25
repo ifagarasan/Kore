@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using Kore.IO.Retrievers;
+using static Kore.Validation.ObjectValidation;
 
 namespace Kore.IO.Scanners
 {
     public class FileScanner : IFileScanner
     {
         private readonly IFileRetriever _fileRetriever;
+
+        public event FileFoundDelegate FileFound;
 
         public FileScanner(IFileRetriever fileRetriever)
         {
@@ -21,12 +24,32 @@ namespace Kore.IO.Scanners
 
         public IFileScanResult Scan(IKoreFolderInfo folder, FileScanOptions options)
         {
-            if (options == null)
-                throw new ArgumentNullException(nameof(options));
+            IsNotNull(options, nameof(options));
 
-            List<IKoreFileInfo> files = _fileRetriever.GetFiles(folder);
+            var files = new List<IKoreFileInfo>();
 
-            return new FileScanResult(folder, options.Filters.Aggregate(files, (current, filter) => filter.Filter(current)));
+            var eventDelegate = new FileFoundDelegate(file =>
+            {
+                var filtered = options.Filters.Aggregate(new List<IKoreFileInfo> {file}, (current, filter) => filter.Filter(current));
+                if (filtered.Count > 0)
+                {
+                    OnFileFound(file);
+                    files.Add(file);
+                }
+            });
+
+            _fileRetriever.FileFound += eventDelegate;
+
+            _fileRetriever.GetFiles(folder);
+
+            _fileRetriever.FileFound -= eventDelegate;
+
+            return new FileScanResult(folder, files);
+        }
+
+        protected virtual void OnFileFound(IKoreFileInfo file)
+        {
+            FileFound?.Invoke(file);
         }
     }
 }

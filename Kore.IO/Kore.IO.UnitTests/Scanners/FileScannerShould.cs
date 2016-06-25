@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Kore.IO.Retrievers;
@@ -13,14 +14,25 @@ namespace Kore.IO.UnitTests.Scanners
     [TestClass]
     public class FileScannerShould
     {
-        Mock<IFileRetriever> _mockFileRetriever;
-        FileScanner _fileScanner;
-        FileScanOptions _fileScanOptions;
+        private Mock<IFileRetriever> _mockFileRetriever;
+        private FileScanner _fileScanner;
+        private FileScanOptions _fileScanOptions;
         private IKoreFolderInfo _testFolderDeep;
+        private Mock<IFileFilter> _mockFileFilter;
+        List<IKoreFileInfo> _mockFiles;
 
         [TestInitialize]
         public void Setup()
         {
+            _mockFiles = new List<IKoreFileInfo>
+            {
+                new Mock<IKoreFileInfo>().Object,
+                new Mock<IKoreFileInfo>().Object,
+                new Mock<IKoreFileInfo>().Object
+            };
+
+            _mockFileFilter = new Mock<IFileFilter>();
+
             _mockFileRetriever = new Mock<IFileRetriever>();
             _mockFileRetriever.Setup(m => m.GetFiles(It.IsAny<IKoreFolderInfo>())).Returns(new List<IKoreFileInfo>());
 
@@ -40,30 +52,37 @@ namespace Kore.IO.UnitTests.Scanners
         [TestMethod]
         public void CallFilterForEveryFilter()
         {
-            Mock<IFileFilter> mockFileFilter = new Mock<IFileFilter>();
+            _mockFileFilter.Setup(m => m.Filter(It.IsAny<List<IKoreFileInfo>>())).Returns(new List<IKoreFileInfo> { _mockFiles[0]});
 
-            List<IKoreFileInfo> filteredFiles = new List<IKoreFileInfo>();
-            List<IKoreFileInfo> inputFiles = ScannerUtil.BuildDeepTestFilesList(true, false);
-            List<IKoreFileInfo>[] expected = new List<IKoreFileInfo>[2];
+            _mockFileRetriever.Setup(m => m.GetFiles(It.IsAny<IKoreFolderInfo>()))
+                .Returns(_mockFiles)
+                .Raises(m => m.FileFound += null, _mockFiles[0]);
 
-            expected[0] = inputFiles;
-            expected[1] = filteredFiles;
-            int index = 0;
-
-            mockFileFilter.Setup(m => m.Filter(It.IsAny<List<IKoreFileInfo>>())).Returns(filteredFiles).Callback(
-                (List<IKoreFileInfo> files) =>
-                {
-                    Assert.AreSame(expected[index++], files);
-                });
-
-            _mockFileRetriever.Setup(m => m.GetFiles(It.IsAny<IKoreFolderInfo>())).Returns(inputFiles);
-
-            _fileScanOptions.Filters.Add(mockFileFilter.Object);
-            _fileScanOptions.Filters.Add(mockFileFilter.Object);
+            _fileScanOptions.Filters.Add(_mockFileFilter.Object);
+            _fileScanOptions.Filters.Add(_mockFileFilter.Object);
 
             _fileScanner.Scan(_testFolderDeep, _fileScanOptions);
 
-            Assert.AreEqual(2, index);
+            _mockFileFilter.Verify(m => m.Filter(It.IsAny<List<IKoreFileInfo>>()), Times.Exactly(2));
+        }
+
+        public void RaisesFileFoundOnFilteredFiles()
+        {
+            List<IKoreFileInfo> filteredFiles = _mockFiles.GetRange(0, 2);
+
+            _mockFileFilter.Setup(m => m.Filter(It.IsAny<List<IKoreFileInfo>>())).Returns(filteredFiles);
+
+            _mockFileRetriever.Setup(m => m.GetFiles(It.IsAny<IKoreFolderInfo>())).Returns(_mockFiles);
+
+            _fileScanOptions.Filters.Add(_mockFileFilter.Object);
+
+            var times = 0;
+
+            _fileScanner.FileFound += (f) => { times++; };
+
+            _fileScanner.Scan(_testFolderDeep, _fileScanOptions);
+
+            Assert.AreEqual(filteredFiles.Count, times);
         }
     }
 }
