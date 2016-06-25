@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Kore.IO.Scanners;
+using Kore.IO.Util;
 
 namespace Kore.IO.Sync
 {
@@ -29,10 +30,11 @@ namespace Kore.IO.Sync
         {
             foreach (var sourceFileInfo in sourceScanResult.Files)
             {
-                var relativeFullFileName = ExtractRelativeFullFileName(sourceFileInfo, sourceScanResult.Folder.Length);
+                var relativeFullFileName = IoNode.RelativePath(sourceFileInfo, new KoreFolderInfo(sourceScanResult.Folder)).ToLower();
 
+                //TODO: build dictionay based on this stuff and reduce look-up to O(1)
                 var destinationFileInfo = destinationScanResult.Files.SingleOrDefault(
-                    f => f.FullName.Substring(destinationScanResult.Folder.Length).ToLower().Equals(relativeFullFileName));
+                    f => IoNode.RelativePath(f, new KoreFolderInfo(destinationScanResult.Folder)).ToLower().Equals(relativeFullFileName));
 
                 var diffType = diffFunc(sourceFileInfo, destinationFileInfo);
 
@@ -48,7 +50,7 @@ namespace Kore.IO.Sync
             }
         }
 
-        private DiffRelation? SourceRelativeDiff(IKoreFileInfo sourceFileInfo, IKoreFileInfo destinationFileInfo)
+        public DiffRelation? SourceRelativeDiff(IKoreFileInfo sourceFileInfo, IKoreFileInfo destinationFileInfo)
         {
             DiffRelation? diffRelation;
 
@@ -64,7 +66,7 @@ namespace Kore.IO.Sync
             return diffRelation;
         }
 
-        private DiffRelation? DestinationRelativeDiff(IKoreFileInfo sourceFileInfo, IKoreFileInfo destinationFileInfo)
+        public DiffRelation? DestinationRelativeDiff(IKoreFileInfo sourceFileInfo, IKoreFileInfo destinationFileInfo)
         {
             DiffRelation? diffRelation = null;
 
@@ -72,11 +74,6 @@ namespace Kore.IO.Sync
                 diffRelation = DiffRelation.DestinationOrphan;
 
             return diffRelation;
-        }
-
-        private static string ExtractRelativeFullFileName(IKoreFileInfo sourceFileInfo, int startIndex)
-        {
-            return sourceFileInfo.FullName.Substring(startIndex).ToLower();
         }
     }
 }
