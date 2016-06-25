@@ -19,6 +19,9 @@ namespace Kore.IO.AcceptanceTests.Sync
         private string _sourceFolder;
         private string _destinationFolder;
 
+        private IKoreFolderInfo _sourceFolderInfo;
+        private IKoreFolderInfo _destinationFolderInfo;
+
         private List<IKoreFileInfo> _sourceFiles;
         private List<IKoreFileInfo> _destinationFiles;
 
@@ -50,8 +53,11 @@ namespace Kore.IO.AcceptanceTests.Sync
 
             EnsureTestFilesExist();
 
-            _sourceScanResult = new FileScanResult(_sourceFolder, _sourceFiles);
-            _destinationScanResult = new FileScanResult(_destinationFolder, _destinationFiles);
+            _sourceFolderInfo = new KoreFolderInfo(_sourceFolder);
+            _destinationFolderInfo = new KoreFolderInfo(_destinationFolder);
+
+            _sourceScanResult = new FileScanResult(_sourceFolderInfo, _sourceFiles);
+            _destinationScanResult = new FileScanResult(_destinationFolderInfo, _destinationFiles);
         }
 
         private void EnsureTestFilesExist()

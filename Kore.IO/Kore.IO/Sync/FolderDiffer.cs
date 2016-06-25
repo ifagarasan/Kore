@@ -22,7 +22,7 @@ namespace Kore.IO.Sync
             ProcessScanResultFiles(sourceScanResult, destinationScanResult, SourceRelativeDiff, diffs);
             ProcessScanResultFiles(destinationScanResult, sourceScanResult, DestinationRelativeDiff, diffs);
 
-            return new FolderDiff(new KoreFolderInfo(sourceScanResult.Folder), new KoreFolderInfo(destinationScanResult.Folder), diffs);
+            return new FolderDiff(sourceScanResult.Folder, destinationScanResult.Folder, diffs);
         }
 
         private void ProcessScanResultFiles(IFileScanResult sourceScanResult, IFileScanResult destinationScanResult,
@@ -30,11 +30,11 @@ namespace Kore.IO.Sync
         {
             foreach (var sourceFileInfo in sourceScanResult.Files)
             {
-                var relativeFullFileName = IoNode.RelativePath(sourceFileInfo, new KoreFolderInfo(sourceScanResult.Folder)).ToLower();
+                var relativeFullFileName = IoNode.RelativePath(sourceFileInfo, sourceScanResult.Folder).ToLower();
 
                 //TODO: build dictionay based on this stuff and reduce look-up to O(1)
                 var destinationFileInfo = destinationScanResult.Files.SingleOrDefault(
-                    f => IoNode.RelativePath(f, new KoreFolderInfo(destinationScanResult.Folder)).ToLower().Equals(relativeFullFileName));
+                    f => IoNode.RelativePath(f, destinationScanResult.Folder).ToLower().Equals(relativeFullFileName));
 
                 var diffType = diffFunc(sourceFileInfo, destinationFileInfo);
 

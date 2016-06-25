@@ -4,7 +4,7 @@ namespace Kore.IO.Scanners
 {
     public interface IFileScanResult
     {
-        string Folder { get; }
+        IKoreFolderInfo Folder { get; }
         IReadOnlyList<IKoreFileInfo> Files { get; }
     }
 }

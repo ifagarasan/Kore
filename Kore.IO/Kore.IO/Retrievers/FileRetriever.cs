@@ -6,13 +6,13 @@ namespace Kore.IO.Retrievers
 {
     public class FileRetriever : IFileRetriever
     {
-        public List<IKoreFileInfo> GetFiles(string folder, string searchPattern)
+        public List<IKoreFileInfo> GetFiles(IKoreFolderInfo folder, string searchPattern)
         {
-            return Directory.EnumerateFiles(folder, searchPattern, SearchOption.AllDirectories).
+            return Directory.EnumerateFiles(folder.FullName, searchPattern, SearchOption.AllDirectories).
                 Select(BuildFileInfo).ToList();
         }
 
-        private IKoreFileInfo BuildFileInfo(string file)
+        private static IKoreFileInfo BuildFileInfo(string file)
         {
             return new KoreFileInfo(file);
         }

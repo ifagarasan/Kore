@@ -4,6 +4,6 @@ namespace Kore.IO.Retrievers
 {
     public interface IFileRetriever
     {
-        List<IKoreFileInfo> GetFiles(string folder, string searchPattern);
+        List<IKoreFileInfo> GetFiles(IKoreFolderInfo folder, string searchPattern);
     }
 }

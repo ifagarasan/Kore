@@ -6,13 +6,13 @@ namespace Kore.IO.Scanners
 {
     public class FileScanResult: IFileScanResult
     {
-        public FileScanResult(string folder, List<IKoreFileInfo> files)
+        public FileScanResult(IKoreFolderInfo folder, List<IKoreFileInfo> files)
         {
-            Folder = new DirectoryInfo(folder).FullName; //TODO: IKoreDirectoryInfo
+            Folder = folder;
             Files = files.AsReadOnly();
         }
 
-        public string Folder { get; }
+        public IKoreFolderInfo Folder { get; }
         public IReadOnlyList<IKoreFileInfo> Files { get; }
     }
 }

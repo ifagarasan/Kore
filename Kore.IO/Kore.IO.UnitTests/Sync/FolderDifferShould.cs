@@ -23,6 +23,9 @@ namespace Kore.IO.UnitTests.Sync
         private Mock<IKoreFileInfo> _mockSourceFileInfo;
         private Mock<IKoreFileInfo> _mockDestinationFileInfo;
 
+        private Mock<IKoreFolderInfo> _mockSourceFolderInfo;
+        private Mock<IKoreFolderInfo> _mockDestinationFolderInfo;
+
         private Mock<IIdentityProvider> _mockIdentityProvider;
 
         long idToReturn = 2016;
@@ -30,6 +33,12 @@ namespace Kore.IO.UnitTests.Sync
         [TestInitialize]
         public void Setup()
         {
+            _mockSourceFolderInfo = new Mock<IKoreFolderInfo>();
+            _mockSourceFolderInfo.Setup(m => m.FullName).Returns(SourceFolder);
+
+            _mockDestinationFolderInfo = new Mock<IKoreFolderInfo>();
+            _mockDestinationFolderInfo.Setup(m => m.FullName).Returns(DestinationFolder);
+
             _mockIdentityProvider = new Mock<IIdentityProvider>();
             _mockIdentityProvider.Setup(m => m.GenerateId()).Returns(idToReturn);
 
@@ -37,15 +46,15 @@ namespace Kore.IO.UnitTests.Sync
             _mockDestinationFileInfo = new Mock<IKoreFileInfo>();
 
             _mockSourceScanResult = new Mock<IFileScanResult>();
-            InitialiseScanResultMock(_mockSourceScanResult, SourceFolder);
+            InitialiseScanResultMock(_mockSourceScanResult, _mockSourceFolderInfo.Object);
 
             _mockDestinationScanResult = new Mock<IFileScanResult>();
-            InitialiseScanResultMock(_mockDestinationScanResult, DestinationFolder);
+            InitialiseScanResultMock(_mockDestinationScanResult, _mockDestinationFolderInfo.Object);
 
             _folderDiffer = new FolderDiffer(_mockIdentityProvider.Object);
         }
 
-        private static void InitialiseScanResultMock(Mock<IFileScanResult> mockScanResult, string folder)
+        private static void InitialiseScanResultMock(Mock<IFileScanResult> mockScanResult, IKoreFolderInfo folder)
         {
             mockScanResult.Setup(m => m.Folder).Returns(folder);
             mockScanResult.Setup(m => m.Files).Returns(new List<IKoreFileInfo>());
