@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Comparers\Comparer.cs" />
     <Compile Include="Comparers\ComparisonResult.cs" />
+    <Compile Include="Exceptions\NullException.cs" />
     <Compile Include="Exceptions\CollectionEmptyException.cs" />
     <Compile Include="Exceptions\CollectionFullException.cs" />
     <Compile Include="Exceptions\ComparisonException.cs" />

@@ -7,10 +7,10 @@ namespace Kore.Validation
 {
     public class ObjectValidation
     {
-        public static void IsNotNull(object o, string argumentName=null)
+        public static void IsNotNull(object o)
         {
             if (o == null)
-                throw new ArgumentNullException(argumentName ?? nameof(o));
+                throw new NullException();
         }
     }
 }

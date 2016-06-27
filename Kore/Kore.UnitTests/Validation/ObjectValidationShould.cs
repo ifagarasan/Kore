@@ -10,8 +10,8 @@ namespace Kore.UnitTests.Validation
     public class ObjectalidationShould
     {
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void ThrowArgumentNullExceptionIfNull()
+        [ExpectedException(typeof(NullException))]
+        public void ThrowNullExceptionIfNull()
         {
             ObjectValidation.IsNotNull(null);
         }
