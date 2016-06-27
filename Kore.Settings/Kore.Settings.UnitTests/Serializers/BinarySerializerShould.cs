@@ -1,4 +1,5 @@
 ﻿using System;
+using Kore.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Kore.Settings.Serializers;
 
@@ -16,21 +17,21 @@ namespace Kore.Settings.UnitTests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof(NullException))]
         public void ThrowArgumentNullExceptionIfDataIsNullOnSerialize()
         {
             _serializer.Serialize(null, null);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof(NullException))]
         public void ThrowArgumentNullExceptionIfStreamIsNullOnSerialize()
         {
             _serializer.Serialize(this, null);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof(NullException))]
         public void ThrowArgumentNullExceptionIfStreamIsNullOnDeserialize()
         {
             _serializer.Deserialize(null);

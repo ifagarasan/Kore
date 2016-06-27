@@ -20,7 +20,7 @@ namespace Kore.Settings
 
         public void Write(IKoreFileInfo fileInfo)
         {
-            IsNotNull(fileInfo, nameof(fileInfo));
+            IsNotNull(fileInfo);
 
             if (Data == null)
                 throw new SerializationException();
@@ -33,7 +33,7 @@ namespace Kore.Settings
 
         public void Read(IKoreFileInfo fileInfo)
         {
-            IsNotNull(fileInfo, nameof(fileInfo));
+            IsNotNull(fileInfo);
 
             if (!fileInfo.Exists)
                 throw new NodeNotFoundException();

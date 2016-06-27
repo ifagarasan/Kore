@@ -15,15 +15,15 @@ namespace Kore.Settings.Serializers
 
         public T Deserialize(Stream stream)
         {
-            ObjectValidation.IsNotNull(stream, nameof(stream));
+            ObjectValidation.IsNotNull(stream);
 
             return (T)_binaryFormatter.Deserialize(stream);
         }
 
         public void Serialize(T data, Stream stream)
         {
-            ObjectValidation.IsNotNull(data, nameof(data));
-            ObjectValidation.IsNotNull(stream, nameof(stream));
+            ObjectValidation.IsNotNull(data);
+            ObjectValidation.IsNotNull(stream);
 
             _binaryFormatter.Serialize(stream, data);
         }

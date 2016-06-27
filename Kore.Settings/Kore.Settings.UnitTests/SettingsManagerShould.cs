@@ -4,6 +4,7 @@ using Moq;
 using Kore.Settings.Serializers;
 using System.IO;
 using System.Runtime.Serialization;
+using Kore.Exceptions;
 using Kore.IO;
 using Kore.IO.Exceptions;
 
@@ -79,14 +80,14 @@ namespace Kore.Settings.UnitTests
         #endregion
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof(NullException))]
         public void ThrowsArgumentNullExceptionWhenPassingNullOnWrite()
         {
             _settings.Write(null);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof(NullException))]
         public void ThrowsArgumentNullExceptionWhenPassingNullOnRead()
         {
             _settings.Read(null);
