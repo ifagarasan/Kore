@@ -13,7 +13,7 @@ namespace Kore.IO.Validation
     {
         public static void Exists(IKoreIoNodeInfo fileInfo)
         {
-            IsNotNull(fileInfo, nameof(fileInfo));
+            IsNotNull(fileInfo);
 
             if (!fileInfo.Exists)
                 throw new FileNotFoundException(fileInfo.FullName);

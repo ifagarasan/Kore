@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Kore.Dev.Util;
+using Kore.Exceptions;
 using Kore.IO.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -39,14 +40,14 @@ namespace Kore.IO.UnitTests.Util
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof(NullException))]
         public void ValidateSourceOnRelativePath()
         {
             RelativePath(null, null);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof(NullException))]
         public void ValidateParentOnRelativePath()
         {
             RelativePath(mockSourceNodeInfo.Object, null);

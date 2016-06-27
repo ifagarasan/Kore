@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Kore.Dev.Util;
+using Kore.Exceptions;
 using Kore.IO.Exceptions;
 using Kore.IO.Management;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -29,14 +30,14 @@ namespace Kore.IO.UnitTests.Management
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof(NullException))]
         public void ValidatesSourceOnCopy()
         {
             _fileCopier.Copy(null, null);   
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof(NullException))]
         public void ValidatesDestinationOnCopy()
         {
             _fileCopier.Copy(_mockSourceInfo.Object, null);

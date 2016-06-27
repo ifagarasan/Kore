@@ -1,4 +1,5 @@
 ﻿using System;
+using Kore.Exceptions;
 using Kore.IO.Exceptions;
 using Kore.IO.Management;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -24,7 +25,7 @@ namespace Kore.IO.UnitTests.Management
         #region Init
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof(NullException))]
         public void ValidatesFileCopierOnInit()
         {
             _fileManager = new FileManager(null);

@@ -6,8 +6,8 @@ namespace Kore.IO.Util
     {
         public static string RelativePath(IKoreIoNodeInfo source, IKoreIoNodeInfo parent)
         {
-            IsNotNull(source, nameof(source));
-            IsNotNull(parent, nameof(parent));
+            IsNotNull(source);
+            IsNotNull(parent);
 
             var sourcePath = source.FullName;
             var parentPath = parent.FullName;

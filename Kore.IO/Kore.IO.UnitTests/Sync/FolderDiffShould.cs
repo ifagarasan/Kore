@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using Castle.Components.DictionaryAdapter;
+using Kore.Exceptions;
 using Kore.IO.Scanners;
 using Kore.IO.Sync;
 using Kore.IO.TestUtil;
@@ -29,21 +30,21 @@ namespace Kore.IO.UnitTests.Sync
         #region Init
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof(NullException))]
         public void ValidatesSourceParameterOnInit()
         {
             _folderDiff = new FolderDiff(null, _mockDestinationFolderInfo.Object, new List<IDiff>());
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof(NullException))]
         public void ValidatesDestinationParameterOnInit()
         {
             _folderDiff = new FolderDiff(_mockSourceFolderInfo.Object, null, new List<IDiff>());
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof(NullException))]
         public void ValidatesDiffsParameterOnInit()
         {
             _folderDiff = new FolderDiff(_mockSourceFolderInfo.Object, _mockDestinationFolderInfo.Object, null);

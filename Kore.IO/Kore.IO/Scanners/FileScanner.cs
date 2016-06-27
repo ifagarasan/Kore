@@ -24,7 +24,7 @@ namespace Kore.IO.Scanners
 
         public IFileScanResult Scan(IKoreFolderInfo folder, FileScanOptions options)
         {
-            IsNotNull(options, nameof(options));
+            IsNotNull(options);
 
             var files = new List<IKoreFileInfo>();
 

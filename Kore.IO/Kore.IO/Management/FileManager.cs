@@ -9,7 +9,7 @@ namespace Kore.IO.Management
 
         public FileManager(IFileCopier copier)
         {
-            ObjectValidation.IsNotNull(copier, nameof(copier));
+            ObjectValidation.IsNotNull(copier);
 
             _copier = copier;
         }

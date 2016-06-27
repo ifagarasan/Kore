@@ -9,8 +9,8 @@ namespace Kore.IO.Management
     {
         public void Copy(IKoreFileInfo source, IKoreFileInfo destination)
         {
-            IsNotNull(source, nameof(source));
-            IsNotNull(destination, nameof(destination));
+            IsNotNull(source);
+            IsNotNull(destination);
 
             if (!source.Exists)
                 throw new NodeNotFoundException();

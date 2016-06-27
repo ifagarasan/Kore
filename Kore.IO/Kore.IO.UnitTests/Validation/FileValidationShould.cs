@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Kore.Exceptions;
 
 namespace Kore.IO.UnitTests.Validation
 {
@@ -21,7 +22,7 @@ namespace Kore.IO.UnitTests.Validation
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof(NullException))]
         public void ThrowArgumentNullExceptionIfFileInfoIsNull()
         {
             IO.Validation.FileValidation.Exists(null);

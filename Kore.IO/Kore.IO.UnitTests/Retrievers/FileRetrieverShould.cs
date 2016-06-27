@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Castle.Components.DictionaryAdapter;
+using Kore.Exceptions;
 using Kore.IO.Retrievers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -42,7 +43,7 @@ namespace Kore.IO.UnitTests.Retrievers
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof(NullException))]
         public void ValidatesFolderOnGetFiles()
         {
             _fileRetriever.GetFiles(null);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using Kore.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Kore.IO.Retrievers;
@@ -43,7 +44,7 @@ namespace Kore.IO.UnitTests.Scanners
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof(NullException))]
         public void ValidateFileScanOptionsOnScan()
         {
             _fileScanner.Scan(_testFolderDeep, null);
