@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8C643254-B39A-49DC-8775-EB832A9210FB}</ProjectGuid>
+    <ProjectGuid>{936FD271-1954-4995-8367-ACE164377AAE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Kore.Logic.UnitTests</RootNamespace>
-    <AssemblyName>Kore.Logic.UnitTests</AssemblyName>
+    <RootNamespace>Kore.Logic.FeatureTests</RootNamespace>
+    <AssemblyName>Kore.Logic.FeatureTests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -26,7 +26,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -35,15 +34,10 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Kore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Kore.1.0.0-CI00081\lib\net40\Kore.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Moq, Version=4.5.10.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
@@ -51,9 +45,6 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -68,19 +59,18 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Grid\Bidimensional\BidimensionalGridShould.cs" />
-    <Compile Include="Grid\Bidimensional\Distribution\UniformDistributionShould.cs" />
-    <Compile Include="Grid\Bidimensional\Dynamic\GridShould.cs" />
+    <Compile Include="Grid\Bidimensional\Accessors.cs" />
+    <Compile Include="Grid\Bidimensional\Dynamic\Reinitalization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Kore.Logic\Kore.Logic.csproj">
       <Project>{2b8bbd57-bd17-410d-8983-a762e9603e2e}</Project>
       <Name>Kore.Logic</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
