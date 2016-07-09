@@ -54,7 +54,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Functional\ReadersFunctional.cs" />
-    <Compile Include="Grid\BidimensionalGridShould.cs" />
     <Compile Include="Heaps\BinaryHeapFunctionality.cs" />
     <Compile Include="Heaps\BinaryHeapMaxFunctionality.cs" />
     <Compile Include="Heaps\BinaryHeapMinFunctionality.cs" />
