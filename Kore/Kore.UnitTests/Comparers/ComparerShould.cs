@@ -1,8 +1,7 @@
-﻿using System;
+﻿using Kore.Comparers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Kore.Comparers;
 
-namespace Kore.UnitTests
+namespace Kore.UnitTests.Comparers
 {
     [TestClass]
     public class ComparerShould

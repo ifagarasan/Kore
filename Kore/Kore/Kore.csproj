@@ -54,6 +54,9 @@
     <Compile Include="Random\IGenerator.cs" />
     <Compile Include="Validation\ObjectValidation.cs" />
     <Compile Include="Validation\ComparisonValidation.cs" />
+    <Compile Include="Vector\Element.cs" />
+    <Compile Include="Vector\IVector.cs" />
+    <Compile Include="Vector\Vector.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
