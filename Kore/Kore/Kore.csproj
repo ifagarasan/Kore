@@ -50,6 +50,8 @@
     <Compile Include="Exceptions\InvalidQuantityException.cs" />
     <Compile Include="IdentityGenerators\NumericIdGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Random\Generator.cs" />
+    <Compile Include="Random\IGenerator.cs" />
     <Compile Include="Validation\ObjectValidation.cs" />
     <Compile Include="Validation\ComparisonValidation.cs" />
   </ItemGroup>
