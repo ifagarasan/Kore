@@ -11,7 +11,7 @@ namespace Kore.Code.Tests.Functional
         public void ArrayReaderFunctional()
         {
             string rootFolder = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).FullName).FullName;
-            string path = Path.Combine(new string[] { rootFolder, "TestData", "readers", "array.txt" });
+            string path = Path.Combine(new string[] { rootFolder, "TestRequiredData", "readers", "array.txt" });
 
             int[] result;
 
@@ -31,7 +31,7 @@ namespace Kore.Code.Tests.Functional
         public void MatrixReaderFunctional()
         {
             string rootFolder = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).FullName).FullName;
-            string path = Path.Combine(new string[] { rootFolder, "TestData", "readers", "matrix.txt" });
+            string path = Path.Combine(new string[] { rootFolder, "TestRequiredData", "readers", "matrix.txt" });
 
             int[,] result;
 
