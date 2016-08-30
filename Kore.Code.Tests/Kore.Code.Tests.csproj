@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DF271693-23B4-4D63-8DEF-C7B5411244B3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Kore.Code.Tests</RootNamespace>
+    <AssemblyName>Kore.Code.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Moq, Version=4.2.1510.2205, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>..\packages\Moq.4.2.1510.2205\lib\net40\Moq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Functional\ReadersFunctional.cs" />
+    <Compile Include="Heaps\BinaryHeapFunctionality.cs" />
+    <Compile Include="Heaps\BinaryHeapMaxFunctionality.cs" />
+    <Compile Include="Heaps\BinaryHeapMinFunctionality.cs" />
+    <Compile Include="List\CircularListFunctional.cs" />
+    <Compile Include="List\DoubleLinkedListFunctional.cs" />
+    <Compile Include="List\LinkedListFunctional.cs" />
+    <Compile Include="List\SingleLinkedListFunctional.cs" />
+    <Compile Include="Memory\ArrayObjectAllocatorTests.cs" />
+    <Compile Include="Nodes\Builders\RedBlackNodeBuilderFunctionality.cs" />
+    <Compile Include="Nodes\Builders\BinaryNodeBuilderFunctionality.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queue\DequeueFunctional.cs" />
+    <Compile Include="Queue\QueueFunctional.cs" />
+    <Compile Include="Sort\BubbleSortFunctionality.cs" />
+    <Compile Include="Sort\HeapSortFunctionality.cs" />
+    <Compile Include="Sort\InsertSortFunctionality.cs" />
+    <Compile Include="Sort\MergeSortFunctionality.cs" />
+    <Compile Include="Sort\QuickSortFunctionality.cs" />
+    <Compile Include="Sort\SelectionSortFunctionality.cs" />
+    <Compile Include="Sort\SortFunctionality.cs" />
+    <Compile Include="Stack\StackFunctional.cs" />
+    <Compile Include="Traversals\TraversalsFunctionality.cs" />
+    <Compile Include="Trees\TreeNodeFunctionality.cs" />
+    <Compile Include="Trees\Binary\AvlTree\BalanceProviderFunctionality.cs" />
+    <Compile Include="Trees\Binary\AvlTree\AvlFunctionality.cs" />
+    <Compile Include="Trees\Binary\Nodes\BinaryNodeHeightFunctionality.cs" />
+    <Compile Include="Trees\Binary\Nodes\RedBlackNodeFunctionality.cs" />
+    <Compile Include="Trees\Binary\Nodes\BinaryNodeFunctionality.cs" />
+    <Compile Include="Trees\Binary\BinaryTreeFunctionality.cs" />
+    <Compile Include="Trees\Binary\BstFunctionality.cs" />
+    <Compile Include="Trees\Binary\RedBlackTreeFunctionality.cs" />
+    <Compile Include="Util\ArrayOpsFunctionality.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Kore.Code\Kore.Code.csproj">
+      <Project>{EBB71342-AD45-4119-B1D5-4334451DFA2B}</Project>
+      <Name>Kore.Code</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kore\Kore.csproj">
+      <Project>{F78425A0-78E8-414A-A935-8D36E6E4F8D0}</Project>
+      <Name>Kore</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
