@@ -13,18 +13,13 @@ namespace Kore.IO.UnitTests
         IKoreIoNodeInfo _nodeInfo;
         protected static string CurrentWorkingFolder;
 
-        static KoreIoNodeInfoShould()
-        {
-            IoUtil.EnsureFolderExists(IoUtil.TestRoot);
-
-            CurrentWorkingFolder = $"{IoUtil.TestRoot}\\{DateTime.Now.Ticks}";
-
-            FullName = $"{CurrentWorkingFolder}\\node";
-        }
-
         [TestInitialize]
         public virtual void Setup()
         {
+            IoUtil.EnsureFolderExists(IoUtil.TestRoot);
+            CurrentWorkingFolder = $"{IoUtil.TestRoot}\\{DateTime.Now.Ticks}";
+            FullName = $"{CurrentWorkingFolder}\\node";
+
             _nodeInfo = CreateNodeInfo(FullName);
             EnsureNodeExists(_nodeInfo);
         }
@@ -59,6 +54,14 @@ namespace Kore.IO.UnitTests
             _nodeInfo.EnsureExists();
 
             Assert.IsTrue(_nodeInfo.Exists);
+        }
+
+        [TestMethod]
+        public void EqualAnotherNodeIfFullNamesAreEqual()
+        {
+            var fullName = "D:\\Music\\My Stuff";
+
+            Assert.AreEqual(CreateNodeInfo(fullName), CreateNodeInfo(fullName));
         }
 
         #region Delete

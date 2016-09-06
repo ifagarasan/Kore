@@ -32,6 +32,16 @@ namespace Kore.IO
             EnsureNodeExists();
         }
 
+        public override bool Equals(object obj)
+        {
+            return obj is KoreIoNodeInfo && Equals((KoreIoNodeInfo) obj);
+        }
+
+        public bool Equals(IKoreIoNodeInfo otherNodeInfo)
+        {
+            return FullName.Equals(otherNodeInfo.FullName);
+        }
+
         protected abstract void CopyNode(IKoreIoNodeInfo nodeInfo);
         protected abstract void EnsureNodeExists();
         protected abstract void DeleteNode();
