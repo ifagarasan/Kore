@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using Castle.Components.DictionaryAdapter;
+﻿using System.Collections.Generic;
 using Kore.Exceptions;
-using Kore.IO.Scanners;
 using Kore.IO.Sync;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;

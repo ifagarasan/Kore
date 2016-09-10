@@ -1,9 +1,5 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection.Emit;
 using Kore.IO.Scanners;
 using Kore.IO.Retrievers;
 using Kore.IO.TestUtil;

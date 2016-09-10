@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Kore.IdentityGenerators;
 
 namespace Kore.UnitTests.IdentityGenerators

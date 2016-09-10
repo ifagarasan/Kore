@@ -1,7 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections;
-
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Kore.Code.Sort;
 
 namespace Kore.Code.Tests.Sort

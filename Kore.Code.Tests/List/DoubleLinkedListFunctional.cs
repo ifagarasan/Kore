@@ -1,10 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Kore.Code.List;
-using Kore.Code.List.Linear;
+﻿using Kore.Code.List.Linear;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Kore.Code.Tests.List

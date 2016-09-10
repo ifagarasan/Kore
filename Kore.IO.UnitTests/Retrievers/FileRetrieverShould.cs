@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using Castle.Components.DictionaryAdapter;
+﻿using System.Collections.Generic;
 using Kore.Exceptions;
 using Kore.IO.Retrievers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using static Kore.IO.TestUtil.ScannerUtil;
-using Moq;
 
 namespace Kore.IO.UnitTests.Retrievers
 {

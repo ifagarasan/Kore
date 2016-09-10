@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Kore.Random
+﻿namespace Kore.Random
 {
     public interface IGenerator
     {

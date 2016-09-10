@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Kore.Comparers;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Kore.Exceptions;
 using Kore.Validation;
 

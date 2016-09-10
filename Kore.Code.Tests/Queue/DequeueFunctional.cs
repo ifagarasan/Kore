@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Kore.Code.Queue;
 using Kore.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections;
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-using Kore.Code;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Kore.Code.Util;
-using Kore.Code.Traversals;
 using Kore.Code.Trees.Binary;
-using System.Collections.Generic;
 using Kore.Code.Node.Builders;
-using Moq;
 
 namespace Kore.Code.Tests.Nodes.Builders
 {

@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections;
-
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-using Kore.Code;
 using Kore.Code.Util;
 using Kore.Exceptions;
 

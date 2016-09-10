@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Threading;
-using Kore.IO.Filters;
-using Kore.IO.Retrievers;
 using Kore.IO.Scanners;
-using Kore.IO.TestUtil;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Kore.IO.Sync;
 using Kore.Dev.Util;

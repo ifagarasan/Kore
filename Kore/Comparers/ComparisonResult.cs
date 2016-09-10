@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Kore.Comparers
+﻿namespace Kore.Comparers
 {
     public enum ComparisonResult
     {

@@ -1,6 +1,4 @@
-﻿using System;
-using Kore.Exceptions;
-using Kore.IO.Exceptions;
+﻿using Kore.Exceptions;
 using Kore.IO.Management;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;

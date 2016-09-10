@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Kore.IO.Management
+﻿namespace Kore.IO.Management
 {
     public interface IFileCopier
     {

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using Castle.Components.DictionaryAdapter;
 using Kore.IO.Scanners;
 using Kore.IO.Sync;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

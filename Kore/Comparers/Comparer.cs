@@ -1,5 +1,4 @@
 ﻿using System;
-using Kore.Comparers;
 using System.Collections.Generic;
 
 namespace Kore.Comparers

@@ -1,6 +1,4 @@
-﻿using System;
-
-using Kore.Code.Stack;
+﻿using Kore.Code.Stack;
 using Kore.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
