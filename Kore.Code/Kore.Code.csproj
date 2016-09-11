@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Functional\Tests\TestFound.cs" />
+    <Compile Include="Heaps\HeapType.cs" />
     <Compile Include="Node\Builders\RedBlackNodeBuilder.cs" />
     <Compile Include="Node\Builders\TreeNodeBuilder.cs" />
     <Compile Include="Node\Builders\BinaryNodeBuilder.cs" />
@@ -72,18 +74,22 @@
     <Compile Include="Sort\MergeSort.cs" />
     <Compile Include="Sort\QuickSort.cs" />
     <Compile Include="Sort\SelectionSort.cs" />
+    <Compile Include="Sort\SortDirection.cs" />
     <Compile Include="Stack\Item.cs" />
     <Compile Include="Stack\IStack.cs" />
     <Compile Include="Stack\Stack.cs" />
+    <Compile Include="Traversals\NodeProcessor.cs" />
     <Compile Include="Traversals\Traversals.cs" />
     <Compile Include="Trees\Binary\AvlTree\BalanceProvider.cs" />
     <Compile Include="Trees\Binary\AvlTree\Avl.cs" />
+    <Compile Include="Trees\Binary\Color.cs" />
     <Compile Include="Trees\Binary\IBinaryNode.cs" />
     <Compile Include="Trees\Binary\BinaryNode.cs" />
     <Compile Include="Trees\Binary\BinaryTree.cs" />
     <Compile Include="Trees\Binary\Bst.cs" />
     <Compile Include="Trees\Binary\RedBlackTree\RedBlackTree.cs" />
     <Compile Include="Trees\Binary\RedBlackTree\RedBlackNode.cs" />
+    <Compile Include="Trees\Binary\RotateDirection.cs" />
     <Compile Include="Trees\ITreeNode.cs" />
     <Compile Include="Trees\TreeNode.cs" />
     <Compile Include="Util\ArrayOps.cs" />

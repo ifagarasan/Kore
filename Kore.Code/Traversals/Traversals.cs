@@ -3,8 +3,6 @@ using Kore.Code.Node;
 
 namespace Kore.Code.Traversals
 {
-    public delegate bool NodeProcessor<T>(T node);
-
     public static class Traversals<T>
     {
         public static void BreadthFirstSearch(INode<T> node, INode<T> Nil, NodeProcessor<INode<T>> processor)

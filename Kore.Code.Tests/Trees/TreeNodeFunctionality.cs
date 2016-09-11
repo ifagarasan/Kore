@@ -17,9 +17,9 @@ namespace Kore.Code.Tests.Trees
         [TestMethod]
         public void GrandparentReturnsParentParent()
         {
-            T grandParent = BuildNode();
-            T parent = BuildNode();
-            T node = BuildNode();
+            var grandParent = BuildNode();
+            var parent = BuildNode();
+            var node = BuildNode();
 
             parent.Parent = grandParent;
             node.Parent = parent;

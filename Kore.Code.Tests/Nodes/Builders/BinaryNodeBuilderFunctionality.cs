@@ -50,7 +50,7 @@ namespace Kore.Code.Tests.Nodes.Builders
         [TestMethod]
         public void BuildNodeCreatesANodeWithSpecifiedKey()
         {
-            int key = 32;
+            var key = 32;
             var node = NodeBuilder.BuildNode(key);
             Assert.AreEqual(key, node.Key);
         }

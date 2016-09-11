@@ -34,8 +34,8 @@ namespace Kore.IO.UnitTests.Management
         [TestMethod]
         public void CallFileCopierCopySourceToDestination()
         {
-            Mock<IKoreFileInfo> mockSourceFileInfo = new Mock<IKoreFileInfo>();
-            Mock<IKoreFileInfo> mockDestinationFileInfo = new Mock<IKoreFileInfo>();
+            var mockSourceFileInfo = new Mock<IKoreFileInfo>();
+            var mockDestinationFileInfo = new Mock<IKoreFileInfo>();
 
             _fileManager.Copy(mockSourceFileInfo.Object, mockDestinationFileInfo.Object);
 

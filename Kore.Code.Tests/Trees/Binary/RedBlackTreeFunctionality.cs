@@ -37,7 +37,7 @@ namespace Kore.Code.Tests.Trees.Binary
         {
             BinaryTree.Insert(new int[] { 2, 1, 3, 5, 6 });
 
-            IBinaryNode node = BinaryTree.Search(5);
+            var node = BinaryTree.Search(5);
             node.Color = Color.Red;
 
             node.Left.Color = Color.Black;
@@ -162,8 +162,8 @@ namespace Kore.Code.Tests.Trees.Binary
         {
             BinaryTree.Insert(new int[] { 10, 8, 12, 6, 5, 7 });
 
-            IBinaryNode node = BinaryTree.Search(6);
-            IBinaryNode newNode = BinaryTree.Search(7);
+            var node = BinaryTree.Search(6);
+            var newNode = BinaryTree.Search(7);
 
             BinaryTree.Remove(8);
 
@@ -176,8 +176,8 @@ namespace Kore.Code.Tests.Trees.Binary
         {
             BinaryTree.Insert(new int[] { 10, 8, 12, 6, 5, 7 });
 
-            IBinaryNode node = BinaryTree.Search(6);
-            IBinaryNode newNode = BinaryTree.Search(7);
+            var node = BinaryTree.Search(6);
+            var newNode = BinaryTree.Search(7);
 
             Assert.AreEqual(Color.Red, newNode.Color);
 
@@ -191,8 +191,8 @@ namespace Kore.Code.Tests.Trees.Binary
         {
             BinaryTree.Insert(new int[] { 10, 8, 12, 6, 5, 4 });
 
-            IBinaryNode node = BinaryTree.Search(6);
-            IBinaryNode newNode = BinaryTree.Search(4);
+            var node = BinaryTree.Search(6);
+            var newNode = BinaryTree.Search(4);
 
             BinaryTree.Remove(5);
 
@@ -205,8 +205,8 @@ namespace Kore.Code.Tests.Trees.Binary
         {
             BinaryTree.Insert(new int[] { 10, 8, 12, 6, 5, 4 });
 
-            IBinaryNode node = BinaryTree.Search(6);
-            IBinaryNode newNode = BinaryTree.Search(4);
+            var node = BinaryTree.Search(6);
+            var newNode = BinaryTree.Search(4);
 
             Assert.AreEqual(Color.Red, newNode.Color);
 
@@ -220,9 +220,9 @@ namespace Kore.Code.Tests.Trees.Binary
         {
             BinaryTree.Insert(new int[] { 10, 8, 12, 6, 5 });
 
-            IBinaryNode node = BinaryTree.Search(6);
-            IBinaryNode nodeLeft = node.Left;
-            IBinaryNode newNode = BinaryTree.Search(8);
+            var node = BinaryTree.Search(6);
+            var nodeLeft = node.Left;
+            var newNode = BinaryTree.Search(8);
 
             Assert.AreEqual(Color.Red, newNode.Color);
 

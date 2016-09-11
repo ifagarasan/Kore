@@ -20,9 +20,9 @@ namespace Kore.Code.Tests.Trees.Binary.AvlTree
         {
             BinaryTree.Insert(new int[] { 10, 2, 11, 1, 5, 13, 3, 6 });
 
-            IBinaryNode target = BinaryTree.Search(2);
-            IBinaryNode newNode = BinaryTree.Search(5);
-            IBinaryNode expected = newNode.Left;
+            var target = BinaryTree.Search(2);
+            var newNode = BinaryTree.Search(5);
+            var expected = newNode.Left;
 
             BinaryTree.RotateLeft(target);
 
@@ -35,8 +35,8 @@ namespace Kore.Code.Tests.Trees.Binary.AvlTree
         {
             BinaryTree.Insert(new int[] { 10, 2, 11, 1, 5, 13, 3, 6 });
 
-            IBinaryNode target = BinaryTree.Search(2);
-            IBinaryNode newNode = BinaryTree.Search(5);
+            var target = BinaryTree.Search(2);
+            var newNode = BinaryTree.Search(5);
 
             BinaryTree.RotateLeft(target);
 
@@ -107,9 +107,9 @@ namespace Kore.Code.Tests.Trees.Binary.AvlTree
         [TestMethod]
         public void TestStuffAvl()
         {
-            int[] input = RandomOps.GetContiguousRandomSequence(1, 100);
+            var input = RandomOps.GetContiguousRandomSequence(1, 100);
 
-            foreach (int key in input)
+            foreach (var key in input)
             {
                 BinaryTree.Insert(key);
 

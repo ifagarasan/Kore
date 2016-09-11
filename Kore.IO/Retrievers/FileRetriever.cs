@@ -4,8 +4,6 @@ using static Kore.Validation.ObjectValidation;
 
 namespace Kore.IO.Retrievers
 {
-    public delegate void FileFoundDelegate(IKoreFileInfo file);
-
     public class FileRetriever : IFileRetriever
     {
         public event FileFoundDelegate FileFound;

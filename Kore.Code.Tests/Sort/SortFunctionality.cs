@@ -50,7 +50,7 @@ namespace Kore.Code.Tests.Sort
 
         private void TestSort(int[] input, SortDirection direction)
         {
-            List<int> expected = new List<int>(input);
+            var expected = new List<int>(input);
 
             if (direction == SortDirection.Ascending)
                 expected.Sort((x, y) => x.CompareTo(y));

@@ -17,7 +17,7 @@ namespace Kore.Code.Tests.Heaps
         [TestMethod]
         public void CapacityIsThatPassedInViaTheConstructor()
         {
-            int capacity = 3;
+            var capacity = 3;
             heap = new BinaryHeap<int, object>(capacity);
 
             Assert.AreEqual(capacity, heap.Capacity);
@@ -107,7 +107,7 @@ namespace Kore.Code.Tests.Heaps
 
         protected void InsertPerformsHeapifyUpToTheRoot(int[] insertValues)
         {
-            for (int i = 0; i < insertValues.Length; ++i)
+            for (var i = 0; i < insertValues.Length; ++i)
             {
                 heap.Insert(insertValues[i]);
                 Assert.AreEqual(insertValues[i], heap.Root.Key);
@@ -116,9 +116,9 @@ namespace Kore.Code.Tests.Heaps
 
         protected void InsertReturnsCorrectIndex(int[] insertValues)
         {
-            for (int i = 0; i < insertValues.Length; ++i)
+            for (var i = 0; i < insertValues.Length; ++i)
             {
-                int index = heap.Insert(insertValues[i]);
+                var index = heap.Insert(insertValues[i]);
                 Assert.AreEqual(insertValues[i], heap[index].Key);
             }
         }
@@ -128,7 +128,7 @@ namespace Kore.Code.Tests.Heaps
         {
             heap = new BinaryHeap<int, object>(3);
 
-            for (int i = 1; i <= 3; ++i)
+            for (var i = 1; i <= 3; ++i)
                 heap.Insert(i);
 
             Assert.IsTrue(heap.IsFull);
@@ -153,7 +153,7 @@ namespace Kore.Code.Tests.Heaps
         [TestMethod]
         public void IsHeapReturnsTrueAfterInsertThatIncludesHeapifyUp()
         {
-            int[] input = new int[] { 1, 5, 4, 2, 3 };
+            var input = new int[] { 1, 5, 4, 2, 3 };
             heap.Insert(input);
 
             Assert.IsTrue(heap.IsHeap());
@@ -162,7 +162,7 @@ namespace Kore.Code.Tests.Heaps
         [TestMethod]
         public void IsHeapReturnsFalseIfTheHeapConditionIsBroken()
         {
-            int[] input = new int[] { 1, 5, 4, 2, 3 };
+            var input = new int[] { 1, 5, 4, 2, 3 };
 
             heap = new BinaryHeap<int, object>(input);
 
@@ -184,20 +184,20 @@ namespace Kore.Code.Tests.Heaps
         [TestMethod]
         public void ContainsReturnsTrueIfItemWasFound()
         {
-            int[] input = new int[] { 1, 4, 2, 7, 6 };
+            var input = new int[] { 1, 4, 2, 7, 6 };
             heap.Insert(input);
 
-            for (int i = 0; i < input.Length; ++i)
+            for (var i = 0; i < input.Length; ++i)
                 Assert.IsTrue(heap.ContainsKey(input[i]));
         }
 
         [TestMethod]
         public void ContainsReturnsFalseIfItemWasNotFound()
         {
-            int[] input = new int[] { 1, 4, 2, 7, 6 };
+            var input = new int[] { 1, 4, 2, 7, 6 };
             heap.Insert(input);
 
-            for (int i = 10; i < 20; ++i)
+            for (var i = 10; i < 20; ++i)
                 Assert.IsFalse(heap.ContainsKey(i));
         }
 
@@ -217,12 +217,12 @@ namespace Kore.Code.Tests.Heaps
         [TestMethod]
         public void RemoveLeadsToItemBeingNotFound()
         {
-            int[] input = new int[] { 1, 4, 2, 7, 6 };
+            var input = new int[] { 1, 4, 2, 7, 6 };
             heap.Insert(input);
 
-            for (int i = 0; i < input.Length; ++i)
+            for (var i = 0; i < input.Length; ++i)
             {
-                int itemToRemove = heap.Root.Key;
+                var itemToRemove = heap.Root.Key;
                 heap.Remove(1);
                 Assert.IsFalse(heap.ContainsKey(itemToRemove));
             }
@@ -231,12 +231,12 @@ namespace Kore.Code.Tests.Heaps
         [TestMethod]
         public void ExtractRootRemovesElementAtTop()
         {
-            int[] input = new int[] { 1, 4, 2, 7, 6 };
+            var input = new int[] { 1, 4, 2, 7, 6 };
             heap.Insert(input);
 
-            for (int i = 0; i < input.Length; ++i)
+            for (var i = 0; i < input.Length; ++i)
             {
-                int keyToRemove = heap.Root.Key;
+                var keyToRemove = heap.Root.Key;
                 heap.ExtractRoot();
                 Assert.IsFalse(heap.ContainsKey(keyToRemove));
             }

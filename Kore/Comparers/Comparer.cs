@@ -17,7 +17,7 @@ namespace Kore.Comparers
 
         public static ComparisonResult Compare(T value1, T value2)
         {
-            int comparisonResult = value1.CompareTo(value2);
+            var comparisonResult = value1.CompareTo(value2);
 
             return _comparisonResults[comparisonResult];
         }

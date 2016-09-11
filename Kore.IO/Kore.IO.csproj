@@ -46,6 +46,7 @@
     <Compile Include="Management\FileManager.cs" />
     <Compile Include="Management\IFileCopier.cs" />
     <Compile Include="Management\IFileManager.cs" />
+    <Compile Include="Retrievers\FileFoundDelegate.cs" />
     <Compile Include="Scanners\IFileScanner.cs" />
     <Compile Include="Scanners\IFileScanResult.cs" />
     <Compile Include="Filters\VisibleFileFilter.cs" />

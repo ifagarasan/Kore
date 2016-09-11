@@ -65,7 +65,7 @@ namespace Kore.IO
         {
             FolderInfo.EnsureExists();
 
-            using (FileStream fs = File.Create(FullName)) { }
+            using (var fs = File.Create(FullName)) { }
         }
 
         protected override void DeleteNode()

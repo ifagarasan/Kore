@@ -3,8 +3,6 @@ using System.IO;
 
 namespace Kore.Code.Functional.Tests
 {
-    public delegate void TestFound(string folderPath);
-
     public class FolderProcessor
     {
         public event TestFound OnTestFound;

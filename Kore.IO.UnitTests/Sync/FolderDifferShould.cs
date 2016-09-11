@@ -95,7 +95,7 @@ namespace Kore.IO.UnitTests.Sync
         [TestMethod]
         public void ReturnIdenticalWhenDestinationHasSameSuffixAndDateTime()
         {
-            DateTime lastWriteTime = DateTime.Now;
+            var lastWriteTime = DateTime.Now;
 
             TestIdenticalFileFullNameDiffs(lastWriteTime, lastWriteTime, DiffRelation.Identical);
         }
@@ -103,8 +103,8 @@ namespace Kore.IO.UnitTests.Sync
         [TestMethod]
         public void ReturnSourceNewerWhenDestinationHasSameSuffixAndSourceLastWrittenTimeIsNewer()
         {
-            DateTime sourceLastWriteTime = DateTime.Now;
-            DateTime destinationLastWriteTime = sourceLastWriteTime.Subtract(new TimeSpan(1));
+            var sourceLastWriteTime = DateTime.Now;
+            var destinationLastWriteTime = sourceLastWriteTime.Subtract(new TimeSpan(1));
 
             TestIdenticalFileFullNameDiffs(sourceLastWriteTime, destinationLastWriteTime, DiffRelation.SourceNewer);
         }
@@ -112,8 +112,8 @@ namespace Kore.IO.UnitTests.Sync
         [TestMethod]
         public void ReturnSourceOlderWhenDestinationHasSameSuffixAndSourceLastWrittenTimeIsOlder()
         {
-            DateTime sourceLastWriteTime = DateTime.Now;
-            DateTime destinationLastWriteTime = sourceLastWriteTime.Add(new TimeSpan(1));
+            var sourceLastWriteTime = DateTime.Now;
+            var destinationLastWriteTime = sourceLastWriteTime.Add(new TimeSpan(1));
 
             TestIdenticalFileFullNameDiffs(sourceLastWriteTime, destinationLastWriteTime, DiffRelation.SourceOlder);
         }
@@ -133,7 +133,7 @@ namespace Kore.IO.UnitTests.Sync
         [TestMethod]
         public void NotCareAboutCasing()
         {
-            DateTime now = DateTime.Now;
+            var now = DateTime.Now;
 
             _mockSourceFileInfo.Setup(m => m.FullName).Returns(Path.Combine(SourceFolder, "data", "file1.txt"));
             _mockSourceFileInfo.Setup(m => m.LastWriteTime).Returns(now);

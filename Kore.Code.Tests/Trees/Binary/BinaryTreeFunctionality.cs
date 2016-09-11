@@ -141,7 +141,7 @@ namespace Kore.Code.Tests.Trees.Binary
 
             Assert.IsTrue(BinaryTree.IsBst());
 
-            IBinaryNode node = BinaryTree.Search(4);
+            var node = BinaryTree.Search(4);
             node.Left = new BinaryNode(120);
 
             Assert.IsFalse(BinaryTree.IsBst());
@@ -164,21 +164,21 @@ namespace Kore.Code.Tests.Trees.Binary
         [TestMethod]
         public void InOrderReturnsArraySorted()
         {
-            int[] input = new int[1000];
-            for (int i = 0; i < input.Length; ++i)
+            var input = new int[1000];
+            for (var i = 0; i < input.Length; ++i)
                 input[i] = i+1;
 
-            List<int> inputArray = new List<int>(input);
+            var inputArray = new List<int>(input);
 
-            System.Random random = new System.Random();
+            var random = new System.Random();
             while (inputArray.Count > 0)
             {
-                int index = random.Next(inputArray.Count);
+                var index = random.Next(inputArray.Count);
                 BinaryTree.Insert(inputArray[index]);
                 inputArray.RemoveAt(index);
             }
 
-            int currentIndex = 0;
+            var currentIndex = 0;
             BinaryTree.Inorder((IBinaryNode node) => {
                 Assert.AreEqual(input[currentIndex], node.Key);
                 currentIndex++;
@@ -257,18 +257,18 @@ namespace Kore.Code.Tests.Trees.Binary
         [TestMethod]
         public void SuccesorReturnsNextElementInInOrder()
         {
-            int[] array = new int[] { 10, 5, 7, 8, 9 };
+            var array = new int[] { 10, 5, 7, 8, 9 };
 
             BinaryTree.Insert(array);
 
-            List<int> list = new List<int>(array);
+            var list = new List<int>(array);
 
             list.Sort();
 
-            for (int i = 0; i < list.Count - 1; ++i)
+            for (var i = 0; i < list.Count - 1; ++i)
             {
-                IBinaryNode expected = BinaryTree.Search(list[i + 1]);
-                IBinaryNode current = BinaryTree.Search(list[i]);
+                var expected = BinaryTree.Search(list[i + 1]);
+                var current = BinaryTree.Search(list[i]);
 
                 Assert.AreSame(expected, BinaryTree.Successor(current));
             }
@@ -291,18 +291,18 @@ namespace Kore.Code.Tests.Trees.Binary
         [TestMethod]
         public void PredecessorReturnsPreviousElementInInOrder()
         {
-            int[] array = new int[] { 10, 5, 7, 8, 9 };
+            var array = new int[] { 10, 5, 7, 8, 9 };
 
             BinaryTree.Insert(array);
 
-            List<int> list = new List<int>(array);
+            var list = new List<int>(array);
 
             list.Sort();
 
-            for (int i = 1; i < list.Count; ++i)
+            for (var i = 1; i < list.Count; ++i)
             {
-                IBinaryNode expected = BinaryTree.Search(list[i-1]);
-                IBinaryNode current = BinaryTree.Search(list[i]);
+                var expected = BinaryTree.Search(list[i-1]);
+                var current = BinaryTree.Search(list[i]);
 
                 Assert.AreSame(expected, BinaryTree.Predecessor(current));
             }
@@ -321,7 +321,7 @@ namespace Kore.Code.Tests.Trees.Binary
         [TestMethod]
         public void TransplantSetsRootToVIfUIsRoot()
         {
-            BinaryNode v = new BinaryNode();
+            var v = new BinaryNode();
             BinaryTree.Insert(1);
 
             BinaryTree.Transplant(BinaryTree.Root, v);
@@ -332,9 +332,9 @@ namespace Kore.Code.Tests.Trees.Binary
         [TestMethod]
         public void TransplantSetsRootLeftToVIfUIsLeftChild()
         {
-            BinaryNode parent = new BinaryNode();
-            BinaryNode v = new BinaryNode();
-            BinaryNode u = new BinaryNode();
+            var parent = new BinaryNode();
+            var v = new BinaryNode();
+            var u = new BinaryNode();
             parent.Left = u;
             u.Parent = parent;
 
@@ -346,9 +346,9 @@ namespace Kore.Code.Tests.Trees.Binary
         [TestMethod]
         public void TransplantSetsRootRightToVIfUIsRightChild()
         {
-            BinaryNode parent = new BinaryNode();
-            BinaryNode u = new BinaryNode();
-            BinaryNode v = new BinaryNode();
+            var parent = new BinaryNode();
+            var u = new BinaryNode();
+            var v = new BinaryNode();
             parent.Right = u;
             u.Parent = parent;
 
@@ -369,9 +369,9 @@ namespace Kore.Code.Tests.Trees.Binary
         [TestMethod]
         public void TransplantSetsVParentToUParent()
         {
-            BinaryNode u = new BinaryNode();
-            BinaryNode v = new BinaryNode();
-            BinaryNode parent = new BinaryNode();
+            var u = new BinaryNode();
+            var v = new BinaryNode();
+            var parent = new BinaryNode();
             u.Parent = parent;
 
             BinaryTree.Transplant(u, v);
@@ -406,8 +406,8 @@ namespace Kore.Code.Tests.Trees.Binary
         {
             BinaryTree.Insert(new int[] { 1, 2 });
 
-            IBinaryNode one = BinaryTree.Search(1);
-            IBinaryNode two = BinaryTree.Search(2);
+            var one = BinaryTree.Search(1);
+            var two = BinaryTree.Search(2);
 
             BinaryTree.RotateLeft(one);
 
@@ -420,9 +420,9 @@ namespace Kore.Code.Tests.Trees.Binary
         {
             BinaryTree.Insert(new int[] { 10, 2, 1, 5, 3, 6 });
 
-            IBinaryNode target = BinaryTree.Search(2);
-            IBinaryNode newNode = BinaryTree.Search(5);
-            IBinaryNode expected = newNode.Left;
+            var target = BinaryTree.Search(2);
+            var newNode = BinaryTree.Search(5);
+            var expected = newNode.Left;
 
             BinaryTree.RotateLeft(target);
 
@@ -435,8 +435,8 @@ namespace Kore.Code.Tests.Trees.Binary
         {
             BinaryTree.Insert(new int[] { 10, 2, 1, 5, 3, 6 });
 
-            IBinaryNode target = BinaryTree.Search(2);
-            IBinaryNode newNode = BinaryTree.Search(5);
+            var target = BinaryTree.Search(2);
+            var newNode = BinaryTree.Search(5);
 
             BinaryTree.RotateLeft(target);
 
@@ -449,8 +449,8 @@ namespace Kore.Code.Tests.Trees.Binary
         {
             BinaryTree.Insert(new int[] { 2, 1, 5, 3, 6 });
 
-            IBinaryNode target = BinaryTree.Search(2);
-            IBinaryNode newNode = BinaryTree.Search(5);
+            var target = BinaryTree.Search(2);
+            var newNode = BinaryTree.Search(5);
 
             BinaryTree.RotateLeft(target);
 
@@ -482,8 +482,8 @@ namespace Kore.Code.Tests.Trees.Binary
         {
             BinaryTree.Insert(new int[] { 2, 1 });
 
-            IBinaryNode one = BinaryTree.Search(1);
-            IBinaryNode two = BinaryTree.Search(2);
+            var one = BinaryTree.Search(1);
+            var two = BinaryTree.Search(2);
 
             BinaryTree.RotateRight(two);
 
@@ -496,9 +496,9 @@ namespace Kore.Code.Tests.Trees.Binary
         {
             BinaryTree.Insert(new int[] { 10, 11, 5, 2, 1, 3, 6 });
 
-            IBinaryNode target = BinaryTree.Root;
-            IBinaryNode newParent = BinaryTree.Root.Left;
-            IBinaryNode newParentRight = newParent.Right;
+            var target = BinaryTree.Root;
+            var newParent = BinaryTree.Root.Left;
+            var newParentRight = newParent.Right;
 
             Assert.AreNotSame(BinaryTree.Nil, newParent);
             Assert.AreNotSame(BinaryTree.Nil, newParentRight);
@@ -516,8 +516,8 @@ namespace Kore.Code.Tests.Trees.Binary
         {
             BinaryTree.Insert(new int[] { 5, 2, 1, 3, 6 });
 
-            IBinaryNode target = BinaryTree.Root;
-            IBinaryNode newNode = BinaryTree.Root.Left;
+            var target = BinaryTree.Root;
+            var newNode = BinaryTree.Root.Left;
 
             BinaryTree.RotateRight(target);
 
@@ -533,7 +533,7 @@ namespace Kore.Code.Tests.Trees.Binary
         [TestMethod]
         public void InsertIncrementsCount()
         {
-            int initialValue = BinaryTree.Count;
+            var initialValue = BinaryTree.Count;
 
             BinaryTree.Insert(1);
 
@@ -543,8 +543,8 @@ namespace Kore.Code.Tests.Trees.Binary
         [TestMethod]
         public void InsertMultipleIncrementsCountAccordingly()
         {
-            int initialValue = BinaryTree.Count;
-            int[] input = new int[] { 1, 2, 3 };
+            var initialValue = BinaryTree.Count;
+            var input = new int[] { 1, 2, 3 };
 
             BinaryTree.Insert(input);
 
@@ -568,7 +568,7 @@ namespace Kore.Code.Tests.Trees.Binary
         {
             BinaryTree.Insert(1);
 
-            int initialValue = BinaryTree.Count;
+            var initialValue = BinaryTree.Count;
 
             BinaryTree.Remove(1);
 

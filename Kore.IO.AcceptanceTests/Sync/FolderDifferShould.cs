@@ -78,7 +78,7 @@ namespace Kore.IO.AcceptanceTests.Sync
 
         private void EnsureFilesExist(List<IKoreFileInfo> fileList)
         {
-            foreach (IKoreFileInfo fileInfo in fileList)
+            foreach (var fileInfo in fileList)
                 fileInfo.EnsureExists();
         }
 
@@ -87,7 +87,7 @@ namespace Kore.IO.AcceptanceTests.Sync
         {
             IFolderDiffer folderDiffer = new FolderDiffer(new IdentityProvider());
 
-            IFolderDiff folderDiff = folderDiffer.BuildDiff(_sourceScanResult, _destinationScanResult);
+            var folderDiff = folderDiffer.BuildDiff(_sourceScanResult, _destinationScanResult);
 
             Assert.AreEqual(DiffRelation.Identical, folderDiff.Diffs[0].Relation);
             Assert.AreEqual(DiffRelation.SourceNew, folderDiff.Diffs[1].Relation);

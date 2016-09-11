@@ -26,7 +26,7 @@ namespace Kore.IO.UnitTests.Filters
         {
             _mockFileInfo.Setup(m => m.Hidden).Returns(true);   
 
-            List<IKoreFileInfo> output = _visibleFileFilter.Filter(_inputFiles);
+            var output = _visibleFileFilter.Filter(_inputFiles);
 
             Assert.AreEqual(0, output.Count);
         }
@@ -36,7 +36,7 @@ namespace Kore.IO.UnitTests.Filters
         {
             _mockFileInfo.Setup(m => m.Hidden).Returns(false);
 
-            List<IKoreFileInfo> output = _visibleFileFilter.Filter(_inputFiles);
+            var output = _visibleFileFilter.Filter(_inputFiles);
 
             Assert.AreEqual(_inputFiles.Count, output.Count);
         }

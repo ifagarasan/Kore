@@ -144,7 +144,7 @@ namespace Kore.Code.Tests.Queue
             deque.Enqueue(3);
             deque.Enqueue(2);
 
-            int head = deque.Dequeue();
+            var head = deque.Dequeue();
 
             Assert.AreEqual(head, 3);
             Assert.AreEqual(2, deque.Peek());
@@ -308,7 +308,7 @@ namespace Kore.Code.Tests.Queue
             deque.Enqueue(3);
             deque.Enqueue(2);
 
-            int tail = deque.DequeueTail();
+            var tail = deque.DequeueTail();
 
             Assert.AreEqual(tail, 2);
             Assert.AreEqual(3, deque.Peek());

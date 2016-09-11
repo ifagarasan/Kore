@@ -65,7 +65,7 @@ namespace Kore.IO.UnitTests.Scanners
 
         public void RaisesFileFoundOnFilteredFiles()
         {
-            List<IKoreFileInfo> filteredFiles = _mockFiles.GetRange(0, 2);
+            var filteredFiles = _mockFiles.GetRange(0, 2);
 
             _mockFileFilter.Setup(m => m.Filter(It.IsAny<List<IKoreFileInfo>>())).Returns(filteredFiles);
 

@@ -43,7 +43,7 @@ namespace Kore.Logic.UnitTests.Dynamic
         [TestMethod]
         public void Add()
         {
-            Grid grid = new Grid(_bidimensionalGridMock.Object,
+            var grid = new Grid(_bidimensionalGridMock.Object,
                 _distributionStrategyMock.Object, _selectionStrategy.Object);
 
             grid.Add(10u);

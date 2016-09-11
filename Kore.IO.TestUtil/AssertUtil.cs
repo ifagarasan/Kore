@@ -9,12 +9,12 @@ namespace Kore.IO.TestUtil
         {
             Assert.AreEqual(expectedFileList.Count, actualFileList.Count);
 
-            foreach (IKoreFileInfo expectedFileInfo in expectedFileList)
+            foreach (var expectedFileInfo in expectedFileList)
             {
-                string expectedFileName = expectedFileInfo.FullName.ToLower();
-                bool found = false;
+                var expectedFileName = expectedFileInfo.FullName.ToLower();
+                var found = false;
 
-                foreach (IKoreFileInfo actualFileInfo in actualFileList)
+                foreach (var actualFileInfo in actualFileList)
                 {
                     if (actualFileInfo.FullName.ToLower().Equals(expectedFileName))
                     {

@@ -13,7 +13,7 @@ namespace Kore.Code.Tests.Util
         [TestMethod]
         public void ExchangeInterchangesTheItemsWhenIndex1IsSmallerThanIndex2()
         {
-            int[] input = new int[] { 0, 1 };
+            var input = new int[] { 0, 1 };
 
             Exchange<int>.ArrayExchange(input, 0, 1);
 
@@ -24,7 +24,7 @@ namespace Kore.Code.Tests.Util
         [TestMethod]
         public void ExchangeInterchangesTheItemsWhenIndex1IsLargerThanIndex2()
         {
-            int[] input = new int[] { 0, 1 };
+            var input = new int[] { 0, 1 };
 
             Exchange<int>.ArrayExchange(input, 1, 0);
 
@@ -35,7 +35,7 @@ namespace Kore.Code.Tests.Util
         [TestMethod]
         public void ExchangeDoesNotErrorWhenIndex1EqualsIndex2()
         {
-            int[] input = new int[] { 0, 1 };
+            var input = new int[] { 0, 1 };
 
             Exchange<int>.ArrayExchange(input, 0, 0);
 
@@ -51,7 +51,7 @@ namespace Kore.Code.Tests.Util
         [ExpectedException(typeof(IndexOutOfRangeException))]
         public void CopyArrayThrowsIndexOutOfBoundsIfSourceIndexIsOutOfBounds()
         {
-            int[] input = new int[] { };
+            var input = new int[] { };
 
             ArrayOps<int>.CopyArray(input, 0, 1, input);
         }
@@ -60,7 +60,7 @@ namespace Kore.Code.Tests.Util
         [ExpectedException(typeof(IndexOutOfRangeException))]
         public void CopyArrayThrowsIndexOutOfBoundsIfTargetIndexIsOutOfBounds()
         {
-            int[] input = new int[] { 1 };
+            var input = new int[] { 1 };
 
             ArrayOps<int>.CopyArray(input, 0, 1, input, 1);
         }
@@ -69,7 +69,7 @@ namespace Kore.Code.Tests.Util
         [ExpectedException(typeof(ComparisonException))]
         public void CopyArrayThrowsComparisonExceptionIfSourceStartIndexPlusLengthIsOutOfBounds()
         {
-            int[] input = new int[] { 1 };
+            var input = new int[] { 1 };
 
             ArrayOps<int>.CopyArray(input, 0, 2, input, 0);
         }
@@ -78,8 +78,8 @@ namespace Kore.Code.Tests.Util
         [ExpectedException(typeof(ComparisonException))]
         public void CopyArrayThrowsComparisonExceptionIfTargetStartIndexPlusSourceLengthIsOutOfBounds()
         {
-            int[] input = new int[] { 1, 2, 3 };
-            int[] target = new int[] { 1 };
+            var input = new int[] { 1, 2, 3 };
+            var target = new int[] { 1 };
 
             ArrayOps<int>.CopyArray(input, 0, 3, target, 0);
         }
@@ -87,12 +87,12 @@ namespace Kore.Code.Tests.Util
         [TestMethod]
         public void CopyArrayCopiesAllTheSourceElementsSpecifiedByIntervalToTargetInterval()
         {
-            int[] input = new int[] { 1, 2, 3 };
-            int[] target = new int[] { 0, 0, 0, 0, 0 };
+            var input = new int[] { 1, 2, 3 };
+            var target = new int[] { 0, 0, 0, 0, 0 };
 
             ArrayOps<int>.CopyArray(input, 0, target, 1);
 
-            int[] expected = new int[] { 0, 1, 2, 3, 0 };
+            var expected = new int[] { 0, 1, 2, 3, 0 };
 
             CollectionAssert.AreEqual(expected, target);
         }
@@ -100,8 +100,8 @@ namespace Kore.Code.Tests.Util
         [TestMethod]
         public void CopyArrayCopiesTheArrayWhenLengthsAreEqual()
         {
-            int[] input = new int[] { 1, 2, 3 };
-            int[] target = new int[] { 0, 0, 0 };
+            var input = new int[] { 1, 2, 3 };
+            var target = new int[] { 0, 0, 0 };
 
             ArrayOps<int>.CopyArray(input, target);
 
@@ -111,9 +111,9 @@ namespace Kore.Code.Tests.Util
         [TestMethod]
         public void CopyArraySourceCountCoupledWithProperStartIndexIncludesLastItem()
         {
-            int[] input = new int[] { 1, 2, 3 };
-            int[] target = new int[] { 0, 0, 0 };
-            int[] expected = new int[] { 2, 3, 0 };
+            var input = new int[] { 1, 2, 3 };
+            var target = new int[] { 0, 0, 0 };
+            var expected = new int[] { 2, 3, 0 };
 
             ArrayOps<int>.CopyArray(input, 1, 2, target);
 
@@ -127,7 +127,7 @@ namespace Kore.Code.Tests.Util
         [TestMethod]
         public void ExtremeWithoutIndexProcessesTheWholeArray()
         {
-            int[] input = new int[] { 1, 2, 3 };
+            var input = new int[] { 1, 2, 3 };
 
             Assert.AreEqual(0, ArrayOps<int>.GetExtremeIndex(input, Comparers.Comparer<int>.SmallerThan));
 
@@ -139,7 +139,7 @@ namespace Kore.Code.Tests.Util
         [TestMethod]
         public void ExtremeIncludesValueAtIndex()
         {
-            int[] input = new int[] { 1, 2, 3 };
+            var input = new int[] { 1, 2, 3 };
 
             Assert.AreEqual(0, ArrayOps<int>.GetExtremeIndex(input, 0, Comparers.Comparer<int>.SmallerThan));
 
@@ -155,11 +155,11 @@ namespace Kore.Code.Tests.Util
         [TestMethod]
         public void MergeReturnsArrayOfLengthEqualToLengthSumOfInputsContainingAllElements()
         {
-            int[] input1 = new int[] { 1, 2, 3 };
-            int[] input2 = new int[] { 1 };
-            int[] expected = new int[] { 1, 1, 2, 3 };
+            var input1 = new int[] { 1, 2, 3 };
+            var input2 = new int[] { 1 };
+            var expected = new int[] { 1, 1, 2, 3 };
 
-            int[] result = ArrayOps<int>.Merge(input1, input2, Comparers.Comparer<int>.SmallerThan);
+            var result = ArrayOps<int>.Merge(input1, input2, Comparers.Comparer<int>.SmallerThan);
 
             CollectionAssert.AreEqual(expected, result);
         }
@@ -167,11 +167,11 @@ namespace Kore.Code.Tests.Util
         [TestMethod]
         public void MergeReturnsResultArrayIfProvided()
         {
-            int[] input1 = new int[] { 1, 2, 3 };
-            int[] input2 = new int[] { 1 };
-            int[] result = new int[4];
+            var input1 = new int[] { 1, 2, 3 };
+            var input2 = new int[] { 1 };
+            var result = new int[4];
 
-            int[] actual = ArrayOps<int>.Merge(input1, input2, result, Comparers.Comparer<int>.SmallerThan);
+            var actual = ArrayOps<int>.Merge(input1, input2, result, Comparers.Comparer<int>.SmallerThan);
 
             Assert.AreSame(result, actual);
         }
@@ -179,10 +179,10 @@ namespace Kore.Code.Tests.Util
         [TestMethod]
         public void MergeIsAbleToProcessEmptyArrays()
         {
-            int[] input1 = new int[] { 1, 2, 3 };
-            int[] input2 = new int[] { };
+            var input1 = new int[] { 1, 2, 3 };
+            var input2 = new int[] { };
 
-            int[] result = ArrayOps<int>.Merge(input1, input2, Comparers.Comparer<int>.SmallerThan);
+            var result = ArrayOps<int>.Merge(input1, input2, Comparers.Comparer<int>.SmallerThan);
 
             Assert.AreEqual(input1.Length + input2.Length, result.Length);
         }
@@ -190,12 +190,12 @@ namespace Kore.Code.Tests.Util
         [TestMethod]
         public void MergeTakesResultIndexIntoConsideration()
         {
-            int[] input1 = new int[] { 1, 2, 3 };
-            int[] input2 = new int[] { 1 };
-            int[] result = new int[6];
-            int[] expected = new int[] { 0, 1, 1, 2, 3, 0 };
+            var input1 = new int[] { 1, 2, 3 };
+            var input2 = new int[] { 1 };
+            var result = new int[6];
+            var expected = new int[] { 0, 1, 1, 2, 3, 0 };
 
-            int[] actual = ArrayOps<int>.Merge(input1, input2, result, 1, Comparers.Comparer<int>.SmallerThan);
+            var actual = ArrayOps<int>.Merge(input1, input2, result, 1, Comparers.Comparer<int>.SmallerThan);
 
             CollectionAssert.AreEqual(expected, actual);
         }
@@ -203,10 +203,10 @@ namespace Kore.Code.Tests.Util
         [TestMethod]
         public void MergePreservesValuesWhenCalledWithSingleSourceAndTargetArray()
         {
-            int[] input = new int[] { 2, 4, 6, 1, 3, 5 };
-            int[] expected = new int[] { 1, 2, 3, 4, 5, 6 };
+            var input = new int[] { 2, 4, 6, 1, 3, 5 };
+            var expected = new int[] { 1, 2, 3, 4, 5, 6 };
 
-            int[] actual = ArrayOps<int>.Merge(input, 0, 3, 3, 3, Comparers.Comparer<int>.SmallerThan);
+            var actual = ArrayOps<int>.Merge(input, 0, 3, 3, 3, Comparers.Comparer<int>.SmallerThan);
 
             CollectionAssert.AreEqual(expected, actual);
         }
@@ -218,7 +218,7 @@ namespace Kore.Code.Tests.Util
         [TestMethod]
         public void ArrayContainsReturnsFalseIfTheValueWasNotFound()
         {
-            int[] input = new int[] { 1, 2, 3 };
+            var input = new int[] { 1, 2, 3 };
 
             Assert.IsFalse(ArrayOps<int>.ArrayContains(input, 4));
         }
@@ -226,7 +226,7 @@ namespace Kore.Code.Tests.Util
         [TestMethod]
         public void ArrayContainsReturnsFalseIfArrayIsEmpty()
         {
-            int[] input = new int[] { };
+            var input = new int[] { };
 
             Assert.IsFalse(ArrayOps<int>.ArrayContains(input, 1));
         }
@@ -234,9 +234,9 @@ namespace Kore.Code.Tests.Util
         [TestMethod]
         public void ArrayContainsReturnsTrueIfValueIsInArrayRegardlessOfPosition()
         {
-            int[] input = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            var input = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
-            for (int i = 0; i < input.Length; ++i)
+            for (var i = 0; i < input.Length; ++i)
                 Assert.IsTrue(ArrayOps<int>.ArrayContains(input, input[i]));
         }
 

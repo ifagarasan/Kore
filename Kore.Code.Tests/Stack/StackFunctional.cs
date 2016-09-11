@@ -45,7 +45,7 @@ namespace Kore.Code.Tests.Stack
             Stack.Push(3);
             Stack.Push(2);
 
-            int top = Stack.Pop();
+            var top = Stack.Pop();
 
             Assert.AreEqual(top, 2);
             Assert.AreEqual(3, Stack.Peek());

@@ -6,12 +6,6 @@ using Kore.Exceptions;
 
 namespace Kore.Code.Trees.Binary
 {
-    public enum RotateDirection
-    {
-        Left = 0,
-        Right
-    }
-
     public abstract class BinaryTree
     {
         protected BinaryTree()

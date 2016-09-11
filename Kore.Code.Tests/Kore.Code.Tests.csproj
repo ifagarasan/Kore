@@ -49,11 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Functional\ReadersFunctional.cs" />
+    <Compile Include="Functional\ReaderFunctional.cs" />
     <Compile Include="Heaps\BinaryHeapFunctionality.cs" />
     <Compile Include="Heaps\BinaryHeapMaxFunctionality.cs" />
     <Compile Include="Heaps\BinaryHeapMinFunctionality.cs" />
-    <Compile Include="List\CircularListFunctional.cs" />
+    <Compile Include="List\CircularLinkedListFunctional.cs" />
     <Compile Include="List\DoubleLinkedListFunctional.cs" />
     <Compile Include="List\LinkedListFunctional.cs" />
     <Compile Include="List\SingleLinkedListFunctional.cs" />

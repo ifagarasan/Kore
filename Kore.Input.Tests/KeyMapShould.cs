@@ -27,8 +27,4 @@ namespace Kore.Input.Tests
             Assert.True(_keyMap.Contains(_key));
         }
     }
-
-    internal class TestableResource
-    {
-    }
 }

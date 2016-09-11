@@ -63,6 +63,7 @@
     <Compile Include="KeyBuilderShould.cs" />
     <Compile Include="KeyMapShould.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestableResource.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -22,17 +22,17 @@ namespace Kore.Code.Tests.Traversals
         [TestMethod]
         public void BFSCallsNodeProcessorInOrderForEveryNonNillNodePassingNodeReference()
         {
-            List<IBinaryNode> order = new List<IBinaryNode>();
-            for (int i = 1; i <= 5; ++i)
+            var order = new List<IBinaryNode>();
+            for (var i = 1; i <= 5; ++i)
                 order.Add(nodeBuilder.BuildNode(i));
 
-            IBinaryNode root = order[0];
+            var root = order[0];
             root.Left = order[1];
             root.Right = order[2];
             root.Left.Left = order[3];
             root.Left.Right = order[4];
 
-            int index = 0;
+            var index = 0;
 
             Traversals<IBinaryNode>.BreadthFirstSearch(root, nodeBuilder.Nil, (x) =>
             {
@@ -47,7 +47,7 @@ namespace Kore.Code.Tests.Traversals
         [TestMethod]
         public void BFSDoesNothingIfNodePassedIsNil()
         {
-            int index = 0;
+            var index = 0;
 
             Traversals<IBinaryNode>.BreadthFirstSearch(nodeBuilder.Nil, nodeBuilder.Nil, (x) =>
             {

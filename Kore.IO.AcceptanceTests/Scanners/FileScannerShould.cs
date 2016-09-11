@@ -30,7 +30,7 @@ namespace Kore.IO.AcceptanceTests.Scanners
         [TestMethod]
         public void ReturnAllFiles()
         {
-            IFileScanResult scanResult = _fileScanner.Scan(_testDeepFolderInfo);
+            var scanResult = _fileScanner.Scan(_testDeepFolderInfo);
 
             AssertUtil.AssertIKoreFileInfoListsAreEqual(_expectedFileList, scanResult.Files);
         }
@@ -40,7 +40,7 @@ namespace Kore.IO.AcceptanceTests.Scanners
         {
             _fileScanOptions.Filters.Add(new VisibleFileFilter());
 
-            IFileScanResult scanResult = _fileScanner.Scan(_testDeepFolderInfo, _fileScanOptions);
+            var scanResult = _fileScanner.Scan(_testDeepFolderInfo, _fileScanOptions);
 
             _expectedFileList = ScannerUtil.BuildDeepTestFilesList(true, false);
 

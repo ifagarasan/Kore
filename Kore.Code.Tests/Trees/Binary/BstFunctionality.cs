@@ -28,9 +28,9 @@ namespace Kore.Code.Tests.Trees.Binary
         [TestMethod]
         public void InsertPreservesTreeProperty()
         {
-            int[] input = RandomOps.GetContiguousRandomSequence(1, 100);
+            var input = RandomOps.GetContiguousRandomSequence(1, 100);
 
-            foreach(int key in input)
+            foreach(var key in input)
             {
                 BinaryTree.Insert(key);
 
@@ -76,7 +76,7 @@ namespace Kore.Code.Tests.Trees.Binary
         {
             BinaryTree.Insert(3);
             BinaryTree.Insert(2);
-            IBinaryNode node = BinaryTree.Insert(5);
+            var node = BinaryTree.Insert(5);
             BinaryTree.Insert(4);
 
             Assert.AreSame(node, BinaryTree.Search(5));
@@ -98,7 +98,7 @@ namespace Kore.Code.Tests.Trees.Binary
         [TestMethod]
         public void RemoveRemovesLeaf()
         {
-            Bst bst = new Bst();
+            var bst = new Bst();
             bst.Insert(1);
             bst.Insert(2);
 
@@ -149,13 +149,13 @@ namespace Kore.Code.Tests.Trees.Binary
 
         public void TestRemove(int[] keys)
         {
-            for (int i = 0; i < keys.Length; ++i)
+            for (var i = 0; i < keys.Length; ++i)
                 TestRemoveAtIndex(keys, i);
         }
 
         protected virtual void TestRemoveAtIndex(int[] keys, int index)
         {
-            List<int> keyList = new List<int>(keys);
+            var keyList = new List<int>(keys);
 
             BinaryTree = CreateBinaryTree();
 
@@ -165,13 +165,13 @@ namespace Kore.Code.Tests.Trees.Binary
 
             BinaryTree.Insert(keys);
 
-            int keyToRemove = keys[index];
+            var keyToRemove = keys[index];
 
             BinaryTree.Remove(keyToRemove);
 
             Assert.AreEqual(BinaryTree.Nil, BinaryTree.Search(keyToRemove));
 
-            foreach (int key in keys)
+            foreach (var key in keys)
                 if (key != keyToRemove)
                     Assert.AreEqual(key, BinaryTree.Search(key).Key);
 

@@ -1,11 +1,11 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 using System.IO;
-using System.Runtime.Serialization;
 using Kore.IO;
 using Kore.Settings.Serializers;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Kore.Settings.AcceptanceTests
+namespace Kore.Settings.UnitTests.Feature
 {
     [TestClass]
     public class SettingsManagerShould
@@ -35,7 +35,7 @@ namespace Kore.Settings.AcceptanceTests
         [TestMethod]
         public void PersistDataInXmlFormatUsingContract()
         {
-            TestSerialization(CreateCar(), new XmlSerializer<Car>(new CarContractResolver()));
+            TestSerialization(CreateCar(), new XmlSerializer<Car>());
         }
 
         #endregion
@@ -52,7 +52,7 @@ namespace Kore.Settings.AcceptanceTests
 
         private void TestSerialization(Car car, ISerializer<Car> serializer=null)
         {
-            SettingsManager<Car> settings = new SettingsManager<Car>(serializer) {Data = car};
+            var settings = new SettingsManager<Car>(serializer) {Data = car};
 
             settings.Write(_settingsFileInfo);
 
@@ -66,18 +66,11 @@ namespace Kore.Settings.AcceptanceTests
 
         private static Car CreateCar()
         {
-            return new Car() { Make = "Ford", Model = "Focus", Year = 2008 };
-        }
-
-        public class CarContractResolver : IdentityContractResolver
-        {
-            public override Type ResolveName(string typeName, string typeNamespace, Type declaredType, DataContractResolver knownTypeResolver)
+            return new Car { Make = "Ford", Model = "Focus", Year = 2008, Owners = new List<Owner>
             {
-                if (typeName == "Car" && typeNamespace.EndsWith("Kore.Settings.AcceptanceTests"))
-                    return typeof(Car);
-
-                return base.ResolveName(typeName, typeNamespace, declaredType, knownTypeResolver);
-            }
+                new Owner {Name="Billy"},
+                new Owner {Name="James"},
+            } };
         }
     }
 }

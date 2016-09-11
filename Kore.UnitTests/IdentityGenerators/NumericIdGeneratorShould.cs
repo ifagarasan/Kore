@@ -25,7 +25,7 @@ namespace Kore.UnitTests.IdentityGenerators
         {
             var value = _numericGenerator.Generate();
 
-            for (int i = 0; i < 10; ++i)
+            for (var i = 0; i < 10; ++i)
                 Assert.AreEqual(value++ + 1, _numericGenerator.Generate());
         }
     }

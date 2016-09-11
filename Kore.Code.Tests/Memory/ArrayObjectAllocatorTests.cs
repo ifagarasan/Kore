@@ -47,7 +47,7 @@ namespace Kore.Code.Tests.Memory
         [ExpectedException(typeof(OutOfMemoryException))]
         public void AllocationThrowsOutOfMemoryWhenNoneAvailable()
         {
-            for (int i = 0; i < AllocationSize; ++i)
+            for (var i = 0; i < AllocationSize; ++i)
                 allocator.Allocate();
 
             allocator.Allocate();

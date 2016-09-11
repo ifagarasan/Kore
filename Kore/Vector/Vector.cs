@@ -13,7 +13,7 @@ namespace Kore.Vector
 
             Elements = new Element<T>[length];
 
-            for (int i = 0; i < Elements.Length; ++i)
+            for (var i = 0; i < Elements.Length; ++i)
                 Elements[i] = new Element<T>();
         }
 

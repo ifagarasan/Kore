@@ -5,12 +5,6 @@ using Kore.Validation;
 
 namespace Kore.Code.Heaps
 {
-    public enum HeapType
-    {
-        Max = 0,
-        Min
-    }
-
     public class BinaryHeap<T, R> where T : IComparable
     {
         private const int Nil = 0;

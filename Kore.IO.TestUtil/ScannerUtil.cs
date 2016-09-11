@@ -52,7 +52,7 @@ namespace Kore.IO.TestUtil
 
         private static void EnsureFilesExist(IEnumerable<IKoreFileInfo> files, bool hidden)
         {
-            foreach (IKoreFileInfo fileInfo in files)
+            foreach (var fileInfo in files)
             {
                 fileInfo.EnsureExists();
                 fileInfo.Hidden = hidden;
@@ -79,11 +79,11 @@ namespace Kore.IO.TestUtil
 
         public static List<IKoreFileInfo> BuildDeepTestFilesList(bool addVisible, bool addHidden, string extension = "")
         {
-            List<IKoreFileInfo> outputList = new List<IKoreFileInfo>();
+            var outputList = new List<IKoreFileInfo>();
 
-            string currentFolder = TestFolderDeep;
+            var currentFolder = TestFolderDeep;
 
-            for (int i = 0; i < 2; ++i)
+            for (var i = 0; i < 2; ++i)
             {
                 BuildFilesForFolder(currentFolder, outputList, extension, addVisible, addHidden);
                 currentFolder = Path.Combine(currentFolder, "1");
@@ -94,7 +94,7 @@ namespace Kore.IO.TestUtil
 
         public static List<IKoreFileInfo> BuildOneLevelTestFilesList(bool addVisible, bool addHidden, string extension = "")
         {
-            List<IKoreFileInfo> outputList = new List<IKoreFileInfo>();
+            var outputList = new List<IKoreFileInfo>();
 
             BuildFilesForFolder(TestFolderOneLevel, outputList, extension, addVisible, addHidden);
 

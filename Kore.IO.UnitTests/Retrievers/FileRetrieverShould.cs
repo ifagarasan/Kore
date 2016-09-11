@@ -25,7 +25,7 @@ namespace Kore.IO.UnitTests.Retrievers
             AddFiles(TestFolderOneLevel, VisibleFileList, _expectedFiles);
             AddFiles(TestFolderOneLevel, HiddenFileList, _expectedFiles);
 
-            List<IKoreFileInfo> actualFiles = _fileRetriever.GetFiles(new KoreFolderInfo(TestFolderOneLevel));
+            var actualFiles = _fileRetriever.GetFiles(new KoreFolderInfo(TestFolderOneLevel));
             Assert.AreEqual(_expectedFiles.Count, actualFiles.Count);
         }
 
@@ -34,7 +34,7 @@ namespace Kore.IO.UnitTests.Retrievers
         {
             _expectedFiles = BuildDeepTestFilesList(true, true);
 
-            List<IKoreFileInfo> actualFiles = _fileRetriever.GetFiles(new KoreFolderInfo(TestFolderDeep));
+            var actualFiles = _fileRetriever.GetFiles(new KoreFolderInfo(TestFolderDeep));
 
             Assert.AreEqual(_expectedFiles.Count, actualFiles.Count);
         }

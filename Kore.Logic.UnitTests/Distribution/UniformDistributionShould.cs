@@ -16,7 +16,7 @@ namespace Kore.Logic.UnitTests.Distribution
 
             uniformDistribution.Initialise(grid, 9);
 
-            foreach (Element<uint> cell in grid)
+            foreach (var cell in grid)
                 Assert.AreEqual(3u, cell.Value);
         }
 

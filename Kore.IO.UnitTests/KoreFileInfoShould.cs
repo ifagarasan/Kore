@@ -118,7 +118,7 @@ namespace Kore.IO.UnitTests
         [TestMethod]
         public override void ReturnContentLengthInBytesForSize()
         {
-            using (StreamWriter wr = new StreamWriter(_fileInfo.FullName))
+            using (var wr = new StreamWriter(_fileInfo.FullName))
             {
                 wr.Write('c');
                 wr.Write('d');
@@ -142,7 +142,7 @@ namespace Kore.IO.UnitTests
         [TestMethod]
         public void ReturnsIKoreFolderInfoWithDirectoryName()
         {
-            IKoreIoNodeInfo folderInfo = _fileInfo.FolderInfo;
+            var folderInfo = _fileInfo.FolderInfo;
 
             Assert.AreEqual($"{folderInfo.FullName}\\{Path.GetFileName(FullName)}", Path.GetFullPath(FullName));
         }

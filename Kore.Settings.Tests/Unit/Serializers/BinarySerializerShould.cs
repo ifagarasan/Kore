@@ -2,7 +2,7 @@
 using Kore.Settings.Serializers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Kore.Settings.UnitTests.Serializers
+namespace Kore.Settings.UnitTests.Unit.Serializers
 {
     [TestClass]
     public class BinarySerializerShould

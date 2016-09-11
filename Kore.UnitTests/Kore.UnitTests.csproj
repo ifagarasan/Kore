@@ -59,7 +59,7 @@
     <Compile Include="Comparers\ComparerShould.cs" />
     <Compile Include="IdentityGenerators\NumericIdGeneratorShould.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Validation\ObjectValidationShould.cs" />
+    <Compile Include="Validation\ObjectalidationShould.cs" />
     <Compile Include="Validation\ComparisonValidationShould.cs" />
     <Compile Include="Vector\VectorShould.cs" />
   </ItemGroup>

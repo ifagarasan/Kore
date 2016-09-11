@@ -39,7 +39,7 @@ namespace Kore.Code.Tests.Queue
             queue.Enqueue(3);
             queue.Enqueue(2);
 
-            int head = queue.Dequeue();
+            var head = queue.Dequeue();
 
             Assert.AreEqual(head, 3);
             Assert.AreEqual(2, queue.Peek());

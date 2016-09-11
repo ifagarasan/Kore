@@ -231,9 +231,9 @@ namespace Kore.Code.Tests.Trees.Binary.Nodes
             node.Left = collection[0];
             node.Right = collection[1];
 
-            int index = 0;
+            var index = 0;
 
-            foreach(IBinaryNode child in node)
+            foreach(var child in node)
             {
                 Assert.AreSame(collection[index], child);
                 index++;
@@ -247,9 +247,9 @@ namespace Kore.Code.Tests.Trees.Binary.Nodes
         {
             var node = BuildNode();
 
-            int index = 0;
+            var index = 0;
 
-            foreach (IBinaryNode child in node)
+            foreach (var child in node)
             {
                 Assert.AreSame(NodeBuilder.Nil, child);
                 index++;
